@@ -1,0 +1,19 @@
+.list {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.list li {
+  display: inline;
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
