@@ -5,7 +5,7 @@ import { Form } from "react-router-dom";
 
 interface SearchProps extends HTMLAttributes<HTMLDivElement> {}
 
-export function Search({}: SearchProps) {
+export function HeaderSearch({}: SearchProps) {
   return (
     <Form>
       <input type="text" placeholder="검색어를 입력하세요" />

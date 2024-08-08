@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import cssClass from "./HeaderMain.module.css";
-import { Search } from "./Search.tsx";
+import { HeaderSearch } from "./HeaderSearch.tsx";
 
 export function HeaderMain({}) {
   return (
@@ -11,7 +11,7 @@ export function HeaderMain({}) {
           <span className={cssClass.small}>βeta</span>
         </h1>
       </NavLink>
-      <Search/>
+      <HeaderSearch/>
     </section>
   );
 }
