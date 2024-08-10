@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import { App } from "./App.tsx";
 import { Login } from "./page/Login.tsx";
 import { Post } from "./page/Post.tsx";
-import { New } from "./page/head/New.tsx";
 import { Chim } from "./page/head/Chim.tsx";
 import { Humor } from "./page/head/Humor.tsx";
 import { Hobby } from "./page/head/Hobby.tsx";
@@ -15,6 +14,7 @@ import { GoodsReview } from "./page/head/GoodsReview.tsx";
 import { Management } from "./page/head/Management.tsx";
 import { Fakemon } from "./page/head/Fakemon.tsx";
 import { Report } from "./page/head/Report.tsx";
+import { New } from "./page/head/New.tsx";
 
 export const ROUTES = {
   About: "about",
@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.New,
         children: [
-          { index: true, element: <New />, }, // 전체글
+          { index: true, element: <New/>}, // 전체글
           { path: ROUTES.Chim, element: <Chim /> }, //
           { path: ROUTES.Humor, element: <Humor /> },
           { path: ROUTES.Sports, element: <Sports />, },
