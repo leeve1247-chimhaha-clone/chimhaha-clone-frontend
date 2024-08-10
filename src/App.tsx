@@ -1,9 +1,9 @@
-import { HeaderMain } from './component/HeaderMain.tsx';
-import { HeaderSub } from './component/HeaderSub.tsx';
-import { HeaderNav } from './component/HeaderNav.tsx';
-import { PostForm } from "./component/PostForm";
+import { HeaderMain } from "./component/HeaderMain.tsx";
+import { HeaderSub } from "./component/HeaderSub.tsx";
+import { HeaderNav } from "./component/HeaderNav.tsx";
+import { Outlet } from "react-router";
 
-function App() {
+export function App() {
   return (
     <>
       <header>
@@ -12,7 +12,7 @@ function App() {
         <HeaderNav />
       </header>
       <main>
-        <PostForm />
+        <Outlet/>
       </main>
       <footer>
         <p>© 2021. All rights reserved.</p>
@@ -20,5 +20,3 @@ function App() {
     </>
   );
 }
-
-export default App;
