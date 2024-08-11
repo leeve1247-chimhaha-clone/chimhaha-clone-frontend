@@ -7,11 +7,11 @@ export interface PostItem {
 
 export function PostComponent({ post }: { post: PostItem }) {
   return (
-    <div>
-      <h2>{post.title}</h2>
-      <p>{post.content}</p>
-      <p>By: {post.username}</p>
-      <p>Status: {post.status}</p>
-    </div>
+    <tr>
+      <th>{post.title}</th>
+      <th>{post.content}</th>
+      <th>By: {post.username}</th>
+      <th>Status: {post.status}</th>
+    </tr>
   )
 }
