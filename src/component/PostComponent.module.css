@@ -1,0 +1,68 @@
+.postContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 0.75rem;
+    padding-top: 1.10rem;
+    padding-left: 1rem;
+    border-bottom: 0.025rem solid;
+    border-color: var(--color-gray-800);
+    height: 2.2rem;
+}
+
+.image{
+    height: 2.5rem;
+    border-radius: 15%;
+    width: 3rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.username {
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+}
+
+.rightSection{
+    display: flex;
+    flex-direction: column;
+    padding-left: 0.8rem;
+}
+
+.firstLine{
+    display: flex;
+    flex-direction: row;
+}
+
+.category{
+    font-size: 0.8rem;
+    color: var(--color-gray-100);
+    border: 0.025rem solid;
+    border-radius: 15%;
+    background-color: var(--color-gray-850);
+    padding: 0.0rem 0.4rem 0.0rem 0.4rem; /* 시계 방향으로 top, right, bottom, left */
+    margin-right: 0.5rem;
+}
+
+.secondLine{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-gray-500);
+    font-size: 0.75rem;
+}
+
+.dot{
+    color : var(--color-gray-800);
+    font-size: 0.15rem;
+}
+
+.likes{
+    color: var(--color-gray-100);
+}

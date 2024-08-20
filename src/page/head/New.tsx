@@ -18,11 +18,11 @@ export function New() {
   return (
     <div>
       <h1>Posts</h1>
-      <table>
+      <section>
       {data.map((post) => (
         <PostComponent key={post.title} post={post} />
       ))}
-      </table>
+      </section>
     </div>
   );
 }
