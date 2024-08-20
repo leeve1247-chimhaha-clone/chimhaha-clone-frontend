@@ -17,7 +17,6 @@ import { Report } from "./page/head/Report.tsx";
 import { New } from "./page/head/New.tsx";
 
 export const ROUTES = {
-  About: "about",
   Chim: "chim",
   Contact: "contact",
   Hobby: "hobby",
@@ -49,19 +48,19 @@ export const router = createBrowserRouter([
         path: ROUTES.New,
         children: [
           { index: true, element: <New/>}, // 전체글
-          { path: ROUTES.Chim, element: <Chim /> }, //
-          { path: ROUTES.Humor, element: <Humor /> },
-          { path: ROUTES.Sports, element: <Sports />, },
-          { path: ROUTES.Hobby, element: <Hobby /> },
-          { path: ROUTES.Internet, element: <Internet/>}
+          { path: ROUTES.Chim, element: <Chim /> }, //침착맨
+          { path: ROUTES.Humor, element: <Humor /> }, //웃음
+          { path: ROUTES.Sports, element: <Sports />, }, //스포츠
+          { path: ROUTES.Hobby, element: <Hobby /> }, // 취미
+          { path: ROUTES.Internet, element: <Internet/>} //인방
         ],
       },
-      { path: ROUTES.Life, element: <Life /> },
-      { path: ROUTES.Check, element:<Check/>},
-      { path: ROUTES.GoodsReview , element: <GoodsReview/>},
-      { path: ROUTES.Management, element: <Management/>},
-      { path: ROUTES.Fakemon, element: <Fakemon/>},
-      { path: ROUTES.Report, element: <Report/>}
+      { path: ROUTES.Life, element: <Life /> }, //일상(익명)
+      { path: ROUTES.Check, element:<Check/>}, //소원의 돌
+      { path: ROUTES.GoodsReview , element: <GoodsReview/>}, //구쭈
+      { path: ROUTES.Management, element: <Management/>}, //행정실
+      { path: ROUTES.Fakemon, element: <Fakemon/>}, // 짭켓몬
+      { path: ROUTES.Report, element: <Report/>} //신고/건의
     ],
   },
 ]);
