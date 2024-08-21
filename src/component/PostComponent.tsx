@@ -26,7 +26,7 @@ export function PostComponent({ post }: { post: PostItem }) {
       <div className={cssClass.rightSection}>
         <div className={cssClass.firstLine}>
           <Category className={cssClass.category} category={post.category} />
-          <div>{post.title}</div>
+          <div className={cssClass.title}>{post.title}</div>
         </div>
         <div className={cssClass.secondLine}>
           <div>{post.username}</div>
