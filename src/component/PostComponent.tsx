@@ -14,12 +14,10 @@ export interface PostItem {
   category: string;
   post: string;
   createdDate: string;
-  likes:number;
+  likes: number;
 }
 
 export function PostComponent({ post }: { post: PostItem }) {
-  // @ts-ignore
-  const myIcon : IconProp = ["fa-regular", "fa-eye"]
   return (
     <a className={cssClass.postContainer}>
       <FontAwesomeIcon className={cssClass.image} icon={faFileLines} />
@@ -35,13 +33,13 @@ export function PostComponent({ post }: { post: PostItem }) {
           <FontAwesomeIcon className={cssClass.dot} icon={faCircle} />
           <FontAwesomeIcon icon={faEye} />
           <div>{post.views}</div>
-          {post.likes > 0 && <>
-            <FontAwesomeIcon className={cssClass.dot} icon={faCircle} />
-            <FontAwesomeIcon className={cssClass.likes} icon={faThumbsUp} />
-            <div className={cssClass.likes}>{post.likes}</div>
+          {post.likes > 0 && (
+            <>
+              <FontAwesomeIcon className={cssClass.dot} icon={faCircle} />
+              <FontAwesomeIcon className={cssClass.likes} icon={faThumbsUp} />
+              <div className={cssClass.likes}>{post.likes}</div>
             </>
-          }
-
+          )}
         </div>
       </div>
     </a>
