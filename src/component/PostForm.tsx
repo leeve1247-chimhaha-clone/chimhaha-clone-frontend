@@ -1,8 +1,7 @@
-import Delta from "quill-delta";
-import { QuillEditor } from "./QuillEditor.tsx";
 import { useRef } from "react";
 import Quill from "quill";
 import axios from "axios";
+import {WYSIWYGEditor} from "./WYSIWYGEditor.tsx";
 
 export function PostForm() {
   const quillRef = useRef<Quill>(null);
@@ -26,8 +25,8 @@ export function PostForm() {
 
   return (
     <>
-      <QuillEditor ref={quillRef} defaultValue={new Delta()} />
       <div>
+        <WYSIWYGEditor />
         <button onClick={saveContent}>Save Content</button>
       </div>
     </>
