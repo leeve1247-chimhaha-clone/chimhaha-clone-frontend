@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { PostComponent, PostItem } from "../../component/PostComponent.tsx";
+import { NavLink } from "react-router-dom";
+import { ROUTES } from "../../router.tsx";
 
 export function New() {
   const [data, setData] = useState<PostItem[]>([]);  // 데이터를 저장할 상태
@@ -23,6 +25,7 @@ export function New() {
         <PostComponent key={post.title} post={post} />
       ))}
       </section>
+      <NavLink to={ROUTES.Post}>글쓰기</NavLink>
     </div>
   );
 }
