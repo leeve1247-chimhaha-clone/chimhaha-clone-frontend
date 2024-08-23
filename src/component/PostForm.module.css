@@ -1,0 +1,13 @@
+.title {
+    border: 0.1rem, solid, var(--color-gray-400);
+    border-radius: 0.5rem; /* 적절한 반경으로 조정 */
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+}
+
+.category {
+    border: 0.1rem, solid, var(--color-gray-400);
+    border-radius: 0.5rem; /* 적절한 반경으로 조정 */
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
