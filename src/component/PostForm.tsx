@@ -13,15 +13,18 @@ export function PostForm() {
       const delta = quillRef.current.getContents();
       const titleText = title.current?.value;
       const deltaJson = JSON.stringify({
-        category: "category",
+        category: "BEST",
         content: delta,
         title: titleText,
-        user: "tempUser",
+        user: "UserA",
       });
       console.log(deltaJson);
 
       try {
-        await axios.post("/localhost:8080/save", {
+        await axios.post("http://localhost:8080/save", {
+          headers: {
+            "Content-Type": "application/json",
+          },
           content: deltaJson,
         });
         alert("Content saved successfully!");
