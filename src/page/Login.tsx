@@ -21,7 +21,8 @@ export function Login() {
   if (auth.isAuthenticated) {
     return (
       <div>
-        {auth.user?.access_token}
+        Hello,
+        {auth?.user?.profile?.sub}
         <button
           onClick={() => {
             console.log(auth?.user?.access_token);
@@ -57,6 +58,7 @@ export function Login() {
   }
   return (
     <>
+      <button onClick={() => void auth.signinRedirect()}>Log in By Github</button>
       <button onClick={() => void auth.signinRedirect()}>Log in</button>
     </>
   );
