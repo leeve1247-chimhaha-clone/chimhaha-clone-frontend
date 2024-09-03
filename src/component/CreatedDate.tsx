@@ -10,7 +10,6 @@ export function CreatedDate({ date }: CreatedDateProps) {
 }
 
 function timeAgo(dateString: string): string {
-  console.log(dateString)
   const date = new Date(dateString);
   const now = new Date();
   const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
