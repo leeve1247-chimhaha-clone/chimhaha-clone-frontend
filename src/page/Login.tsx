@@ -1,5 +1,4 @@
 import { useAuth } from "react-oidc-context";
-import axios from "axios";
 
 export function Login() {
   const auth = useAuth();
@@ -31,7 +30,6 @@ export function Login() {
         >
           Log out
         </button>
-        <button onClick={() => getList()}>Get List</button>
         <button onClick={() => deleteUser()}>Delete User from UserEntityRepository</button>
       </div>
     );
@@ -41,21 +39,6 @@ export function Login() {
     console.log("delete user")
   }
 
-  async function getList() {
-    try {
-      const myData = await axios.get(
-        "http://192.168.1.14:8080/myAccount?username=userC",
-        {
-          headers: {
-            Authorization: `Bearer ${auth.user?.access_token}`,
-          },
-        },
-      );
-      console.log(myData);
-    } catch (error) {
-      console.log(error);
-    }
-  }
   return (
     <>
       <button onClick={() => void auth.signinRedirect()}>Log in By Github</button>
