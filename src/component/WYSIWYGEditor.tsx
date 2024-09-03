@@ -1,6 +1,14 @@
 import Quill from "quill";
 import {forwardRef, useEffect} from "react";
 import "./WYSIWYGEditor.css";
+import Icons from "quill/ui/icons";
+import { svgs } from "../utils/svgs.tsx";
+
+type IconsType = typeof Icons;
+interface ExtendedIcons extends IconsType {
+  undo?:string
+  redo?:string
+}
 
 export const WYSIWYGEditor = forwardRef<Quill>(
   (_props, quillRef) => {
@@ -25,7 +33,7 @@ export const WYSIWYGEditor = forwardRef<Quill>(
           [{ align: [] }],
           ["undo", "redo"],
         ],
-        handler: {
+        handlers: {
           undo: function () {
             quillRef.current?.history.undo();
           },
@@ -34,6 +42,10 @@ export const WYSIWYGEditor = forwardRef<Quill>(
           },
         },
       };
+      const extendedIcons: ExtendedIcons = Icons
+      extendedIcons.undo = svgs["arrow-rotate-left"]
+      extendedIcons.redo = svgs["arrow-rotate-right"]
+
       if (container && !quillRef.current) {
         // quillRef.current가 null이면 새로운 Quill 인스턴스를 생성합니다. 이미 있으면 아무것도 하지 않습니다.
         quillRef.current = new Quill(container, {
