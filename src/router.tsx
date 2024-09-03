@@ -15,6 +15,7 @@ import { Management } from "./page/head/Management.tsx";
 import { Fakemon } from "./page/head/Fakemon.tsx";
 import { Report } from "./page/head/Report.tsx";
 import { New } from "./page/head/New.tsx";
+import { PostDetail, postDetailLoader, postDetailShouldRevalidate } from "./page/head/PostDetail.tsx";
 
 export const ROUTES = {
   Chim: "chim",
@@ -33,34 +34,50 @@ export const ROUTES = {
   Fakemon: "fakemon",
   GoodsReview: "goods-review",
   Check: "check",
-  Report: "report"
+  Report: "report",
 };
 
 export const router = createBrowserRouter([
   {
     path: ROUTES.Home,
     element: <App />,
+    id: "post-detail",
+    loader: postDetailLoader,
+    shouldRevalidate: postDetailShouldRevalidate,
     children: [
-      { path: ROUTES.Login, element: <Login />, },
-      { path: ROUTES.Post, element: <Post />, }, // 글쓰기
-      { path: ROUTES.Best, element: <Best /> }, // 인기글
+      { path: ROUTES.Login, element: <Login /> },
+      { path: ROUTES.Post, element: <Post /> }, // 글쓰기
+      {
+        path: ROUTES.Best,
+        children: [
+          { index: true, element: <Best /> },
+          {
+            path: ":postId",
+            children: [{ index: true, element: <PostDetail /> }],
+          },
+        ],
+      },
       {
         path: ROUTES.New,
         children: [
-          { index: true, element: <New/>}, // 전체글
+          { index: true, element: <New /> }, // 전체글
+          {
+            path: ":postId",
+            children: [{ index: true, element: <PostDetail /> }],
+          },
           { path: ROUTES.Chim, element: <Chim /> }, //침착맨
           { path: ROUTES.Humor, element: <Humor /> }, //웃음
-          { path: ROUTES.Sports, element: <Sports />, }, //스포츠
+          { path: ROUTES.Sports, element: <Sports /> }, //스포츠
           { path: ROUTES.Hobby, element: <Hobby /> }, // 취미
-          { path: ROUTES.Internet, element: <Internet/>} //인방
+          { path: ROUTES.Internet, element: <Internet /> }, //인방
         ],
       },
       { path: ROUTES.Life, element: <Life /> }, //일상(익명)
-      { path: ROUTES.Check, element:<Check/>}, //소원의 돌
-      { path: ROUTES.GoodsReview , element: <GoodsReview/>}, //구쭈
-      { path: ROUTES.Management, element: <Management/>}, //행정실
-      { path: ROUTES.Fakemon, element: <Fakemon/>}, // 짭켓몬
-      { path: ROUTES.Report, element: <Report/>} //신고/건의
+      { path: ROUTES.Check, element: <Check /> }, //소원의 돌
+      { path: ROUTES.GoodsReview, element: <GoodsReview /> }, //구쭈
+      { path: ROUTES.Management, element: <Management /> }, //행정실
+      { path: ROUTES.Fakemon, element: <Fakemon /> }, // 짭켓몬
+      { path: ROUTES.Report, element: <Report /> }, //신고/건의
     ],
   },
 ]);
