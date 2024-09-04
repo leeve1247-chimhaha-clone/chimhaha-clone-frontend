@@ -15,7 +15,7 @@ import { Management } from "./page/head/Management.tsx";
 import { Fakemon } from "./page/head/Fakemon.tsx";
 import { Report } from "./page/head/Report.tsx";
 import { New } from "./page/head/New.tsx";
-import { PostDetail, postDetailLoader, postDetailShouldRevalidate } from "./page/head/PostDetail.tsx";
+import { PostDetail, postDetailLoader } from "./component/PostDetail.tsx";
 
 export const ROUTES = {
   Chim: "chim",
@@ -41,9 +41,6 @@ export const router = createBrowserRouter([
   {
     path: ROUTES.Home,
     element: <App />,
-    id: "post-detail",
-    loader: postDetailLoader,
-    shouldRevalidate: postDetailShouldRevalidate,
     children: [
       { path: ROUTES.Login, element: <Login /> },
       { path: ROUTES.Post, element: <Post /> }, // 글쓰기
@@ -53,17 +50,18 @@ export const router = createBrowserRouter([
           { index: true, element: <Best /> },
           {
             path: ":postId",
-            children: [{ index: true, element: <PostDetail /> }],
-          },
+            loader: postDetailLoader,
+            element: <PostDetail />,
+          }
         ],
       },
       {
         path: ROUTES.New,
         children: [
           { index: true, element: <New /> }, // 전체글
-          {
-            path: ":postId",
-            children: [{ index: true, element: <PostDetail /> }],
+          { path: ":postId",
+            loader: postDetailLoader,
+            element: <PostDetail/>
           },
           { path: ROUTES.Chim, element: <Chim /> }, //침착맨
           { path: ROUTES.Humor, element: <Humor /> }, //웃음
