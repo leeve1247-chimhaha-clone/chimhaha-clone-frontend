@@ -12,7 +12,6 @@ export function PostForm() {
   const auth = useAuth();
 
   const saveContent = async () => {
-    console.log("heyhey")
     if (quillRef.current) {
       const delta = quillRef.current.getContents();
       const titleText = title.current?.value;
@@ -35,7 +34,6 @@ export function PostForm() {
           }
         );
         alert("Content saved successfully!");
-        console.log("goooooood")
       } catch (error) {
         console.error("Error saving content:", error);
         alert("Failed to save content.");
