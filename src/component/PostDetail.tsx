@@ -1,4 +1,4 @@
-import { ShouldRevalidateFunctionArgs, useLoaderData } from "react-router";
+import { useLoaderData } from "react-router";
 import { LoaderFunctionArgs } from "react-router-dom";
 import axios from "axios";
 import { RData } from "../credential/data.ts";
@@ -9,11 +9,12 @@ import { useRef, useState } from "react";
 import { WYSIWYGEditor } from "./WYSIWYGEditor.tsx";
 import { CommentEditor } from "./CommentEditor.tsx";
 import { useAuth } from "react-oidc-context";
+import { MutableRefObject } from "react";
 
 export function PostDetail() {
   const data = useLoaderData() as PostDetailProps;
   const quillRef = useRef<Quill>(null);
-  const commentRef = useRef<Quill>(null);
+  const commentRef : MutableRefObject<Quill | null> = useRef<Quill>(null);
   const auth = useAuth();
   const [isCommentEditorShown, setIsCommentEditorShown] = useState(false);
 
@@ -39,6 +40,7 @@ export function PostDetail() {
     setIsCommentEditorShown(true);
   }
   function closeCommentEditor() {
+    commentRef.current = null
     setIsCommentEditorShown(false);
   }
 
@@ -50,7 +52,7 @@ export function PostDetail() {
       <h1>이하 댓글 창</h1>
       {isCommentEditorShown ? (
         <>
-          <CommentEditor ref={commentRef} />
+          <CommentEditor ref={commentRef} isCommentEditorShown={isCommentEditorShown} />
           <button onClick={closeCommentEditor}>창 닫기</button>
           <button onClick={saveComment}>댓글 입력</button>
         </>
