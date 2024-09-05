@@ -5,7 +5,7 @@ import { RData } from "../credential/data.ts";
 import { timeAgo } from "./CreatedDate.tsx";
 import Quill from "quill";
 import Delta from "quill-delta";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { WYSIWYGEditor } from "./WYSIWYGEditor.tsx";
 import { CommentEditor } from "./CommentEditor.tsx";
 import { useAuth } from "react-oidc-context";
@@ -14,30 +14,33 @@ export function PostDetail() {
   const data = useLoaderData() as PostDetailProps;
   const quillRef = useRef<Quill>(null);
   const commentRef = useRef<Quill>(null);
-  const auth = useAuth()
+  const auth = useAuth();
+  const [isCommentEditorShown, setIsCommentEditorShown] = useState(false);
 
-  const saveComment = async () => {
-    if (quillRef.current) {
-      const delta = quillRef.current.getContents();
+  async function saveComment() {
+    if (commentRef.current) {
+      const delta = commentRef.current.getContents();
       const deltaJson = JSON.stringify({
         content: delta,
-        postId: data.postId
+        postId: data.postId,
+        user: auth?.user?.profile.sub,
       });
-      try {
-        await axios.post(RData.baseUrl+"/save/comment", deltaJson, {
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${auth.user?.access_token}`,
-            }
-          }
-        );
-        alert("Comment saved successfully!");
-      } catch (error) {
-        console.error("Error saving content:", error);
-        alert("Failed to save content.");
-      }
+      await axios.post(RData.baseUrl + "/save/comment", deltaJson, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.user?.access_token}`,
+        },
+      });
+      setIsCommentEditorShown(false);
     }
-  };
+  }
+
+  function showCommentEditor() {
+    setIsCommentEditorShown(true);
+  }
+  function closeCommentEditor() {
+    setIsCommentEditorShown(false);
+  }
 
   return (
     <>
@@ -45,8 +48,17 @@ export function PostDetail() {
       <h1>디테일</h1>
       <WYSIWYGEditor ref={quillRef} defaultValue={data.content} />
       <h1>이하 댓글 창</h1>
-      <CommentEditor ref={commentRef}/>
-      <button onClick={saveComment}>댓글 입력</button>
+      {isCommentEditorShown ? (
+        <>
+          <CommentEditor ref={commentRef} />
+          <button onClick={closeCommentEditor}>창 닫기</button>
+          <button onClick={saveComment}>댓글 입력</button>
+        </>
+      ) : (
+        <button onClick={showCommentEditor}>
+          이 버튼을 눌러야 하위 창이 표시된다구?
+        </button>
+      )}
     </>
   );
 }
@@ -70,11 +82,4 @@ export async function postDetailLoader({ params }: LoaderFunctionArgs) {
   postDetailData.createdDate = timeAgo(postDetailData.createdDate);
 
   return postDetailData;
-}
-
-export function postDetailShouldRevalidate({
-  currentParams,
-  nextParams,
-}: ShouldRevalidateFunctionArgs) {
-  return currentParams.postId !== nextParams.postId;
 }
