@@ -3,8 +3,8 @@ import "./WYSIWYGEditor.css";
 import Quill from "quill";
 import Delta from "quill-delta";
 
-export const CommentEditor = forwardRef<Quill, {defaultValue? : Delta}>(
-  ({}, quillRef) => {
+export const CommentEditor = forwardRef<Quill, {defaultValue? : Delta, isCommentEditorShown: boolean}>(
+  ({isCommentEditorShown}, quillRef) => {
     useEffect(() => {
       if (quillRef === null || typeof quillRef === "function") return;
       const container = document.getElementById("comment-editor") as HTMLElement;
@@ -18,12 +18,10 @@ export const CommentEditor = forwardRef<Quill, {defaultValue? : Delta}>(
           });
 
       }
-    }, [quillRef]);
+    }, [quillRef, isCommentEditorShown]);
 
     return <>
-      <h1>comment edit Start</h1>
       <div id="comment-editor" style={{ height: "100px" }} />
-      <h1>comment edit End</h1>
     </>
   },
 );
