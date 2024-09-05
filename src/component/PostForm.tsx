@@ -21,10 +21,6 @@ export function PostForm() {
         title: titleText,
         user: auth?.user?.profile?.sub,
       });
-      console.log(auth?.user?.profile?.sub)
-      console.log(deltaJson);
-      console.log(titleText)
-      console.log(auth.user?.access_token)
       try {
         await axios.post(RData.baseUrl+"/save", deltaJson, {
             headers: {
