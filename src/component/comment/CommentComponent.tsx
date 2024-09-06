@@ -1,22 +1,19 @@
-import Delta from "quill-delta";
 import { useRef } from "react";
 import Quill from "quill";
 import { CommentUpdateEditor } from "./CommentUpdateEditor.tsx";
 import { CommentEditorComponent } from "./CommentEditorComponent.tsx";
+import { CommentProps } from "../PostDetail.tsx";
 
 interface CommentComponentProps {
-  postId:string;
+  postId: string;
   key: string;
-  content: Delta;
-  commentId: string;
-  children?: CommentComponentProps[];
+  comment: CommentProps;
 }
+
 export function CommentComponent({
   postId,
   key,
-  content,
-  commentId,
-  children,
+  comment,
 }: CommentComponentProps) {
   const commentRef = useRef<Quill>(null);
   return (
@@ -24,21 +21,17 @@ export function CommentComponent({
       <CommentUpdateEditor
         key={key}
         ref={commentRef}
-        defaultValue={content}
-        commentId={commentId}
+        defaultValue={comment.content}
+        commentId={comment.id}
       />
       <button>수정</button>
       <button>삭제</button>
-      <CommentEditorComponent postId={postId} commentId={commentId}>답글 달기</CommentEditorComponent>
-      {children !== undefined && children?.length !== 0 ? (
-        children.map((child, index) => (
-          <CommentComponent
-            postId = {postId}
-            key={key + index}
-            commentId={child.commentId}
-            content={child.content}
-            children={child.children}
-          />
+      <CommentEditorComponent postId={postId} commentId={comment.id}>
+        답글 달기
+      </CommentEditorComponent>
+      {comment.children !== undefined && comment.children?.length !== 0 ? (
+        comment.children.map((child, index) => (
+          <CommentComponent postId={postId} key={key + index} comment={child} />
         ))
       ) : (
         <></>
