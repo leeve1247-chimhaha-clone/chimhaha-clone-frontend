@@ -30,10 +30,11 @@ export function CommentComponent({ postId, comment }: CommentComponentProps) {
       <div className={cssClass.buttons}>
         <button>수정</button>
         <button>삭제</button>
+      </div>
         <CommentEditorComponent postId={postId} commentId={comment.id}>
           답글 달기
         </CommentEditorComponent>
-      </div>
+
       <div className={cssClass.termToLeft}>
         {comment.children !== undefined && comment.children?.length !== 0 ? (
           comment.children.map((child, index) => (
