@@ -10,13 +10,17 @@ import { WYSIWYGEditor } from "./WYSIWYGEditor.tsx";
 import { CommentEditor } from "./CommentEditor.tsx";
 import { useAuth } from "react-oidc-context";
 import { MutableRefObject } from "react";
+import {
+  CommentComponent,
+} from "./CommentUpdateEditor.tsx";
 
 export function PostDetail() {
   const data = useLoaderData() as PostDetailProps;
   const quillRef = useRef<Quill>(null);
-  const commentRef : MutableRefObject<Quill | null> = useRef<Quill>(null);
+  const commentRef: MutableRefObject<Quill | null> = useRef<Quill>(null);
   const auth = useAuth();
   const [isCommentEditorShown, setIsCommentEditorShown] = useState(false);
+  console.log(data.comments);
 
   async function saveComment() {
     if (commentRef.current) {
@@ -26,12 +30,13 @@ export function PostDetail() {
         postId: data.postId,
         user: auth?.user?.profile.sub,
       });
-      await axios.post(RData.baseUrl + "/save/comment", deltaJson, {
+      const axiosResponse = await axios.post(RData.baseUrl + "/save/comment", deltaJson, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${auth.user?.access_token}`,
         },
       });
+      data.comments = axiosResponse.data.comments
       setIsCommentEditorShown(false);
     }
   }
@@ -40,7 +45,7 @@ export function PostDetail() {
     setIsCommentEditorShown(true);
   }
   function closeCommentEditor() {
-    commentRef.current = null
+    commentRef.current = null;
     setIsCommentEditorShown(false);
   }
 
@@ -50,9 +55,20 @@ export function PostDetail() {
       <h1>디테일</h1>
       <WYSIWYGEditor ref={quillRef} defaultValue={data.content} />
       <h1>이하 댓글 창</h1>
+      {data.comments.map((comment, index) => (
+        <CommentComponent
+          key = {index.toString()}
+          content={comment.content}
+          commentId={comment.id}
+        />
+      ))}
+      <h1>댓글 창 종료..!</h1>
       {isCommentEditorShown ? (
         <>
-          <CommentEditor ref={commentRef} isCommentEditorShown={isCommentEditorShown} />
+          <CommentEditor
+            ref={commentRef}
+            isCommentEditorShown={isCommentEditorShown}
+          />
           <button onClick={closeCommentEditor}>창 닫기</button>
           <button onClick={saveComment}>댓글 입력</button>
         </>
@@ -65,6 +81,13 @@ export function PostDetail() {
   );
 }
 
+interface CommentProps {
+  username: string;
+  content: Delta;
+  id: string;
+  children?: CommentProps[];
+}
+
 interface PostDetailProps {
   title: string;
   username: string;
@@ -74,6 +97,7 @@ interface PostDetailProps {
   category: string;
   createdDate: string;
   content: Delta;
+  comments: CommentProps[];
 }
 
 export async function postDetailLoader({ params }: LoaderFunctionArgs) {
