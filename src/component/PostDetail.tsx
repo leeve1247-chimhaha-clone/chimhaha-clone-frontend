@@ -8,36 +8,18 @@ import Delta from "quill-delta";
 import { useRef, useState } from "react";
 import { WYSIWYGEditor } from "./WYSIWYGEditor.tsx";
 import { CommentEditor } from "./CommentEditor.tsx";
-import { useAuth } from "react-oidc-context";
 import { MutableRefObject } from "react";
 import { CommentComponent } from "./CommentComponent.tsx";
+import { saveComment } from "../utils/saveComment.ts";
+import { useAuth } from "react-oidc-context";
 
 export function PostDetail() {
   const data = useLoaderData() as PostDetailProps;
   const quillRef = useRef<Quill>(null);
   const commentRef: MutableRefObject<Quill | null> = useRef<Quill>(null);
-  const auth = useAuth();
   const [isCommentEditorShown, setIsCommentEditorShown] = useState(false);
+  const auth = useAuth()
   console.log(data.comments);
-
-  async function saveComment() {
-    if (commentRef.current) {
-      const delta = commentRef.current.getContents();
-      const deltaJson = JSON.stringify({
-        content: delta,
-        postId: data.postId,
-        user: auth?.user?.profile.sub,
-      });
-      const axiosResponse = await axios.post(RData.baseUrl + "/save/comment", deltaJson, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${auth.user?.access_token}`,
-        },
-      });
-      data.comments = axiosResponse.data.comments
-      setIsCommentEditorShown(false);
-    }
-  }
 
   function showCommentEditor() {
     setIsCommentEditorShown(true);
@@ -55,7 +37,7 @@ export function PostDetail() {
       <h1>이하 댓글 창</h1>
       {data.comments.map((comment, index) => (
         <CommentComponent
-          key = {index.toString()}
+          key={index.toString()}
           content={comment.content}
           commentId={comment.id}
         />
@@ -68,7 +50,19 @@ export function PostDetail() {
             isCommentEditorShown={isCommentEditorShown}
           />
           <button onClick={closeCommentEditor}>창 닫기</button>
-          <button onClick={saveComment}>댓글 입력</button>
+          <button
+            onClick={async () => {
+              await saveComment(
+                commentRef.current?.getContents(),
+                data,
+                auth?.user?.profile.sub,
+                auth.user?.access_token
+              );
+              closeCommentEditor()
+            }}
+          >
+            댓글 입력
+          </button>
         </>
       ) : (
         <button onClick={showCommentEditor}>
@@ -86,7 +80,7 @@ interface CommentProps {
   children?: CommentProps[];
 }
 
-interface PostDetailProps {
+export interface PostDetailProps {
   title: string;
   username: string;
   postId: number;
