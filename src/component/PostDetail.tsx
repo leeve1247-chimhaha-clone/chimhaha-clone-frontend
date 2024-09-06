@@ -5,29 +5,14 @@ import { RData } from "../credential/data.ts";
 import { timeAgo } from "./CreatedDate.tsx";
 import Quill from "quill";
 import Delta from "quill-delta";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { WYSIWYGEditor } from "./WYSIWYGEditor.tsx";
-import { CommentEditor } from "./CommentEditor.tsx";
-import { MutableRefObject } from "react";
-import { CommentComponent } from "./CommentComponent.tsx";
-import { saveComment } from "../utils/saveComment.ts";
-import { useAuth } from "react-oidc-context";
+import { CommentComponent } from "./comment/CommentComponent.tsx";
+import { CommentEditorComponent } from "./comment/CommentEditorComponent.tsx";
 
 export function PostDetail() {
   const data = useLoaderData() as PostDetailProps;
   const quillRef = useRef<Quill>(null);
-  const commentRef: MutableRefObject<Quill | null> = useRef<Quill>(null);
-  const [isCommentEditorShown, setIsCommentEditorShown] = useState(false);
-  const auth = useAuth()
-
-  function showCommentEditor() {
-    setIsCommentEditorShown(true);
-  }
-  function closeCommentEditor() {
-    commentRef.current = null;
-    setIsCommentEditorShown(false);
-  }
-
   return (
     <>
       <h1>인기글</h1>
@@ -42,32 +27,7 @@ export function PostDetail() {
         />
       ))}
       <h1>댓글 창 종료..!</h1>
-      {isCommentEditorShown ? (
-        <>
-          <CommentEditor
-            ref={commentRef}
-            isCommentEditorShown={isCommentEditorShown}
-          />
-          <button onClick={closeCommentEditor}>창 닫기</button>
-          <button
-            onClick={async () => {
-              await saveComment(
-                commentRef.current?.getContents(),
-                data,
-                auth?.user?.profile.sub,
-                auth.user?.access_token
-              );
-              closeCommentEditor()
-            }}
-          >
-            댓글 입력
-          </button>
-        </>
-      ) : (
-        <button onClick={showCommentEditor}>
-          이 버튼을 눌러야 하위 창이 표시된다구?
-        </button>
-      )}
+      <CommentEditorComponent postId={data?.postId} />
     </>
   );
 }
@@ -82,7 +42,7 @@ interface CommentProps {
 export interface PostDetailProps {
   title: string;
   username: string;
-  postId: number;
+  postId: string;
   likes: number;
   views: number;
   category: string;

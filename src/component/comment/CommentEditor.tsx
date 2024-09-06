@@ -1,28 +1,26 @@
 import { forwardRef, useEffect } from "react";
-import "./WYSIWYGEditor.css";
+import "../WYSIWYGEditor.css";
 import Quill from "quill";
 import Delta from "quill-delta";
 
-export const CommentUpdateEditor = forwardRef<Quill, {defaultValue? : Delta, commentId: string}>(
-  ({commentId, defaultValue}, quillRef) => {
+export const CommentEditor = forwardRef<Quill, {defaultValue? : Delta, isCommentEditorShown: boolean}>(
+  ({isCommentEditorShown}, quillRef) => {
     useEffect(() => {
       if (quillRef === null || typeof quillRef === "function") return;
-      const container = document.getElementById("comment-" + commentId) as HTMLElement;
+      const container = document.getElementById("comment-editor") as HTMLElement;
       if (container && !quillRef.current) {
           quillRef.current = new Quill(container, {
-            readOnly: true,
             modules: {
               toolbar: false,
             },
             theme: "snow",
             formats: []
           });
-          if (defaultValue) quillRef.current.setContents(defaultValue)
       }
-    }, [quillRef]);
+    }, [quillRef, isCommentEditorShown]);
 
     return <>
-      <div id={`comment-${commentId}`}/>
+      <div id={`comment-editor`} style={{ height: "100px" }} />
     </>
   },
 );
