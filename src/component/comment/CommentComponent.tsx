@@ -12,14 +12,12 @@ interface CommentComponentProps {
 
 export function CommentComponent({
   postId,
-  key,
   comment,
 }: CommentComponentProps) {
   const commentRef = useRef<Quill>(null);
   return (
-    <>
+    <div>
       <CommentUpdateEditor
-        key={key}
         ref={commentRef}
         defaultValue={comment.content}
         commentId={comment.id}
@@ -31,11 +29,11 @@ export function CommentComponent({
       </CommentEditorComponent>
       {comment.children !== undefined && comment.children?.length !== 0 ? (
         comment.children.map((child, index) => (
-          <CommentComponent postId={postId} key={key + index} comment={child} />
+          <CommentComponent key = {index.toString()} postId={postId} comment={child} />
         ))
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 }
