@@ -17,7 +17,6 @@ export const CommentUpdateEditor = forwardRef<Quill, {defaultValue? : Delta, com
             theme: "snow",
             formats: []
           });
-          console.log(defaultValue)
           if (defaultValue) quillRef.current.setContents(defaultValue)
       }
     }, [quillRef]);
