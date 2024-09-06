@@ -13,6 +13,7 @@ import { CommentEditorComponent } from "./comment/CommentEditorComponent.tsx";
 export function PostDetail() {
   const data = useLoaderData() as PostDetailProps;
   const quillRef = useRef<Quill>(null);
+  console.log(data);
   return (
     <>
       <h1>인기글</h1>
@@ -23,18 +24,19 @@ export function PostDetail() {
         <CommentComponent
           postId={data?.postId}
           key={index.toString()}
-          content={comment.content}
-          commentId={comment.id}
+          comment={comment}
         />
       ))}
       <h1>댓글 창 종료..!</h1>
-      <CommentEditorComponent postId={data?.postId}>댓글 달기</CommentEditorComponent>
+      <CommentEditorComponent postId={data?.postId}>
+        댓글 달기
+      </CommentEditorComponent>
     </>
   );
 }
 
-interface CommentProps {
-  username: string;
+export interface CommentProps {
+  username?: string;
   content: Delta;
   id: string;
   children?: CommentProps[];
