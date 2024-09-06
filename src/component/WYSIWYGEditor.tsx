@@ -4,6 +4,7 @@ import "./WYSIWYGEditor.css";
 import Icons from "quill/ui/icons";
 import { svgs } from "../utils/svgs.tsx";
 import Delta from "quill-delta";
+import { ImageBlot } from "../utils/ImageBlot.ts";
 
 type IconsType = typeof Icons;
 interface ExtendedIcons extends IconsType {
@@ -12,11 +13,11 @@ interface ExtendedIcons extends IconsType {
 }
 
 interface EditorProps {
-  defaultValue? : Delta,
+  defaultValue?: Delta;
 }
 
 export const WYSIWYGEditor = forwardRef<Quill, EditorProps>(
-  ({defaultValue}, quillRef) => {
+  ({ defaultValue }, quillRef) => {
     useEffect(() => {
       if (quillRef === null || typeof quillRef === "function") return;
       const container = document.getElementById("editor") as HTMLElement;
@@ -24,7 +25,7 @@ export const WYSIWYGEditor = forwardRef<Quill, EditorProps>(
         container: [
           [{ font: [] }],
           [{ size: ["small", false, "large", "huge"] }], // custom dropdown
-          // ["link", "image", "video"], // 추후 구현 예정
+          ["link", "image", "video"], // 추후 구현 예정
           ["bold", "italic", "underline", "strike"], // toggled buttons
 
           [{ color: [] }, { background: [] }], // dropdown with defaults from theme
@@ -53,10 +54,15 @@ export const WYSIWYGEditor = forwardRef<Quill, EditorProps>(
 
       if (container && !quillRef.current) {
         if (defaultValue !== undefined) {
-          quillRef.current = new Quill(container, {readOnly : true})
-          quillRef.current.setContents(defaultValue)
+          quillRef.current = new Quill(container, { readOnly: true });
+          quillRef.current.setContents(defaultValue);
         } else {
           // quillRef.current 가 null 이면 새로운 Quill 인스턴스를 생성합니다. 이미 있으면 아무것도 하지 않습니다.
+          const RegisteredBlot = Quill.import('blots/block/embed');
+          if (RegisteredBlot === ImageBlot) {
+          } else {
+            Quill.register(ImageBlot);
+          }
           quillRef.current = new Quill(container, {
             modules: {
               history: {
