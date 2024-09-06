@@ -7,12 +7,14 @@ export async function saveComment(
   commentDelta?: Delta,
   userSub?: string,
   userToken?: string,
+  commentId?: string,
 ) {
   if (commentDelta) {
     const deltaJson = JSON.stringify({
       content: commentDelta,
       postId: postId,
       user: userSub,
+      commentId: commentId ?? null
     });
     await axios.post(RData.baseUrl + "/save/comment", deltaJson, {
       headers: {
