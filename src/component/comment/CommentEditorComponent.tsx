@@ -27,6 +27,17 @@ export function CommentEditorComponent({
     setIsCommentEditorShown(false);
   }
 
+  async function sendCommentAndCloseEditor() {
+    await saveComment(
+      postId,
+      commentRef.current?.getContents(),
+      auth?.user?.profile.sub,
+      auth.user?.access_token,
+      commentId,
+    );
+    closeCommentEditor();
+  }
+
   return (
     <>
       {isCommentEditorShown ? (
@@ -36,20 +47,7 @@ export function CommentEditorComponent({
             isCommentEditorShown={isCommentEditorShown}
           />
           <button onClick={closeCommentEditor}>창 닫기</button>
-          <button
-            onClick={async () => {
-              await saveComment(
-                postId,
-                commentRef.current?.getContents(),
-                auth?.user?.profile.sub,
-                auth.user?.access_token,
-                commentId,
-              );
-              closeCommentEditor();
-            }}
-          >
-            입력
-          </button>
+          <button onClick={sendCommentAndCloseEditor}>입력</button>
         </>
       ) : (
         <button onClick={showCommentEditor}>{children}</button>
