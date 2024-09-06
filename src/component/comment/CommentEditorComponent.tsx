@@ -1,10 +1,20 @@
 import { CommentEditor } from "./CommentEditor.tsx";
 import { saveComment } from "../../utils/saveComment.ts";
-import { MutableRefObject, useRef, useState } from "react";
+import { MutableRefObject, ReactNode, useRef, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import Quill from "quill";
 
-export function CommentEditorComponent({ postId }: { postId: string }) {
+interface CommentEditorComponentProps {
+  postId: string;
+  commentId?: string;
+  children: ReactNode;
+}
+
+export function CommentEditorComponent({
+  postId,
+  commentId,
+  children,
+}: CommentEditorComponentProps) {
   const [isCommentEditorShown, setIsCommentEditorShown] = useState(false);
   const auth = useAuth();
   const commentRef: MutableRefObject<Quill | null> = useRef<Quill>(null);
@@ -33,17 +43,16 @@ export function CommentEditorComponent({ postId }: { postId: string }) {
                 commentRef.current?.getContents(),
                 auth?.user?.profile.sub,
                 auth.user?.access_token,
+                commentId,
               );
               closeCommentEditor();
             }}
           >
-            댓글 입력
+            입력
           </button>
         </>
       ) : (
-        <button onClick={showCommentEditor}>
-          이 버튼을 눌러야 하위 창이 표시된다구?
-        </button>
+        <button onClick={showCommentEditor}>{children}</button>
       )}
     </>
   );
