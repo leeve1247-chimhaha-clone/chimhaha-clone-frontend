@@ -2,15 +2,17 @@ import Delta from "quill-delta";
 import { useRef } from "react";
 import Quill from "quill";
 import { CommentUpdateEditor } from "./CommentUpdateEditor.tsx";
+import { CommentEditorComponent } from "./CommentEditorComponent.tsx";
 
 interface CommentComponentProps {
+  postId:string;
   key: string;
   content: Delta;
   commentId: string;
   children?: CommentComponentProps[];
 }
-
 export function CommentComponent({
+  postId,
   key,
   content,
   commentId,
@@ -27,10 +29,11 @@ export function CommentComponent({
       />
       <button>수정</button>
       <button>삭제</button>
-      <button>답글</button>
+      <CommentEditorComponent postId={postId} commentId={commentId}>답글 달기</CommentEditorComponent>
       {children !== undefined && children?.length !== 0 ? (
         children.map((child, index) => (
           <CommentComponent
+            postId = {postId}
             key={key + index}
             commentId={child.commentId}
             content={child.content}

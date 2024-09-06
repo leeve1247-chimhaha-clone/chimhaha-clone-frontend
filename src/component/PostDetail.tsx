@@ -21,6 +21,7 @@ export function PostDetail() {
       <h1>이하 댓글 창</h1>
       {data.comments.map((comment, index) => (
         <CommentComponent
+          postId={data?.postId}
           key={index.toString()}
           content={comment.content}
           commentId={comment.id}
