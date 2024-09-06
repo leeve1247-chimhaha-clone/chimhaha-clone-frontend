@@ -7,40 +7,8 @@ import Quill from "quill";
 import Delta from "quill-delta";
 import { useRef } from "react";
 import { WYSIWYGEditor } from "./WYSIWYGEditor.tsx";
-import { CommentComponent } from "./comment/CommentComponent.tsx";
+import { CommentComponent, CommentProps } from "./comment/CommentComponent.tsx";
 import { CommentEditorComponent } from "./comment/CommentEditorComponent.tsx";
-
-export function PostDetail() {
-  const data = useLoaderData() as PostDetailProps;
-  const quillRef = useRef<Quill>(null);
-  console.log(data);
-  return (
-    <>
-      <h1>인기글</h1>
-      <h1>디테일</h1>
-      <WYSIWYGEditor ref={quillRef} defaultValue={data.content} />
-      <h1>이하 댓글 창</h1>
-      {data.comments.map((comment, index) => (
-        <CommentComponent
-          postId={data?.postId}
-          key={index.toString()}
-          comment={comment}
-        />
-      ))}
-      <h1>댓글 창 종료..!</h1>
-      <CommentEditorComponent postId={data?.postId}>
-        댓글 달기
-      </CommentEditorComponent>
-    </>
-  );
-}
-
-export interface CommentProps {
-  username?: string;
-  content: Delta;
-  id: string;
-  children?: CommentProps[];
-}
 
 export interface PostDetailProps {
   title: string;
@@ -62,4 +30,28 @@ export async function postDetailLoader({ params }: LoaderFunctionArgs) {
   postDetailData.createdDate = timeAgo(postDetailData.createdDate);
 
   return postDetailData;
+}
+
+export function PostDetail() {
+  const data = useLoaderData() as PostDetailProps;
+  const quillRef = useRef<Quill>(null);
+  return (
+    <>
+      <h1>인기글</h1>
+      <h1>디테일</h1>
+      <WYSIWYGEditor ref={quillRef} defaultValue={data.content} />
+      <h1>이하 댓글 창</h1>
+      {data.comments.map((comment, index) => (
+        <CommentComponent
+          postId={data?.postId}
+          key={index.toString()}
+          comment={comment}
+        />
+      ))}
+      <h1>댓글 창 종료..!</h1>
+      <CommentEditorComponent postId={data?.postId}>
+        댓글 달기
+      </CommentEditorComponent>
+    </>
+  );
 }

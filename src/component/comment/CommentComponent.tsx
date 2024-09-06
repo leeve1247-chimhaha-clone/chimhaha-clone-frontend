@@ -2,7 +2,8 @@ import { useRef } from "react";
 import Quill from "quill";
 import { CommentUpdateEditor } from "./CommentUpdateEditor.tsx";
 import { CommentEditorComponent } from "./CommentEditorComponent.tsx";
-import { CommentProps } from "../PostDetail.tsx";
+import cssClass from "./CommentComponent.module.css";
+import Delta from "quill-delta";
 
 interface CommentComponentProps {
   postId: string;
@@ -10,10 +11,14 @@ interface CommentComponentProps {
   comment: CommentProps;
 }
 
-export function CommentComponent({
-  postId,
-  comment,
-}: CommentComponentProps) {
+export interface CommentProps {
+  username?: string;
+  content: Delta;
+  id: string;
+  children?: CommentProps[];
+}
+
+export function CommentComponent({ postId, comment }: CommentComponentProps) {
   const commentRef = useRef<Quill>(null);
   return (
     <div>
@@ -22,18 +27,26 @@ export function CommentComponent({
         defaultValue={comment.content}
         commentId={comment.id}
       />
-      <button>수정</button>
-      <button>삭제</button>
-      <CommentEditorComponent postId={postId} commentId={comment.id}>
-        답글 달기
-      </CommentEditorComponent>
-      {comment.children !== undefined && comment.children?.length !== 0 ? (
-        comment.children.map((child, index) => (
-          <CommentComponent key = {index.toString()} postId={postId} comment={child} />
-        ))
-      ) : (
-        <></>
-      )}
+      <div className={cssClass.buttons}>
+        <button>수정</button>
+        <button>삭제</button>
+        <CommentEditorComponent postId={postId} commentId={comment.id}>
+          답글 달기
+        </CommentEditorComponent>
+      </div>
+      <div className={cssClass.termToLeft}>
+        {comment.children !== undefined && comment.children?.length !== 0 ? (
+          comment.children.map((child, index) => (
+            <CommentComponent
+              key={index.toString()}
+              postId={postId}
+              comment={child}
+            />
+          ))
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 }
