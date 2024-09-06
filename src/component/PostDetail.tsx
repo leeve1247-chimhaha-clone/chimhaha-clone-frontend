@@ -19,7 +19,6 @@ export function PostDetail() {
   const commentRef: MutableRefObject<Quill | null> = useRef<Quill>(null);
   const [isCommentEditorShown, setIsCommentEditorShown] = useState(false);
   const auth = useAuth()
-  console.log(data.comments);
 
   function showCommentEditor() {
     setIsCommentEditorShown(true);

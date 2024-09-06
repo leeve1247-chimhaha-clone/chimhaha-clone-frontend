@@ -44,7 +44,6 @@ export function Login() {
         <div>
           <button
             onClick={() => {
-              console.log(auth?.user?.access_token);
               void auth.removeUser();
             }}
           >
@@ -59,7 +58,7 @@ export function Login() {
   }
 
   async function deleteUser() {
-    console.log("delete user");
+
   }
 
   return (
