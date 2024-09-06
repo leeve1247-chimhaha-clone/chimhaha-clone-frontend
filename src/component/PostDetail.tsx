@@ -10,9 +10,7 @@ import { WYSIWYGEditor } from "./WYSIWYGEditor.tsx";
 import { CommentEditor } from "./CommentEditor.tsx";
 import { useAuth } from "react-oidc-context";
 import { MutableRefObject } from "react";
-import {
-  CommentComponent,
-} from "./CommentUpdateEditor.tsx";
+import { CommentComponent } from "./CommentComponent.tsx";
 
 export function PostDetail() {
   const data = useLoaderData() as PostDetailProps;
