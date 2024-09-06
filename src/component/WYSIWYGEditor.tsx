@@ -24,7 +24,7 @@ export const WYSIWYGEditor = forwardRef<Quill, EditorProps>(
         container: [
           [{ font: [] }],
           [{ size: ["small", false, "large", "huge"] }], // custom dropdown
-          ["link", "image", "video"],
+          // ["link", "image", "video"], // 추후 구현 예정
           ["bold", "italic", "underline", "strike"], // toggled buttons
 
           [{ color: [] }, { background: [] }], // dropdown with defaults from theme
