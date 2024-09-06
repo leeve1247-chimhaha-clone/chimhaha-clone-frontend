@@ -19,7 +19,9 @@ export function Login() {
       const nameData = axiosResponse.data;
       setNickName(nameData);
     }
-    fetchMeals().then();
+    if(nickName === "") {
+      fetchMeals().then()
+    }
   }, [auth?.user?.profile?.sub]);
 
   switch (auth.activeNavigator) {
