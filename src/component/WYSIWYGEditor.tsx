@@ -4,7 +4,6 @@ import "./WYSIWYGEditor.css";
 import Icons from "quill/ui/icons";
 import { svgs } from "../utils/svgs.tsx";
 import Delta from "quill-delta";
-import { ImageBlot } from "../utils/ImageBlot.ts";
 
 type IconsType = typeof Icons;
 interface ExtendedIcons extends IconsType {
@@ -57,12 +56,6 @@ export const WYSIWYGEditor = forwardRef<Quill, EditorProps>(
           quillRef.current = new Quill(container, { readOnly: true });
           quillRef.current.setContents(defaultValue);
         } else {
-          // quillRef.current 가 null 이면 새로운 Quill 인스턴스를 생성합니다. 이미 있으면 아무것도 하지 않습니다.
-          const RegisteredBlot = Quill.import('blots/block/embed');
-          if (RegisteredBlot === ImageBlot) {
-          } else {
-            Quill.register(ImageBlot);
-          }
           quillRef.current = new Quill(container, {
             modules: {
               history: {
