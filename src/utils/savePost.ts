@@ -47,7 +47,7 @@ function findImageUrl(delta: Delta): any {
       const index = url.indexOf(RData.imagePrefix);
       const result = url.substring(index + RData.imagePrefix.length);
       console.log(result)
-      return result.slice(0,RData.imageIdLength);
+      return result.slice(0);
     }
   }
   return null; // Return undefined if no image URL is found
