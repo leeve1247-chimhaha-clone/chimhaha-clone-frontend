@@ -22,7 +22,7 @@ export function HeaderSub() {
       });
       dispatch(setNickName(axiosResponse.data));
     }
-    if (nickName === "") {
+    if (nickName === "" && auth.user?.access_token !== undefined) {
       fetchMeals().then();
     }
   }, [auth?.user?.profile?.sub]);
