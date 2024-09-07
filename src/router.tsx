@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import { App } from "./App.tsx";
-import { Login } from "./page/Login.tsx";
 import { Post } from "./page/Post.tsx";
 import { Chim } from "./page/head/Chim.tsx";
 import { Humor } from "./page/head/Humor.tsx";
@@ -42,7 +41,6 @@ export const router = createBrowserRouter([
     path: ROUTES.Home,
     element: <App />,
     children: [
-      { path: ROUTES.Login, element: <Login /> },
       { path: ROUTES.Post, element: <Post /> }, // 글쓰기
       {
         path: ROUTES.Best,
