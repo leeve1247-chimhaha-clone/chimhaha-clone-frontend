@@ -1,6 +1,7 @@
 import axios from "axios";
 import { RData } from "../credential/data.ts";
 import Quill from "quill";
+import Delta from "quill-delta";
 
 interface savePostProps {
   quill: Quill | null;
@@ -17,11 +18,13 @@ export async function savePost({
 }: savePostProps) {
   if (quill) {
     const delta = quill.getContents();
+    const titleImage = findImageUrl(delta);
     const deltaJson = JSON.stringify({
       category: "BEST",
       content: delta,
       title: titleText,
       user: user,
+      titleImage: titleImage
     });
     try {
       await axios.post(RData.baseUrl + "/save", deltaJson, {
@@ -32,8 +35,16 @@ export async function savePost({
       });
       alert("Content saved successfully!");
     } catch (error) {
-      console.error("Error saving content:", error);
       alert("Failed to save content.");
     }
   }
 }
+
+const findImageUrl = (delta: Delta): string | null => {
+  for (const op of delta.ops) {
+    if (op.insert && typeof op.insert === 'object' && 'image' in op.insert) {
+      return (op.insert.image as any).url.slice(-RData.imageIdLength)
+    }
+  }
+  return null; // Return undefined if no image URL is found
+};
