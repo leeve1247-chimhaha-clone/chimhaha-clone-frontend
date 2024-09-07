@@ -27,6 +27,10 @@ export function HeaderSub() {
     }
   }, [auth?.user?.profile?.sub]);
 
+  useEffect(() => {
+    dispatch(setToken(auth?.user?.access_token ?? ""))
+  }, [auth.isAuthenticated]);
+
   if (auth.isLoading) {
     return <div>Loading...</div>;
   }
@@ -35,7 +39,6 @@ export function HeaderSub() {
     return <div>Oops... {auth.error.message}</div>;
   }
   if (auth.isAuthenticated) {
-    dispatch(setToken(auth?.user?.access_token ?? ""));
     return (
       <section className={cssClass.section}>
         <ul className={cssClass.list}>
