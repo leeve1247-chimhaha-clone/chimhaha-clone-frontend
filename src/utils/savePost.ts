@@ -26,17 +26,12 @@ export async function savePost({
       user: user,
       titleImage: titleImage,
     });
-    try {
-      await axios.post(RData.baseUrl + "/save", deltaJson, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token}`,
-        },
-      });
-      alert("Content saved successfully!");
-    } catch (error) {
-      alert("Failed to save content.");
-    }
+    return await axios.post(RData.baseUrl + "/save", deltaJson, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
   }
 }
 
@@ -46,7 +41,6 @@ function findImageUrl(delta: Delta): any {
       const url = (op.insert.image as any).url as string;
       const index = url.indexOf(RData.imagePrefix);
       const result = url.substring(index + RData.imagePrefix.length);
-      console.log(result)
       return result.slice(0);
     }
   }
