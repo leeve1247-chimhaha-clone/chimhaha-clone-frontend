@@ -1,6 +1,6 @@
 import cssClass from "./HeaderNav.module.css";
 import { Link } from "react-router-dom";
-import { ROUTES } from "../router.tsx";
+import { ROUTES } from "../../router.tsx";
 
 export function HeaderNav() {
   return (
