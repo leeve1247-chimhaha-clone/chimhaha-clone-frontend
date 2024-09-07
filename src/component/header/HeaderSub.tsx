@@ -2,8 +2,8 @@ import cssClass from "./HeaderSub.module.css";
 import { useAuth } from "react-oidc-context";
 import { useEffect } from "react";
 import axios from "axios";
-import { RData } from "../credential/data.ts";
-import { setNickName, setToken, StateProps } from "../utils/redux/store.ts";
+import { RData } from "../../credential/data.ts";
+import { setNickName, setToken, StateProps } from "../../utils/redux/store.ts";
 import { useDispatch, useSelector } from "react-redux";
 
 export function HeaderSub() {

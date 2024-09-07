@@ -1,6 +1,6 @@
-import { HeaderSub } from "../component/HeaderSub.tsx";
-import { HeaderMain } from "../component/HeaderMain.tsx";
-import { HeaderNav } from "../component/HeaderNav.tsx";
+import { HeaderSub } from "../component/header/HeaderSub.tsx";
+import { HeaderMain } from "../component/header/HeaderMain.tsx";
+import { HeaderNav } from "../component/header/HeaderNav.tsx";
 
 export function Register(){
     return (
