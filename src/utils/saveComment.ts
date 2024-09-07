@@ -2,24 +2,32 @@ import axios from "axios";
 import { RData } from "../credential/data.ts";
 import Delta from "quill-delta";
 
-export async function saveComment(
-  postId: string,
-  commentDelta?: Delta,
-  userSub?: string,
-  userToken?: string,
-  commentId?: string,
-) {
-  if (commentDelta) {
+interface SaveCommentProps {
+  postId: string;
+  comment?: Delta;
+  user?: string;
+  access_token?: string;
+  commentId?: string;
+}
+
+export async function saveComment({
+  postId,
+  comment,
+  user,
+  access_token,
+  commentId,
+}: SaveCommentProps) {
+  if (comment) {
     const deltaJson = JSON.stringify({
-      content: commentDelta,
+      content: comment,
       postId: postId,
-      user: userSub,
-      commentId: commentId ?? null
+      user: user,
+      commentId: commentId ?? null,
     });
     await axios.post(RData.baseUrl + "/save/comment", deltaJson, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userToken}`,
+        Authorization: `Bearer ${access_token}`,
       },
     });
   }
