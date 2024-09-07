@@ -24,7 +24,7 @@ export async function savePost({
       content: delta,
       title: titleText,
       user: user,
-      titleImage: titleImage
+      titleImage: titleImage,
     });
     try {
       await axios.post(RData.baseUrl + "/save", deltaJson, {
@@ -40,11 +40,15 @@ export async function savePost({
   }
 }
 
-const findImageUrl = (delta: Delta): string | null => {
+function findImageUrl(delta: Delta): any {
   for (const op of delta.ops) {
-    if (op.insert && typeof op.insert === 'object' && 'image' in op.insert) {
-      return (op.insert.image as any).url.slice(-RData.imageIdLength)
+    if (op.insert && typeof op.insert === "object" && "image" in op.insert) {
+      const url = (op.insert.image as any).url as string;
+      const index = url.indexOf(RData.imagePrefix);
+      const result = url.substring(index + RData.imagePrefix.length);
+      console.log(result)
+      return result.slice(0,RData.imageIdLength);
     }
   }
   return null; // Return undefined if no image URL is found
-};
+}
