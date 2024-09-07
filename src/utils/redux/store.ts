@@ -27,6 +27,3 @@ export const store = configureStore({
   reducer: stateSlice.reducer
 })
 export const { setToken, setNickName } = stateSlice.actions
-store.subscribe(()=>{console.log(store.getState())})
-
-console.log(store.getState())
