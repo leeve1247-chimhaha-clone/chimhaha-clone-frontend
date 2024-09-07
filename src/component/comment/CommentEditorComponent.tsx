@@ -28,13 +28,13 @@ export function CommentEditorComponent({
   }
 
   async function sendCommentAndCloseEditor() {
-    await saveComment(
-      postId,
-      commentRef.current?.getContents(),
-      auth?.user?.profile.sub,
-      auth.user?.access_token,
-      commentId,
-    );
+    await saveComment({
+      postId: postId,
+      comment: commentRef.current?.getContents(),
+      user: auth?.user?.profile.sub,
+      access_token: auth.user?.access_token,
+      commentId: commentId,
+    });
     closeCommentEditor();
   }
 
