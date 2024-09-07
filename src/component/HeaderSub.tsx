@@ -1,15 +1,15 @@
 import cssClass from "./HeaderSub.module.css";
 import { useAuth } from "react-oidc-context";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { RData } from "../credential/data.ts";
-import { incremented } from "../utils/redux/store.ts";
-import { useDispatch } from "react-redux";
+import { setNickName, setToken, StateProps } from "../utils/redux/store.ts";
+import { useDispatch, useSelector } from "react-redux";
 
 export function HeaderSub() {
   const auth = useAuth();
-  const [nickName, setNickName] = useState<string>("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const nickName = useSelector<StateProps, string>((state) => state.nickName);
 
   useEffect(() => {
     // useEffect 내부에 선언함으로써, (개발자들이) 재사용방지
@@ -20,11 +20,10 @@ export function HeaderSub() {
           Authorization: `Bearer ${auth.user?.access_token}`,
         },
       });
-      const nameData = axiosResponse.data;
-      setNickName(nameData);
+      dispatch(setNickName(axiosResponse.data));
     }
-    if(nickName === "") {
-      fetchMeals().then()
+    if (nickName === "") {
+      fetchMeals().then();
     }
   }, [auth?.user?.profile?.sub]);
 
@@ -36,7 +35,7 @@ export function HeaderSub() {
     return <div>Oops... {auth.error.message}</div>;
   }
   if (auth.isAuthenticated) {
-    dispatch(incremented(auth?.user?.access_token ?? ""));
+    dispatch(setToken(auth?.user?.access_token ?? ""));
     return (
       <section className={cssClass.section}>
         <ul className={cssClass.list}>
@@ -52,7 +51,7 @@ export function HeaderSub() {
           </div>
         </ul>
       </section>
-  )
+    );
   }
   return (
     <section className={cssClass.section}>
