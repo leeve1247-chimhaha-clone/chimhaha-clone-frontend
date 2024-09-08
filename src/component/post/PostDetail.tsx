@@ -50,14 +50,16 @@ export function PostDetail() {
   return (
     <>
       <h1>인기글</h1>
-      <h1>디테일</h1>
-      <PostEditor ref={quillRef} defaultValue={data.content} />
-      {auth.user?.profile.sub === data.userAuthId && (
-        <div>
-          <button onClick={navToEditPage}>수정</button>
-          <button>삭제</button>
-        </div>
-      )}
+      <h2>{data.title}</h2>
+      <div>
+        <PostEditor ref={quillRef} defaultValue={data.content} />
+        {auth.user?.profile.sub === data.userAuthId && (
+          <div>
+            <button onClick={navToEditPage}>수정</button>
+            <button>삭제</button>
+          </div>
+        )}
+      </div>
       <div>--------------임시 구분선-------------</div>
       {data.comments.map((comment, index) => (
         <CommentComponent
