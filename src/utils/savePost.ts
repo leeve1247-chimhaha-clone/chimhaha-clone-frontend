@@ -9,6 +9,9 @@ interface savePostProps {
   user: string | undefined;
   access_token: string | undefined;
 }
+interface updatePostProps extends savePostProps {
+  postId: string;
+}
 
 export async function savePost({
   quill,
@@ -27,6 +30,33 @@ export async function savePost({
       titleImage: titleImage,
     });
     return await axios.post(RData.baseUrl + "/save", deltaJson, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+  }
+}
+
+export async function updatePost({
+  postId,
+  quill,
+  titleText,
+  user,
+  access_token,
+}: updatePostProps) {
+  if (quill) {
+    const delta = quill.getContents();
+    const titleImage = findImageUrl(delta);
+    const deltaJson = JSON.stringify({
+      postId: postId,
+      category: "BEST",
+      content: delta,
+      title: titleText,
+      user: user,
+      titleImage: titleImage,
+    });
+    return await axios.post(RData.baseUrl + "/update", deltaJson, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,

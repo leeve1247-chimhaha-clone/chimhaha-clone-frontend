@@ -7,12 +7,10 @@ import Quill from "quill";
 import Delta from "quill-delta";
 import { useRef } from "react";
 import { PostEditor } from "./PostEditor.tsx";
-import {
-  CommentComponent,
-  CommentProps,
-} from "../comment/CommentComponent.tsx";
-import { CommentEditorComponent } from "../comment/CommentEditorComponent.tsx";
+import { CommentProps } from "../comment/CommentComponent.tsx";
 import { useAuth } from "react-oidc-context";
+import cssStyle from "./PostForm.module.css";
+import { updatePost } from "../../utils/savePost.ts";
 
 export interface PostDetailProps {
   title: string;
@@ -27,49 +25,54 @@ export interface PostDetailProps {
   comments: CommentProps[];
 }
 
-export async function postDetailLoader({ params }: LoaderFunctionArgs) {
+export async function postUpdateEditorLoader({ params }: LoaderFunctionArgs) {
   const axiosResponse = await axios.get(
     RData.baseUrl + "/posts/detail?num=" + params.postId,
   );
   const postDetailData = axiosResponse.data as PostDetailProps;
   postDetailData.createdDate = timeAgo(postDetailData.createdDate);
-
   return postDetailData;
 }
 
-export function PostDetail() {
+export function PostUpdateEditor() {
   const data = useLoaderData() as PostDetailProps;
   const quillRef = useRef<Quill>(null);
   const auth = useAuth();
+  const title = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  function navToEditPage() {
-    navigate("edit");
+  async function sendUpdateContent() {
+    const axiosResponse = await updatePost({
+      postId: data.postId,
+      quill: quillRef.current,
+      titleText: title.current?.value,
+      user: auth?.user?.profile?.sub,
+      access_token: auth.user?.access_token,
+    });
+    navigate("/new/" + axiosResponse?.data);
   }
 
   return (
     <>
-      <h1>인기글</h1>
+      <h1>하위</h1>
+      <div className={cssStyle.title}> 카테고리</div>
+      <input
+        className={cssStyle.title}
+        defaultValue={data.title}
+        ref={title}
+        type="text"
+      />
       <h1>디테일</h1>
-      <PostEditor ref={quillRef} defaultValue={data.content} />
       {auth.user?.profile.sub === data.userAuthId && (
-        <div>
-          <button onClick={navToEditPage}>수정</button>
-          <button>삭제</button>
-        </div>
-      )}
-      <div>--------------임시 구분선-------------</div>
-      {data.comments.map((comment, index) => (
-        <CommentComponent
-          postId={data?.postId}
-          key={index.toString()}
-          comment={comment}
+        <PostEditor
+          ref={quillRef}
+          defaultValue={data.content}
+          editState={true}
         />
-      ))}
-      <h1>댓글 창 종료..!</h1>
-      <CommentEditorComponent postId={data?.postId}>
-        댓글 달기
-      </CommentEditorComponent>
+      )}
+      <div>
+        <button onClick={sendUpdateContent}>Save Content</button>
+      </div>
     </>
   );
 }
