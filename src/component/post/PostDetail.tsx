@@ -69,9 +69,11 @@ export function PostDetail() {
         />
       ))}
       <h1>댓글 창 종료..!</h1>
-      <CommentEditorComponent postId={data?.postId}>
-        댓글 달기
-      </CommentEditorComponent>
+      {auth.isAuthenticated && (
+        <CommentEditorComponent postId={data?.postId}>
+          댓글 달기
+        </CommentEditorComponent>
+      )}
     </>
   );
 }
