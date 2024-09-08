@@ -3,6 +3,8 @@ import { saveComment } from "../../utils/saveComment.ts";
 import { MutableRefObject, ReactNode, useRef, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import Quill from "quill";
+import { useLocation } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 interface CommentEditorComponentProps {
   postId: string;
@@ -18,6 +20,8 @@ export function CommentEditorComponent({
   const [isCommentEditorShown, setIsCommentEditorShown] = useState(false);
   const auth = useAuth();
   const commentRef: MutableRefObject<Quill | null> = useRef<Quill>(null);
+  const location = useLocation();
+  const navigate= useNavigate();
 
   function showCommentEditor() {
     setIsCommentEditorShown(true);
@@ -35,7 +39,8 @@ export function CommentEditorComponent({
       access_token: auth.user?.access_token,
       commentId: commentId,
     });
-    closeCommentEditor();
+    closeCommentEditor()
+    navigate(location.pathname)
   }
 
   return (
