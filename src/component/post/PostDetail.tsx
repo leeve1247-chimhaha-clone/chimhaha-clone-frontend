@@ -13,6 +13,7 @@ import {
 } from "../comment/CommentComponent.tsx";
 import { CommentEditorComponent } from "../comment/CommentEditorComponent.tsx";
 import { useAuth } from "react-oidc-context";
+import { deletePost } from "../../utils/savePost.ts";
 
 export interface PostDetailProps {
   title: string;
@@ -47,6 +48,15 @@ export function PostDetail() {
     navigate("edit");
   }
 
+  async function deleteAndGoToHome() {
+    if (auth.isAuthenticated)
+      await deletePost({
+        postId: data.postId,
+        access_token: auth.user?.access_token!,
+      });
+    navigate("/new")
+  }
+
   return (
     <>
       <h1>인기글</h1>
@@ -56,7 +66,7 @@ export function PostDetail() {
         {auth.user?.profile.sub === data.userAuthId && (
           <div>
             <button onClick={navToEditPage}>수정</button>
-            <button>삭제</button>
+            <button onClick={deleteAndGoToHome}>삭제</button>
           </div>
         )}
       </div>

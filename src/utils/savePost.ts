@@ -38,6 +38,23 @@ export async function savePost({
   }
 }
 
+interface RemovePostProps {
+  postId: string;
+  access_token: string;
+}
+
+export async function deletePost({ postId, access_token }: RemovePostProps) {
+  const deltaJson = JSON.stringify({
+    postId: postId,
+  });
+  return await axios.post(RData.baseUrl + "/delete", deltaJson, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+}
+
 export async function updatePost({
   postId,
   quill,
@@ -66,9 +83,14 @@ export async function updatePost({
 }
 
 function findImageUrl(delta: Delta): any {
-  console.log(delta.ops)
+  console.log(delta.ops);
   for (const op of delta.ops) {
-    if (op.insert && typeof op.insert === "object" && "image" in op.insert && typeof op.insert.image === "string") {
+    if (
+      op.insert &&
+      typeof op.insert === "object" &&
+      "image" in op.insert &&
+      typeof op.insert.image === "string"
+    ) {
       const url = op.insert.image as string;
       const index = url.indexOf(RData.imagePrefix);
       const result = url.substring(index + RData.imagePrefix.length);
