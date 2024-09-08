@@ -1,9 +1,12 @@
 import Quill from "quill";
 import { forwardRef, useEffect } from "react";
-import "../WYSIWYGEditor.css"
+import "../WYSIWYGEditor.css";
 import Icons from "quill/ui/icons";
 import { svgs } from "../../utils/svgs.tsx";
 import Delta from "quill-delta";
+import axios from "axios";
+import { RData } from "../../credential/data.ts";
+import { store } from "../../utils/redux/store.ts";
 
 type IconsType = typeof Icons;
 interface ExtendedIcons extends IconsType {
@@ -13,7 +16,7 @@ interface ExtendedIcons extends IconsType {
 
 interface EditorProps {
   defaultValue?: Delta;
-  editState? : boolean
+  editState?: boolean;
 }
 
 export const PostEditor = forwardRef<Quill, EditorProps>(
@@ -46,17 +49,22 @@ export const PostEditor = forwardRef<Quill, EditorProps>(
           redo: function () {
             quillRef.current?.history.redo();
           },
+          image: function () {
+            if (quillRef.current !== null) imageHandler(quillRef.current);
+          },
         },
       };
       const extendedIcons: ExtendedIcons = Icons;
       extendedIcons.undo = svgs["arrow-rotate-left"];
       extendedIcons.redo = svgs["arrow-rotate-right"];
 
+      // 1. read
       if (container && !quillRef.current) {
         if (!editState && defaultValue !== undefined) {
           quillRef.current = new Quill(container, { readOnly: true });
           quillRef.current.setContents(defaultValue);
         } else {
+          // 2. create
           quillRef.current = new Quill(container, {
             modules: {
               history: {
@@ -68,8 +76,9 @@ export const PostEditor = forwardRef<Quill, EditorProps>(
             },
             theme: "snow",
           });
-          if (editState && defaultValue !== undefined){
-            quillRef.current.setContents(defaultValue)
+          // 3. update
+          if (editState && defaultValue !== undefined) {
+            quillRef.current.setContents(defaultValue);
           }
         }
       }
@@ -78,3 +87,30 @@ export const PostEditor = forwardRef<Quill, EditorProps>(
     return <div id="editor" style={{ height: "400px" }} />; // Ensure the editor has a height
   },
 );
+
+function imageHandler(quill: Quill) {
+  const input = document.createElement("input");
+  input.setAttribute("type", "file");
+  input.setAttribute("accept", "image/*");
+  input.click();
+  input.addEventListener("change", async () => {
+    try {
+      const file = input.files ? input.files[0] : "";
+      const formData = new FormData();
+      formData.append("file", file);
+      const axiosResponse = await axios.post(
+        RData.baseUrl + "/upload/image",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${store.getState().token}`,
+          },
+        },
+      );
+      const range = quill.getSelection();
+      if (range?.index !== undefined)
+        quill.insertEmbed(range?.index, "image", axiosResponse.data);
+    } catch (error) {}
+  });
+}

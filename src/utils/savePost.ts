@@ -66,9 +66,10 @@ export async function updatePost({
 }
 
 function findImageUrl(delta: Delta): any {
+  console.log(delta.ops)
   for (const op of delta.ops) {
-    if (op.insert && typeof op.insert === "object" && "image" in op.insert) {
-      const url = (op.insert.image as any).url as string;
+    if (op.insert && typeof op.insert === "object" && "image" in op.insert && typeof op.insert.image === "string") {
+      const url = op.insert.image as string;
       const index = url.indexOf(RData.imagePrefix);
       const result = url.substring(index + RData.imagePrefix.length);
       return result.slice(0);
