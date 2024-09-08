@@ -13,10 +13,11 @@ interface ExtendedIcons extends IconsType {
 
 interface EditorProps {
   defaultValue?: Delta;
+  editState? : boolean
 }
 
 export const PostEditor = forwardRef<Quill, EditorProps>(
-  ({ defaultValue }, quillRef) => {
+  ({ defaultValue, editState }, quillRef) => {
     useEffect(() => {
       if (quillRef === null || typeof quillRef === "function") return;
       const container = document.getElementById("editor") as HTMLElement;
@@ -52,7 +53,7 @@ export const PostEditor = forwardRef<Quill, EditorProps>(
       extendedIcons.redo = svgs["arrow-rotate-right"];
 
       if (container && !quillRef.current) {
-        if (defaultValue !== undefined) {
+        if (!editState && defaultValue !== undefined) {
           quillRef.current = new Quill(container, { readOnly: true });
           quillRef.current.setContents(defaultValue);
         } else {
@@ -67,6 +68,9 @@ export const PostEditor = forwardRef<Quill, EditorProps>(
             },
             theme: "snow",
           });
+          if (editState && defaultValue !== undefined){
+            quillRef.current.setContents(defaultValue)
+          }
         }
       }
     }, [quillRef]);

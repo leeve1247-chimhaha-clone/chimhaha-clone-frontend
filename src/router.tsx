@@ -15,6 +15,10 @@ import { Fakemon } from "./page/head/Fakemon.tsx";
 import { Report } from "./page/head/Report.tsx";
 import { New } from "./page/head/New.tsx";
 import { PostDetail, postDetailLoader } from "./component/post/PostDetail.tsx";
+import {
+  PostUpdateEditor,
+  postUpdateEditorLoader,
+} from "./component/post/PostUpdateEditor.tsx";
 
 export const ROUTES = {
   Chim: "chim",
@@ -50,16 +54,22 @@ export const router = createBrowserRouter([
             path: ":postId",
             loader: postDetailLoader,
             element: <PostDetail />,
-          }
+          },
         ],
       },
       {
         path: ROUTES.New,
         children: [
           { index: true, element: <New /> }, // 전체글
-          { path: ":postId",
+          {
+            path: ":postId",
             loader: postDetailLoader,
-            element: <PostDetail/>
+            element: <PostDetail />,
+          },
+          {
+            path: ":postId/edit",
+            loader: postUpdateEditorLoader,
+            element: <PostUpdateEditor />,
           },
           { path: ROUTES.Chim, element: <Chim /> }, //침착맨
           { path: ROUTES.Humor, element: <Humor /> }, //웃음
