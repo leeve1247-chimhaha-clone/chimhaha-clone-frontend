@@ -7,13 +7,18 @@ import Quill from "quill";
 import Delta from "quill-delta";
 import { useRef } from "react";
 import { PostEditor } from "./PostEditor.tsx";
-import { CommentComponent, CommentProps } from "../comment/CommentComponent.tsx";
+import {
+  CommentComponent,
+  CommentProps,
+} from "../comment/CommentComponent.tsx";
 import { CommentEditorComponent } from "../comment/CommentEditorComponent.tsx";
+import { useAuth } from "react-oidc-context";
 
 export interface PostDetailProps {
   title: string;
   username: string;
   postId: string;
+  userAuthId: string;
   likes: number;
   views: number;
   category: string;
@@ -35,12 +40,20 @@ export async function postDetailLoader({ params }: LoaderFunctionArgs) {
 export function PostDetail() {
   const data = useLoaderData() as PostDetailProps;
   const quillRef = useRef<Quill>(null);
+  const auth = useAuth();
+  console.log(data.userAuthId);
   return (
     <>
       <h1>인기글</h1>
       <h1>디테일</h1>
       <PostEditor ref={quillRef} defaultValue={data.content} />
-      <h1>이하 댓글 창</h1>
+      {auth.user?.profile.sub === data.userAuthId && (
+        <div>
+          <button>수정</button>
+          <button>삭제</button>
+        </div>
+      )}
+      <div>--------------임시 구분선-------------</div>
       {data.comments.map((comment, index) => (
         <CommentComponent
           postId={data?.postId}
