@@ -14,7 +14,7 @@ import { Management } from "./page/head/Management.tsx";
 import { Fakemon } from "./page/head/Fakemon.tsx";
 import { Report } from "./page/head/Report.tsx";
 import { New } from "./page/head/New.tsx";
-import { PostDetail, postDetailLoader } from "./component/PostDetail.tsx";
+import { PostDetail, postDetailLoader } from "./component/post/PostDetail.tsx";
 
 export const ROUTES = {
   Chim: "chim",

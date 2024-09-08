@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import Quill from "quill";
-import { WYSIWYGEditor } from "./WYSIWYGEditor.tsx";
+import { PostEditor } from "./PostEditor.tsx";
 import cssStyle from "./PostForm.module.css";
 import { useAuth } from "react-oidc-context";
-import { savePost } from "../utils/savePost.ts";
+import { savePost } from "../../utils/savePost.ts";
 import { useNavigate } from "react-router-dom";
 
 export function PostForm() {
@@ -32,7 +32,7 @@ export function PostForm() {
         type="text"
       />
       <div>
-        <WYSIWYGEditor ref={quillRef} />
+        <PostEditor ref={quillRef} />
         <button onClick={sendPostContent}>Save Content</button>
       </div>
     </>

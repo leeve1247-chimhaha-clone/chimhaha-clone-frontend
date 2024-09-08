@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { PostComponent, PostItem } from "../../component/PostComponent.tsx";
+import { PostComponent, PostItem } from "../../component/post/PostComponent.tsx";
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../../router.tsx";
 import { RData } from "../../credential/data.ts";
