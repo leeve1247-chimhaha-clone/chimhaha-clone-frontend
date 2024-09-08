@@ -63,13 +63,15 @@ export function PostUpdateEditor() {
         type="text"
       />
       <h1>디테일</h1>
-      {auth.user?.profile.sub === data.userAuthId && (
-        <PostEditor
-          ref={quillRef}
-          defaultValue={data.content}
-          editState={true}
-        />
-      )}
+      <div>
+        {auth.user?.profile.sub === data.userAuthId && (
+          <PostEditor
+            ref={quillRef}
+            defaultValue={data.content}
+            editState={true}
+          />
+        )}
+      </div>
       <div>
         <button onClick={sendUpdateContent}>Save Content</button>
       </div>
