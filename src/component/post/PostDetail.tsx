@@ -1,14 +1,14 @@
 import { useLoaderData } from "react-router";
 import { LoaderFunctionArgs } from "react-router-dom";
 import axios from "axios";
-import { RData } from "../credential/data.ts";
-import { timeAgo } from "./CreatedDate.tsx";
+import { RData } from "../../credential/data.ts";
+import { timeAgo } from "../../utils/CreatedDate.tsx";
 import Quill from "quill";
 import Delta from "quill-delta";
 import { useRef } from "react";
-import { WYSIWYGEditor } from "./WYSIWYGEditor.tsx";
-import { CommentComponent, CommentProps } from "./comment/CommentComponent.tsx";
-import { CommentEditorComponent } from "./comment/CommentEditorComponent.tsx";
+import { PostEditor } from "./PostEditor.tsx";
+import { CommentComponent, CommentProps } from "../comment/CommentComponent.tsx";
+import { CommentEditorComponent } from "../comment/CommentEditorComponent.tsx";
 
 export interface PostDetailProps {
   title: string;
@@ -39,7 +39,7 @@ export function PostDetail() {
     <>
       <h1>인기글</h1>
       <h1>디테일</h1>
-      <WYSIWYGEditor ref={quillRef} defaultValue={data.content} />
+      <PostEditor ref={quillRef} defaultValue={data.content} />
       <h1>이하 댓글 창</h1>
       {data.comments.map((comment, index) => (
         <CommentComponent

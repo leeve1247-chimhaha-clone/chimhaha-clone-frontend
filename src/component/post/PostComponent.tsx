@@ -1,7 +1,7 @@
 import cssClass from "./PostComponent.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CreatedDate } from "./CreatedDate.tsx";
-import { Category } from "./Category.tsx";
+import { CreatedDate } from "../../utils/CreatedDate.tsx";
+import { Category } from "../Category.tsx";
 import { faCircle } from "@fortawesome/free-solid-svg-icons/faCircle";
 import {
   faEye,
@@ -9,7 +9,7 @@ import {
   faThumbsUp,
 } from "@fortawesome/free-regular-svg-icons";
 import { NavLink } from "react-router-dom";
-import { ImageThumbNail } from "./ImageThumbNail.tsx";
+import { ImageThumbNail } from "../ImageThumbNail.tsx";
 
 export interface PostItem {
   title: string;

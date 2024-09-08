@@ -1,8 +1,8 @@
 import Quill from "quill";
 import { forwardRef, useEffect } from "react";
-import "./WYSIWYGEditor.css";
+import "../WYSIWYGEditor.css"
 import Icons from "quill/ui/icons";
-import { svgs } from "../utils/svgs.tsx";
+import { svgs } from "../../utils/svgs.tsx";
 import Delta from "quill-delta";
 
 type IconsType = typeof Icons;
@@ -15,7 +15,7 @@ interface EditorProps {
   defaultValue?: Delta;
 }
 
-export const WYSIWYGEditor = forwardRef<Quill, EditorProps>(
+export const PostEditor = forwardRef<Quill, EditorProps>(
   ({ defaultValue }, quillRef) => {
     useEffect(() => {
       if (quillRef === null || typeof quillRef === "function") return;
