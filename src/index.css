@@ -24,7 +24,6 @@
     font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Apple SD Gothic Neo, 맑은 고딕, Malgun Gothic, 돋움, dotum, Arial, sans-serif;
     line-height: 1.5rem;
     font-weight: 400;
-    margin: 1rem;
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 1);
@@ -55,4 +54,17 @@
     button {
         background-color: #f9f9f9;
     }
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+a:visited{
+    color:inherit;
+}
+
+body{
+    margin: 0;
 }
