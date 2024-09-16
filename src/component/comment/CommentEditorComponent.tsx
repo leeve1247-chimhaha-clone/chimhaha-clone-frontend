@@ -1,27 +1,26 @@
 import { CommentEditor } from "./CommentEditor.tsx";
-import { saveComment } from "../../utils/saveComment.ts";
+import { createComment } from "../../utils/saveComment.ts";
 import { MutableRefObject, ReactNode, useRef, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import Quill from "quill";
-import { useLocation } from "react-router";
-import { useNavigate } from "react-router-dom";
+import { CommentProps } from "./CommentComponent.tsx";
 
 interface CommentEditorComponentProps {
   postId: string;
-  commentId?: string;
   children: ReactNode;
+  onDataReceived: (arg0: CommentProps) => void;
+  commentId?: string;
 }
 
 export function CommentEditorComponent({
   postId,
-  commentId,
   children,
+  onDataReceived,
+  commentId
 }: CommentEditorComponentProps) {
   const [isCommentEditorShown, setIsCommentEditorShown] = useState(false);
   const auth = useAuth();
   const commentRef: MutableRefObject<Quill | null> = useRef<Quill>(null);
-  const location = useLocation();
-  const navigate= useNavigate();
 
   function showCommentEditor() {
     setIsCommentEditorShown(true);
@@ -32,15 +31,14 @@ export function CommentEditorComponent({
   }
 
   async function sendCommentAndCloseEditor() {
-    await saveComment({
+    const axiosResponse = await createComment({
       postId: postId,
       comment: commentRef.current?.getContents(),
-      user: auth?.user?.profile.sub,
       access_token: auth.user?.access_token,
-      commentId: commentId,
+      commentId: commentId
     });
-    closeCommentEditor()
-    navigate(location.pathname)
+    closeCommentEditor();
+    onDataReceived(axiosResponse?.data);
   }
 
   return (
@@ -49,7 +47,6 @@ export function CommentEditorComponent({
         <>
           <CommentEditor
             ref={commentRef}
-            isCommentEditorShown={isCommentEditorShown}
           />
           <button onClick={closeCommentEditor}>창 닫기</button>
           <button onClick={sendCommentAndCloseEditor}>입력</button>
