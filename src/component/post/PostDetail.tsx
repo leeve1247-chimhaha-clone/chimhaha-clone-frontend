@@ -5,7 +5,7 @@ import { RData } from "../../credential/data.ts";
 import { timeAgo } from "../../utils/CreatedDate.tsx";
 import Quill from "quill";
 import Delta from "quill-delta";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { PostEditor } from "./PostEditor.tsx";
 import {
   CommentComponent,
@@ -13,7 +13,7 @@ import {
 } from "../comment/CommentComponent.tsx";
 import { CommentEditorComponent } from "../comment/CommentEditorComponent.tsx";
 import { useAuth } from "react-oidc-context";
-import { deletePost } from "../../utils/savePost.ts";
+import { deletePost, likePost } from "../../utils/savePost.ts";
 
 export interface PostDetailProps {
   title: string;
@@ -39,7 +39,8 @@ export async function postDetailLoader({ params }: LoaderFunctionArgs) {
 }
 
 export function PostDetail() {
-  const data = useLoaderData() as PostDetailProps;
+  const initialData = useLoaderData() as PostDetailProps;
+  const [data, setData] = useState(initialData);
   const quillRef = useRef<Quill>(null);
   const auth = useAuth();
   const navigate = useNavigate();
@@ -48,13 +49,32 @@ export function PostDetail() {
     navigate("edit");
   }
 
+  async function likeThisPost() {
+    if (!auth.isAuthenticated) return;
+    const axiosResponse = await likePost({
+      postId: data.postId,
+      access_token: auth.user?.access_token!,
+    });
+    setData((prevData) => ({
+      ...prevData,
+      likes: axiosResponse.data,
+    }));
+  }
+
   async function deleteAndGoToHome() {
     if (auth.isAuthenticated)
       await deletePost({
         postId: data.postId,
         access_token: auth.user?.access_token!,
       });
-    navigate("/new")
+    navigate("/new");
+  }
+
+  function handleDataReceived(data: CommentProps) {
+    setData((prevData) => ({
+      ...prevData,
+      comments: [...prevData.comments, data],
+    }));
   }
 
   return (
@@ -65,8 +85,10 @@ export function PostDetail() {
         <PostEditor ref={quillRef} defaultValue={data.content} />
         {auth.user?.profile.sub === data.userAuthId && (
           <div>
+            <button onClick={likeThisPost}>좋아요</button>
             <button onClick={navToEditPage}>수정</button>
             <button onClick={deleteAndGoToHome}>삭제</button>
+            <div>{data.likes}</div>
           </div>
         )}
       </div>
@@ -80,7 +102,10 @@ export function PostDetail() {
       ))}
       <h1>댓글 창 종료..!</h1>
       {auth.isAuthenticated && (
-        <CommentEditorComponent postId={data?.postId}>
+        <CommentEditorComponent
+          onDataReceived={handleDataReceived}
+          postId={data?.postId}
+        >
           댓글 달기
         </CommentEditorComponent>
       )}
