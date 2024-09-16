@@ -38,7 +38,7 @@ export async function savePost({
   }
 }
 
-interface RemovePostProps {
+export interface RemovePostProps {
   postId: string;
   access_token: string;
 }
@@ -48,6 +48,18 @@ export async function deletePost({ postId, access_token }: RemovePostProps) {
     postId: postId,
   });
   return await axios.post(RData.baseUrl + "/delete", deltaJson, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+}
+
+export async function likePost({ postId, access_token}: RemovePostProps) {
+  const deltaJson = JSON.stringify({
+    num: postId,
+  });
+  return await axios.post(RData.baseUrl + "/posts/like", deltaJson, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${access_token}`,
