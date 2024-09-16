@@ -59,7 +59,8 @@
     font-size: 0.8rem;
     color: var(--color-gray-100);
     border: 0.025rem solid;
-    border-radius: 15%;
+    border-radius: 0.5rem;
+    border-color: var(--color-gray-700);
     background-color: var(--color-gray-850);
     padding: 0.0rem 0.4rem 0.0rem 0.4rem; /* 시계 방향으로 top, right, bottom, left */
     margin-right: 0.5rem;

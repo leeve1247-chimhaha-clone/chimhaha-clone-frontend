@@ -4,6 +4,7 @@ import { PostComponent, PostItem } from "../../component/post/PostComponent.tsx"
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../../router.tsx";
 import { RData } from "../../credential/data.ts";
+import cssClass from "./New.module.css";
 
 export function New() {
   const [data, setData] = useState<PostItem[]>([]);  // 데이터를 저장할 상태
@@ -18,7 +19,7 @@ export function New() {
 
   return (
     <div>
-      <h1>Posts</h1>
+      <h2 className={cssClass.h2}>침착맨 전체 게시글</h2>
       <section>
       {data.map((post, index) => (
         <PostComponent key={index} post={post} />
