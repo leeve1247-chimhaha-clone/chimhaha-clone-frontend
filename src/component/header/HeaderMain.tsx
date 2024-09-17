@@ -8,7 +8,7 @@ export function HeaderMain({}) {
       <NavLink className={cssClass.title} to={"/"}>
         <h1>
           침하하
-          <span className={cssClass.small}>βeta</span>
+          <span className={cssClass.small}>clone</span>
         </h1>
       </NavLink>
       <HeaderSearch />

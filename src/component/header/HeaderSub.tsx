@@ -5,6 +5,8 @@ import axios from "axios";
 import { RData } from "../../credential/data.ts";
 import { setNickName, setToken, StateProps } from "../../utils/redux/store.ts";
 import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 
 export function HeaderSub() {
   const auth = useAuth();
@@ -28,28 +30,40 @@ export function HeaderSub() {
   }, [auth?.user?.profile?.sub]);
 
   useEffect(() => {
-    dispatch(setToken(auth?.user?.access_token ?? ""))
+    dispatch(setToken(auth?.user?.access_token ?? ""));
   }, [auth.isAuthenticated]);
 
   if (auth.isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <section className={cssClass.section}>
+        <ul className={cssClass.list}>
+          <div>로그인 중...</div>;
+        </ul>
+      </section>
+    );
   }
 
   if (auth.error) {
-    return <div>Oops... {auth.error.message}</div>;
+    return <div>에러 발생... {auth.error.message}</div>;
   }
   if (auth.isAuthenticated) {
     return (
       <section className={cssClass.section}>
         <ul className={cssClass.list}>
-          <div>{nickName}, 안녕하신지요?</div>
+          <button className={cssClass.buttonAlert}>
+            <FontAwesomeIcon className={cssClass.bell} icon={faBell} />
+            <div>{`알림 ${2}개`}</div>
+          </button>
+          <button className={cssClass.button}>마이페이지</button>
+          <div>{`포인트 : ${2}`}</div>
           <div>
             <button
+              className={cssClass.button}
               onClick={() => {
                 void auth.removeUser();
               }}
             >
-              Log out
+              로그아웃
             </button>
           </div>
         </ul>
@@ -59,10 +73,13 @@ export function HeaderSub() {
   return (
     <section className={cssClass.section}>
       <ul className={cssClass.list}>
-        <li>알림 표시</li>
-        <li>마이페이지</li>
-        <li>포인트</li>
-        <button onClick={() => void auth.signinRedirect()}>Log in</button>
+        <button className={cssClass.button}>회원가입</button>
+        <button
+          className={cssClass.button}
+          onClick={() => void auth.signinRedirect()}
+        >
+          로그인
+        </button>
       </ul>
     </section>
   );

@@ -1,17 +1,23 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { Form } from "react-router-dom";
+import cssClass from "./HeaderSearch.module.css";
 
 interface SearchProps extends HTMLAttributes<HTMLDivElement> {}
 
 export function HeaderSearch({}: SearchProps) {
+  const searchRef = useRef(null);
+
+  function handleSearch() {
+    console.log(searchRef.current);
+  }
+
   return (
-    <Form>
-      <input type="text" placeholder="검색어를 입력하세요" />
-      <button>
+    <form className={cssClass.headerSearch}>
+      <input className={cssClass.input} type="text" placeholder="검색어를 입력하세요" />
+      <button className={cssClass.button} onClick={handleSearch}>
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
-    </Form>
+    </form>
   );
 }
