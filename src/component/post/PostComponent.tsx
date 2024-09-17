@@ -23,10 +23,12 @@ export interface PostItem {
   likes: number;
   postId?: number;
   titleImageId?: string;
+  commentsCount?: number;
 }
 
 export function PostComponent({ post }: { post: PostItem }) {
   const postId = post.postId;
+  console.log(post)
   return (
     <NavLink to={postId?.toString() ?? ""} className={cssClass.postContainer}>
       {post.titleImageId ? (
@@ -41,6 +43,7 @@ export function PostComponent({ post }: { post: PostItem }) {
         <div className={cssClass.firstLine}>
           <Category className={cssClass.category} category={post.category} />
           <div className={cssClass.title}>{post.title}</div>
+          <div className={cssClass.commentsCount}>{post.commentsCount}</div>
         </div>
         <div className={cssClass.secondLine}>
           <div>{post.username}</div>
