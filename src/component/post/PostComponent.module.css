@@ -53,6 +53,7 @@
 .firstLine{
     display: flex;
     flex-direction: row;
+    gap: 0.5rem
 }
 
 .category{
@@ -63,7 +64,6 @@
     border-color: var(--color-gray-700);
     background-color: var(--color-gray-850);
     padding: 0.0rem 0.4rem 0.0rem 0.4rem; /* 시계 방향으로 top, right, bottom, left */
-    margin-right: 0.5rem;
 }
 
 .secondLine{
@@ -73,6 +73,11 @@
     gap: 0.5rem;
     color: var(--color-gray-500);
     font-size: 0.75rem;
+}
+.commentsCount{
+    color: var(--color-accent-000);
+    font-size: 0.75rem;
+    font-weight: bolder;
 }
 
 .dot{
