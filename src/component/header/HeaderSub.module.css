@@ -14,4 +14,31 @@
 
 .section {
   border-bottom: 0.05rem solid var(--color-gray-700); /* Add a bottom border */
+  padding-top: 0.3rem;
+  padding-bottom: 0.15rem;
+}
+
+.button {
+  display: flex;
+  padding-top: 0.05rem;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+  line-height: 1.5rem;
+}
+
+.buttonAlert {
+  display: flex;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+  line-height: 1.5rem;
+  color: red;
+  gap: 0.25rem;
+}
+
+.bell{
+  padding-top: 0.2rem;
 }

@@ -1,0 +1,34 @@
+.headerSearch{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    padding: 0.7rem;
+    border: 0.15rem solid #1ca8afe6;
+    border-radius: 0.8rem;
+}
+
+.input{
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-size: 1rem;
+    color: var(--color-gray-000)
+}
+.input::placeholder{
+    color: #1ca8afe6;
+    opacity: 50%;
+}
+.input:focus{
+    outline: none;
+}
+
+.button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
+    font-size: 1rem;
+    color: #1ca8afe6;
+}
