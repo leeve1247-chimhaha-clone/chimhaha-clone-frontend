@@ -71,6 +71,16 @@
   cursor: pointer;
 }
 
+.modal{
+  position: absolute;
+  display: flex;
+    flex-direction: row;
+  background-color: var(--color-gray-000);
+  top: 100%;
+  left: auto;
+  right: 0
+}
+
 .postCategory {
   border-radius: 0.25rem;
   padding: 0.25rem 0.5rem;
@@ -90,4 +100,8 @@
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 1rem;
+}
+
+.modalOpenContainer{
+  position: relative;
 }

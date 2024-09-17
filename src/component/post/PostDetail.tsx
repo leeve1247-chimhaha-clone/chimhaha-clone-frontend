@@ -17,6 +17,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons/faCircle";
 import { faEye, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
+import { Modal } from "../modal/Modal.tsx";
+
 
 export interface PostDetailProps {
   title: string;
@@ -103,15 +105,20 @@ export function PostDetail() {
             <div className={cssClass.likes}>{data.likes}</div>
           </div>
           <div className={cssClass.postHeader3Right}>
-            <button
-              className={cssClass.options}
-              onClick={() => {
-                setIsModalOpen(true)
-                console.log("hellel")
-              }}
-            >
-              <FontAwesomeIcon icon={faEllipsisVertical} />
-            </button>
+            <div className={cssClass.modalOpenContainer}>
+              <button
+                className={cssClass.options}
+                onClick={() => {
+                  setIsModalOpen(true);
+                }}
+              >
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+              </button>
+              <Modal className={cssClass.modal} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} >
+                <button onClick={navToEditPage}> 수정 </button>
+                <button onClick={deleteAndGoToHome}> 삭제 </button>
+              </Modal>
+            </div>
           </div>
         </div>
       </div>
@@ -122,15 +129,6 @@ export function PostDetail() {
             <button className={cssClass.postBodyButton} onClick={likeThisPost}>
               <div>좋아요</div>
               <div>👍</div>
-            </button>
-            <button className={cssClass.postBodyButton} onClick={navToEditPage}>
-              수정
-            </button>
-            <button
-              className={cssClass.postBodyButton}
-              onClick={deleteAndGoToHome}
-            >
-              삭제
             </button>
           </div>
         )}
