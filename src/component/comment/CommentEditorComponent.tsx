@@ -10,15 +10,17 @@ interface CommentEditorComponentProps {
   children: ReactNode;
   onDataReceived: (arg0: CommentProps) => void;
   commentId?: string;
+  initOpen?: boolean
 }
 
 export function CommentEditorComponent({
   postId,
   children,
   onDataReceived,
-  commentId
+  commentId,
+  initOpen
 }: CommentEditorComponentProps) {
-  const [isCommentEditorShown, setIsCommentEditorShown] = useState(false);
+  const [isCommentEditorShown, setIsCommentEditorShown] = useState(initOpen ?? false);
   const auth = useAuth();
   const commentRef: MutableRefObject<Quill | null> = useRef<Quill>(null);
 

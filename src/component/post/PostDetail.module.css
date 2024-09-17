@@ -1,0 +1,93 @@
+.postHeader {
+  padding-bottom: 1.8rem;
+  border-bottom: 1px solid var(--color-gray-600);
+  margin-bottom: 0.7rem;
+}
+
+.postNavigate {
+  margin-top: 0.1rem;
+  font-size: 0.9rem;
+  font-weight: bolder;
+  color: var(--color-gray-200);
+}
+.postBody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.postBodyButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-gray-800);
+  border: none;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  width: 8rem;
+  height: 4rem;
+}
+
+.postHeader2 {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 0.8rem;
+  font-weight: bolder;
+  color: var(--color-gray-300);
+  font-size: 1.3rem;
+}
+
+.postHeader3 {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--color-gray-600);
+}
+
+.postHeader3left {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 0.4rem;
+}
+.likes {
+  color: var(--color-gray-000);
+}
+
+.options {
+  background-color: transparent;
+  border: none;
+  color: var(--color-gray-200);
+  font-size: 1rem;
+  padding-right: 1rem;
+  cursor: pointer;
+}
+
+.postCategory {
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--color-gray-800);
+  color: var(--color-gray-300);
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.dot {
+  color: var(--color-gray-800);
+  font-size: 0.15rem;
+  padding: 0.15rem;
+}
+
+.postContainer {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+}

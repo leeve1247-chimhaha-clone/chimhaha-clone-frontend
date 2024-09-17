@@ -7,13 +7,16 @@ import Quill from "quill";
 import Delta from "quill-delta";
 import { useRef, useState } from "react";
 import { PostEditor } from "./PostEditor.tsx";
-import {
-  CommentComponent,
-  CommentProps,
-} from "../comment/CommentComponent.tsx";
-import { CommentEditorComponent } from "../comment/CommentEditorComponent.tsx";
+import { CommentProps } from "../comment/CommentComponent.tsx";
 import { useAuth } from "react-oidc-context";
 import { deletePost, likePost } from "../../utils/savePost.ts";
+import { PostDetailComment } from "../comment/PostDetailComment.tsx";
+import cssClass from "./PostDetail.module.css";
+import { PostCategory } from "../../utils/PostCategory.ts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircle } from "@fortawesome/free-solid-svg-icons/faCircle";
+import { faEye, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
 
 export interface PostDetailProps {
   title: string;
@@ -37,13 +40,13 @@ export async function postDetailLoader({ params }: LoaderFunctionArgs) {
 
   return postDetailData;
 }
-
 export function PostDetail() {
   const initialData = useLoaderData() as PostDetailProps;
   const [data, setData] = useState(initialData);
   const quillRef = useRef<Quill>(null);
   const auth = useAuth();
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   function navToEditPage() {
     navigate("edit");
@@ -78,37 +81,65 @@ export function PostDetail() {
   }
 
   return (
-    <>
-      <h1>인기글</h1>
-      <h2>{data.title}</h2>
+    <div className={cssClass.postContainer}>
+      <div className={cssClass.postNavigate}>{`침착맨 전체 게시글 >`}</div>
+      <div className={cssClass.postHeader}>
+        <div className={cssClass.postHeader2}>
+          <div className={cssClass.postCategory}>
+            {PostCategory[data.category]}
+          </div>
+          <div className={cssClass.postTitle}>{data.title}</div>
+        </div>
+        <div className={cssClass.postHeader3}>
+          <div className={cssClass.postHeader3left}>
+            <div>{data.username}</div>
+            <FontAwesomeIcon className={cssClass.dot} icon={faCircle} />
+            <div>{data.createdDate}</div>
+            <FontAwesomeIcon className={cssClass.dot} icon={faCircle} />
+            <FontAwesomeIcon icon={faEye} />
+            <div>{data.views}</div>
+            <FontAwesomeIcon className={cssClass.dot} icon={faCircle} />
+            <FontAwesomeIcon className={cssClass.likes} icon={faThumbsUp} />
+            <div className={cssClass.likes}>{data.likes}</div>
+          </div>
+          <div className={cssClass.postHeader3Right}>
+            <button
+              className={cssClass.options}
+              onClick={() => {
+                setIsModalOpen(true)
+                console.log("hellel")
+              }}
+            >
+              <FontAwesomeIcon icon={faEllipsisVertical} />
+            </button>
+          </div>
+        </div>
+      </div>
       <div>
         <PostEditor ref={quillRef} defaultValue={data.content} />
         {auth.user?.profile.sub === data.userAuthId && (
-          <div>
-            <button onClick={likeThisPost}>좋아요</button>
-            <button onClick={navToEditPage}>수정</button>
-            <button onClick={deleteAndGoToHome}>삭제</button>
-            <div>{data.likes}</div>
+          <div className={cssClass.postBody}>
+            <button className={cssClass.postBodyButton} onClick={likeThisPost}>
+              <div>좋아요</div>
+              <div>👍</div>
+            </button>
+            <button className={cssClass.postBodyButton} onClick={navToEditPage}>
+              수정
+            </button>
+            <button
+              className={cssClass.postBodyButton}
+              onClick={deleteAndGoToHome}
+            >
+              삭제
+            </button>
           </div>
         )}
       </div>
-      <div>--------------임시 구분선-------------</div>
-      {data.comments.map((comment, index) => (
-        <CommentComponent
-          postId={data?.postId}
-          key={index.toString()}
-          comment={comment}
-        />
-      ))}
-      <h1>댓글 창 종료..!</h1>
-      {auth.isAuthenticated && (
-        <CommentEditorComponent
-          onDataReceived={handleDataReceived}
-          postId={data?.postId}
-        >
-          댓글 달기
-        </CommentEditorComponent>
-      )}
-    </>
+      <PostDetailComment
+        postId={data.postId}
+        comments={data.comments}
+        handleDataReceived={handleDataReceived}
+      />
+    </div>
   );
 }
