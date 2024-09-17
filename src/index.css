@@ -41,6 +41,9 @@
     --color-gray-850: #292929;
     --color-gray-900: #181818;
 
+    --color-accent-000: #1cdde4;
+    --color-accent-100: #1ca8af;
+
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
