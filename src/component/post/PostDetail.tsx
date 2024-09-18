@@ -55,10 +55,10 @@ export function PostDetail() {
   }
 
   async function likeThisPost() {
-    if (!auth.isAuthenticated) return;
+    if (auth.user?.access_token === undefined) return;
     const axiosResponse = await likePost({
       postId: data.postId,
-      access_token: auth.user?.access_token!,
+      access_token: auth.user.access_token,
     });
     setData((prevData) => ({
       ...prevData,
@@ -67,10 +67,10 @@ export function PostDetail() {
   }
 
   async function deleteAndGoToHome() {
-    if (auth.isAuthenticated)
+    if (auth.user?.access_token === undefined) return;
       await deletePost({
         postId: data.postId,
-        access_token: auth.user?.access_token!,
+        access_token: auth.user.access_token,
       });
     navigate("/new");
   }
