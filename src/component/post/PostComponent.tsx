@@ -35,10 +35,10 @@ export function PostComponent({ post }: { post: PostItem }) {
         <ImageThumbNail
           imageId={post.titleImageId}
           postId={post.postId}
-          className={cssClass.image}
+          className={cssClass.imageThumbnailContainer}
         ></ImageThumbNail>
       ) : (
-        <FontAwesomeIcon className={cssClass.image} icon={faFileLines} />
+        <FontAwesomeIcon className={cssClass.imageThumbnailContainer} icon={faFileLines} />
       )}
       <div className={cssClass.rightSection}>
         <div className={cssClass.firstLine}>
