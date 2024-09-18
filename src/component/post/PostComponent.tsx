@@ -21,7 +21,7 @@ export interface PostItem {
   post: string;
   createdDate: string;
   likes: number;
-  postId?: number;
+  postId: number;
   titleImageId?: string;
   commentsCount?: number;
 }
@@ -34,6 +34,7 @@ export function PostComponent({ post }: { post: PostItem }) {
       {post.titleImageId ? (
         <ImageThumbNail
           imageId={post.titleImageId}
+          postId={post.postId}
           className={cssClass.image}
         ></ImageThumbNail>
       ) : (

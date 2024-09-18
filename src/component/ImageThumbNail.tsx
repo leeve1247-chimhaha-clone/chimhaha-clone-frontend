@@ -1,14 +1,22 @@
 import { HTMLAttributes } from "react";
 import { RData } from "../credential/data.ts";
 
-interface ImageThumbNailProps extends HTMLAttributes<HTMLImageElement>{
-  imageId : string
+interface ImageThumbNailProps extends HTMLAttributes<HTMLImageElement> {
+  postId: number;
+  imageId: string;
 }
 
-export function ImageThumbNail({imageId, className}: ImageThumbNailProps){
+export function ImageThumbNail({
+  postId,
+  imageId,
+  className,
+}: ImageThumbNailProps) {
   return (
     <div className={className}>
-    <img src = {RData.imageViewURl + imageId} alt={""}/>
+      <img
+        src={RData.imageThumbnailViewURl + postId.toString() + "-" + imageId}
+        alt={""}
+      />
     </div>
-  )
+  );
 }
