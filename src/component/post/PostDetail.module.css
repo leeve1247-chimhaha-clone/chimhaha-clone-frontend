@@ -75,14 +75,23 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-gray-000);
+  width: 4rem;
+  background-color: var(--color-gray-850);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   top: 100%;
   left: auto;
   right: 0;
 }
-
 .modal button{
   z-index: 1000;
+  background-color: transparent;
+  border: none;
+}
+.modal button:hover{
+  background-color: var(--color-gray-700);
+  border-radius: 0.5rem;
+  cursor: pointer;
 }
 
 .postCategory {
