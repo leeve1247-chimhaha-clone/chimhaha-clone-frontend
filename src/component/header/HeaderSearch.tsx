@@ -1,11 +1,9 @@
-import { HTMLAttributes, useRef } from "react";
+import { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import cssClass from "./HeaderSearch.module.css";
 
-interface SearchProps extends HTMLAttributes<HTMLDivElement> {}
-
-export function HeaderSearch({}: SearchProps) {
+export function HeaderSearch() {
   const searchRef = useRef(null);
 
   function handleSearch() {

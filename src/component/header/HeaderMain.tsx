@@ -2,16 +2,14 @@ import { NavLink } from "react-router-dom";
 import cssClass from "./HeaderMain.module.css";
 import { HeaderSearch } from "./HeaderSearch.tsx";
 
-export function HeaderMain({}) {
+export function HeaderMain() {
   return (
-    <section className={cssClass.sectionContainer}>
-      <NavLink className={cssClass.title} to={"/"}>
-        <h1>
-          침하하
-          <span className={cssClass.small}>clone</span>
-        </h1>
+    <div className={cssClass.sectionContainer}>
+      <NavLink className={cssClass.title} to={"/new"}>
+        <div className={cssClass.h1}>침하하</div>
+        <div className={cssClass.small}>clone</div>
       </NavLink>
       <HeaderSearch />
-    </section>
+    </div>
   );
 }

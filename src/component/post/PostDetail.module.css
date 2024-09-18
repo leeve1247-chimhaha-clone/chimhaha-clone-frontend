@@ -32,6 +32,13 @@
   height: 4rem;
 }
 
+.postBodyButton:hover {
+  background-color: var(--color-gray-700);
+}
+.postBodyButton:active {
+  background-color: var(--color-gray-850);
+}
+
 .postHeader2 {
   margin-top: 0.5rem;
   display: flex;

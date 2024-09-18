@@ -29,11 +29,7 @@ export function PostDetailComment({
       {auth.isAuthenticated && (
         <CommentEditorComponent
           onDataReceived={handleDataReceived}
-          postId={postId}
-          initOpen={true}
-        >
-          댓글 달기
-        </CommentEditorComponent>
+          postId={postId}/>
       )}
     </SelectCommentContext.Provider>
   );

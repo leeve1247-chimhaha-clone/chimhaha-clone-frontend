@@ -1,61 +1,49 @@
 import { CommentEditor } from "./CommentEditor.tsx";
 import { createComment } from "../../utils/saveComment.ts";
-import { MutableRefObject, ReactNode, useRef, useState } from "react";
+import {forwardRef, MutableRefObject, ReactNode, useRef} from "react";
 import { useAuth } from "react-oidc-context";
 import Quill from "quill";
 import { CommentProps } from "./CommentComponent.tsx";
+import cssClass from "./CommentEditorComponent.module.css";
 
 interface CommentEditorComponentProps {
   postId: string;
-  children: ReactNode;
   onDataReceived: (arg0: CommentProps) => void;
+  children?: ReactNode;
   commentId?: string;
-  initOpen?: boolean
+  initOpen?: boolean;
+  closeReplyEditor?: () => void;
 }
 
-export function CommentEditorComponent({
-  postId,
-  children,
-  onDataReceived,
-  commentId,
-  initOpen
-}: CommentEditorComponentProps) {
-  const [isCommentEditorShown, setIsCommentEditorShown] = useState(initOpen ?? false);
+export const CommentEditorComponent = forwardRef<HTMLDivElement, CommentEditorComponentProps>(
+    ({postId, onDataReceived, commentId, closeReplyEditor}, targetRef)=> {
   const auth = useAuth();
   const commentRef: MutableRefObject<Quill | null> = useRef<Quill>(null);
-
-  function showCommentEditor() {
-    setIsCommentEditorShown(true);
-  }
-  function closeCommentEditor() {
-    commentRef.current = null;
-    setIsCommentEditorShown(false);
-  }
 
   async function sendCommentAndCloseEditor() {
     const axiosResponse = await createComment({
       postId: postId,
       comment: commentRef.current?.getContents(),
       access_token: auth.user?.access_token,
-      commentId: commentId
+      commentId: commentId,
     });
-    closeCommentEditor();
     onDataReceived(axiosResponse?.data);
+    if (closeReplyEditor) closeReplyEditor();
   }
 
   return (
-    <>
-      {isCommentEditorShown ? (
-        <>
-          <CommentEditor
-            ref={commentRef}
-          />
-          <button onClick={closeCommentEditor}>창 닫기</button>
-          <button onClick={sendCommentAndCloseEditor}>입력</button>
-        </>
-      ) : (
-        <button onClick={showCommentEditor}>{children}</button>
-      )}
-    </>
+      <div ref = {targetRef} className={cssClass.editorContainer}>
+        <CommentEditor ref={commentRef} commentId={commentId} />
+        <div className={cssClass.editorContainerButton}>
+          <button className={cssClass.buttonApply} onClick={sendCommentAndCloseEditor}>
+            등록
+          </button>
+          {commentId && (
+              <button className={cssClass.buttonCancel} onClick={closeReplyEditor}>
+                취소
+              </button>
+          )}
+        </div>
+      </div>
   );
-}
+});

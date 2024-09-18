@@ -482,13 +482,16 @@
   position: absolute;
 }
 .ql-editor.ql-blank::before {
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--color-gray-400);
   content: attr(data-placeholder);
-  font-style: italic;
+  font-style: normal;
   left: 15px;
   pointer-events: none;
   position: absolute;
   right: 15px;
+}
+.ql-editor.ql-composition::before{
+
 }
 .ql-snow.ql-toolbar:after,
 .ql-snow .ql-toolbar:after {
@@ -954,7 +957,7 @@
   top: 5px;
 }
 .ql-toolbar.ql-snow {
-  border: 1px solid #ccc;
+  border-bottom: 1px solid var(--color-gray-200);
   box-sizing: border-box;
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   padding: 8px;

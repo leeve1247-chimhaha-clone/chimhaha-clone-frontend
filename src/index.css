@@ -43,6 +43,12 @@
 
     --color-accent-000: #1cdde4;
     --color-accent-100: #1ca8af;
+    --color-accent-200: #1a7a80;
+    --color-accent-300: #1a5f65;
+
+    --color-red-400: #ff6868;
+    --color-red-500: #e14242;
+    --color-red-600: #cf3b3b;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;

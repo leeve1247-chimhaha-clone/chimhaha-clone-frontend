@@ -1,0 +1,75 @@
+.editorContainer{
+    display: flex;
+    flex-direction: row;
+    background-color: var(--color-gray-850);
+    margin-top: 1rem;
+    border-radius: 0.3rem;
+}
+
+.editorContainer > :first-child{
+    flex:1;
+}
+
+.editorContainer > :nth-child{
+    flex:0;
+}
+
+.editorContainerButton{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.3rem 0.2rem;
+}
+
+.editorContainerButton > :first-child{
+    flex: 1;
+}
+.editorContainerButton > :nth-child{
+    flex: 0;
+}
+
+.buttonApply{
+    width: 4rem;
+    margin: 0.2rem;
+    background-color: var(--color-accent-100);
+    border : 1px solid var(--color-accent-100);
+    border-radius: 0.2rem;
+    color: var(--color-gray-100);
+}
+
+.buttonApply:hover{
+    width: 4rem;
+    margin: 0.2rem;
+    cursor: pointer;
+    background-color: var(--color-accent-000);
+    border : 1px solid var(--color-accent-000);
+    color: var(--color-gray-000);
+}
+
+.buttonApply:active{
+    cursor: pointer;
+    background-color: var(--color-accent-200);
+    border : 1px solid var(--color-accent-200);
+    color: var(--color-gray-200);
+}
+
+.buttonCancel{
+    width: 4rem;
+    margin: 0.2rem;
+    background-color: var(--color-red-500);
+    border : 1px solid var(--color-red-500);
+    border-radius: 0.2rem;
+    color : var(--color-gray-100)
+}
+
+.buttonCancel:hover{
+    background-color: var(--color-red-400);
+    border : 1px solid var(--color-red-400);
+    color : var(--color-gray-000)
+}
+
+.buttonCancel:active{
+    background-color: var(--color-red-600);
+    border : 1px solid var(--color-red-600);
+    color : var(--color-gray-200)
+}
