@@ -1,16 +1,21 @@
 .sectionContainer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  position: relative;
 }
 
 .title {
-  font-family: GangwonEduPowerExtraBoldA, serif;
+  position: absolute;
+  left: 50%;
+  top: 50%;
   display: flex;
-  font-size: 1.5rem;
-  justify-content: center; /* Center the items horizontally */
+  font-family: GangwonEduPowerExtraBoldA, serif;
+  font-size: 3rem;
   margin: auto;
+  justify-content: center; /* Center the items horizontally */
   text-align: center; /* Center the text within the title */
+  transform: translateX(-50%);
 }
 
 .small {

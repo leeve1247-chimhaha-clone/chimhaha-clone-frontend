@@ -1,4 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem;
+    padding: 1rem;
+}
+
 .title {
+    background-color: transparent;
     border: 0.1rem, solid, var(--color-gray-400);
     border-radius: 0.5rem; /* 적절한 반경으로 조정 */
     margin-bottom: 1rem;
@@ -10,4 +19,80 @@
     border-radius: 0.5rem; /* 적절한 반경으로 조정 */
     margin-bottom: 1rem;
     padding: 1rem;
+}
+
+.body{
+    border: 0.1rem, solid, var(--color-gray-400);
+    border-radius: 0.5rem; /* 적절한 반경으로 조정 */
+    margin-bottom: 1rem;
+    padding-top:0.25rem
+}
+
+.tail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.25rem;
+    padding: 0.25rem;
+}
+
+.buttonApply{
+    height: 3rem;
+    width: 4.85rem;
+    font-weight: bold;
+    background-color: var(--color-accent-100);
+    border : 1px solid var(--color-accent-100);
+    border-radius: 0.15rem;
+    color: var(--color-gray-100);
+}
+
+.buttonApply:hover{
+    height: 3rem;
+    width: 4.85rem;
+    font-weight: bold;
+    background-color: var(--color-accent-100);
+    border : 1px solid var(--color-accent-100);
+    border-radius: 0.15rem;
+    color: var(--color-gray-100);
+}
+
+.buttonApply:active{
+    height: 3rem;
+    width: 4.85rem;
+    font-weight: bold;
+    background-color: var(--color-accent-100);
+    border : 1px solid var(--color-accent-100);
+    border-radius: 0.15rem;
+    color: var(--color-gray-100);
+}
+
+.buttonCancel{
+    height: 3rem;
+    width: 4.85rem;
+    font-weight: bold;
+    background-color: var(--color-red-500);
+    border : 1px solid var(--color-red-500);
+    border-radius: 0.15rem;
+    color : var(--color-gray-100)
+}
+
+.buttonCancel:hover{
+    height: 3rem;
+    width: 4.85rem;
+    font-weight: bold;
+    background-color: var(--color-red-500);
+    border : 1px solid var(--color-red-500);
+    border-radius: 0.15rem;
+    color : var(--color-gray-100)
+}
+
+.buttonCancel:active{
+    height: 3rem;
+    width: 4.85rem;
+    font-weight: bold;
+    background-color: var(--color-red-500);
+    border : 1px solid var(--color-red-500);
+    border-radius: 0.15rem;
+    color : var(--color-gray-100)
 }

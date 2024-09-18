@@ -79,7 +79,7 @@
     font-size: 0.75rem;
 }
 .commentsCount{
-    color: var(--color-accent-000);
+    color: var(--color-accent-100);
     font-size: 0.75rem;
     font-weight: bolder;
 }

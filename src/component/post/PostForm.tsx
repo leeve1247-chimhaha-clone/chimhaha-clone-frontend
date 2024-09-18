@@ -19,22 +19,27 @@ export function PostForm() {
       user: auth?.user?.profile?.sub,
       access_token: auth.user?.access_token,
     });
-    navigate("/new/" + axiosResponse?.data)
+    navigate("/new/" + axiosResponse?.data);
+  }
+  function cancelPostContent() {
+    navigate("/new");
   }
 
   return (
-    <>
+    <div className={cssStyle.container}>
       <div className={cssStyle.title}> 카테고리 </div>
-      <input
-        className={cssStyle.title}
-        placeholder={"안녕? 난 제목이라고 해"}
-        ref={title}
-        type="text"
-      />
-      <div>
+      <input className={cssStyle.title} placeholder={"제목을 입력하세요"} ref={title} type="text" />
+      <div className={cssStyle.body}>
         <PostEditor ref={quillRef} />
-        <button onClick={sendPostContent}>Save Content</button>
       </div>
-    </>
+      <div className={cssStyle.tail}>
+        <button className={cssStyle.buttonCancel} onClick={cancelPostContent}>
+          취소
+        </button>
+        <button className={cssStyle.buttonApply} onClick={sendPostContent}>
+          글쓰기
+        </button>
+      </div>
+    </div>
   );
 }
