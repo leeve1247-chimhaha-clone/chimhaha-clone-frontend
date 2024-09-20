@@ -60,6 +60,7 @@ export function HeaderSub() {
             <button
               className={cssClass.button}
               onClick={() => {
+                void auth.signoutRedirect();
                 void auth.removeUser();
               }}
             >
@@ -76,7 +77,7 @@ export function HeaderSub() {
         <button className={cssClass.button}>회원가입</button>
         <button
           className={cssClass.button}
-          onClick={() => void auth.signinRedirect()}
+          onClick={() => void auth.signinPopup()}
         >
           로그인
         </button>
