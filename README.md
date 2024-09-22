@@ -1,30 +1,57 @@
-# React + TypeScript + Vite
+# 침하하 클론 웹 애플리케이션
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 주요 기능
 
-Currently, two official plugins are available:
+- OAuth2.0을 이용한 소셜 로그인, 로그 아웃
+- 전체 게시글 목록 조회
+- 게시글 작성, 수정, 삭제, 좋아요
+- 댓글, 답글 작성, 수정, 삭제, 좋아요
+- 작성, 수정, 삭제
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### OAuth2.0을 이용한 소셜 로그인
 
-## Expanding the ESLint configuration
+- Spring Security 로 OAuth2.0을 이용한 소셜 로그인을 구현했습니다.
+    <a href = "https://youtube.com/shorts/vMmENCtzrgI"> 로그인 (영상) </a>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 전체 게시글 목록 조회
 
-- Configure the top-level `parserOptions` property like this:
+- 게시글 목록 조회 시 이미지 썸네일 표시를 구현했습니다.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### 게시글 작성, 수정, 삭제, 좋아요
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Http Method를 이용한 게시글 작성, 수정, 삭제를 구현했습니다.
+- Quill Editor를 이용한 게시글 작성, 수정을 구현했습니다.
+- 게시글 작성, 수정 시 이미지 업로드를 구현했습니다.
+
+### 댓글, 답글 작성, 수정, 삭제, 좋아요
+
+- Http Method를 이용한 댓글, 답글 작성, 수정, 삭제를 구현했습니다.
+- Quill Editor를 이용한 댓글, 답글 작성, 수정을 구현했습니다.
+
+## 현재 이슈 (2024-09-23)
+
+- Quill Editor 2.x 이슈로서 Composition Text 상태에서 Placeholder 의 텍스트가 사라지지 않는 문제가 있습니다.
+
+## 추가 개발할 사항
+
+- 카테고리 지정 기능
+- 검색 기능
+- 게시글 검색 기능 (제목, 내용, 작성자)
+- 게시글 정렬 기은 (최신순, 좋아요순, 조회순, 고급 검색)
+- 게시글 페이징 기능
+- 댓글, 답글 페이징 기능
+- 게시글 좋아요 기능
+- 댓글, 답글 좋아요 기능
+
+## 개발 환경
+
+- React
+- Vite
+- TypeScript
+
+## 주요 모듈
+
+- axios
+- react-redux
+- quill
+- react-oidc-context
