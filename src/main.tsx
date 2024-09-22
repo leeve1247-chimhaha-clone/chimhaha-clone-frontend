@@ -22,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             window.location.pathname,
           );
         }}
+        post_logout_redirect_uri={CData.redirect_uri}
         automaticSilentRenew={true}
       >
         <RouterProvider router={router} />
