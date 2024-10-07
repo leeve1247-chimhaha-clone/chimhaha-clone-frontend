@@ -28,10 +28,6 @@
 - Http Method를 이용한 댓글, 답글 작성, 수정, 삭제를 구현했습니다.
 - Quill Editor를 이용한 댓글, 답글 작성, 수정을 구현했습니다.
 
-## 현재 이슈 (2024-09-23)
-
-- Quill Editor 2.x 이슈로서 Composition Text 상태에서 Placeholder 의 텍스트가 사라지지 않는 문제가 있습니다.
-
 ## 추가 개발할 사항
 
 - 카테고리 지정 기능
