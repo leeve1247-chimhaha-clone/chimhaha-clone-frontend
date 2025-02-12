@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RData } from "../credential/data.ts";
+import { ImageData } from "../credential/data.ts";
 import Quill from "quill";
 import Delta from "quill-delta";
 
@@ -29,7 +29,7 @@ export async function savePost({
       user: user,
       titleImage: titleImage,
     });
-    return await axios.post(RData.baseUrl + "/save", deltaJson, {
+    return await axios.post(ImageData.baseUrl + "/save", deltaJson, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
@@ -47,7 +47,7 @@ export async function deletePost({ postId, access_token }: RemovePostProps) {
   const deltaJson = JSON.stringify({
     postId: postId,
   });
-  return await axios.post(RData.baseUrl + "/delete", deltaJson, {
+  return await axios.post(ImageData.baseUrl + "/delete", deltaJson, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${access_token}`,
@@ -59,7 +59,7 @@ export async function likePost({ postId, access_token}: RemovePostProps) {
   const deltaJson = JSON.stringify({
     num: postId,
   });
-  return await axios.post(RData.baseUrl + "/posts/like", deltaJson, {
+  return await axios.post(ImageData.baseUrl + "/posts/like", deltaJson, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${access_token}`,
@@ -85,7 +85,7 @@ export async function updatePost({
       user: user,
       titleImage: titleImage,
     });
-    return await axios.post(RData.baseUrl + "/update", deltaJson, {
+    return await axios.post(ImageData.baseUrl + "/update", deltaJson, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
@@ -104,8 +104,8 @@ function findImageUrl(delta: Delta): any {
       typeof op.insert.image === "string"
     ) {
       const url = op.insert.image as string;
-      const index = url.indexOf(RData.imagePrefix);
-      const result = url.substring(index + RData.imagePrefix.length);
+      const index = url.indexOf(ImageData.imagePrefix);
+      const result = url.substring(index + ImageData.imagePrefix.length);
       return result.slice(0);
     }
   }

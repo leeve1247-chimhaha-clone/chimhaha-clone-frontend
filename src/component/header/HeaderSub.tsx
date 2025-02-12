@@ -2,7 +2,7 @@ import cssClass from "./HeaderSub.module.css";
 import { useAuth } from "react-oidc-context";
 import { useEffect } from "react";
 import axios from "axios";
-import { RData } from "../../credential/data.ts";
+import { ImageData } from "../../credential/data.ts";
 import { setNickName, setToken, StateProps } from "../../utils/redux/store.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +16,7 @@ export function HeaderSub() {
   useEffect(() => {
     // useEffect 내부에 선언함으로써, (개발자들이) 재사용방지
     async function fetchMeals() {
-      const axiosResponse = await axios.get(RData.baseUrl + "/getMyNickName", {
+      const axiosResponse = await axios.get(ImageData.baseUrl + "/getMyNickName", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${auth.user?.access_token}`,
