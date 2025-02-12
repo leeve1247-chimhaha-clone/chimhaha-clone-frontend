@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router";
 import { LoaderFunctionArgs, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { RData } from "../../credential/data.ts";
+import { ImageData } from "../../credential/data.ts";
 import { timeAgo } from "../../utils/CreatedDate.tsx";
 import Quill from "quill";
 import Delta from "quill-delta";
@@ -35,7 +35,7 @@ export interface PostDetailProps {
 
 export async function postDetailLoader({ params }: LoaderFunctionArgs) {
   const axiosResponse = await axios.get(
-    RData.baseUrl + "/posts/detail?num=" + params.postId,
+    ImageData.baseUrl + "/posts/detail?num=" + params.postId,
   );
   const postDetailData = axiosResponse.data as PostDetailProps;
   postDetailData.createdDate = timeAgo(postDetailData.createdDate);

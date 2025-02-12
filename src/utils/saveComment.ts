@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RData } from "../credential/data.ts";
+import { ImageData } from "../credential/data.ts";
 import Delta from "quill-delta";
 
 interface SimpleCommentProps {
@@ -30,7 +30,7 @@ export async function createComment({
       postId: postId,
       commentId: commentId //있을 경우 답글로 처리
     });
-    return await axios.post(RData.baseUrl + "/save/comment", deltaJson, {
+    return await axios.post(ImageData.baseUrl + "/save/comment", deltaJson, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
@@ -50,7 +50,7 @@ export async function updateComment({
       content: comment,
       commentId: commentId,
     });
-    return await axios.post(RData.baseUrl + "/update/comment", deltaJson, {
+    return await axios.post(ImageData.baseUrl + "/update/comment", deltaJson, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
@@ -67,7 +67,7 @@ export async function deleteComment({
     const deltaJson = JSON.stringify({
       commentId: commentId,
     });
-    return await axios.post(RData.baseUrl + "/delete/comment", deltaJson, {
+    return await axios.post(ImageData.baseUrl + "/delete/comment", deltaJson, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${access_token}`,
@@ -83,7 +83,7 @@ export async function likeComment({
   const deltaJson = JSON.stringify({
     commentId: commentId,
   });
-  return await axios.post(RData.baseUrl + "/comments/like", deltaJson, {
+  return await axios.post(ImageData.baseUrl + "/comments/like", deltaJson, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${access_token}`,

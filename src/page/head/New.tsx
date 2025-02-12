@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { PostComponent, PostItem } from "../../component/post/PostComponent.tsx";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../router.tsx";
-import { RData } from "../../credential/data.ts";
+import { ImageData } from "../../credential/data.ts";
 import cssClass from "./New.module.css";
 
 export function New() {
@@ -15,7 +15,7 @@ export function New() {
   useEffect(() => {
     // useEffect 내부에 선언함으로써, (개발자들이) 재사용방지
     async function fetchMeals() {
-      const axiosResponse = await axios.get(RData.baseUrl + "/posts");
+      const axiosResponse = await axios.get(ImageData.baseUrl + "/posts");
       setData(axiosResponse.data);
     }
     fetchMeals().then();

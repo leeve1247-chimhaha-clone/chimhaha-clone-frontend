@@ -5,7 +5,7 @@ import Icons from "quill/ui/icons";
 import { svgs } from "../../utils/svgs.tsx";
 import Delta from "quill-delta";
 import axios from "axios";
-import { RData } from "../../credential/data.ts";
+import { ImageData } from "../../credential/data.ts";
 import { store } from "../../utils/redux/store.ts";
 
 type IconsType = typeof Icons;
@@ -91,7 +91,7 @@ function imageHandler(quill: Quill) {
       const file = input.files ? input.files[0] : "";
       const formData = new FormData();
       formData.append("file", file);
-      const axiosResponse = await axios.post(RData.baseUrl + "/upload/image", formData, {
+      const axiosResponse = await axios.post(ImageData.baseUrl + "/upload/image", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${store.getState().token}`,
