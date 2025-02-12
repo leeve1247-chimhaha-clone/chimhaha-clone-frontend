@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         authority={CData.authority}
         client_id={CData.client_id}
         redirect_uri={CData.redirect_uri}
-        onSigninCallback={async (_user) => {
+        onSigninCallback={async () => {
           window.history.replaceState(
             {},
             document.title,
