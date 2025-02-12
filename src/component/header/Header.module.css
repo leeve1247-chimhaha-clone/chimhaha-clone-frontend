@@ -1,0 +1,8 @@
+.container {
+    background: var(--color-accent-100);
+    font-weight: bold;
+}
+
+.container > div:first-child {
+    height: var(--height-first-header);
+}

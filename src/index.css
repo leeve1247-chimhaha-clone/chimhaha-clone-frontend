@@ -29,6 +29,10 @@
     color: rgba(255, 255, 255, 1);
     background-color: #181818;
 
+    --height-first-header: 4.5rem;
+
+    --border-radius-100: 0.5rem;
+
     --color-gray-000: #ffffff;
     --color-gray-100: #f5f5f5;
     --color-gray-200: #dcdcdc;
@@ -40,6 +44,10 @@
     --color-gray-800: #313131;
     --color-gray-850: #292929;
     --color-gray-900: #181818;
+
+
+    --color-accent-white-000: #86d2da;
+    --color-accent-white-100: #75B7BE;
 
     --color-accent-000: #1cdde4;
     --color-accent-100: #1ca8af;
@@ -66,9 +74,10 @@
     }
 }
 
-a{
-    text-decoration: none;
-    color: inherit;
+a, button {
+    all: unset;
+    cursor: pointer;
+    text-align: center;
 }
 
 a:visited{

@@ -6,7 +6,7 @@ import { svgs } from "../../utils/svgs.tsx";
 import Delta from "quill-delta";
 import axios from "axios";
 import { ImageData } from "../../credential/data.ts";
-import { store } from "../../utils/redux/store.ts";
+import { store } from "../../utils/redux/store.tsx";
 
 type IconsType = typeof Icons;
 interface ExtendedIcons extends IconsType {

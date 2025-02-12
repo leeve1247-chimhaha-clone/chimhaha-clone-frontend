@@ -11,14 +11,13 @@ export function Category({ className, category }: CategoryProps) {
 
 export enum CategoryEnum {
   BEST= "인기글",
-  CHECK= "일상",
+  LIFE= "일상",
   CHIM = "침착맨",
   FAKEMON = "짭켓몬",
   GOODS_REVIEW = "구쭈",
   HOBBY = "취미",
   HUMOR = "웃음",
   INTERNET = "인방",
-  LIFE = "일상",
   MANAGEMENT = "행정실",
   REPORT = "신고/건의",
   SPORTS = "스포츠",
