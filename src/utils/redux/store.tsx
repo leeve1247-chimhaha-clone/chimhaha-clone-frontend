@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { dropDownSlice } from "./dropDownSlice.tsx";
+import { accountSlice } from "./accountSlice.tsx";
 
 
 export const store = configureStore({
   reducer: {
     headerDropDownStatus: dropDownSlice.reducer,
+    accountStatus: accountSlice.reducer
   }
 });
 
