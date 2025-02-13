@@ -1,18 +1,11 @@
 import Quill from "quill";
 import { forwardRef, useEffect } from "react";
 import "../WYSIWYGEditor.css";
-import Icons from "quill/ui/icons";
-import { svgs } from "../../utils/svgs.tsx";
 import Delta from "quill-delta";
 import axios from "axios";
 import { ImageData } from "../../credential/data.ts";
-import { store } from "../../utils/redux/store.tsx";
+import { useAuth } from "react-oidc-context";
 
-type IconsType = typeof Icons;
-interface ExtendedIcons extends IconsType {
-  undo?: string;
-  redo?: string;
-}
 
 interface EditorProps {
   defaultValue?: Delta;
@@ -20,6 +13,10 @@ interface EditorProps {
 }
 
 export const PostEditor = forwardRef<Quill, EditorProps>(({ defaultValue, editState }, quillRef) => {
+  const authedHeaders = {
+    "Content-Type": "multipart/form-data",
+    Authorization: `Bearer ${useAuth().user?.access_token}`,
+  };
   useEffect(() => {
     if (quillRef === null || typeof quillRef === "function") return;
     const container = document.getElementById("editor") as HTMLElement;
@@ -44,13 +41,10 @@ export const PostEditor = forwardRef<Quill, EditorProps>(({ defaultValue, editSt
           quillRef.current?.history.redo();
         },
         image: function () {
-          if (quillRef.current !== null) imageHandler(quillRef.current);
+          if (quillRef.current !== null) imageHandler(quillRef.current, authedHeaders);
         },
       },
     };
-    const extendedIcons: ExtendedIcons = Icons;
-    extendedIcons.undo = svgs["arrow-rotate-left"];
-    extendedIcons.redo = svgs["arrow-rotate-right"];
 
     // 1. read
     if (container && !quillRef.current) {
@@ -81,7 +75,7 @@ export const PostEditor = forwardRef<Quill, EditorProps>(({ defaultValue, editSt
   return <div id="editor" style={{ height: "400px" }} />; // Ensure the editor has a height
 });
 
-function imageHandler(quill: Quill) {
+function imageHandler(quill: Quill, authedHeaders: Record<string, string>) {
   const input = document.createElement("input");
   input.setAttribute("type", "file");
   input.setAttribute("accept", "image/*");
@@ -92,10 +86,7 @@ function imageHandler(quill: Quill) {
       const formData = new FormData();
       formData.append("file", file);
       const axiosResponse = await axios.post(ImageData.baseUrl + "/upload/image", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${store.getState().token}`,
-        },
+        headers: authedHeaders,
       });
       const range = quill.getSelection();
       if (range?.index !== undefined) quill.insertEmbed(range?.index, "image", axiosResponse.data);
