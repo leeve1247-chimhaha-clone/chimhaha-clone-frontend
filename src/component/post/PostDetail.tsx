@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router";
 import { LoaderFunctionArgs, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ImageData } from "../../credential/data.ts";
+import { ImageData } from "../../../credential/data.ts"
 import { timeAgo } from "../../utils/CreatedDate.tsx";
 import Quill from "quill";
 import Delta from "quill-delta";

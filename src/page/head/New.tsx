@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { PostComponent, PostItem } from "../../component/post/PostComponent.tsx";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../router.tsx";
-import { ImageData } from "../../credential/data.ts";
+import { ImageData } from "../../../credential/data.ts";
 import cssClass from "./New.module.css";
 
 export function New() {

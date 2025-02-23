@@ -3,7 +3,7 @@ import { forwardRef, useEffect } from "react";
 import "../WYSIWYGEditor.css";
 import Delta from "quill-delta";
 import axios from "axios";
-import { ImageData } from "../../credential/data.ts";
+import { ImageData } from "../../../credential/data.ts";
 import { useAuth } from "react-oidc-context";
 
 

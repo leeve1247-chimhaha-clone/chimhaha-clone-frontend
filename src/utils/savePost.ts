@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ImageData } from "../credential/data.ts";
+import { ImageData } from "../../credential/data.ts";
 import Quill from "quill";
 import Delta from "quill-delta";
 
