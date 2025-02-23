@@ -4,7 +4,7 @@ import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router.tsx";
 import { AuthProvider } from "react-oidc-context";
-import { CData } from "./credential/data.ts";
+import { CData } from "../credential/data.ts";
 import { Provider } from "react-redux";
 import { store } from "./utils/redux/store.tsx";
 

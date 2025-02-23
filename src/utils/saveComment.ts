@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ImageData } from "../credential/data.ts";
+import { ImageData } from "../../credential/data.ts";
 import Delta from "quill-delta";
 
 interface SimpleCommentProps {

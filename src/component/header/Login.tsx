@@ -1,11 +1,10 @@
 import cssClass from "./Login.module.css";
 import { useAuth } from "react-oidc-context";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { setNickName } from "../../utils/redux/accountSlice.tsx";
-import { ImageData } from "../../credential/data.ts";
+import {ImageData} from "../../../credential/data.ts";
 import axios from "axios";
 import { RootState } from "../../utils/redux/store.tsx";
 
@@ -41,7 +40,7 @@ export function Login() {
   }
   if (auth.isAuthenticated) {
     if (nickName === "" && auth.user?.access_token !== undefined) {
-      console.log(nickName)
+      console.log(nickName);
       fetchMeals().then();
     }
     return (
