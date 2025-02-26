@@ -1,0 +1,16 @@
+services:
+  my-react-container:
+    image: nginx:latest
+    container_name: my-react-container
+    ports:
+      - "5173:5173"
+    networks:
+      - my-network
+    volumes:
+      - "./dist:/usr/share/nginx/html"
+      - "./nginx.conf:/etc/nginx/nginx.conf"
+volumes:
+  my-react-data:
+networks:
+  my-network:
+    external: true
