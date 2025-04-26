@@ -28,7 +28,6 @@ export interface PostItem {
 
 export function PostComponent({ post }: { post: PostItem }) {
   const postId = post.postId;
-  console.log(post)
   return (
     <NavLink to={postId?.toString() ?? ""} className={cssClass.postContainer}>
       {post.titleImageId ? (
