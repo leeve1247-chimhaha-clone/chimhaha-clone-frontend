@@ -21,7 +21,7 @@ export async function savePost({
 }: savePostProps) {
   if (quill) {
     const delta = quill.getContents();
-    const titleImage = findImageUrl(delta);
+    const titleImage = parseImageUrl(delta);
     const deltaJson = JSON.stringify({
       category: "BEST",
       content: delta,
@@ -76,7 +76,7 @@ export async function updatePost({
 }: updatePostProps) {
   if (quill) {
     const delta = quill.getContents();
-    const titleImage = findImageUrl(delta);
+    const titleImage = parseImageUrl(delta);
     const deltaJson = JSON.stringify({
       postId: postId,
       category: "BEST",
@@ -94,20 +94,19 @@ export async function updatePost({
   }
 }
 
-function findImageUrl(delta: Delta): any {
-  console.log(delta.ops);
-  for (const op of delta.ops) {
-    if (
-      op.insert &&
-      typeof op.insert === "object" &&
-      "image" in op.insert &&
-      typeof op.insert.image === "string"
-    ) {
+function parseImageUrl(delta: Delta): [(string | null), Delta] {
+  let titleImageUrl: string | null = null;
+  delta.ops.forEach((op => {
+    if (op.insert && typeof op.insert === "object" && "image" in op.insert) {
       const url = op.insert.image as string;
-      const index = url.indexOf(ImageData.imagePrefix);
-      const result = url.substring(index + ImageData.imagePrefix.length);
-      return result.slice(0);
+      const result = url.match(/\/([^/?]+)\?/);
+      if (result) {
+        op.insert.image = result[1];
+        if (titleImageUrl === null){
+          titleImageUrl = result[1];
+        }
+      }
     }
-  }
-  return null; // Return undefined if no image URL is found
+  }))
+  return [titleImageUrl, delta]; // Return undefined if no image URL is found
 }
