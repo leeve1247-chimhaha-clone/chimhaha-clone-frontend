@@ -1,0 +1,31 @@
+{
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "altText": "Pink flowers",
+            "height": 170.664,
+            "maxWidth": 500,
+            "src": "https://dummyimage.com/600x400/000/fff",
+            "type": "image",
+            "version": 1,
+            "width": 256
+          }
+        ],
+        "direction": null,
+        "format": "",
+        "indent": 0,
+        "type": "paragraph",
+        "version": 1,
+        "textFormat": 0,
+        "textStyle": ""
+      }
+    ],
+    "direction": null,
+    "format": "",
+    "indent": 0,
+    "type": "root",
+    "version": 1
+  }
+}
