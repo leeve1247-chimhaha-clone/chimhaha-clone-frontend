@@ -1,0 +1,7 @@
+.editorImage{
+    cursor: default;
+    display: inline-block;
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+}

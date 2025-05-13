@@ -1,0 +1,98 @@
+.editorParagraph {
+    margin: 0 0 8px;
+    position: relative;
+}
+
+.ltr {
+    text-align: left;
+}
+
+.rtl {
+    text-align: right;
+}
+
+.editorPlaceholder {
+
+}
+
+.editorQuote {
+    margin: 0 0 0 20px;
+    font-size: 15px;
+    color: rgb(101, 103, 107);
+    border-left-color: rgb(206, 208, 212);
+    border-left-width: 4px;
+    border-left-style: solid;
+    padding-left: 16px;
+}
+
+.editorTextBold {
+    font-weight: bold;
+}
+
+.editorTextItalic {
+    font-style: italic;
+}
+
+.editorTextUnderline {
+    text-decoration: underline;
+}
+
+.editorTextStrikethrough {
+    text-decoration: line-through;
+}
+
+.editorTextUnderlineStrikethrough {
+    text-decoration: underline line-through;
+}
+
+
+.editorTextCode {
+    background-color: rgb(240, 242, 245);
+    padding: 1px 0.25rem;
+    font-family: Menlo, Consolas, Monaco, monospace;
+    font-size: 94%;
+}
+
+.editorListUl {
+    padding: 0;
+    margin: 0 0 0 16px;
+}
+
+.editor-list-ol {
+    padding: 0;
+    margin: 0 0 0 16px;
+}
+
+.editorNestedListitem {
+    list-style-type: none;
+}
+
+.editorListitem {
+    margin: 8px 32px 8px 32px;
+}
+
+.editorLink {
+    color: rgb(33, 111, 219);
+    text-decoration: none;
+}
+
+.editorImage {
+
+}
+
+.editorHeadingH1 {
+    font-size: 24px;
+    color: rgb(5, 5, 5);
+    font-weight: 400;
+    margin: 0 0 12px;
+    padding: 0;
+}
+
+.editorHeadingH2 {
+    font-size: 15px;
+    color: rgb(101, 103, 107);
+    font-weight: 700;
+    margin: 10px 0 0;
+    padding: 0;
+    text-transform: uppercase;
+}

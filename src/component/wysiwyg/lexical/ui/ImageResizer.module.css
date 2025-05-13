@@ -1,0 +1,57 @@
+.imageResizer {
+    display: block;
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    background-color: rgb(60, 132, 244);
+    border: 1px solid #fff;
+}
+
+
+.imageResizerNorth{
+    top: -6px;
+    left: 48%;
+    cursor: n-resize;
+}
+
+.imageResizerNorthEast{
+    top: -6px;
+    right: -6px;
+    cursor: ne-resize;
+}
+
+.imageResizerEast{
+    bottom: 48%;
+    right: -6px;
+    cursor: e-resize;
+}
+
+.imageResizerSouthEast{
+    bottom: -2px;
+    right: -6px;
+    cursor: nwse-resize;
+}
+
+.imageResizerSouth{
+    bottom: -2px;
+    left: 48%;
+    cursor: s-resize;
+}
+
+.imageResizerSouthWest{
+    bottom: -2px;
+    left: -6px;
+    cursor: sw-resize;
+}
+
+.imageResizerWest{
+    bottom: 48%;
+    left: -6px;
+    cursor: w-resize;
+}
+
+.imageResizerNorthWest{
+    top: -6px;
+    left: -6px;
+    cursor: nw-resize;
+}
