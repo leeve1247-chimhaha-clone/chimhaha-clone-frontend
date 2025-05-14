@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { HeaderDropDownCategory } from "../../component/header/dropdown/HeaderDropDownCategory.tsx";
+import { HeaderDropDownCategory } from "../component/header/dropdown/HeaderDropDownCategory.tsx";
 
 export interface HeaderDropDownCategoryState {
   value: keyof typeof HeaderDropDownCategory | "";

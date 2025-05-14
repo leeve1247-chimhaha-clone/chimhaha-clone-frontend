@@ -1,5 +1,5 @@
 import cssClass from "./HeaderNav.module.css";
-import { setHeaderDropDownStatus } from "../../utils/redux/dropDownSlice.tsx";
+import { setHeaderDropDownStatus } from "../../redux/dropDownSlice.tsx";
 import { useDispatch } from "react-redux";
 import { HeaderLevelZero } from "./HeaderLevelZero.tsx";
 

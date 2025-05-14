@@ -4,7 +4,7 @@ import "./index.css";
 import { AuthProvider } from "react-oidc-context";
 import { CData } from "../credential/data.ts";
 import { Provider } from "react-redux";
-import { store } from "./utils/redux/store.tsx";
+import { store } from "./redux/store.tsx";
 import { AppRouterProvider } from "./router/AppRouterProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
