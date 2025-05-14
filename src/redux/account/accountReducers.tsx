@@ -1,4 +1,4 @@
-import { AccountState } from "./accountSlice.tsx";
+import type { AccountState } from "./accountSlice.tsx";
 
 export const accountReducers = {
   setNickName: (state: AccountState, action: { payload: string }) => {
