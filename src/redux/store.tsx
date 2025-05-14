@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { dropDownSlice } from "./dropDownSlice.tsx";
-import { accountSlice } from "./accountSlice.tsx";
+import { dropDownSlice } from "./dropDown/dropDownSlice.tsx";
+import { accountSlice } from "./account/accountSlice.tsx";
 
 
 export const store = configureStore({
