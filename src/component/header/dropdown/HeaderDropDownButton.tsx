@@ -1,6 +1,6 @@
 import { HeaderDropDownCategory } from "./HeaderDropDownCategory.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { setHeaderDropDownStatus } from "../../../redux/dropDownSlice.tsx";
+import { setHeaderDropDownStatus } from "../../../redux/dropDown/dropDownSlice.tsx";
 import { RootState } from "../../../redux/store.tsx";
 import cssClass from "./HeaderDropDownButton.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
