@@ -1,7 +1,7 @@
 import { HeaderDropDownCategory } from "./HeaderDropDownCategory.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { setHeaderDropDownStatus } from "../../../utils/redux/dropDownSlice.tsx";
-import { RootState } from "../../../utils/redux/store.tsx";
+import { setHeaderDropDownStatus } from "../../../redux/dropDownSlice.tsx";
+import { RootState } from "../../../redux/store.tsx";
 import cssClass from "./HeaderDropDownButton.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleChevronDown, faCircleChevronUp } from "@fortawesome/free-solid-svg-icons";

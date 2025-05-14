@@ -1,6 +1,6 @@
 import cssClass from "./HeaderDropDown.module.css";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../utils/redux/store.tsx";
+import { RootState } from "../../../redux/store.tsx";
 import { HeaderDropDownCategory } from "./HeaderDropDownCategory.tsx";
 
 export default function HeaderDropDown() {
