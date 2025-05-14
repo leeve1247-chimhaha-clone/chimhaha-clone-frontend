@@ -6,7 +6,7 @@ import { faRightToBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { setNickName } from "../../redux/account/accountSlice.tsx";
 import {ImageData} from "../../../credential/data.ts";
 import axios from "axios";
-import { RootState } from "../../redux/store.tsx";
+import type { RootState } from "../../redux/store.tsx";
 
 export function Login() {
   const auth = useAuth();

@@ -1,14 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Suspense, useEffect, useState } from "react";
-import { componentMap, convertToRouteObjects, RawRouteConfig } from "./convertToRouteObjects.tsx";
+import { convertToRouteObjects, type RawRouteConfig } from "./convertToRouteObjects.tsx";
 import axios from "axios";
 import { CData } from "../../credential/data.ts";
-
-export interface RouteConfig {
-  path: string;
-  component: keyof typeof componentMap;
-  children?: RouteConfig[];
-}
+import { createBrowserRouter, RouterProvider } from "react-router";
 
 export function AppRouterProvider() {
   const [router, setRouter] = useState<ReturnType<typeof createBrowserRouter> | null>(null);
@@ -20,10 +14,6 @@ export function AppRouterProvider() {
         const routeObjects = convertToRouteObjects(res.data);
         setRouter(
           createBrowserRouter(routeObjects, {
-            // until when React Router v7 is released.
-            future: {
-              v7_relativeSplatPath: true,
-            },
           }),
         );
       })
@@ -39,10 +29,6 @@ export function AppRouterProvider() {
   return (
     <Suspense fallback={<div>로딩 중...</div>}>
       <RouterProvider
-        // until when React Router v7 is released.
-        future={{
-          v7_startTransition: true,
-        }}
         router={router}
       />
     </Suspense>

@@ -1,4 +1,4 @@
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 
 export interface CategoryElement {
@@ -6,13 +6,13 @@ export interface CategoryElement {
   icon: IconDefinition;
 }
 
-enum HeaderSubCategoryKeys {
-  favorite = "favorite",
-  recent = "recent",
-}
+const HeaderSubCategoryKeys = {
+  favorite: "favorite",
+  recent: "recent",
+};
 
 type HeaderSubCategoryTable = {
-  [key in HeaderSubCategoryKeys]: CategoryElement;
+  [K in keyof typeof HeaderSubCategoryKeys]: CategoryElement
 };
 
 export const HeaderSubCategory: HeaderSubCategoryTable = {
@@ -24,4 +24,4 @@ export const HeaderSubCategory: HeaderSubCategoryTable = {
     name: "최근방문",
     icon: faClock,
   },
-}
+};
