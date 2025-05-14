@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { RouterProvider } from "react-router-dom";
-import { router } from "./router.tsx";
 import { AuthProvider } from "react-oidc-context";
 import { CData } from "../credential/data.ts";
 import { Provider } from "react-redux";
 import { store } from "./utils/redux/store.tsx";
+import { AppRouterProvider } from "./router/AppRouterProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -16,16 +15,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         client_id={CData.client_id}
         redirect_uri={CData.redirect_uri}
         onSigninCallback={async () => {
-          window.history.replaceState(
-            {},
-            document.title,
-            window.location.pathname,
-          );
+          window.history.replaceState({}, document.title, window.location.pathname);
         }}
         post_logout_redirect_uri={CData.redirect_uri}
         automaticSilentRenew={true}
       >
-        <RouterProvider router={router} />
+        <AppRouterProvider />
       </AuthProvider>
     </Provider>
   </React.StrictMode>,
