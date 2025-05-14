@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { App } from "./App.tsx";
-import { Post } from "./page/Post.tsx";
-import { New } from "./page/head/New.tsx";
+import { Post } from "./pages/Post.tsx";
+import { New } from "./pages/head/New.tsx";
 import { PostDetail, postDetailLoader } from "./component/post/PostDetail.tsx";
 import { PostUpdateEditor, postUpdateEditorLoader } from "./component/post/PostUpdateEditor.tsx";
 
@@ -13,7 +13,7 @@ export const ROUTES = {
 
 export const router = createBrowserRouter([
   {
-    path: ROUTES.Home,
+    path: "/",
     element: <App />,
     children: [
       { path: ROUTES.Post, element: <Post /> }, // 글쓰기
