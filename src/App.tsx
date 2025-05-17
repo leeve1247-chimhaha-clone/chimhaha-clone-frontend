@@ -10,34 +10,65 @@ import HeaderDropDown from "./component/header/dropdown/HeaderDropDown.tsx";
 import axios from "axios";
 import { useState } from "react";
 import { CData } from "../credential/data.ts";
-import file from "../public/vite.svg";
+
+interface presignedUrlProps {
+  url: string;
+  fileName: string;
+}
 
 export function App() {
-  const [state, setState] = useState();
+  const [putImageUrl, setPutImageUrl] = useState<string>("");
+  const [filename, setFilename] = useState<string>("");
 
-  async function getPresignedUrl() {
-    axios
-      .get(CData.local_backend+"/get/presigned-url")
-      .then((response) => {
-        console.log(response.data);
-        setState(response.data);
-      })
-      .catch((error) => {
+  const [getImageUrl, setGetImageUrl] = useState<string>("");
+
+  async function getPresignedUrlPut() {
+    return await axios.get<presignedUrlProps>(CData.local_backend + "/get/presigned-url").then(
+      (res) => {
+        console.log(res.data);
+        setPutImageUrl(res.data.url);
+        setFilename(res.data.fileName);
+      },
+      (error) => {
         console.error(error);
-      });
+      },
+    );
   }
 
-  async function postPresignedUrl() {
-    axios.put(CData.local_image_uri+state, file, {
-      headers:{
-        "Content-Type": "image/svg+xml"
-      }
-    })
-      .then((response) => {
-        console.log(response.data);
-      }).catch((error) => {
-        console.error(error);
-    })
+  async function putImage() {
+    const response = await fetch("../public/green.png");
+    const blob = await response.blob();
+    return await axios
+      .put(CData.local_image_uri + "/" + putImageUrl, blob, {
+        headers: {
+          "Content-Type": "image/png",
+        },
+      })
+      .then(
+        (res) => {
+          if (res.status === 200) {
+            console.log(filename);
+            return axios
+              .get(CData.local_backend + "/get/presigned-url2", {
+                params: {
+                  filename: filename,
+                },
+              })
+              .then(
+                (res) => {
+                  console.log(res.data);
+                  setGetImageUrl(res.data);
+                },
+                (error) => {
+                  console.error(error);
+                },
+              );
+          }
+        },
+        (error) => {
+          console.error(error);
+        },
+      );
   }
 
   return (
@@ -59,9 +90,11 @@ export function App() {
       <main>
         <Outlet />
         <div>
-          <button onClick={getPresignedUrl}>Get Presigned URL</button>
-          <div>{state}</div>
-          <button onClick={postPresignedUrl}>Post presigned Image</button>
+          <button onClick={getPresignedUrlPut}>Get Presigned URL</button>
+          <div>{putImageUrl}</div>
+          <button onClick={putImage}>Post presigned Image</button>
+          <div>{getImageUrl}</div>
+          <img src={CData.local_image_uri + "/" + getImageUrl} />
         </div>
       </main>
       <footer>

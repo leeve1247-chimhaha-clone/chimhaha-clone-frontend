@@ -25,6 +25,14 @@ export default function DragAndDropPlugin(): null {
                         [ACCEPTABLE_IMAGE_TYPES].flatMap((x) => x),
                     );
                     for (const {file, result} of filesResult) {
+                        /// presignedUrl 절차를 여기서 실행하면 될 듯
+                        
+
+
+
+
+
+
                         if (isMimeType(file, ACCEPTABLE_IMAGE_TYPES)) {
                             editor.dispatchCommand(INSERT_IMAGE_COMMAND, {
                                 altText: file.name,
