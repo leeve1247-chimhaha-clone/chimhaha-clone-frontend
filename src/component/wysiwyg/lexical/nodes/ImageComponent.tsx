@@ -127,7 +127,7 @@ export default function ImageComponent(
                         height={height}
                         maxWidth={maxWidth} onError={function (): void {
                         throw new Error("Function not implemented.");
-                    }}                    />
+                    }} />
                 </div>
                 {isFocused && (
                     <ImageResizer
