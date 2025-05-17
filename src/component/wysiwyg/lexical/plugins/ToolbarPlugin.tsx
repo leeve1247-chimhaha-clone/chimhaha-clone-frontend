@@ -30,7 +30,7 @@ import {
     TypeUnderline
 } from "react-bootstrap-icons";
 import style from "./ToolbarPlugin.module.css";
-import {InsertImagePayload} from "./ImagePlugin.tsx";
+import type { InsertImagePayload } from "./ImagePlugin.tsx";
 import {INSERT_IMAGE_COMMAND} from "../commands/INSERT_IMAGE_COMMAND.tsx";
 
 const LowPriority = 1;
