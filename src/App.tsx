@@ -25,7 +25,6 @@ export function App() {
           <HeaderSub headerCategory={HeaderSubCategory.recent} />
         </HeaderLine>
       </Header>
-
       <main>
         <Outlet />
       </main>

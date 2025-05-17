@@ -1,5 +1,7 @@
 import type { RouteObject } from "react-router";
 import { App } from "../App.tsx";
+import { DefaultBody } from "../component/body/DefaultBody.tsx";
+import { DefaultSubmitBody } from "../component/body/DefaultSubmitBody.tsx";
 
 // export const componentMap = {
 //   Page1: lazy(() => import("../pages/Page1.tsx")),
@@ -18,7 +20,16 @@ export function convertToRouteObjects(routes: RawRouteConfig[]): RouteObject[] {
   const children = routes.map(({ key }) => {
     return {
       path: `/${key}`,
-      element: <div> Unknown component: {key}</div>,
+      children: [
+        {
+          path: "",
+          element: <DefaultBody routerKey={key} />,
+        },
+        {
+          path: "submit",
+          element: <DefaultSubmitBody routerKey={key} />,
+        },
+      ],
     };
   });
   return [
