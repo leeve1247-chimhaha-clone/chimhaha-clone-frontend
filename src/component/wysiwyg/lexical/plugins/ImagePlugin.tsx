@@ -14,13 +14,12 @@ import {
     DRAGOVER_COMMAND,
     DRAGSTART_COMMAND,
     DROP_COMMAND,
-    getDOMSelectionFromTarget,
-    LexicalEditor
+    getDOMSelectionFromTarget, type LexicalEditor
 } from "lexical";
-import {JSX, useEffect} from "react";
+import { type ReactNode, useEffect } from "react";
 
-import {$createImageNode, $isImageNode, ImageNode, ImagePayload} from "../nodes/ImageNode";
 import {INSERT_IMAGE_COMMAND} from "../commands/INSERT_IMAGE_COMMAND.tsx";
+import { $createImageNode, $isImageNode, ImageNode, type ImagePayload } from "../nodes/ImageNode.tsx";
 
 export type InsertImagePayload = Readonly<ImagePayload>;
 
@@ -28,7 +27,7 @@ export default function ImagesPlugin({
                                          captionsEnabled
                                      }: {
     captionsEnabled?: boolean;
-}): JSX.Element | null {
+}): ReactNode | null {
     const [editor] = useLexicalComposerContext();
 
     useEffect(() => {
