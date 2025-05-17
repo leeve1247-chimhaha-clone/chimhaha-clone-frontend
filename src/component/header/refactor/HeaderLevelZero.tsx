@@ -1,11 +1,19 @@
-import type { TheRouterData } from "../HeaderNav.tsx";
-import { HeaderLevelOnes } from "./HeaderLevelOnes.tsx";
+import type { routerDataTree } from "../HeaderNav.tsx";
+import { useDispatch } from "react-redux";
+import { setHeaderDropDownStatus } from "../../../redux/dropDown/dropDownSlice.tsx";
 
-export function HeaderLevelZero({theRouterData}: {theRouterData: TheRouterData}) {
+export function HeaderLevelZero({ theRouterData }: { theRouterData: routerDataTree }) {
+  const dispatch = useDispatch();
   return (
     <div>
-      <div>{theRouterData.korean}</div>
-      <HeaderLevelOnes children={theRouterData.children}/>
+      <button
+        onClick={() => {
+          dispatch(setHeaderDropDownStatus(theRouterData.key));
+          return;
+        }}
+      >
+        {theRouterData.korean}
+      </button>
     </div>
   );
 }

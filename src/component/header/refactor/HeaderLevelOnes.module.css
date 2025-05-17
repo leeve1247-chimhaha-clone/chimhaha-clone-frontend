@@ -1,0 +1,14 @@
+.container{
+    width: 100%;
+    background-color: var(--color-gray-850);
+}
+
+.subContainer{
+    padding-top: 0.5rem;
+    margin-left: 2rem;
+    margin-right: 5rem;
+    padding-bottom: 5rem;
+    display: flex;
+    flex-direction: row;
+    font-weight: normal;
+}
