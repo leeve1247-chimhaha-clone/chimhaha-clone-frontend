@@ -1,11 +1,11 @@
 import cssClass from "./HeaderNav.module.css";
-import { setHeaderDropDownStatus } from "../../redux/dropDown/dropDownSlice.tsx";
-import { useDispatch } from "react-redux";
 import { HeaderLevelZeroes } from "./refactor/HeaderLevelZeroes.tsx";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { CData } from "../../../credential/data.ts";
 import { queryKeys } from "./queryKeys.tsx";
+import { NavPopularPosts } from "./NavPopularPosts.tsx";
+import { NavAllPosts } from "./NavAllPosts.tsx";
 
 async function fetchRouterDataList() {
   return axios
@@ -29,7 +29,6 @@ export interface routerDataTree {
 }
 
 export function HeaderNav() {
-  const dispatch = useDispatch();
   const { data, error, isLoading } = useQuery({ queryKey: queryKeys.routerDataList, queryFn: fetchRouterDataList });
 
   if (isLoading) return <div>Loading...</div>;
@@ -39,21 +38,9 @@ export function HeaderNav() {
     <>
       <div className={cssClass.navContainer}>
         <div className={cssClass.list}>
-          <button
-            onClick={() => {
-              dispatch(setHeaderDropDownStatus(""));
-            }}
-          >
-            인기글
-          </button>
-          <button
-            onClick={() => {
-              dispatch(setHeaderDropDownStatus(""));
-            }}
-          >
-            전체글
-          </button>
-          <HeaderLevelZeroes theRouterDataList={data} />
+          <NavPopularPosts />
+          <NavAllPosts />
+          <HeaderLevelZeroes theRouterDataList={data}/>
         </div>
       </div>
     </>
