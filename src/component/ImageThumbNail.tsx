@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import { ImageData } from "../../credential/data.ts";
 
 interface ImageThumbNailProps extends HTMLAttributes<HTMLImageElement> {
