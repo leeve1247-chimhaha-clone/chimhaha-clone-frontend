@@ -1,21 +1,26 @@
-import cssClass from "./HeaderDropDown.module.css";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../redux/store.tsx";
-import { HeaderDropDownCategory } from "./HeaderDropDownCategory.tsx";
+import { useQueryClient } from "@tanstack/react-query";
+import { type routerDataTree } from "../HeaderNav.tsx";
+import { HeaderLevelOnes } from "../refactor/HeaderLevelOnes.tsx";
+import style from "./HeaderDropDown.module.css";
+import { queryKeys } from "../queryKeys.tsx";
 
 export default function HeaderDropDown() {
   const headerDropDownStatus = useSelector((state: RootState) => state.headerDropDownStatus.value);
+  const routerDataList = useQueryClient().getQueryData<routerDataTree[]>(queryKeys.routerDataList);
 
   if (headerDropDownStatus === "") {
     return <></>;
   }
-  return (
-    <div className={cssClass.background}>
-      <div>{HeaderDropDownCategory[headerDropDownStatus].name}</div>
-      <div>{HeaderDropDownCategory[headerDropDownStatus].message}</div>
-      <div>
-        <div />
+
+  const selectedMenu = routerDataList?.find(routerData => routerData.key === headerDropDownStatus);
+  if (selectedMenu) {
+    return (
+      <div className={style.background}>
+        <HeaderLevelOnes routerDataList={selectedMenu.children} />
       </div>
-    </div>
-  );
+    );
+  }
+  return <div>There is no Keys in</div>;
 }

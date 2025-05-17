@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { HeaderDropDownCategory } from "../../component/header/dropdown/HeaderDropDownCategory.tsx";
 import { dropDownReducers } from "./dropDownReducers.tsx";
 import { dropDownInitialState } from "./dropDownInitialState.tsx";
 
 export interface HeaderDropDownCategoryState {
-  value: keyof typeof HeaderDropDownCategory | "";
+  value: string;
 }
 
 export const dropDownSlice = createSlice({

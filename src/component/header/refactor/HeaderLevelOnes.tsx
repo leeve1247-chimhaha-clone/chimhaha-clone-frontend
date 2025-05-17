@@ -1,19 +1,19 @@
-import type { TheRouterData } from "../HeaderNav.tsx";
+import type { routerDataTree } from "../HeaderNav.tsx";
 import { HeaderLevelOne } from "./HeaderLevelOne.tsx";
+import style from "./HeaderLevelOnes.module.css";
 
 interface HeaderLevelOnesProps {
-  children?: TheRouterData[];
+  routerDataList?: routerDataTree[];
 }
 
-export function HeaderLevelOnes({ children }: HeaderLevelOnesProps) {
+export function HeaderLevelOnes({ routerDataList }: HeaderLevelOnesProps) {
   return (
-    <>
-      <div>HeaderLevelOne</div>
-      <div>
-        {children?.map((theRouterData: TheRouterData) => {
+    <div className={style.container}>
+      <div className={style.subContainer}>
+        {routerDataList?.map((theRouterData: routerDataTree) => {
           return <HeaderLevelOne key={theRouterData.key} theRouterData={theRouterData} />;
         })}
       </div>
-    </>
+    </div>
   );
 }
