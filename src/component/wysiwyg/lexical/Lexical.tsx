@@ -54,8 +54,6 @@ export function Lexical({ readOnly = false, initSerializedEditorState = undefine
           <LogButtonPlugin />
           <ImagesPlugin />
           <DragAndDropPlugin />
-        </div>
-        <div className={styles.editorSubmit}>
           <UpdateEditorStatePlugin />
         </div>
       </div>
