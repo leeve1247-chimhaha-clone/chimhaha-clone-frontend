@@ -17,24 +17,26 @@ export interface RawRouteConfig {
 }
 
 export function convertToRouteObjects(routes: RawRouteConfig[]): RouteObject[] {
-  const children = routes.map<RouteObject>(({ key }) => {
-    return {
-      path: `/${key}`,
-      children: [
-        {
-          path: "",
-          element: <DefaultBody routerKey={key} />,
-        },
-        {
-          path: "submit",
-          element: <DefaultSubmitBody routerKey={key} />,
-        },
-      ],
-    };
-  }).concat({
-    path: "/ALL",
-    element: <DefaultBody routerKey={"ALL"} />,
-  });
+  const children = routes
+    .map<RouteObject>(({ key }) => {
+      return {
+        path: `/${key}`,
+        children: [
+          {
+            path: "",
+            element: <DefaultBody />,
+          },
+          {
+            path: "submit",
+            element: <DefaultSubmitBody />,
+          },
+        ],
+      };
+    })
+    .concat({
+      path: "/ALL",
+      element: <DefaultBody />,
+    });
   return [
     {
       path: "/",

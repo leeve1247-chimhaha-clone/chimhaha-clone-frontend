@@ -7,9 +7,6 @@ import { HeaderNav } from "./component/header/HeaderNav.tsx";
 import HeaderSub from "./component/header/HeaderSub.tsx";
 import { HeaderSubCategory } from "./component/header/HeaderSubCategory.tsx";
 import HeaderDropDown from "./component/header/dropdown/HeaderDropDown.tsx";
-import axios from "axios";
-import { useState } from "react";
-import { CData } from "../credential/data.ts";
 
 export interface presignedUrlProps {
   url: string;

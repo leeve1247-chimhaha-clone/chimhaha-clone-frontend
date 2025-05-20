@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export function DefaultBody(props: { routerKey: string }) {
+export function DefaultBody() {
   const navigate = useNavigate();
+  const category = useLocation();
   return (
     <>
-      <div> Unknown component: {props.routerKey}</div>
+      <div> Unknown component: {category.pathname}</div>
       <button
         onClick={() => {
           navigate("submit");
