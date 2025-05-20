@@ -3,12 +3,16 @@ import { InputTitle } from "./InputTitle.tsx";
 import { Provider } from "react-redux";
 import { defaultSubmitBodyStore } from "./redux/submitPost/DefaultSubmitBodyStore.tsx";
 import { SubmitPostButton } from "./SubmitPostButton.tsx";
+import { useRef } from "react";
+import type { LexicalEditor } from "lexical";
 
 function CancelButton() {
   return <div>취소</div>;
 }
 
 export function DefaultSubmitBody() {
+  const ref = useRef<LexicalEditor>(undefined);
+
   return (
     <Provider store={defaultSubmitBodyStore}>
       <div>
@@ -16,9 +20,9 @@ export function DefaultSubmitBody() {
         <div>소분류</div>
         <InputTitle />
       </div>
-      <Lexical />
+      <Lexical ref={ref} />
       <div>
-        <SubmitPostButton />
+        <SubmitPostButton ref={ref} />
         <CancelButton />
       </div>
       <div>DefaultSubmitBody</div>
