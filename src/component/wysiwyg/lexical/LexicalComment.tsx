@@ -1,5 +1,4 @@
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
-import ToolbarPlugin from "./plugins/ToolbarPlugin.tsx";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
@@ -8,21 +7,17 @@ import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import styles from "./Lexical.module.css";
 import LogButtonPlugin from "./plugins/LogButtonPlugin.tsx";
 import ImagesPlugin from "./plugins/ImagePlugin.tsx";
-import DragAndDropPlugin from "./plugins/DragAndDropPlugin.tsx";
-import { ParagraphNode, type SerializedEditorState, TextNode } from "lexical";
+import { ParagraphNode, TextNode } from "lexical";
 import { ImageNode } from "./nodes/ImageNode.tsx";
 import ExampleTheme from "./ExampleTheme.tsx";
-import { UpdateEditorStatePlugin } from "./plugins/UpdateEditorStatePlugin.tsx";
-
 
 interface LexicalProps {
   readOnly?: boolean;
-  initSerializedEditorState?: SerializedEditorState;
 }
 
 const placeholder: string = "Enter some rich text...";
 
-export function Lexical({ readOnly = false, initSerializedEditorState = undefined }: LexicalProps) {
+export function LexicalComment({ readOnly = false }: LexicalProps) {
   return (
     <LexicalComposer
       initialConfig={{
@@ -33,11 +28,9 @@ export function Lexical({ readOnly = false, initSerializedEditorState = undefine
         },
         theme: ExampleTheme,
         editable: !readOnly,
-        editorState: initSerializedEditorState !== undefined ? JSON.stringify(initSerializedEditorState) : undefined,
       }}
     >
       <div className={styles.editorContainer}>
-        {!readOnly && <ToolbarPlugin />}
         <div className={styles.editorInner}>
           <RichTextPlugin
             contentEditable={
@@ -53,10 +46,6 @@ export function Lexical({ readOnly = false, initSerializedEditorState = undefine
           <AutoFocusPlugin />
           <LogButtonPlugin />
           <ImagesPlugin />
-          <DragAndDropPlugin />
-        </div>
-        <div className={styles.editorSubmit}>
-          <UpdateEditorStatePlugin />
         </div>
       </div>
     </LexicalComposer>
