@@ -9,20 +9,21 @@ import styles from "./Lexical.module.css";
 import LogButtonPlugin from "./plugins/LogButtonPlugin.tsx";
 import ImagesPlugin from "./plugins/ImagePlugin.tsx";
 import DragAndDropPlugin from "./plugins/DragAndDropPlugin.tsx";
-import { ParagraphNode, type SerializedEditorState, TextNode } from "lexical";
+import { type LexicalEditor, ParagraphNode, type SerializedEditorState, TextNode } from "lexical";
 import { ImageNode } from "./nodes/ImageNode.tsx";
 import ExampleTheme from "./ExampleTheme.tsx";
-import { UpdateEditorStatePlugin } from "./plugins/UpdateEditorStatePlugin.tsx";
-
+import { UpdateEditorStatePlugin2 } from "./UpdateEditorStatePlugin2.tsx";
+import type { RefObject } from "react";
 
 interface LexicalProps {
   readOnly?: boolean;
   initSerializedEditorState?: SerializedEditorState;
+  ref: RefObject<LexicalEditor | undefined>;
 }
 
 const placeholder: string = "Enter some rich text...";
 
-export function Lexical({ readOnly = false, initSerializedEditorState = undefined }: LexicalProps) {
+export function Lexical({ readOnly = false, initSerializedEditorState = undefined, ref }: LexicalProps) {
   return (
     <LexicalComposer
       initialConfig={{
@@ -54,7 +55,8 @@ export function Lexical({ readOnly = false, initSerializedEditorState = undefine
           <LogButtonPlugin />
           <ImagesPlugin />
           <DragAndDropPlugin />
-          <UpdateEditorStatePlugin />
+          {/*<UpdateEditorStatePlugin />*/}
+          {ref !== undefined && <UpdateEditorStatePlugin2 ref={ref} />}
         </div>
       </div>
     </LexicalComposer>
