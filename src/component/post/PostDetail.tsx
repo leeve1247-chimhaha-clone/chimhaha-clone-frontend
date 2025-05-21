@@ -1,10 +1,9 @@
 import { useLoaderData } from "react-router";
 import { LoaderFunctionArgs, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ImageData } from "../../../credential/data.ts"
+import { ImageData } from "../../../credential/data.ts";
 import { timeAgo } from "../../utils/CreatedDate.tsx";
 import Quill from "quill";
-import Delta from "quill-delta";
 import { useRef, useState } from "react";
 import { PostEditor } from "./PostEditor.tsx";
 import { CommentProps } from "../comment/CommentComponent.tsx";
@@ -18,25 +17,10 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons/faCircle";
 import { faEye, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
 import { Modal } from "../modal/Modal.tsx";
-
-
-export interface PostDetailProps {
-  title: string;
-  username: string;
-  postId: string;
-  userAuthId: string;
-  likes: number;
-  views: number;
-  category: string;
-  createdDate: string;
-  content: Delta;
-  comments: CommentProps[];
-}
+import type { PostDetailProps } from "./PostDetailProps.tsx";
 
 export async function postDetailLoader({ params }: LoaderFunctionArgs) {
-  const axiosResponse = await axios.get(
-    ImageData.baseUrl + "/posts/detail?num=" + params.postId,
-  );
+  const axiosResponse = await axios.get(ImageData.baseUrl + "/posts/detail?num=" + params.postId);
   const postDetailData = axiosResponse.data as PostDetailProps;
   postDetailData.createdDate = timeAgo(postDetailData.createdDate);
 
@@ -68,10 +52,10 @@ export function PostDetail() {
 
   async function deleteAndGoToHome() {
     if (auth.user?.access_token === undefined) return;
-      await deletePost({
-        postId: data.postId,
-        access_token: auth.user.access_token,
-      });
+    await deletePost({
+      postId: data.postId,
+      access_token: auth.user.access_token,
+    });
     navigate("/new");
   }
 
@@ -87,9 +71,7 @@ export function PostDetail() {
       <div className={cssClass.postNavigate}>{`침착맨 전체 게시글 >`}</div>
       <div className={cssClass.postHeader}>
         <div className={cssClass.postHeader2}>
-          <div className={cssClass.postCategory}>
-            {PostCategory[data.category]}
-          </div>
+          <div className={cssClass.postCategory}>{PostCategory[data.category]}</div>
           <div className={cssClass.postTitle}>{data.title}</div>
         </div>
         <div className={cssClass.postHeader3}>
@@ -114,7 +96,7 @@ export function PostDetail() {
               >
                 <FontAwesomeIcon icon={faEllipsisVertical} />
               </button>
-              <Modal className={cssClass.modal} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} >
+              <Modal className={cssClass.modal} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <button onClick={navToEditPage}> 수정 </button>
                 <button onClick={deleteAndGoToHome}> 삭제 </button>
               </Modal>
@@ -133,11 +115,7 @@ export function PostDetail() {
           </div>
         )}
       </div>
-      <PostDetailComment
-        postId={data.postId}
-        comments={data.comments}
-        handleDataReceived={handleDataReceived}
-      />
+      <PostDetailComment postId={data.postId} comments={data.comments} handleDataReceived={handleDataReceived} />
     </div>
   );
 }

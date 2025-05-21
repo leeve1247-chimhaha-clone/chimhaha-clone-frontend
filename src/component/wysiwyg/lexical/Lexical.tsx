@@ -6,19 +6,18 @@ import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import styles from "./Lexical.module.css";
-import LogButtonPlugin from "./plugins/LogButtonPlugin.tsx";
 import ImagesPlugin from "./plugins/ImagePlugin.tsx";
 import DragAndDropPlugin from "./plugins/DragAndDropPlugin.tsx";
 import { type LexicalEditor, ParagraphNode, type SerializedEditorState, TextNode } from "lexical";
 import { ImageNode } from "./nodes/ImageNode.tsx";
 import ExampleTheme from "./ExampleTheme.tsx";
-import { UpdateEditorStatePlugin2 } from "./UpdateEditorStatePlugin2.tsx";
+import { RefEditorPlugin } from "./RefEditorPlugin.tsx";
 import type { RefObject } from "react";
 
 interface LexicalProps {
   readOnly?: boolean;
   initSerializedEditorState?: SerializedEditorState;
-  ref: RefObject<LexicalEditor | undefined>;
+  ref?: RefObject<LexicalEditor | undefined>;
 }
 
 const placeholder: string = "Enter some rich text...";
@@ -34,7 +33,7 @@ export function Lexical({ readOnly = false, initSerializedEditorState = undefine
         },
         theme: ExampleTheme,
         editable: !readOnly,
-        editorState: initSerializedEditorState !== undefined ? JSON.stringify(initSerializedEditorState) : undefined,
+        editorState: JSON.stringify(initSerializedEditorState),
       }}
     >
       <div className={styles.editorContainer}>
@@ -52,11 +51,10 @@ export function Lexical({ readOnly = false, initSerializedEditorState = undefine
           />
           <HistoryPlugin />
           <AutoFocusPlugin />
-          <LogButtonPlugin />
           <ImagesPlugin />
           <DragAndDropPlugin />
           {/*<UpdateEditorStatePlugin />*/}
-          {ref !== undefined && <UpdateEditorStatePlugin2 ref={ref} />}
+          {ref !== undefined && <RefEditorPlugin ref={ref} />}
         </div>
       </div>
     </LexicalComposer>

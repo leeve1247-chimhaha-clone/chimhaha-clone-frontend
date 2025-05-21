@@ -12,6 +12,7 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsis
 import { CreatedDate } from "../../utils/CreatedDate.tsx";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { faCircle } from "@fortawesome/free-solid-svg-icons/faCircle";
+import type { SerializedEditorState } from "lexical";
 
 interface CommentComponentProps {
   postId: string;
@@ -21,7 +22,7 @@ interface CommentComponentProps {
 
 export interface CommentProps {
   username?: string;
-  content: Delta;
+  content: SerializedEditorState;
   id: string;
   likes: number;
   lastEditedDate: string;

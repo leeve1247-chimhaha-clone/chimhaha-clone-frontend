@@ -1,4 +1,4 @@
-import type { LexicalEditor, SerializedEditorState } from "lexical";
+import type { LexicalEditor, SerializedEditorState, SerializedLexicalNode } from "lexical";
 import EMPTY_EDITOR_STATE_JSON from "../../../public/empty_editor_state.json";
 import { type RefObject } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,9 +8,41 @@ import { CData } from "../../../credential/data.ts";
 import { useAuth } from "react-oidc-context";
 import { useMatches } from "react-router";
 import { setCategory } from "./redux/submitPost/submitPostSlice.tsx";
+import { useNavigate } from "react-router-dom";
 
-function isEmpty(content: SerializedEditorState) {
+export function isEmpty(content: SerializedEditorState) {
   return JSON.stringify(content) === JSON.stringify(EMPTY_EDITOR_STATE_JSON);
+}
+
+export function clearImageSrcInEditorState(json: SerializedEditorState): void {
+  clearImageSrcInLexicalNodes(json.root.children);
+}
+
+function clearImageSrcInLexicalNodes(nodes: SerializedLexicalNode[]): void {
+  for (const node of nodes) {
+    traverseAndClear(node);
+  }
+}
+
+function traverseAndClear(obj: unknown): void {
+  if (Array.isArray(obj)) {
+    obj.forEach(traverseAndClear);
+    return;
+  }
+
+  if (typeof obj === "object" && obj !== null) {
+    const o = obj as Record<string, unknown>;
+
+    if (o.type === "image") {
+      o["src"] = "";
+    }
+
+    for (const key in o) {
+      if (typeof o[key] === "object" && o[key] !== null) {
+        traverseAndClear(o[key]);
+      }
+    }
+  }
 }
 
 export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undefined> }) {
@@ -18,10 +50,24 @@ export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undef
   const dispatch = useDispatch<DefaultSubmitBodyDispatch>();
   const matches = useMatches();
   const auth = useAuth();
+  const navigate = useNavigate();
 
-  if (selector.category === undefined){
+  if (selector.category === undefined) {
     const category = matches[1].pathname.substring(1, matches[1].pathname.length);
-    dispatch(setCategory(category))
+    dispatch(setCategory(category));
+  }
+
+  function seeState() {
+    if (ref.current === undefined) return;
+    const editor = ref.current;
+    editor.read(() => {
+      const editorState = editor.getEditorState();
+      console.log(editorState);
+      const content = editorState.toJSON();
+      clearImageSrcInEditorState(content);
+      console.log(content);
+      console.log(editorState.toJSON());
+    });
   }
 
   function submitPost() {
@@ -32,7 +78,6 @@ export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undef
       const content = editorState.toJSON();
       if (isEmpty(content)) return;
       if (matches.length < 2) return;
-
 
       const postData = {
         title: selector.title,
@@ -49,10 +94,15 @@ export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undef
           },
         })
         .then((r) => {
-          console.log(r.data);
+          navigate("/" + selector.category + "/" + r.data);
         });
     });
   }
 
-  return <div onClick={submitPost}>등록</div>;
+  return (
+    <>
+      <div onClick={submitPost}>등록</div>
+      <div onClick={seeState}>보기</div>
+    </>
+  );
 }

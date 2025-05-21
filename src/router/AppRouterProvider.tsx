@@ -3,33 +3,25 @@ import { convertToRouteObjects, type RawRouteConfig } from "./convertToRouteObje
 import axios from "axios";
 import { CData } from "../../credential/data.ts";
 import { createBrowserRouter, RouterProvider } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "../component/header/queryKeys.tsx";
 
 export function AppRouterProvider() {
-  const [router, setRouter] = useState<ReturnType<typeof createBrowserRouter> | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  useEffect(() => {
-    axios
+  const { data, error , isLoading} = useQuery({queryKey: queryKeys.RouterDataFlat, queryFn: fetchRouterDataFlat});
+  async function fetchRouterDataFlat() {
+    return axios
       .get<RawRouteConfig[]>(CData.local_backend + "/post-categories/flat")
       .then((res) => {
-        const routeObjects = convertToRouteObjects(res.data);
-        setRouter(
-          createBrowserRouter(routeObjects, {
-          }),
-        );
+        return res.data;
       })
-      .catch((err) => {
-        console.error(err);
-        setError("라우트를 불러오는 데 실패했습니다.");
-      });
-  }, []);
-
-  if (error) return <div>{error}</div>;
-  if (!router) return <div>라우트 준비 중...</div>;
-
+  }
+  if (error) return <div>error</div>;
+  if (isLoading) return <div>라우트 준비 중...</div>;
+  if (!data) return <div>데이터 준비 중...</div>;
   return (
     <Suspense fallback={<div>로딩 중...</div>}>
       <RouterProvider
-        router={router}
+        router={createBrowserRouter(convertToRouteObjects(data))}
       />
     </Suspense>
   );

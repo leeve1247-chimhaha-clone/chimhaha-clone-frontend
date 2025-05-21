@@ -2,6 +2,7 @@ import type { RouteObject } from "react-router";
 import { App } from "../App.tsx";
 import { DefaultBody } from "../component/body/DefaultBody.tsx";
 import { DefaultSubmitBody } from "../component/body/DefaultSubmitBody.tsx";
+import { DefaultDetailBody } from "./DefaultDetailBody.tsx";
 
 // export const componentMap = {
 //   Page1: lazy(() => import("../pages/Page1.tsx")),
@@ -29,6 +30,10 @@ export function convertToRouteObjects(routes: RawRouteConfig[]): RouteObject[] {
           {
             path: "submit",
             element: <DefaultSubmitBody />,
+          },
+          {
+            path: ":postId",
+            element: <DefaultDetailBody />,
           },
         ],
       };

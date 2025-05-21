@@ -150,6 +150,7 @@ export default function ToolbarPlugin() {
                 className={`${style.toolbarItemButton} ${style.spaced} ${isStrikethrough ? style.active : ''}`}
             >
                 <TypeStrikethrough className={style.toolbarItemIcon}/>
+              
             </button>
             <Divider/>
             <button
