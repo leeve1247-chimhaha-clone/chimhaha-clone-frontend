@@ -112,8 +112,7 @@
 
 .dot {
   color: var(--color-gray-800);
-  font-size: 0.15rem;
-  padding: 0.15rem;
+  font-size: 1rem;
 }
 
 .postContainer {

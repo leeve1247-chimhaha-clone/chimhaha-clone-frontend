@@ -4,7 +4,7 @@ import {
 import type { RefObject } from "react";
 import type { LexicalEditor } from "lexical";
 
-export function UpdateEditorStatePlugin2({ref}:{ref: RefObject<LexicalEditor|undefined>}) {
+export function RefEditorPlugin({ref}:{ref: RefObject<LexicalEditor|undefined>}) {
   const [editor] = useLexicalComposerContext();
   if (ref.current === undefined){
     ref.current = editor;

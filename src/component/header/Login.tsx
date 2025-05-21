@@ -40,7 +40,6 @@ export function Login() {
   }
   if (auth.isAuthenticated) {
     if (nickName === "" && auth.user?.access_token !== undefined) {
-      console.log(nickName);
       fetchMeals().then();
     }
     return (

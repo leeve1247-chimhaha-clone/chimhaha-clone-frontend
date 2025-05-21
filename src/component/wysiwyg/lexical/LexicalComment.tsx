@@ -4,38 +4,40 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
-import styles from "./Lexical.module.css";
-import LogButtonPlugin from "./plugins/LogButtonPlugin.tsx";
-import ImagesPlugin from "./plugins/ImagePlugin.tsx";
-import { ParagraphNode, TextNode } from "lexical";
-import { ImageNode } from "./nodes/ImageNode.tsx";
+import styles from "./LexicalComment.module.css";
+import { type LexicalEditor, ParagraphNode, type SerializedEditorState, TextNode } from "lexical";
 import ExampleTheme from "./ExampleTheme.tsx";
+import type { RefObject } from "react";
+import { RefEditorPlugin } from "./RefEditorPlugin.tsx";
 
-interface LexicalProps {
+interface LexicalCommentProps {
   readOnly?: boolean;
+  ref?: RefObject<LexicalEditor | undefined>;
+  content?: SerializedEditorState;
 }
 
-const placeholder: string = "Enter some rich text...";
+const placeholder: string = "I am a comment...";
 
-export function LexicalComment({ readOnly = false }: LexicalProps) {
+export function LexicalComment({ readOnly = false, content=undefined, ref }: LexicalCommentProps) {
   return (
     <LexicalComposer
       initialConfig={{
         namespace: "React.js Demo",
-        nodes: [ParagraphNode, TextNode, ImageNode],
+        nodes: [ParagraphNode, TextNode],
         onError(error: Error) {
           throw error;
         },
         theme: ExampleTheme,
         editable: !readOnly,
+        editorState: JSON.stringify(content)
       }}
     >
-      <div className={styles.editorContainer}>
-        <div className={styles.editorInner}>
+      <div className={!readOnly ? styles.editorContainer : styles.editorContainerReadOnly}>
+        <div className={!readOnly ? styles.editorInner : styles.editorInnerReadOnly}>
           <RichTextPlugin
             contentEditable={
               <ContentEditable
-                className={styles.editorInput}
+                className={!readOnly ? styles.editorInput : styles.editorInputReadOnly}
                 aria-placeholder={placeholder}
                 placeholder={<div className={styles.editorPlaceholder}>{placeholder}</div>}
               />
@@ -44,8 +46,7 @@ export function LexicalComment({ readOnly = false }: LexicalProps) {
           />
           <HistoryPlugin />
           <AutoFocusPlugin />
-          <LogButtonPlugin />
-          <ImagesPlugin />
+          {ref !== undefined && <RefEditorPlugin ref={ref} />}
         </div>
       </div>
     </LexicalComposer>

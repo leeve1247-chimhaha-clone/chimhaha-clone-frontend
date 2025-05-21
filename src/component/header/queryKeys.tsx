@@ -1,3 +1,7 @@
 export const queryKeys = {
-  routerDataTree: ["theRouterDataTree"]
+  routerDataTree: ["theRouterDataTree"],
+  PostDetail: ["PostDetail"],
+  PostList: ["PostList"],
+  CommentList: ["CommentList"],
+  RouterDataFlat: ["theRouterDataFlat"],
 };
