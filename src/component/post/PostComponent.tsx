@@ -21,7 +21,7 @@ export interface PostItem {
   createdDate: string;
   likes: number;
   postId: number;
-  thumbNailSrc?: string;
+  titleImageFileName?: string;
   commentsCount?: number;
 }
 
@@ -29,9 +29,9 @@ export function PostComponent({ post }: { post: PostItem }) {
   const postId = post.postId;
   return (
     <NavLink to={postId?.toString() ?? ""} className={cssClass.postContainer}>
-      {post.thumbNailSrc ? (
+      {post.titleImageFileName ? (
         <ImageThumbNail
-          src={post.thumbNailSrc}
+          fileName={post.titleImageFileName}
           className={cssClass.imageThumbnailContainer}
         />
       ) : (

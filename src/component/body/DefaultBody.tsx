@@ -15,7 +15,6 @@ export function DefaultBody() {
   const { data, isLoading, error } = useQuery({ queryKey: [...queryKeys.PostList, category], queryFn: fetchPostList });
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
-
   async function fetchPostList() {
     return axios
       .get<PostItem[]>(CData.local_backend + "/posts?category=" + category)
@@ -31,7 +30,6 @@ export function DefaultBody() {
   function goToSubmit() {
     navigate("submit");
   }
-
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   if (data === undefined) return <div>No data</div>;

@@ -4,8 +4,20 @@ import { Dot, HandThumbsUp } from "react-bootstrap-icons";
 import { timeAgo } from "../utils/CreatedDate.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
+import { Modal } from "../component/modal/Modal.tsx";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
+import { useState } from "react";
 
 export function DefaultDetailHeader({ korean, data }: { korean: string | undefined; data: PostDetailProps }) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  function openModal(){
+    setIsModalOpen(true)
+  }
+  function closeModal(){
+    setIsModalOpen(false)
+  }
+
+
   return (
     <div className={cssClass.postHeader}>
       <div className={cssClass.postNavigate}>{`${korean} 게시글 >`}</div>
@@ -24,6 +36,17 @@ export function DefaultDetailHeader({ korean, data }: { korean: string | undefin
           <Dot className={cssClass.dot} />
           <HandThumbsUp className={cssClass.likes} />
           <div className={cssClass.likes}>{data.likes}</div>
+        </div>
+        <div>
+          <div className={cssClass.modalOpenContainer}>
+            <button className={cssClass.options} onClick={openModal}>
+              <FontAwesomeIcon icon={faEllipsisVertical} />
+            </button>
+            <Modal className={cssClass.modal} isOpen={isModalOpen} onClose={closeModal}>
+              <button>수정</button>
+              <button>삭제</button>
+            </Modal>
+          </div>
         </div>
       </div>
     </div>

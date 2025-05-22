@@ -57,19 +57,6 @@ export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undef
     dispatch(setCategory(category));
   }
 
-  function seeState() {
-    if (ref.current === undefined) return;
-    const editor = ref.current;
-    editor.read(() => {
-      const editorState = editor.getEditorState();
-      console.log(editorState);
-      const content = editorState.toJSON();
-      clearImageSrcInEditorState(content);
-      console.log(content);
-      console.log(editorState.toJSON());
-    });
-  }
-
   function submitPost() {
     if (ref.current === undefined) return;
     const editor = ref.current;
@@ -103,7 +90,6 @@ export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undef
   return (
     <>
       <div onClick={submitPost}>등록</div>
-      <div onClick={seeState}>보기</div>
     </>
   );
 }
