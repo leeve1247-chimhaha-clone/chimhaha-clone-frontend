@@ -1,10 +1,10 @@
-import type { PostDetailProps } from "../component/post/PostDetailProps.tsx";
-import cssClass from "../component/post/PostDetail.module.css";
+import type { PostDetailProps } from "../post/PostDetailProps.tsx";
+import cssClass from "../post/PostDetail.module.css";
 import { Dot, HandThumbsUp } from "react-bootstrap-icons";
-import { timeAgo } from "../utils/CreatedDate.tsx";
+import { timeAgo } from "../../utils/CreatedDate.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
-import { Modal } from "../component/modal/Modal.tsx";
+import { Modal } from "../modal/Modal.tsx";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
 import { useState } from "react";
 

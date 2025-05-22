@@ -2,7 +2,7 @@ import type { RouteObject } from "react-router";
 import { App } from "../App.tsx";
 import { DefaultBody } from "../component/body/DefaultBody.tsx";
 import { DefaultSubmitBody } from "../component/body/DefaultSubmitBody.tsx";
-import { DefaultDetailBody } from "./DefaultDetailBody.tsx";
+import { DefaultDetailBody } from "../component/body/DefaultDetailBody.tsx";
 
 
 export interface RawRouteConfig {

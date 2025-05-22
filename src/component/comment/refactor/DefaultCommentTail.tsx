@@ -1,4 +1,4 @@
-import cssClass from "../component/comment/CommentComponent.module.css";
+import cssClass from "../CommentComponent.module.css";
 
 export function DefaultCommentTail(props: { likeThisComment: () => Promise<void>; openReplyEditor?: () => void })
 {

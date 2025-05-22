@@ -1,4 +1,4 @@
-import type { CommentProps } from "../component/comment/CommentComponent.tsx";
+import type { CommentProps } from "../CommentComponent.tsx";
 import { DefaultCommentComponent } from "./DefaultCommentComponent.tsx";
 
 export function DefaultCommentComponentList({ comments, postId }: { comments: CommentProps[]; postId: number }) {

@@ -1,14 +1,14 @@
 import { useMatches, useParams } from "react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../component/header/queryKeys.tsx";
-import { CData } from "../../credential/data.ts";
+import { queryKeys } from "../header/queryKeys.tsx";
+import { CData } from "../../../credential/data.ts";
 import axios from "axios";
 
-import type { PostDetailProps } from "../component/post/PostDetailProps.tsx";
-import cssClass from "../component/post/PostDetail.module.css";
-import { Lexical } from "../component/wysiwyg/lexical/Lexical.tsx";
-import { DefaultCommentRootComponent } from "./DefaultCommentRootComponent.tsx";
-import type { RawRouteConfig } from "./convertToRouteObjects.tsx";
+import type { PostDetailProps } from "../post/PostDetailProps.tsx";
+import cssClass from "../post/PostDetail.module.css";
+import { Lexical } from "../wysiwyg/lexical/Lexical.tsx";
+import { DefaultCommentRootComponent } from "../comment/refactor/DefaultCommentRootComponent.tsx";
+import type { RawRouteConfig } from "../../router/convertToRouteObjects.tsx";
 import { DefaultDetailHeader } from "./DefaultDetailHeader.tsx";
 
 export function DefaultDetailBody() {

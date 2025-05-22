@@ -1,5 +1,5 @@
-import type { CommentProps } from "../component/comment/CommentComponent.tsx";
-import cssClass from "../component/comment/CommentComponent.module.css";
+import type { CommentProps } from "../CommentComponent.tsx";
+import cssClass from "../CommentComponent.module.css";
 import { DefaultCommentHeaderLeft } from "./DefaultCommentHeaderLeft.tsx";
 import { DefaultCommentHeaderRight } from "./DefaultCommentHeaderRight.tsx";
 
