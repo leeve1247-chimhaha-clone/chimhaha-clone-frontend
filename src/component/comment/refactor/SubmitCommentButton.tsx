@@ -1,10 +1,10 @@
 import type { RefObject } from "react";
 import type { LexicalEditor } from "lexical";
-import { clearImageSrcInEditorState, isEmpty } from "../component/body/SubmitPostButton.tsx";
+import { clearImageSrcInEditorState, isEmpty } from "../../body/SubmitPostButton.tsx";
 import { useAuth } from "react-oidc-context";
 import axios from "axios";
-import { CData } from "../../credential/data.ts";
-import cssClass from "../component/comment/CommentComponent.module.css";
+import { CData } from "../../../../credential/data.ts";
+import cssClass from "../CommentComponent.module.css";
 
 interface SubmitCommentButtonProps {
   postId: number;
