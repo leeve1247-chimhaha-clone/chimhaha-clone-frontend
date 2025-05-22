@@ -5,15 +5,13 @@ import { setHeaderDropDownStatus } from "../../../redux/dropDown/dropDownSlice.t
 export function HeaderLevelZero({ theRouterData }: { theRouterData: routerDataTree }) {
   const dispatch = useDispatch();
   return (
-    <div>
-      <button
-        onClick={() => {
-          dispatch(setHeaderDropDownStatus(theRouterData.key));
-          return;
-        }}
-      >
-        {theRouterData.korean}
-      </button>
-    </div>
+    <button
+      onClick={() => {
+        dispatch(setHeaderDropDownStatus(theRouterData.key));
+        return;
+      }}
+    >
+      {theRouterData.korean}
+    </button>
   );
 }

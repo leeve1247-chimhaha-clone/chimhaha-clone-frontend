@@ -78,6 +78,7 @@ export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undef
       const content = editorState.toJSON();
       if (isEmpty(content)) return;
       if (matches.length < 2) return;
+      clearImageSrcInEditorState(content);
 
       const postData = {
         title: selector.title,

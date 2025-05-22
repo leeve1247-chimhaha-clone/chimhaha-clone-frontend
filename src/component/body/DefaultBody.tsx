@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import cssClass from "../../pages/head/New.module.css";
 import { PostComponent, type PostItem } from "../post/PostComponent.tsx";
 import axios from "axios";
@@ -40,7 +40,7 @@ export function DefaultBody() {
   return (
     <>
       <div>
-        <h2 className={cssClass.h2}>{`${korean !== undefined? korean : "???"} 게시판`}</h2>
+        <h2 className={cssClass.h2}>{`${korean !== undefined ? korean : "???"} 게시판`}</h2>
         <section>
           {data.map((post, index) => (
             <PostComponent key={index} post={post} />

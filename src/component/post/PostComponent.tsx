@@ -21,7 +21,7 @@ export interface PostItem {
   createdDate: string;
   likes: number;
   postId: number;
-  titleImageId?: string;
+  thumbNailSrc?: string;
   commentsCount?: number;
 }
 
@@ -29,12 +29,11 @@ export function PostComponent({ post }: { post: PostItem }) {
   const postId = post.postId;
   return (
     <NavLink to={postId?.toString() ?? ""} className={cssClass.postContainer}>
-      {post.titleImageId ? (
+      {post.thumbNailSrc ? (
         <ImageThumbNail
-          imageId={post.titleImageId}
-          postId={post.postId}
+          src={post.thumbNailSrc}
           className={cssClass.imageThumbnailContainer}
-        ></ImageThumbNail>
+        />
       ) : (
         <FontAwesomeIcon className={cssClass.imageThumbnailContainer} icon={faFileLines} />
       )}

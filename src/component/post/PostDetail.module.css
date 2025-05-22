@@ -1,11 +1,8 @@
 .postHeader {
-  padding-bottom: 1.8rem;
-  border-bottom: 1px solid var(--color-gray-600);
-  margin-bottom: 0.7rem;
+  margin: 0.7rem 0;
 }
 
 .postNavigate {
-  margin-top: 0.1rem;
   font-size: 0.9rem;
   font-weight: bolder;
   color: var(--color-gray-200);
@@ -116,9 +113,7 @@
 }
 
 .postContainer {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .modalOpenContainer {

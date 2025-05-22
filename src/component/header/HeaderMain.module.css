@@ -1,15 +1,16 @@
 .container {
   display: flex;
   font-family: GangwonEduPowerExtraBoldA, serif;
-  align-items: center;
+  align-items: end;
 }
 
 .title {
+  position: relative;
   font-size: 3rem;
   min-width: 8.2rem;
 }
 
 .small {
-  padding-top: 0.8rem;
   font-size: 0.7rem;
+  padding-bottom: 0.8rem;
 }

@@ -5,6 +5,11 @@
   margin: 0;
 }
 
+.list button {
+  color: var(--color-gray-000);
+  font-weight: bold;
+}
+
 .navContainer {
   display: flex;
   align-items: center;

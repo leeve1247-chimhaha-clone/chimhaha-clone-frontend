@@ -1,31 +1,18 @@
 .editorContainer{
-    margin: 20px auto 20px auto;
-    max-width: 400px;
-    color: #000;
+    margin: auto;
     position: relative;
     line-height: 20px;
     font-weight: 400;
     text-align: left;
-    border-radius: 10px 10px 2px 2px;
+    background: var(--color-gray-850);
 }
 
 .editorContainerReadOnly{
-    margin: 10px auto 10px auto;
-    color: #000;
+    margin: auto;
     position: relative;
     font-weight: 400;
     text-align: left;
-    border-radius: 10px 10px 2px 2px;
-}
-
-.editorInner{
-    background: #fff;
-    position: relative;
-}
-
-.editorInnerReadOnly{
-    background: #fff;
-    position: relative;
+    background: var(--color-gray-850);
 }
 
 .editorInput{
