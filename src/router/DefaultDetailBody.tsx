@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useMatches, useParams } from "react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../component/header/queryKeys.tsx";
 import { CData } from "../../credential/data.ts";
@@ -7,11 +7,9 @@ import axios from "axios";
 import type { PostDetailProps } from "../component/post/PostDetailProps.tsx";
 import cssClass from "../component/post/PostDetail.module.css";
 import { Lexical } from "../component/wysiwyg/lexical/Lexical.tsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-regular-svg-icons";
-import { timeAgo } from "../utils/CreatedDate.tsx";
-import { Dot, HandThumbsUp } from "react-bootstrap-icons";
 import { DefaultCommentRootComponent } from "./DefaultCommentRootComponent.tsx";
+import type { RawRouteConfig } from "./convertToRouteObjects.tsx";
+import { DefaultDetailHeader } from "./DefaultDetailHeader.tsx";
 
 export function DefaultDetailBody() {
   async function fetchPostDetail() {
@@ -21,41 +19,23 @@ export function DefaultDetailBody() {
   }
   const { data, error, isLoading } = useQuery({ queryKey: queryKeys.PostDetail, queryFn: fetchPostDetail });
   const queryClient = useQueryClient();
-
+  const queryData = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
+  const matches = useMatches();
+  const category = matches[1].pathname.substring(1, matches[1].pathname.length);
   const { postId } = useParams();
-
   if (error) return <div>Error: {error.message}</div>;
   if (isLoading) return <div>Loading...</div>;
   if (data === undefined) return <div>No data</div>;
+  if (queryData === undefined) return <div>캐시 불러오는 중...</div>;
+  const korean = queryData.find((x) => x.key === category)?.korean;
   return (
-    <>
-      <div className={cssClass.postContainer}>
-        <div className={cssClass.postNavigate}>{`침착맨 전체 게시글 >`}</div>
-        <div className={cssClass.postHeader}>
-          <div className={cssClass.postHeader2}>
-            <div className={cssClass.postCategory}>헤헤</div>
-            <div className={cssClass.postTitle}>{data.title}</div>
-          </div>
-        </div>
-        <div className={cssClass.postHeader3}>
-          <div className={cssClass.postHeader3left}>
-            <div>{data.username}</div>
-            <Dot className={cssClass.dot} />
-            <div>{timeAgo(data.createdDate)}</div>
-            <Dot className={cssClass.dot} />
-            <FontAwesomeIcon icon={faEye} />
-            <div>{data.views}</div>
-            <Dot className={cssClass.dot} />
-            <HandThumbsUp className={cssClass.likes} />
-            <div className={cssClass.likes}>{data.likes}</div>
-          </div>
-        </div>
-      </div>
-      <div className={cssClass.postContainer}>
+    <div className={cssClass.postContainer}>
+      <DefaultDetailHeader korean={korean} data={data} />
+      <>
         {isLoading && <div>Loading...</div>}
         {!isLoading && <Lexical readOnly={true} initSerializedEditorState={data?.content} />}
-      </div>
+      </>
       <DefaultCommentRootComponent postId={Number(data.postId)} comments={data?.comments} />
-    </>
+    </div>
   );
 }

@@ -174,7 +174,7 @@ export function CommentComponent({ postId, comment: initComment }: CommentCompon
             </div>
           )}
         </div>
-        <div className={cssClass.commentTailContainer}>
+        <div className={cssClass.DefaultCommentTail}>
           {!isCommentEditorComponentOpen && (
             <button className={cssClass.button} onClick={openReplyEditor}>
               답글

@@ -3,12 +3,11 @@ import { DefaultCommentComponentList } from "./DefaultCommentComponentList.tsx";
 import { LexicalComment } from "../component/wysiwyg/lexical/LexicalComment.tsx";
 import cssClass from "../component/comment/CommentComponent.module.css";
 import { useRef, useState } from "react";
-import { DefaultCommentHeaderRight } from "./DefaultCommentHeaderRight.tsx";
-import { DefaultCommentHeaderLeft } from "./DefaultCommentHeaderLeft.tsx";
 import { likeComment } from "../utils/saveComment.ts";
 import { useAuth } from "react-oidc-context";
 import { DefaultCommentTail } from "./DefaultCommentTail.tsx";
 import { SubmitCommentButton } from "./SubmitCommentButton.tsx";
+import { DefaultCommentHeader } from "./DefaultCommentHeader.tsx";
 
 interface ReplyEditorComponentProps {
   postId: number;
@@ -56,17 +55,8 @@ export function DefaultCommentComponent({ initComment, postId }: { initComment: 
   }
 
   return (
-    <div className={cssClass.commentContainer}>
-      <div className={cssClass.commentHeaderContainer}>
-        <DefaultCommentHeaderLeft username={comment.username} date={comment.lastEditedDate} likes={comment.likes} />
-        <DefaultCommentHeaderRight
-          onClick={() => {
-            setModalOpen(true);
-          }}
-          isModalOpen={isModalOpen}
-          onClose={() => setModalOpen(false)}
-        />
-      </div>
+    <div className={cssClass.DefaultCommentContainer}>
+      <DefaultCommentHeader comment={comment} onClick={() => {setModalOpen(true);}} modalOpen={isModalOpen} onClose={() => setModalOpen(false)} />
       <LexicalComment readOnly={true} content={comment.content} />
       {!replyEditorOpen && <DefaultCommentTail likeThisComment={likeThisComment} openReplyEditor={openReplyEditor} />}
       {replyEditorOpen && <ReplyEditorComponent postId={postId} commentId={Number(comment.id)} closeReplyEditor={closeReplyEditor} />}

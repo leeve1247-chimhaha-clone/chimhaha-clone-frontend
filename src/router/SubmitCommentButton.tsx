@@ -39,7 +39,9 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
       })
       .then((r) => {
         console.log(r.data);
-      });
+      }).catch((err) => {
+        console.error(err);
+    });
   }
 
   return (

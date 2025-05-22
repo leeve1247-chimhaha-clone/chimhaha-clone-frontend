@@ -18,7 +18,7 @@ interface LexicalCommentProps {
 
 const placeholder: string = "I am a comment...";
 
-export function LexicalComment({ readOnly = false, content=undefined, ref }: LexicalCommentProps) {
+export function LexicalComment({ readOnly = false, content = undefined, ref }: LexicalCommentProps) {
   return (
     <LexicalComposer
       initialConfig={{
@@ -29,25 +29,23 @@ export function LexicalComment({ readOnly = false, content=undefined, ref }: Lex
         },
         theme: ExampleTheme,
         editable: !readOnly,
-        editorState: JSON.stringify(content)
+        editorState: JSON.stringify(content),
       }}
     >
       <div className={!readOnly ? styles.editorContainer : styles.editorContainerReadOnly}>
-        <div className={!readOnly ? styles.editorInner : styles.editorInnerReadOnly}>
-          <RichTextPlugin
-            contentEditable={
-              <ContentEditable
-                className={!readOnly ? styles.editorInput : styles.editorInputReadOnly}
-                aria-placeholder={placeholder}
-                placeholder={<div className={styles.editorPlaceholder}>{placeholder}</div>}
-              />
-            }
-            ErrorBoundary={LexicalErrorBoundary}
-          />
-          <HistoryPlugin />
-          <AutoFocusPlugin />
-          {ref !== undefined && <RefEditorPlugin ref={ref} />}
-        </div>
+        <RichTextPlugin
+          contentEditable={
+            <ContentEditable
+              className={!readOnly ? styles.editorInput : styles.editorInputReadOnly}
+              aria-placeholder={placeholder}
+              placeholder={<div className={styles.editorPlaceholder}>{placeholder}</div>}
+            />
+          }
+          ErrorBoundary={LexicalErrorBoundary}
+        />
+        <HistoryPlugin />
+        <AutoFocusPlugin />
+        {ref !== undefined && <RefEditorPlugin ref={ref} />}
       </div>
     </LexicalComposer>
   );
