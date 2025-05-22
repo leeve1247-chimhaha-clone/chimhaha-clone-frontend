@@ -1,9 +1,8 @@
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import Quill from "quill";
 import { CommentUpdateEditor } from "./CommentUpdateEditor.tsx";
 import { CommentEditorComponent } from "./CommentEditorComponent.tsx";
 import cssClass from "./CommentComponent.module.css";
-import Delta from "quill-delta";
 import { useAuth } from "react-oidc-context";
 import { deleteComment, likeComment, updateComment } from "../../utils/saveComment.ts";
 import { Modal } from "../modal/Modal.tsx";
@@ -43,14 +42,13 @@ export function CommentComponent({ postId, comment: initComment }: CommentCompon
   useEffect(() => {
     // 요소가 생성된 후에만 스크롤 실행
     if (isElementVisible && targetRef.current) {
-      targetRef.current.scrollIntoView({ behavior: 'smooth' });
+      targetRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [isElementVisible]); // isElementVisible 상태가 변경될 때마다 실행
 
-  function handleCreateElement () {
+  function handleCreateElement() {
     setElementVisible(true);
   }
-
 
   async function likeThisComment() {
     if (auth.user?.access_token === undefined) return;
@@ -193,7 +191,13 @@ export function CommentComponent({ postId, comment: initComment }: CommentCompon
         </div>
         {isCommentEditorComponentOpen && (
           <>
-            <CommentEditorComponent ref={targetRef}  onDataReceived={handleDataReceived} postId={postId} commentId={comment.id} closeReplyEditor={closeReplyEditor} />
+            <CommentEditorComponent
+              ref={targetRef}
+              onDataReceived={handleDataReceived}
+              postId={postId}
+              commentId={comment.id}
+              closeReplyEditor={closeReplyEditor}
+            />
           </>
         )}
       </div>

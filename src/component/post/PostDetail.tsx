@@ -86,22 +86,6 @@ export function PostDetail() {
             <FontAwesomeIcon className={cssClass.likes} icon={faThumbsUp} />
             <div className={cssClass.likes}>{data.likes}</div>
           </div>
-          <div className={cssClass.postHeader3Right}>
-            <div className={cssClass.modalOpenContainer}>
-              <button
-                className={cssClass.options}
-                onClick={() => {
-                  setIsModalOpen(true);
-                }}
-              >
-                <FontAwesomeIcon icon={faEllipsisVertical} />
-              </button>
-              <Modal className={cssClass.modal} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                <button onClick={navToEditPage}> 수정 </button>
-                <button onClick={deleteAndGoToHome}> 삭제 </button>
-              </Modal>
-            </div>
-          </div>
         </div>
       </div>
       <div>

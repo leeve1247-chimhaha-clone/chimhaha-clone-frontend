@@ -1,13 +1,32 @@
 import type { HTMLAttributes } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "./header/queryKeys.tsx";
+import { CData } from "../../credential/data.ts";
+import axios from "axios";
 
 interface ImageThumbNailProps extends HTMLAttributes<HTMLImageElement> {
-  src?: string;
+  fileName: string;
 }
 
-export function ImageThumbNail({ src, className }: ImageThumbNailProps) {
+export function ImageThumbNail({ fileName, className }: ImageThumbNailProps) {
+  const {data, isLoading, error } = useQuery({queryKey: [...queryKeys.ThumbNails, fileName], queryFn:fetchThumbNailImage});
+  async function fetchThumbNailImage() {
+    return axios.get(CData.local_backend+"/get/thumbnail-src-url?filename=" + fileName).then((res) => {
+      return CData.local_image_uri+"/"+res.data;
+    }).catch((err) => {
+      console.error(err);
+      return undefined;
+    })
+  }
+
+
+  if (isLoading) return <></>
+  if (error) return <></>;
+  if (data === undefined) return <></>;
+  console.log("data", data);
   return (
     <div className={className}>
-      <img src={src} alt={""} />
+      <img src={data} alt={""} />
     </div>
   );
 }
