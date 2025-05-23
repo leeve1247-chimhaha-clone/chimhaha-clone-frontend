@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./DefaultBody.module.css";
-import { PostComponent, type PostItem } from "../post/PostComponent.tsx";
+import { DefaultPostComponent } from "./DefaultPostComponent.tsx";
 import axios from "axios";
 import { CData } from "../../../credential/data.ts";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../header/queryKeys.tsx";
 import { useMatches, useParams } from "react-router";
 import type { RawRouteConfig } from "../../router/convertToRouteObjects.tsx";
+import type { PostItemProps } from "./PostItemProps.tsx";
 
 export function DefaultBody() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export function DefaultBody() {
   const queryData = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
   async function fetchPostList() {
     return axios
-      .get<PostItem[]>(CData.local_backend + "/posts?category=" + category)
+      .get<PostItemProps[]>(CData.local_backend + "/posts?category=" + category)
       .then((res) => {
         return res.data;
       })
@@ -42,7 +43,7 @@ export function DefaultBody() {
         <h2 className={styles.h2}>{`${korean !== undefined ? korean : "???"} 게시판`}</h2>
         <section>
           {data.map((post, index) => (
-            <PostComponent key={index} post={post} />
+            <DefaultPostComponent key={index} post={post} />
           ))}
         </section>
         <div className={styles.tailContainer}>

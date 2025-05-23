@@ -2,44 +2,22 @@ import cssClass from "./PostComponent.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CreatedDate } from "../../utils/CreatedDate.tsx";
 import { faCircle } from "@fortawesome/free-solid-svg-icons/faCircle";
-import {
-  faEye,
-  faFileLines,
-  faThumbsUp,
-} from "@fortawesome/free-regular-svg-icons";
+import { faEye, faFileLines, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { NavLink } from "react-router-dom";
 import { ImageThumbNail } from "../ImageThumbNail.tsx";
+import type { PostItemProps } from "./PostItemProps.tsx";
 
-export interface PostItem {
-  title: string;
-  content: string;
-  username: string;
-  status: string;
-  views: number;
-  category: string;
-  post: string;
-  createdDate: string;
-  likes: number;
-  postId: number;
-  titleImageFileName?: string;
-  commentsCount?: number;
-}
-
-export function PostComponent({ post }: { post: PostItem }) {
+export function DefaultPostComponent({ post }: { post: PostItemProps }) {
   const postId = post.postId;
   return (
     <NavLink to={postId?.toString() ?? ""} className={cssClass.postContainer}>
       {post.titleImageFileName ? (
-        <ImageThumbNail
-          fileName={post.titleImageFileName}
-          className={cssClass.imageThumbnailContainer}
-        />
+        <ImageThumbNail fileName={post.titleImageFileName} className={cssClass.imageThumbnailContainer} />
       ) : (
         <FontAwesomeIcon className={cssClass.imageThumbnailContainer} icon={faFileLines} />
       )}
       <div className={cssClass.rightSection}>
         <div className={cssClass.firstLine}>
-          {/*<Category className={cssClass.category} category={post.category} />*/}
           <div className={cssClass.title}>{post.title}</div>
           <div className={cssClass.commentsCount}>{post.commentsCount}</div>
         </div>

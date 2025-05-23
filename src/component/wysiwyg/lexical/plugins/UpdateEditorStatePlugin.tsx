@@ -2,12 +2,12 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../header/queryKeys.tsx";
-import type { PostDetailProps } from "../../../post/PostDetailProps.tsx";
+import type { DefaultPostDetailProps } from "../../../body/DefaultPostDetailProps.tsx";
 
 export function UpdateEditorStatePlugin({ postId }: { postId?: string | undefined }) {
   const [editor] = useLexicalComposerContext();
   const queryClient = useQueryClient();
-  const queryData = queryClient.getQueryData<PostDetailProps>([...queryKeys.PostDetail, postId]);
+  const queryData = queryClient.getQueryData<DefaultPostDetailProps>([...queryKeys.PostDetail, postId]);
   useEffect(() => {
     if (postId === undefined) return;
     if (queryData === undefined) return;
