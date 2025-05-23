@@ -7,14 +7,32 @@ import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { Modal } from "../modal/Modal.tsx";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
 import { useState } from "react";
+import { type UIMatch, useNavigate } from "react-router-dom";
+import { useMatches } from "react-router";
+
+function getPostId(matches: UIMatch[]) {
+  return matches[matches.length - 1].pathname.substring(matches[matches.length - 2].pathname.length + 1, matches[matches.length - 1].pathname.length);
+}
+
+function getCategory(matches: UIMatch[]) {
+  return matches[1].pathname.substring(1, matches[1].pathname.length);
+}
 
 export function DefaultDetailHeader({ korean, data }: { korean: string | undefined; data: PostDetailProps }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const navigate = useNavigate();
+  const matches = useMatches();
+  const category = getCategory(matches);
+  const postId = getPostId(matches);
   function openModal(){
     setIsModalOpen(true)
   }
   function closeModal(){
     setIsModalOpen(false)
+  }
+
+  function navigateToEdit(){
+    navigate(`/${category}/submit?postId=${postId}`)
   }
 
 
@@ -43,7 +61,7 @@ export function DefaultDetailHeader({ korean, data }: { korean: string | undefin
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
             <Modal className={cssClass.modal} isOpen={isModalOpen} onClose={closeModal}>
-              <button>수정</button>
+              <button onClick={navigateToEdit}>수정</button>
               <button>삭제</button>
             </Modal>
           </div>

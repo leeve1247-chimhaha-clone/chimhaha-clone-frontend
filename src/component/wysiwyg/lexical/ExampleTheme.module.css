@@ -25,6 +25,10 @@
     padding-left: 16px;
 }
 
+.editorTextBase{
+    color: var(--color-gray-000)
+}
+
 .editorTextBold {
     font-weight: bold;
 }

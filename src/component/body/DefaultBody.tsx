@@ -1,15 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import cssClass from "../../pages/head/New.module.css";
+import styles from "./DefaultBody.module.css";
 import { PostComponent, type PostItem } from "../post/PostComponent.tsx";
 import axios from "axios";
 import { CData } from "../../../credential/data.ts";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../header/queryKeys.tsx";
-import { useMatches } from "react-router";
+import { useMatches, useParams } from "react-router";
 import type { RawRouteConfig } from "../../router/convertToRouteObjects.tsx";
 
 export function DefaultBody() {
   const navigate = useNavigate();
+  useParams();
   const matches = useMatches();
   const category = matches[1].pathname.substring(1, matches[1].pathname.length);
   const { data, isLoading, error } = useQuery({ queryKey: [...queryKeys.PostList, category], queryFn: fetchPostList });
@@ -38,14 +39,14 @@ export function DefaultBody() {
   return (
     <>
       <div>
-        <h2 className={cssClass.h2}>{`${korean !== undefined ? korean : "???"} 게시판`}</h2>
+        <h2 className={styles.h2}>{`${korean !== undefined ? korean : "???"} 게시판`}</h2>
         <section>
           {data.map((post, index) => (
             <PostComponent key={index} post={post} />
           ))}
         </section>
-        <div className={cssClass.tailContainer}>
-          <button onClick={goToSubmit} className={cssClass.button}>
+        <div className={styles.tailContainer}>
+          <button onClick={goToSubmit} className={styles.button}>
             글쓰기
           </button>
         </div>
