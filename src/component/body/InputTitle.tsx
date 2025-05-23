@@ -1,11 +1,17 @@
-import { type ChangeEvent, type KeyboardEvent, useState } from "react";
+import { type ChangeEvent, type KeyboardEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setTitle } from "./redux/submitPost/submitPostSlice.tsx";
 import type { DefaultSubmitBodyDispatch } from "./redux/submitPost/DefaultSubmitBodyStore.tsx";
 
-export function InputTitle() {
-  const [onChangeText, setOnChangeText] = useState("");
+export function InputTitle({initText}: {initText? :string}) {
+  const [onChangeText, setOnChangeText] = useState(initText !== undefined ? initText : "");
   const dispatch = useDispatch<DefaultSubmitBodyDispatch>();
+
+  useEffect(() => {
+    if (initText !== undefined) {
+      dispatch(setTitle(initText));
+    }
+  }, [dispatch, initText])
 
   function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {

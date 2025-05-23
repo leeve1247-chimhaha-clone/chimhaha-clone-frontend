@@ -1,20 +1,18 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import type { DefaultSubmitBodyDispatch, DefaultSubmitBodyState } from "../../../body/redux/submitPost/DefaultSubmitBodyStore.tsx";
-import { setContent } from "../../../body/redux/submitPost/submitPostSlice.tsx";
+import { useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "../../../header/queryKeys.tsx";
+import type { PostDetailProps } from "../../../post/PostDetailProps.tsx";
 
-export function UpdateEditorStatePlugin() {
+export function UpdateEditorStatePlugin({ postId }: { postId?: string | undefined }) {
   const [editor] = useLexicalComposerContext();
-  const run = useSelector((state: DefaultSubmitBodyState) => state.submitPostStatus.run);
-  const dispatch = useDispatch<DefaultSubmitBodyDispatch>();
+  const queryClient = useQueryClient();
+  const queryData = queryClient.getQueryData<PostDetailProps>([...queryKeys.PostDetail, postId]);
   useEffect(() => {
-    if (!run) return;
-    editor.read(() => {
-      const editorState = editor.getEditorState();
-      const serializedEditorState = editorState.toJSON();
-      dispatch(setContent(serializedEditorState));
-    });
-  }, [dispatch, editor, run]);
+    if (postId === undefined) return;
+    if (queryData === undefined) return;
+    const editorState = editor.parseEditorState(queryData.content);
+    editor.setEditorState(editorState);
+  }, [editor, postId, queryData]);
   return null;
 }

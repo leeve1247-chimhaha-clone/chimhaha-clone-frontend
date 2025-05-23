@@ -7,18 +7,6 @@ import { queryKeys } from "./queryKeys.tsx";
 import { NavPopularPosts } from "./NavPopularPosts.tsx";
 import { NavAllPosts } from "./NavAllPosts.tsx";
 
-async function fetchRouterDataList() {
-  return axios
-    .get<routerDataTree[]>(CData.local_backend + "/post-categories")
-    .then((response) => {
-      // console.log("Data fetched successfully:", response.data);
-      return response.data;
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-    });
-}
-
 export interface routerDataTree {
   id: number;
   level: number;
@@ -30,6 +18,17 @@ export interface routerDataTree {
 
 export function HeaderNav() {
   const { data, error, isLoading } = useQuery({ queryKey: queryKeys.routerDataTree, queryFn: fetchRouterDataList });
+  async function fetchRouterDataList() {
+    return axios
+      .get<routerDataTree[]>(CData.local_backend + "/post-categories")
+      .then((response) => {
+        // console.log("Data fetched successfully:", response.data);
+        return response.data;
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

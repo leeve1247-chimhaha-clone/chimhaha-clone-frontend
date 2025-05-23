@@ -6,8 +6,9 @@
  *
  */
 import style from "./ExampleTheme.module.css";
+import type { EditorThemeClasses } from "lexical";
 
-export default {
+const ExampleTheme :  EditorThemeClasses = {
     code: 'editor-code',
     heading: {
         h1: style.editorHeadingH1,
@@ -32,7 +33,8 @@ export default {
     quote: style.editorQuote,
     rtl: style.rtl,
     text: {
-        bold: style.editorBold,
+        base: style.editorTextBase,
+        bold: style.editorTextBold,
         code: style.editorTextCode,
         hashtag: style.editorTextHashtag,
         italic:  style.editorTextItalic,
@@ -42,3 +44,5 @@ export default {
         underlineStrikethrough: style.editorTextUnderlineStrikethrough,
     },
 };
+
+export default ExampleTheme

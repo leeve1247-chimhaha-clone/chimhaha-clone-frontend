@@ -1,12 +1,10 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import cssClass from "./HeaderSub.module.css";
-import type { CategoryElement } from "./HeaderSubCategory.tsx";
+import type { JSX } from "react";
+import cssClass from "./Header.module.css";
 
-export default function HeaderSub({ headerCategory }: { headerCategory: CategoryElement }) {
+export function HeaderSub({ category }: { category: JSX.Element }) {
   return (
-    <div className={cssClass.container}>
-      <FontAwesomeIcon icon={headerCategory.icon} />
-      {headerCategory.name}
+    <div className={cssClass.subContainer}>
+      <div className={cssClass.container1}>{category}</div>
     </div>
   );
 }

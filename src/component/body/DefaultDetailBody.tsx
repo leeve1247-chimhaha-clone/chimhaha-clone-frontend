@@ -12,30 +12,33 @@ import type { RawRouteConfig } from "../../router/convertToRouteObjects.tsx";
 import { DefaultDetailHeader } from "./DefaultDetailHeader.tsx";
 
 export function DefaultDetailBody() {
+  const { postId } = useParams();
   async function fetchPostDetail() {
     return axios.get<PostDetailProps>(CData.local_backend + "/posts/detail?num=" + postId).then((res) => {
       return res.data;
     });
   }
-  const { data, error, isLoading } = useQuery({ queryKey: queryKeys.PostDetail, queryFn: fetchPostDetail });
+  const { data, error, isLoading } = useQuery({ queryKey: [...queryKeys.PostDetail, postId], queryFn: fetchPostDetail });
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
   const matches = useMatches();
   const category = matches[1].pathname.substring(1, matches[1].pathname.length);
-  const { postId } = useParams();
   if (error) return <div>Error: {error.message}</div>;
   if (isLoading) return <div>Loading...</div>;
   if (data === undefined) return <div>No data</div>;
   if (queryData === undefined) return <div>캐시 불러오는 중...</div>;
   const korean = queryData.find((x) => x.key === category)?.korean;
+
   return (
-    <div className={cssClass.postContainer}>
-      <DefaultDetailHeader korean={korean} data={data} />
-      <>
-        {isLoading && <div>Loading...</div>}
-        {!isLoading && <Lexical readOnly={true} initSerializedEditorState={data?.content} />}
-      </>
-      <DefaultCommentRootComponent postId={Number(data.postId)} comments={data?.comments} />
-    </div>
+    <>
+      <div className={cssClass.postContainer}>
+        <DefaultDetailHeader korean={korean} data={data} />
+        <>
+          {isLoading && <div>Loading...</div>}
+          {!isLoading && <Lexical readOnly={true} postId={postId} />}
+        </>
+        <DefaultCommentRootComponent postId={Number(data.postId)} comments={data?.comments} />
+      </div>
+    </>
   );
 }

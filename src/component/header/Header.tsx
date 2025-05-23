@@ -1,6 +1,14 @@
-import type { ReactNode } from "react";
 import cssClass from "./Header.module.css";
+import { HeaderSubCategory } from "./HeaderSubCategory.tsx";
+import { HeaderMain } from "./HeaderMain.tsx";
+import { HeaderSub } from "./HeaderSub.tsx";
 
-export default function Header({ children }: { children: ReactNode }) {
-  return <div className={cssClass.container}>{children}</div>;
+export function Header() {
+  return (
+    <div className={cssClass.container}>
+      <HeaderMain />
+      <HeaderSub category={HeaderSubCategory.favorite} />
+      <HeaderSub category={HeaderSubCategory.recent} />
+    </div>
+  );
 }

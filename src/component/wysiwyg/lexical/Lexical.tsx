@@ -8,21 +8,22 @@ import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import styles from "./Lexical.module.css";
 import ImagesPlugin from "./plugins/ImagePlugin.tsx";
 import DragAndDropPlugin from "./plugins/DragAndDropPlugin.tsx";
-import { type LexicalEditor, ParagraphNode, type SerializedEditorState, TextNode } from "lexical";
+import { type LexicalEditor, ParagraphNode, TextNode } from "lexical";
 import { ImageNode } from "./nodes/ImageNode.tsx";
 import ExampleTheme from "./ExampleTheme.tsx";
 import { RefEditorPlugin } from "./RefEditorPlugin.tsx";
 import type { RefObject } from "react";
+import { UpdateEditorStatePlugin } from "./plugins/UpdateEditorStatePlugin.tsx";
 
 interface LexicalProps {
   readOnly?: boolean;
-  initSerializedEditorState?: SerializedEditorState;
+  postId?: string;
   ref?: RefObject<LexicalEditor | undefined>;
 }
 
 const placeholder: string = "Enter some rich text...";
 
-export function Lexical({ readOnly = false, initSerializedEditorState = undefined, ref }: LexicalProps) {
+export function Lexical({ readOnly = false, postId = undefined, ref }: LexicalProps) {
   return (
     <LexicalComposer
       initialConfig={{
@@ -33,7 +34,6 @@ export function Lexical({ readOnly = false, initSerializedEditorState = undefine
         },
         theme: ExampleTheme,
         editable: !readOnly,
-        editorState: JSON.stringify(initSerializedEditorState),
       }}
     >
       <div className={styles.editorContainer}>
@@ -53,6 +53,7 @@ export function Lexical({ readOnly = false, initSerializedEditorState = undefine
           <AutoFocusPlugin />
           <ImagesPlugin />
           <DragAndDropPlugin />
+          {postId !== undefined && <UpdateEditorStatePlugin postId={postId} />}
           {/*<UpdateEditorStatePlugin />*/}
           {ref !== undefined && <RefEditorPlugin ref={ref} />}
         </div>

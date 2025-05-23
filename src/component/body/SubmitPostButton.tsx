@@ -9,6 +9,8 @@ import { useAuth } from "react-oidc-context";
 import { useMatches } from "react-router";
 import { setCategory } from "./redux/submitPost/submitPostSlice.tsx";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "../header/queryKeys.tsx";
 
 export function isEmpty(content: SerializedEditorState) {
   return JSON.stringify(content) === JSON.stringify(EMPTY_EDITOR_STATE_JSON);
@@ -45,16 +47,51 @@ function traverseAndClear(obj: unknown): void {
   }
 }
 
-export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undefined> }) {
+export function SubmitPostButton({ ref, postId }: { ref: RefObject<LexicalEditor | undefined>; postId?: string }) {
   const selector = useSelector((state: DefaultSubmitBodyState) => state.submitPostStatus);
   const dispatch = useDispatch<DefaultSubmitBodyDispatch>();
   const matches = useMatches();
   const auth = useAuth();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   if (selector.category === undefined) {
     const category = matches[1].pathname.substring(1, matches[1].pathname.length);
     dispatch(setCategory(category));
+  }
+
+  function editPost() {
+    if (ref.current === undefined) return;
+    const editor = ref.current;
+    editor.read(() => {
+      const editorState = editor.getEditorState();
+      const content = editorState.toJSON();
+      if (isEmpty(content)) return;
+      if (matches.length < 2) return;
+      clearImageSrcInEditorState(content);
+
+      const postData = {
+        title: selector.title,
+        category: selector.category,
+        content: content,
+        postId: postId,
+      };
+
+      const access_token = auth?.user?.access_token;
+      axios
+        .post(CData.local_backend + "/update", postData, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${access_token}`,
+          },
+        })
+        .then(async (r) => {
+          await queryClient.invalidateQueries({ queryKey: [...queryKeys.PostDetail, postId] });
+          const data = queryClient.getQueryData([...queryKeys.PostDetail,postId]);
+          console.log(data);
+          navigate("/" + selector.category + "/" + r.data);
+        });
+    });
   }
 
   function submitPost() {
@@ -90,6 +127,7 @@ export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undef
   return (
     <>
       <div onClick={submitPost}>등록</div>
+      <div onClick={editPost}>수정</div>
     </>
   );
 }

@@ -1,11 +1,11 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
 interface CreatedDateProps extends HTMLAttributes<HTMLDivElement>{
   date : string
 }
 
 export function CreatedDate({ date }: CreatedDateProps) {
-  let s = timeAgo(date);
+  const s = timeAgo(date);
   return <>{s}</>;
 }
 
