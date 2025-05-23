@@ -1,4 +1,4 @@
-import type { routerDataTree } from "../HeaderNav.tsx";
+import type { routerDataTree } from "../main/nav/HeaderNav.tsx";
 import { useNavigate } from "react-router-dom";
 import { setHeaderDropDownStatus } from "../../../redux/dropDown/dropDownSlice.tsx";
 import { useDispatch } from "react-redux";

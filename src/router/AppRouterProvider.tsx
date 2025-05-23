@@ -4,7 +4,7 @@ import axios from "axios";
 import { CData } from "../../credential/data.ts";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "../component/header/queryKeys.tsx";
+import { queryKeys } from "../react-query/queryKeys.tsx";
 
 export function AppRouterProvider() {
   const { data, error, isLoading } = useQuery({ queryKey: queryKeys.RouterDataFlat, queryFn: fetchRouterDataFlat });

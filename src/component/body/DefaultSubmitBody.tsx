@@ -7,7 +7,7 @@ import { useRef } from "react";
 import type { LexicalEditor } from "lexical";
 import { useLocation } from "react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../header/queryKeys.tsx";
+import { queryKeys } from "../../react-query/queryKeys.tsx";
 import type { DefaultPostDetailProps } from "./DefaultPostDetailProps.tsx";
 
 function CancelButton() {

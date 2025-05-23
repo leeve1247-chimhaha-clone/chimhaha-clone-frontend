@@ -1,7 +1,7 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../../../header/queryKeys.tsx";
+import { queryKeys } from "../../../../react-query/queryKeys.tsx";
 import type { DefaultPostDetailProps } from "../../../body/DefaultPostDetailProps.tsx";
 
 export function UpdateEditorStatePlugin({ postId }: { postId?: string | undefined }) {

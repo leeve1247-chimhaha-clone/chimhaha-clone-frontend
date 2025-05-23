@@ -1,6 +1,6 @@
 import { useMatches, useParams } from "react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../header/queryKeys.tsx";
+import { queryKeys } from "../../react-query/queryKeys.tsx";
 import { CData } from "../../../credential/data.ts";
 import axios from "axios";
 
