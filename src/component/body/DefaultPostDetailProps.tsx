@@ -1,8 +1,7 @@
-import Delta from "quill-delta";
-import { CommentProps } from "../comment/CommentComponent.tsx";
+import type { CommentProps } from "../comment/CommentComponent.tsx";
 import type { SerializedEditorState } from "lexical";
 
-export interface PostDetailProps {
+export interface DefaultPostDetailProps {
   title: string;
   username: string;
   postId: string;

@@ -4,8 +4,8 @@ import { queryKeys } from "../header/queryKeys.tsx";
 import { CData } from "../../../credential/data.ts";
 import axios from "axios";
 
-import type { PostDetailProps } from "../post/PostDetailProps.tsx";
-import cssClass from "../post/PostDetail.module.css";
+import type { DefaultPostDetailProps } from "./DefaultPostDetailProps.tsx";
+import cssClass from "./DefaultDetailBody.module.css";
 import { Lexical } from "../wysiwyg/lexical/Lexical.tsx";
 import { DefaultCommentRootComponent } from "../comment/refactor/DefaultCommentRootComponent.tsx";
 import type { RawRouteConfig } from "../../router/convertToRouteObjects.tsx";
@@ -14,7 +14,7 @@ import { DefaultDetailHeader } from "./DefaultDetailHeader.tsx";
 export function DefaultDetailBody() {
   const { postId } = useParams();
   async function fetchPostDetail() {
-    return axios.get<PostDetailProps>(CData.local_backend + "/posts/detail?num=" + postId).then((res) => {
+    return axios.get<DefaultPostDetailProps>(CData.local_backend + "/posts/detail?num=" + postId).then((res) => {
       return res.data;
     });
   }

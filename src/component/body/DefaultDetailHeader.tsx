@@ -1,5 +1,5 @@
-import type { PostDetailProps } from "../post/PostDetailProps.tsx";
-import cssClass from "../post/PostDetail.module.css";
+import type { DefaultPostDetailProps } from "./DefaultPostDetailProps.tsx";
+import cssClass from "./DefaultDetailBody.module.css";
 import { Dot, HandThumbsUp } from "react-bootstrap-icons";
 import { timeAgo } from "../../utils/CreatedDate.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,7 +18,7 @@ function getCategory(matches: UIMatch[]) {
   return matches[1].pathname.substring(1, matches[1].pathname.length);
 }
 
-export function DefaultDetailHeader({ korean, data }: { korean: string | undefined; data: PostDetailProps }) {
+export function DefaultDetailHeader({ korean, data }: { korean: string | undefined; data: DefaultPostDetailProps }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const navigate = useNavigate();
   const matches = useMatches();

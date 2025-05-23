@@ -8,7 +8,7 @@ import type { LexicalEditor } from "lexical";
 import { useLocation } from "react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../header/queryKeys.tsx";
-import type { PostDetailProps } from "../post/PostDetailProps.tsx";
+import type { DefaultPostDetailProps } from "./DefaultPostDetailProps.tsx";
 
 function CancelButton() {
   return <div>취소</div>;
@@ -20,7 +20,7 @@ export function DefaultSubmitBody() {
   const queryParams = new URLSearchParams(location.search);
   const postId = queryParams.get("postId");
   const queryClient = useQueryClient();
-  const postDetailProps = queryClient.getQueryData<PostDetailProps>([...queryKeys.PostDetail, postId]);
+  const postDetailProps = queryClient.getQueryData<DefaultPostDetailProps>([...queryKeys.PostDetail, postId]);
   return (
     <Provider store={defaultSubmitBodyStore}>
       <div>
