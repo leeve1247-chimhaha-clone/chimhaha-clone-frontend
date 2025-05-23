@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "./header/queryKeys.tsx";
+import { queryKeys } from "../react-query/queryKeys.tsx";
 import { CData } from "../../credential/data.ts";
 import axios from "axios";
 

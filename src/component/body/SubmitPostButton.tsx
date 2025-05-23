@@ -10,7 +10,7 @@ import { useMatches } from "react-router";
 import { setCategory } from "./redux/submitPost/submitPostSlice.tsx";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../header/queryKeys.tsx";
+import { queryKeys } from "../../react-query/queryKeys.tsx";
 
 export function isEmpty(content: SerializedEditorState) {
   return JSON.stringify(content) === JSON.stringify(EMPTY_EDITOR_STATE_JSON);

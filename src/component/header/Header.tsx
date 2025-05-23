@@ -1,7 +1,7 @@
 import cssClass from "./Header.module.css";
-import { HeaderSubCategory } from "./HeaderSubCategory.tsx";
-import { HeaderMain } from "./HeaderMain.tsx";
-import { HeaderSub } from "./HeaderSub.tsx";
+import { HeaderSubCategory } from "./sub/HeaderSubCategory.tsx";
+import { HeaderMain } from "./main/HeaderMain.tsx";
+import { HeaderSub } from "./sub/HeaderSub.tsx";
 import HeaderDropDown from "./dropdown/HeaderDropDown.tsx";
 
 export function Header() {

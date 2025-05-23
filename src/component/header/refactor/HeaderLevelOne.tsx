@@ -1,4 +1,4 @@
-import type { routerDataTree } from "../HeaderNav.tsx";
+import type { routerDataTree } from "../main/nav/HeaderNav.tsx";
 import { HeaderLevelTwos } from "./HeaderLevelTwos.tsx";
 import style from "./HeaderLevelOne.module.css";
 
