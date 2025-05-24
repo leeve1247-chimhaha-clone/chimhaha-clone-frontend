@@ -9,7 +9,7 @@ export function HeaderLevelZero({ theRouterData }: { theRouterData: routerDataTr
 
   function handleDropDownStatus() {
     return () => {
-      if (selector === "") {
+      if (selector === "" || selector !== theRouterData.key) {
         dispatch(setHeaderDropDownStatus(theRouterData.key));
         return;
       }

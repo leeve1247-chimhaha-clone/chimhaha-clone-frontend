@@ -67,21 +67,23 @@
 }
 
 .options {
+  padding: 0.25rem 0.5rem;
   background-color: transparent;
   border: none;
   color: var(--color-gray-200);
   font-size: 1rem;
-  padding-right: 1rem;
   cursor: pointer;
 }
 
 .modal {
   position: absolute;
+  right: 0;
+  top:1.5rem;
   width: 3rem;
   background-color: var(--color-gray-875);
   border-radius: 0.5rem;
   color: var(--color-gray-100);
-  right: 0.5rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -124,5 +126,7 @@
 }
 
 .modalOpenContainer {
+  display: flex;
+  justify-content: center;
   position: relative;
 }

@@ -1,59 +1,33 @@
-import type { LexicalEditor, SerializedEditorState, SerializedLexicalNode } from "lexical";
-import EMPTY_EDITOR_STATE_JSON from "../../../public/empty_editor_state.json";
+import type { LexicalEditor, SerializedEditorState } from "lexical";
+import EMPTY_EDITOR_STATE_JSON from "../../../../public/empty_editor_state.json";
 import { type RefObject } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { DefaultSubmitBodyDispatch, DefaultSubmitBodyState } from "./redux/submitPost/DefaultSubmitBodyStore.tsx";
+import type { DefaultSubmitBodyDispatch, DefaultSubmitBodyState } from "../redux/submitPost/DefaultSubmitBodyStore.tsx";
 import axios from "axios";
-import { CData } from "../../../credential/data.ts";
+import { CData } from "../../../../credential/data.ts";
 import { useAuth } from "react-oidc-context";
-import { useMatches } from "react-router";
-import { setCategory } from "./redux/submitPost/submitPostSlice.tsx";
+import { useLocation, useMatches } from "react-router";
+import { setCategory } from "../redux/submitPost/submitPostSlice.tsx";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../../react-query/queryKeys.tsx";
+import { queryKeys } from "../../../react-query/queryKeys.tsx";
+import styles from "./DefaultSubmitBody.module.css";
+import { clearImageSrcInEditorState } from "./functions/clearImageSrcInEditorState.tsx";
 
 export function isEmpty(content: SerializedEditorState) {
   return JSON.stringify(content) === JSON.stringify(EMPTY_EDITOR_STATE_JSON);
 }
 
-export function clearImageSrcInEditorState(json: SerializedEditorState): void {
-  clearImageSrcInLexicalNodes(json.root.children);
-}
-
-function clearImageSrcInLexicalNodes(nodes: SerializedLexicalNode[]): void {
-  for (const node of nodes) {
-    traverseAndClear(node);
-  }
-}
-
-function traverseAndClear(obj: unknown): void {
-  if (Array.isArray(obj)) {
-    obj.forEach(traverseAndClear);
-    return;
-  }
-
-  if (typeof obj === "object" && obj !== null) {
-    const o = obj as Record<string, unknown>;
-
-    if (o.type === "image") {
-      o["src"] = "";
-    }
-
-    for (const key in o) {
-      if (typeof o[key] === "object" && o[key] !== null) {
-        traverseAndClear(o[key]);
-      }
-    }
-  }
-}
-
-export function SubmitPostButton({ ref, postId }: { ref: RefObject<LexicalEditor | undefined>; postId?: string }) {
+export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undefined> }) {
   const selector = useSelector((state: DefaultSubmitBodyState) => state.submitPostStatus);
   const dispatch = useDispatch<DefaultSubmitBodyDispatch>();
   const matches = useMatches();
   const auth = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const postId = queryParams.get("postId");
 
   if (selector.category === undefined) {
     const category = matches[1].pathname.substring(1, matches[1].pathname.length);
@@ -87,7 +61,7 @@ export function SubmitPostButton({ ref, postId }: { ref: RefObject<LexicalEditor
         })
         .then(async (r) => {
           await queryClient.invalidateQueries({ queryKey: [...queryKeys.PostDetail, postId] });
-          const data = queryClient.getQueryData([...queryKeys.PostDetail,postId]);
+          const data = queryClient.getQueryData([...queryKeys.PostDetail, postId]);
           console.log(data);
           navigate("/" + selector.category + "/" + r.data);
         });
@@ -126,8 +100,16 @@ export function SubmitPostButton({ ref, postId }: { ref: RefObject<LexicalEditor
 
   return (
     <>
-      <div onClick={submitPost}>등록</div>
-      <div onClick={editPost}>수정</div>
+      {(postId === undefined || postId === null) && (
+        <button className={styles.buttonApply} onClick={submitPost}>
+          등록
+        </button>
+      )}
+      {(postId !== undefined && postId !== null) && (
+        <button className={styles.buttonApply} onClick={editPost}>
+          수정
+        </button>
+      )}
     </>
   );
 }
