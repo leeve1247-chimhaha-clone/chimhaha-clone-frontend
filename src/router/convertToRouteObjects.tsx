@@ -1,7 +1,7 @@
 import type { RouteObject } from "react-router";
 import { App } from "../App.tsx";
 import { DefaultBody } from "../component/body/DefaultBody.tsx";
-import { DefaultSubmitBody } from "../component/body/DefaultSubmitBody.tsx";
+import { DefaultSubmitBody } from "../component/body/submit/DefaultSubmitBody.tsx";
 import { DefaultDetailBody } from "../component/body/DefaultDetailBody.tsx";
 
 

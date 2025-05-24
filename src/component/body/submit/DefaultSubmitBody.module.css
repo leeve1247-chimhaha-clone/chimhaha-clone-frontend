@@ -1,24 +1,46 @@
+.container {
+    margin: 0 0.5rem;
+}
+
 .background {
-    display: flex;
     flex-direction: column;
     gap: 1rem;
     margin: 1rem;
     padding: 1rem;
 }
 
-.headerTitle {
-    background-color: transparent;
-    border: 0.1rem, solid, var(--color-gray-400);
-    border-radius: 0.5rem; /* 적절한 반경으로 조정 */
-    margin-bottom: 1rem;
-    padding: 0.75rem;
+.header{
+    display: flex;
+    flex-direction: column;
+}
+
+.headerLeftAlign{
+    margin: 0.5rem;
+}
+
+.headerSpaceBetween {
+    margin: 0.5rem 0;
+    width: 100%;
+    align-self: center;
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    gap: 1rem;
 }
 
 .category {
+    width: 100%;
+    background-color: var(--color-gray-800);
+    border-radius: 0.5rem; /* 적절한 반경으로 조정 */
+    padding: 0.5rem 1rem;
+}
+
+.title {
+    background-color: transparent;
     border: 0.1rem, solid, var(--color-gray-400);
     border-radius: 0.5rem; /* 적절한 반경으로 조정 */
-    margin-bottom: 1rem;
-    padding: 1rem;
+    margin: 0.5rem 0;
+    padding: 0.75rem;
 }
 
 .body{
@@ -44,15 +66,17 @@
     background-color: var(--color-accent-100);
     border : 1px solid var(--color-accent-100);
     border-radius: var(--border-radius-100);
-    color: var(--color-gray-100);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .buttonApply:hover{
     height: 3rem;
     width: 4.85rem;
     font-weight: bold;
-    background-color: var(--color-accent-100);
-    border : 1px solid var(--color-accent-100);
+    background-color: var(--color-accent-000);
+    border : 1px solid var(--color-accent-000);
     border-radius: var(--border-radius-100);
     color: var(--color-gray-100);
 }
@@ -65,6 +89,7 @@
     border : 1px solid var(--color-accent-100);
     border-radius: var(--border-radius-100);
     color: var(--color-gray-100);
+
 }
 
 .buttonCancel{
@@ -74,25 +99,25 @@
     background-color: var(--color-red-500);
     border : 1px solid var(--color-red-500);
     border-radius: var(--border-radius-100);
-    color : var(--color-gray-100)
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .buttonCancel:hover{
     height: 3rem;
     width: 4.85rem;
     font-weight: bold;
-    background-color: var(--color-red-500);
-    border : 1px solid var(--color-red-500);
+    background-color: var(--color-red-400);
+    border : 1px solid var(--color-red-400);
     border-radius: var(--border-radius-100);
-    color : var(--color-gray-100)
 }
 
 .buttonCancel:active{
     height: 3rem;
     width: 4.85rem;
     font-weight: bold;
-    background-color: var(--color-red-500);
-    border : 1px solid var(--color-red-500);
+    background-color: var(--color-red-600);
+    border : 1px solid var(--color-red-600);
     border-radius: var(--border-radius-100);
-    color : var(--color-gray-100)
 }

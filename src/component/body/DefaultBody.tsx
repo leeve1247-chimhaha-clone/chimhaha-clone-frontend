@@ -39,13 +39,13 @@ export function DefaultBody() {
   const korean = queryData.find((x) => x.key === category)?.korean;
   return (
     <>
-      <div>
+      <div className={styles.container}>
         <h2 className={styles.h2}>{`${korean !== undefined ? korean : "???"} 게시판`}</h2>
-        <section>
+        <div>
           {data.map((post, index) => (
             <DefaultPostComponent key={index} post={post} />
           ))}
-        </section>
+        </div>
         <div className={styles.tailContainer}>
           <button onClick={goToSubmit} className={styles.button}>
             글쓰기
