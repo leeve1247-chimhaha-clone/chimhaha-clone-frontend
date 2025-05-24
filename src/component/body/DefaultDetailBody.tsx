@@ -19,16 +19,21 @@ export function DefaultDetailBody() {
     });
   }
   const { data, error, isLoading } = useQuery({ queryKey: [...queryKeys.PostDetail, postId], queryFn: fetchPostDetail });
+
   const queryClient = useQueryClient();
-  const queryData = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
+  const rawRoute = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
   const matches = useMatches();
   const category = matches[1].pathname.substring(1, matches[1].pathname.length);
   if (error) return <div>Error: {error.message}</div>;
   if (isLoading) return <div>Loading...</div>;
   if (data === undefined) return <div>No data</div>;
-  if (queryData === undefined) return <div>캐시 불러오는 중...</div>;
-  const korean = queryData.find((x) => x.key === category)?.korean;
+  if (rawRoute === undefined) return <div>캐시 불러오는 중...</div>;
 
+  const korean = rawRoute.find((x) => x.key === category)?.korean;
+
+  const queryData = queryClient.getQueryData<DefaultPostDetailProps>([...queryKeys.PostDetail, postId]);
+  console.log(queryData);
+  console.log(...queryKeys.PostDetail, postId)
   return (
     <>
       <div className={cssClass.postContainer}>
@@ -37,7 +42,7 @@ export function DefaultDetailBody() {
           {isLoading && <div>Loading...</div>}
           {!isLoading && <Lexical readOnly={true} postId={postId} />}
         </>
-        <DefaultCommentRootComponent postId={Number(data.postId)} comments={data?.comments} />
+        <DefaultCommentRootComponent postId={String(data.postId)} comments={data?.comments} />
       </div>
     </>
   );
