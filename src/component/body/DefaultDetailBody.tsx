@@ -30,10 +30,6 @@ export function DefaultDetailBody() {
   if (rawRoute === undefined) return <div>캐시 불러오는 중...</div>;
 
   const korean = rawRoute.find((x) => x.key === category)?.korean;
-
-  const queryData = queryClient.getQueryData<DefaultPostDetailProps>([...queryKeys.PostDetail, postId]);
-  console.log(queryData);
-  console.log(...queryKeys.PostDetail, postId)
   return (
     <>
       <div className={cssClass.postContainer}>

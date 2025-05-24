@@ -43,6 +43,7 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
       content: content,
     };
     const access_token = auth?.user?.access_token;
+
     axios
       .post<CommentProps>(CData.local_backend + "/save/comment", commentData, {
         headers: {
@@ -51,11 +52,7 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
         },
       })
       .then((r) => {
-        queryClient.setQueryData(
-          [...queryKeys.PostDetail, postId],
-          (oldData: DefaultPostDetailProps) => {
-          return updateComment(oldData, r.data);
-        });
+        console.log(r.data);
       })
       .catch((err) => {
         console.error(err);
