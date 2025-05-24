@@ -6,13 +6,12 @@ import type { LexicalEditor } from "lexical";
 import { SubmitCommentButton } from "./SubmitCommentButton.tsx";
 import style from "../CommentComponent.module.css";
 
-export function DefaultCommentRootComponent({ postId, comments }: { postId: number; comments: CommentProps[] | undefined }) {
+export function DefaultCommentRootComponent({ postId, comments }: { postId: string; comments: CommentProps[] | undefined }) {
   const ref = useRef<LexicalEditor | undefined>(undefined);
-
   return (
     <>
-      <div className={style.DefaultCommentRootContainer}>{comments && <DefaultCommentComponentList postId={postId} comments={comments} />}</div>
-      <div className={style.commentRootContainer}>
+      {comments?.length !== undefined && comments?.length > 0 && <DefaultCommentComponentList postId={postId} comments={comments} />}
+      <div className={style.submitCommentContainer}>
         <LexicalComment ref={ref} />
         <div className={style.buttonContainer}>
           <SubmitCommentButton postId={postId} ref={ref} commentId={undefined} />

@@ -10,7 +10,7 @@ import { SubmitCommentButton } from "./SubmitCommentButton.tsx";
 import { DefaultCommentHeader } from "./DefaultCommentHeader.tsx";
 
 interface ReplyEditorComponentProps {
-  postId: number;
+  postId: string;
   commentId: number | undefined;
   closeReplyEditor?: () => void;
 }
@@ -28,7 +28,7 @@ function ReplyEditorComponent({ postId, commentId, closeReplyEditor }: ReplyEdit
   );
 }
 
-export function DefaultCommentComponent({ initComment, postId }: { initComment: CommentProps; postId: number }) {
+export function DefaultCommentComponent({ initComment, postId }: { initComment: CommentProps; postId: string }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const auth = useAuth();
   const [comment, setComment] = useState(initComment);
