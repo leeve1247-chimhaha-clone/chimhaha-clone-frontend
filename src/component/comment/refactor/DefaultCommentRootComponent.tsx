@@ -15,11 +15,10 @@ import { CommentPageButtons } from "./CommentPageButtons.tsx";
 export function DefaultCommentRootComponent() {
   const ref = useRef<LexicalEditor | undefined>(undefined);
   const { postId } = useParams();
-  const { data, error, isLoading} = useQuery({
-      queryKey: [...queryKeys.CommentPageSize, postId],
-      queryFn: fetchCommentPageSize,
-    }
-  );
+  const { data, error, isLoading } = useQuery({
+    queryKey: [...queryKeys.CommentPageSize, postId],
+    queryFn: fetchCommentPageSize,
+  });
 
   async function fetchCommentPageSize() {
     return axios
@@ -40,7 +39,7 @@ export function DefaultCommentRootComponent() {
   if (data === undefined) return <div>data is undefined</div>;
   return (
     <>
-      <Companion/>
+      <Companion />
       <div className={style.submitCommentContainer}>
         <LexicalComment ref={ref} />
         <div className={style.buttonContainer}>
@@ -64,6 +63,7 @@ function Companion() {
   function handleCommentPage(pageNum: number) {
     setCommentPageNum(pageNum);
   }
+
   async function fetchCommentPage() {
     return axios
       .get<CommentProps[]>(CData.local_backend + "/get/comment/page", {
