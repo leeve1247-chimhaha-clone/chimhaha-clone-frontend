@@ -1,5 +1,4 @@
-import type { LexicalEditor, SerializedEditorState } from "lexical";
-import EMPTY_EDITOR_STATE_JSON from "../../../../public/empty_editor_state.json";
+import type { LexicalEditor } from "lexical";
 import { type RefObject } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { DefaultSubmitBodyDispatch, DefaultSubmitBodyState } from "../redux/submitPost/DefaultSubmitBodyStore.tsx";
@@ -13,10 +12,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import styles from "./DefaultSubmitBody.module.css";
 import { clearImageSrcInEditorState } from "./functions/clearImageSrcInEditorState.tsx";
-
-export function isEmpty(content: SerializedEditorState) {
-  return JSON.stringify(content) === JSON.stringify(EMPTY_EDITOR_STATE_JSON);
-}
+import { isEmpty } from "./IsEmpty.tsx";
 
 export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undefined> }) {
   const selector = useSelector((state: DefaultSubmitBodyState) => state.submitPostStatus);
@@ -103,7 +99,7 @@ export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undef
           등록
         </button>
       )}
-      {(postId !== undefined && postId !== null) && (
+      {postId !== undefined && postId !== null && (
         <button className={styles.buttonApply} onClick={editPost}>
           수정
         </button>
