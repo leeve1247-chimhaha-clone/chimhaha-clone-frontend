@@ -1,6 +1,5 @@
 import type { RefObject } from "react";
 import type { LexicalEditor } from "lexical";
-import { isEmpty } from "../../body/submit/SubmitPostButton.tsx";
 import { useAuth } from "react-oidc-context";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
@@ -9,6 +8,7 @@ import { clearImageSrcInEditorState } from "../../body/submit/functions/clearIma
 import type { CommentProps } from "../CommentComponent.tsx";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
+import { isEmpty } from "../../body/submit/IsEmpty.tsx";
 
 interface SubmitCommentButtonProps {
   postId: string;
@@ -28,7 +28,6 @@ export function SubmitCommentButton({ postId, commentId, ref, commentPageNum }: 
     const content = editorState.toJSON();
     clearImageSrcInEditorState(content);
     if (isEmpty(content)) return;
-
     const commentData = {
       postId: postId,
       commentId: commentId,
