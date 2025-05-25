@@ -4,6 +4,7 @@ export const queryKeys = {
   PostList: ["PostList"],
   CommentList: ["CommentList"],
   RouterDataFlat: ["theRouterDataFlat"],
-  ThumbNails: ["ThumbNails"]
+  ThumbNails: ["ThumbNails"],
+  CommentPageSize: ["CommentPageSize"]
 
 };

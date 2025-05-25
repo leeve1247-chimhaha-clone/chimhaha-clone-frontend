@@ -6,29 +6,22 @@ import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
 import cssClass from "../CommentComponent.module.css";
 import { clearImageSrcInEditorState } from "../../body/submit/functions/clearImageSrcInEditorState.tsx";
-import { useQueryClient } from "@tanstack/react-query";
-import type { DefaultPostDetailProps } from "../../body/DefaultPostDetailProps.tsx";
 import type { CommentProps } from "../CommentComponent.tsx";
+import { useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "../../../react-query/queryKeys.tsx";
 
 interface SubmitCommentButtonProps {
   postId: string;
   commentId: number | undefined;
   ref: RefObject<LexicalEditor | undefined>;
+  commentPageNum?: number;
 }
 
-export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentButtonProps) {
+export function SubmitCommentButton({ postId, commentId, ref, commentPageNum }: SubmitCommentButtonProps) {
   const auth = useAuth();
   const queryClient = useQueryClient();
 
-  function updateComment(oldData: DefaultPostDetailProps, comment: CommentProps) {
-    if (commentId === undefined) {
-      return { ...oldData, comments: [...oldData.comments, comment] };
-    } else {
-      return oldData;
-    }
-  }
-
-  function submitComment() {
+  async function submitComment() {
     if (ref.current === undefined) return;
     const editor = ref.current;
     const editorState = editor.getEditorState();
@@ -43,15 +36,21 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
     };
     const access_token = auth?.user?.access_token;
 
-    axios
+    await axios
       .post<CommentProps>(CData.local_backend + "/save/comment", commentData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${access_token}`,
         },
       })
-      .then((r) => {
+      .then(async (r) => {
         console.log(r.data);
+        // root 에서 입력되었다? commentId 가 undefined다?
+        // 맨 마지막 pageNum 으로 갱신하고 종료
+        await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentList, postId, commentPageNum] });
+
+        // commentId 가 있다?
+        // 해당 commentId 가 있는 페이지로 이동하고 종료
       })
       .catch((err) => {
         console.error(err);
@@ -59,8 +58,10 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
   }
 
   return (
-    <button className={cssClass.buttonApply} onClick={submitComment}>
-      등록
-    </button>
+    <>
+      <button className={cssClass.buttonApply} onClick={submitComment}>
+        등록
+      </button>
+    </>
   );
 }
