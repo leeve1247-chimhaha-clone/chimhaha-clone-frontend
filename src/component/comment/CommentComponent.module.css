@@ -139,6 +139,25 @@
     margin: 1rem 0.5rem 1rem 0;
 }
 
+.commentPageButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.commentPageButton{
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.2rem;
+}
+
+.commentPageButton:hover{
+    color: var(--color-gray-300);
+    background-color: var(--color-gray-800);
+}
+
+
+
 .buttonApply{
     width: 4rem;
     margin: 0.2rem;
