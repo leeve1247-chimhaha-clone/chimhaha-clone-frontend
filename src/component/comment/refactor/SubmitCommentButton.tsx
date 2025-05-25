@@ -8,7 +8,6 @@ import cssClass from "../CommentComponent.module.css";
 import { clearImageSrcInEditorState } from "../../body/submit/functions/clearImageSrcInEditorState.tsx";
 import { useQueryClient } from "@tanstack/react-query";
 import type { DefaultPostDetailProps } from "../../body/DefaultPostDetailProps.tsx";
-import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import type { CommentProps } from "../CommentComponent.tsx";
 
 interface SubmitCommentButtonProps {
@@ -22,10 +21,10 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
   const queryClient = useQueryClient();
 
   function updateComment(oldData: DefaultPostDetailProps, comment: CommentProps) {
-    if (commentId === undefined){
+    if (commentId === undefined) {
       return { ...oldData, comments: [...oldData.comments, comment] };
     } else {
-      return oldData
+      return oldData;
     }
   }
 

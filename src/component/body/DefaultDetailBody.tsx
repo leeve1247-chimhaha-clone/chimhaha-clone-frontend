@@ -1,5 +1,5 @@
 import { useMatches, useParams } from "react-router";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../react-query/queryKeys.tsx";
 import { CData } from "../../../credential/data.ts";
 import axios from "axios";
@@ -38,7 +38,7 @@ export function DefaultDetailBody() {
           {isLoading && <div>Loading...</div>}
           {!isLoading && <Lexical readOnly={true} postId={postId} />}
         </>
-        <DefaultCommentRootComponent postId={String(data.postId)} comments={data?.comments} />
+        <DefaultCommentRootComponent />
       </div>
     </>
   );

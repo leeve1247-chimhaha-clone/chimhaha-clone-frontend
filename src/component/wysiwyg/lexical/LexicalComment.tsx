@@ -44,7 +44,6 @@ export function LexicalComment({ readOnly = false, content = undefined, ref }: L
           ErrorBoundary={LexicalErrorBoundary}
         />
         <HistoryPlugin />
-        <AutoFocusPlugin />
         {ref !== undefined && <RefEditorPlugin ref={ref} />}
       </div>
     </LexicalComposer>
