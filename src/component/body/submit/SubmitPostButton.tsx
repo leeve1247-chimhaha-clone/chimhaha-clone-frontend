@@ -61,8 +61,6 @@ export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undef
         })
         .then(async (r) => {
           await queryClient.invalidateQueries({ queryKey: [...queryKeys.PostDetail, postId] });
-          const data = queryClient.getQueryData([...queryKeys.PostDetail, postId]);
-          console.log(data);
           navigate("/" + selector.category + "/" + r.data);
         });
     });
