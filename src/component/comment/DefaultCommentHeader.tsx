@@ -1,7 +1,7 @@
-import type { CommentProps } from "../CommentComponent.tsx";
-import cssClass from "../CommentComponent.module.css";
+import cssClass from "./CommentComponent.module.css";
 import { DefaultCommentHeaderLeft } from "./DefaultCommentHeaderLeft.tsx";
 import { DefaultCommentHeaderRight } from "./DefaultCommentHeaderRight.tsx";
+import type { CommentProps } from "./CommentProps.tsx";
 
 export function DefaultCommentHeader(props: {
   comment: CommentProps;

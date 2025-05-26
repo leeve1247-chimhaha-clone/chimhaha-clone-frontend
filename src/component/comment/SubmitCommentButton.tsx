@@ -2,13 +2,13 @@ import type { RefObject } from "react";
 import type { LexicalEditor } from "lexical";
 import { useAuth } from "react-oidc-context";
 import axios from "axios";
-import { CData } from "../../../../credential/data.ts";
-import cssClass from "../CommentComponent.module.css";
-import { clearImageSrcInEditorState } from "../../body/submit/functions/clearImageSrcInEditorState.tsx";
-import type { CommentProps } from "../CommentComponent.tsx";
+import { CData } from "../../../credential/data.ts";
+import cssClass from "./CommentComponent.module.css";
+import { clearImageSrcInEditorState } from "../body/submit/functions/clearImageSrcInEditorState.tsx";
 import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../../../react-query/queryKeys.tsx";
-import { isEmpty } from "../../body/submit/IsEmpty.tsx";
+import { queryKeys } from "../../react-query/queryKeys.tsx";
+import { isEmpty } from "../body/submit/IsEmpty.tsx";
+import type { CommentProps } from "./CommentProps.tsx";
 
 interface SubmitCommentButtonProps {
   postId: string;
