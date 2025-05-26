@@ -41,7 +41,7 @@ export function CommentRootComponent() {
       <div className={style.submitCommentContainer}>
         <LexicalComment ref={ref} />
         <div className={style.buttonContainer}>
-          <SubmitCommentButton postId={postId} ref={ref} commentId={undefined} commentPageNum={data} />
+          <SubmitCommentButton postId={postId} ref={ref}/>
         </div>
       </div>
     </>

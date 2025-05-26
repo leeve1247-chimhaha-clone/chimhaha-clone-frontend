@@ -1,5 +1,5 @@
 import { useMatches, useParams } from "react-router";
-import { useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../react-query/queryKeys.tsx";
 import { CData } from "../../../credential/data.ts";
 import axios from "axios";
@@ -7,9 +7,9 @@ import axios from "axios";
 import type { DefaultPostDetailProps } from "./DefaultPostDetailProps.tsx";
 import cssClass from "./DefaultDetailBody.module.css";
 import { Lexical } from "../wysiwyg/lexical/Lexical.tsx";
-import { CommentRootComponent } from "../comment/CommentRootComponent.tsx";
 import type { RawRouteConfig } from "../../router/convertToRouteObjects.tsx";
 import { DefaultDetailHeader } from "./DefaultDetailHeader.tsx";
+import CommentRootComponentProvider from "../comment/redux/CommentRootComponentProvider.tsx";
 
 export function DefaultDetailBody() {
   const { postId } = useParams();
@@ -38,7 +38,7 @@ export function DefaultDetailBody() {
           {isLoading && <div>Loading...</div>}
           {!isLoading && <Lexical readOnly={true} postId={postId} />}
         </>
-        <CommentRootComponent />
+        <CommentRootComponentProvider />
       </div>
     </>
   );

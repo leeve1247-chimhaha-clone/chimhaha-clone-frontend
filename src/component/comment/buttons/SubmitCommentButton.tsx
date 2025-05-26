@@ -9,17 +9,21 @@ import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import { isEmpty } from "../../body/submit/IsEmpty.tsx";
 import type { CommentProps } from "../CommentProps.tsx";
+import { useDispatch } from "react-redux";
+import { setCommentPage } from "../redux/commentComponentSlice.tsx";
 
 interface SubmitCommentButtonProps {
   postId: string;
-  commentId: number | undefined;
+  commentId?: number;
   ref: RefObject<LexicalEditor | undefined>;
   commentPageNum?: number;
 }
 
-export function SubmitCommentButton({ postId, commentId, ref, commentPageNum }: SubmitCommentButtonProps) {
+export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentButtonProps) {
   const auth = useAuth();
   const queryClient = useQueryClient();
+  const commentPageSize = queryClient.getQueryData<number>([...queryKeys.CommentPageSize, postId]);
+  const dispatch = useDispatch();
 
   async function submitComment() {
     if (ref.current === undefined) return;
@@ -44,12 +48,9 @@ export function SubmitCommentButton({ postId, commentId, ref, commentPageNum }: 
       })
       .then(async (r) => {
         console.log(r.data);
-        // root 에서 입력되었다? commentId 가 undefined다?
-        // 맨 마지막 pageNum 으로 갱신하고 종료
-        await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentList, postId, commentPageNum] });
-
-        // commentId 가 있다?
-        // 해당 commentId 가 있는 페이지로 이동하고 종료
+        const unwrapCommentPageSize = commentPageSize !== undefined ? commentPageSize : 1;
+        await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentList, postId, String(unwrapCommentPageSize)] });
+        dispatch(setCommentPage(unwrapCommentPageSize));
       })
       .catch((err) => {
         console.error(err);

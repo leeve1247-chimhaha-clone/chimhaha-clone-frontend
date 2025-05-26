@@ -156,30 +156,21 @@
     background-color: var(--color-gray-800);
 }
 
-
-
 .buttonApply{
     width: 4rem;
     margin: 0.2rem;
     background-color: var(--color-accent-100);
-    border : 1px solid var(--color-accent-100);
     border-radius: 0.2rem;
     color: var(--color-gray-100);
+    text-align: center;
 }
 
 .buttonApply:hover{
-    width: 4rem;
-    margin: 0.2rem;
-    cursor: pointer;
     background-color: var(--color-accent-000);
-    border : 1px solid var(--color-accent-000);
-    color: var(--color-gray-000);
 }
 
 .buttonApply:active{
-    cursor: pointer;
     background-color: var(--color-accent-200);
-    border : 1px solid var(--color-accent-200);
     color: var(--color-gray-200);
 }
 
