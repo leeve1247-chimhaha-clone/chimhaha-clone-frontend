@@ -4,12 +4,12 @@ import { queryKeys } from "../../react-query/queryKeys.tsx";
 import axios from "axios";
 import { CData } from "../../../credential/data.ts";
 import { CommentPageButtons } from "./buttons/CommentPageButtons.tsx";
-import { CommentComponentList } from "./CommentComponentList.tsx";
+import { CommentComponents } from "./CommentComponents.tsx";
 import type { CommentProps } from "./CommentProps.tsx";
 import { useSelector } from "react-redux";
 import type { CommentComponentState } from "./redux/DefaultSubmitBodyStore.tsx";
 
-export function Companion() {
+export function CommentListComponent() {
   const commentPageNum = useSelector((state: CommentComponentState) => state.commentComponentState.commentPage);
   const queryClient = useQueryClient();
   const { postId } = useParams();
@@ -39,9 +39,9 @@ export function Companion() {
   if (postId === undefined) return <div>Fuck!</div>;
   return (
     <>
-      {pageSize !== 0 && <CommentPageButtons pageSize={pageSize} />}
-      {data?.length !== undefined && data?.length > 0 && <CommentComponentList postId={postId} comments={data} />}
-      {pageSize !== 0 && <CommentPageButtons pageSize={pageSize} />}
+      {pageSize !== 0 && <CommentPageButtons pageSize={pageSize} id={"top"} />}
+      {data?.length !== undefined && data?.length > 0 && <CommentComponents postId={postId} comments={data} />}
+      {pageSize !== 0 && <CommentPageButtons pageSize={pageSize} id={"bottom"}/>}
     </>
   );
 }

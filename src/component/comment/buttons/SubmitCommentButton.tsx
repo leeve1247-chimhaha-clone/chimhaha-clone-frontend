@@ -10,7 +10,8 @@ import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import { isEmpty } from "../../body/submit/IsEmpty.tsx";
 import type { CommentProps } from "../CommentProps.tsx";
 import { useDispatch } from "react-redux";
-import { setCommentPage } from "../redux/commentComponentSlice.tsx";
+import { setCommentPage } from "../redux/commentComponentReducer.tsx";
+import type { CommentComponentDispatch } from "../redux/DefaultSubmitBodyStore.tsx";
 
 interface SubmitCommentButtonProps {
   postId: string;
@@ -23,7 +24,7 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
   const auth = useAuth();
   const queryClient = useQueryClient();
   const commentPageSize = queryClient.getQueryData<number>([...queryKeys.CommentPageSize, postId]);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<CommentComponentDispatch>();
 
   async function submitComment() {
     if (ref.current === undefined) return;
