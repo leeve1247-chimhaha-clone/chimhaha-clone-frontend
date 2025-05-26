@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { submitPostSlice } from "./submitPostSlice.tsx";
+import { commentComponentSlice } from "./commentComponentSlice.tsx";
 
-export const defaultSubmitBodyStore = configureStore({
+export const commentComponentStore = configureStore({
   reducer: {
-    submitPostStatus: submitPostSlice.reducer,
+    commentComponentState: commentComponentSlice.reducer,
   },
 });
 
-export type DefaultSubmitBodyState = ReturnType<typeof defaultSubmitBodyStore.getState>;
-export type DefaultSubmitBodyDispatch = typeof defaultSubmitBodyStore.dispatch;
+export type CommentComponentState = ReturnType<typeof commentComponentStore.getState>;
+export type CommentComponentDispatch = typeof commentComponentStore.dispatch;
