@@ -8,4 +8,4 @@ export const commentComponentSlice = createSlice({
   reducers: commentComponentReducer,
 });
 
-
+export const { setCommentPage, setFocusedButton } = commentComponentSlice.actions;
