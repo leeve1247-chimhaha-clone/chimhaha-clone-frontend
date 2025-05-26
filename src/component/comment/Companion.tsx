@@ -4,8 +4,8 @@ import { useParams } from "react-router";
 import { queryKeys } from "../../react-query/queryKeys.tsx";
 import axios from "axios";
 import { CData } from "../../../credential/data.ts";
-import { CommentPageButtons } from "./CommentPageButtons.tsx";
-import { DefaultCommentComponentList } from "./DefaultCommentComponentList.tsx";
+import { CommentPageButtons } from "./buttons/CommentPageButtons.tsx";
+import { CommentComponentList } from "./CommentComponentList.tsx";
 import type { CommentProps } from "./CommentProps.tsx";
 
 export function Companion() {
@@ -44,7 +44,7 @@ export function Companion() {
     <>
       {pageSize !== 0 && <CommentPageButtons pageSize={pageSize} handleCommentPage={handleCommentPage} />}
       {data?.length !== undefined && data?.length > 0 &&
-        <DefaultCommentComponentList postId={postId} comments={data} />}
+        <CommentComponentList postId={postId} comments={data} />}
       {pageSize !== 0 && <CommentPageButtons pageSize={pageSize} handleCommentPage={handleCommentPage} />}
     </>
   );

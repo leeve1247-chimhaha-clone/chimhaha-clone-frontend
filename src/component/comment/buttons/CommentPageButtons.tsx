@@ -1,4 +1,4 @@
-import style from "./CommentComponent.module.css";
+import style from "../CommentComponent.module.css";
 
 export function CommentPageButtons({ pageSize, handleCommentPage }: {
   pageSize: number;

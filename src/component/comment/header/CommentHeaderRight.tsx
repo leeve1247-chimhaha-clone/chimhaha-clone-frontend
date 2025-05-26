@@ -1,9 +1,9 @@
-import cssClass from "./CommentComponent.module.css";
+import cssClass from "../CommentComponent.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
-import { Modal } from "../modal/Modal.tsx";
+import { Modal } from "../../modal/Modal.tsx";
 
-export function DefaultCommentHeaderRight(props: { onClick: () => void; isModalOpen: boolean; onClose: () => void }) {
+export function CommentHeaderRight(props: { onClick: () => void; isModalOpen: boolean; onClose: () => void }) {
   return (
     <div className={cssClass.commentHeaderContainerRight}>
       {

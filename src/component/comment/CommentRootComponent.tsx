@@ -1,7 +1,7 @@
 import { LexicalComment } from "../wysiwyg/lexical/LexicalComment.tsx";
 import { useRef } from "react";
 import type { LexicalEditor } from "lexical";
-import { SubmitCommentButton } from "./SubmitCommentButton.tsx";
+import { SubmitCommentButton } from "./buttons/SubmitCommentButton.tsx";
 import style from "./CommentComponent.module.css";
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -10,7 +10,7 @@ import axios from "axios";
 import { CData } from "../../../credential/data.ts";
 import { Companion } from "./Companion.tsx";
 
-export function DefaultCommentRootComponent() {
+export function CommentRootComponent() {
   const ref = useRef<LexicalEditor | undefined>(undefined);
   const { postId } = useParams();
   const { data, error, isLoading } = useQuery({
