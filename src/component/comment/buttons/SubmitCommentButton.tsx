@@ -3,7 +3,7 @@ import type { LexicalEditor } from "lexical";
 import { useAuth } from "react-oidc-context";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
-import cssClass from "../CommentComponent.module.css";
+import styles from "../CommentComponent.module.css";
 import { clearImageSrcInEditorState } from "../../body/submit/functions/clearImageSrcInEditorState.tsx";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
@@ -59,7 +59,7 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
 
   return (
     <>
-      <button className={cssClass.buttonApply} onClick={submitComment}>
+      <button className={styles.buttonApply} onClick={submitComment}>
         등록
       </button>
     </>
