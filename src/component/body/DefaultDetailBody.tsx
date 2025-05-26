@@ -7,7 +7,7 @@ import axios from "axios";
 import type { DefaultPostDetailProps } from "./DefaultPostDetailProps.tsx";
 import cssClass from "./DefaultDetailBody.module.css";
 import { Lexical } from "../wysiwyg/lexical/Lexical.tsx";
-import { DefaultCommentRootComponent } from "../comment/DefaultCommentRootComponent.tsx";
+import { CommentRootComponent } from "../comment/CommentRootComponent.tsx";
 import type { RawRouteConfig } from "../../router/convertToRouteObjects.tsx";
 import { DefaultDetailHeader } from "./DefaultDetailHeader.tsx";
 
@@ -38,7 +38,7 @@ export function DefaultDetailBody() {
           {isLoading && <div>Loading...</div>}
           {!isLoading && <Lexical readOnly={true} postId={postId} />}
         </>
-        <DefaultCommentRootComponent />
+        <CommentRootComponent />
       </div>
     </>
   );

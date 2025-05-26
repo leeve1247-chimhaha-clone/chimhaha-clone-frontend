@@ -1,8 +1,8 @@
-import cssClass from "./CommentComponent.module.css";
-import { CreatedDate } from "../../utils/CreatedDate.tsx";
+import cssClass from "../CommentComponent.module.css";
+import { CreatedDate } from "../../../utils/CreatedDate.tsx";
 import { Dot, HandThumbsUp } from "react-bootstrap-icons";
 
-export function DefaultCommentHeaderLeft(props: { username: string | undefined; date: string; likes: number }) {
+export function CommentHeaderLeft(props: { username: string | undefined; date: string; likes: number }) {
   return (
     <div className={cssClass.commentHeaderContainerLeft}>
       <div className={cssClass.username}>{props.username}</div>

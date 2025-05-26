@@ -1,12 +1,12 @@
-import { DefaultCommentComponentList } from "./DefaultCommentComponentList.tsx";
+import { CommentComponentList } from "./CommentComponentList.tsx";
 import { LexicalComment } from "../wysiwyg/lexical/LexicalComment.tsx";
 import cssClass from "./CommentComponent.module.css";
 import { useRef, useState } from "react";
 import { likeComment } from "../../utils/saveComment.ts";
 import { useAuth } from "react-oidc-context";
-import { DefaultCommentTail } from "./DefaultCommentTail.tsx";
-import { SubmitCommentButton } from "./SubmitCommentButton.tsx";
-import { DefaultCommentHeader } from "./DefaultCommentHeader.tsx";
+import { CommentTail } from "./tail/CommentTail.tsx";
+import { SubmitCommentButton } from "./buttons/SubmitCommentButton.tsx";
+import { CommentHeader } from "./header/CommentHeader.tsx";
 import type { CommentProps } from "./CommentProps.tsx";
 
 interface ReplyEditorComponentProps {
@@ -28,7 +28,7 @@ function ReplyEditorComponent({ postId, commentId, closeReplyEditor }: ReplyEdit
   );
 }
 
-export function DefaultCommentComponent({ initComment, postId }: { initComment: CommentProps; postId: string }) {
+export function CommentComponent({ initComment, postId }: { initComment: CommentProps; postId: string }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const auth = useAuth();
   const [comment, setComment] = useState(initComment);
@@ -56,11 +56,11 @@ export function DefaultCommentComponent({ initComment, postId }: { initComment: 
 
   return (
     <div className={cssClass.DefaultCommentContainer}>
-      <DefaultCommentHeader comment={comment} onClick={() => {setModalOpen(true);}} modalOpen={isModalOpen} onClose={() => setModalOpen(false)} />
+      <CommentHeader comment={comment} onClick={() => {setModalOpen(true);}} modalOpen={isModalOpen} onClose={() => setModalOpen(false)} />
       <LexicalComment readOnly={true} content={comment.content} />
-      {!replyEditorOpen && <DefaultCommentTail likeThisComment={likeThisComment} openReplyEditor={openReplyEditor} />}
+      {!replyEditorOpen && <CommentTail likeThisComment={likeThisComment} openReplyEditor={openReplyEditor} />}
       {replyEditorOpen && <ReplyEditorComponent postId={postId} commentId={Number(comment.id)} closeReplyEditor={closeReplyEditor} />}
-      {comment.children && <DefaultCommentComponentList postId={postId} comments={comment.children} />}
+      {comment.children && <CommentComponentList postId={postId} comments={comment.children} />}
     </div>
   );
 }

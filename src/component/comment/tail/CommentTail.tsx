@@ -1,6 +1,6 @@
-import cssClass from "./CommentComponent.module.css";
+import cssClass from "../CommentComponent.module.css";
 
-export function DefaultCommentTail(props: { likeThisComment: () => Promise<void>; openReplyEditor?: () => void })
+export function CommentTail(props: { likeThisComment: () => Promise<void>; openReplyEditor?: () => void })
 {
   return (
     <div className={cssClass.DefaultCommentTail}>
