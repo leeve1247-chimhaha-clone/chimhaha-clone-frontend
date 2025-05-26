@@ -10,8 +10,8 @@ import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import { isEmpty } from "../../body/submit/IsEmpty.tsx";
 import type { CommentProps } from "../CommentProps.tsx";
 import { useDispatch } from "react-redux";
-import { setCommentPage } from "../redux/commentComponentReducer.tsx";
 import type { CommentComponentDispatch } from "../redux/DefaultSubmitBodyStore.tsx";
+import { setCommentPage } from "../redux/commentComponentSlice.tsx";
 
 interface SubmitCommentButtonProps {
   postId: string;

@@ -3,7 +3,6 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
-import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import styles from "./LexicalComment.module.css";
 import { type LexicalEditor, ParagraphNode, type SerializedEditorState, TextNode } from "lexical";
 import ExampleTheme from "./ExampleTheme.tsx";

@@ -5,7 +5,7 @@ export function CommentTail(props: { likeThisComment: () => Promise<void>; openR
   return (
     <div className={cssClass.DefaultCommentTail}>
       <div className={cssClass.button} onClick={props.openReplyEditor}>답글</div>
-      <button className={cssClass.button} onClick={props.likeThisComment}>등록</button>
+      <button className={cssClass.button} onClick={props.likeThisComment}>좋아요</button>
     </div>
   );
 }
