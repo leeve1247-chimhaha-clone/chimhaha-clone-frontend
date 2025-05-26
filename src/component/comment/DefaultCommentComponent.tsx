@@ -1,13 +1,13 @@
-import type { CommentProps } from "../CommentComponent.tsx";
 import { DefaultCommentComponentList } from "./DefaultCommentComponentList.tsx";
-import { LexicalComment } from "../../wysiwyg/lexical/LexicalComment.tsx";
-import cssClass from "../CommentComponent.module.css";
+import { LexicalComment } from "../wysiwyg/lexical/LexicalComment.tsx";
+import cssClass from "./CommentComponent.module.css";
 import { useRef, useState } from "react";
-import { likeComment } from "../../../utils/saveComment.ts";
+import { likeComment } from "../../utils/saveComment.ts";
 import { useAuth } from "react-oidc-context";
 import { DefaultCommentTail } from "./DefaultCommentTail.tsx";
 import { SubmitCommentButton } from "./SubmitCommentButton.tsx";
 import { DefaultCommentHeader } from "./DefaultCommentHeader.tsx";
+import type { CommentProps } from "./CommentProps.tsx";
 
 interface ReplyEditorComponentProps {
   postId: string;

@@ -1,6 +1,6 @@
-import type { CommentProps } from "../CommentComponent.tsx";
 import { DefaultCommentComponent } from "./DefaultCommentComponent.tsx";
-import style from "../CommentComponent.module.css";
+import style from "./CommentComponent.module.css";
+import type { CommentProps } from "./CommentProps.tsx";
 
 export function DefaultCommentComponentList({ comments, postId }: { comments: CommentProps[]; postId: string }) {
   return (
