@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../../react-query/queryKeys.tsx";
 import axios from "axios";
 import { CData } from "../../../credential/data.ts";
-import { Companion } from "./Companion.tsx";
+import { CommentListComponent } from "./CommentListComponent.tsx";
 
 export function CommentRootComponent() {
   const ref = useRef<LexicalEditor | undefined>(undefined);
@@ -37,7 +37,7 @@ export function CommentRootComponent() {
   if (data === undefined) return <div>data is undefined</div>;
   return (
     <>
-      <Companion />
+      <CommentListComponent />
       <div className={style.submitCommentContainer}>
         <LexicalComment ref={ref} />
         <div className={style.buttonContainer}>

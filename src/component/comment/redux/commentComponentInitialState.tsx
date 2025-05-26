@@ -2,4 +2,5 @@ import type { CommentComponentStateProps } from "./CommentComponentStateProps.ts
 
 export const commentComponentInitialState: CommentComponentStateProps = {
   commentPage: undefined,
+  focusedButton: undefined,
 };

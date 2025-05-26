@@ -1,4 +1,4 @@
-import { CommentComponentList } from "./CommentComponentList.tsx";
+import { CommentComponents } from "./CommentComponents.tsx";
 import { LexicalComment } from "../wysiwyg/lexical/LexicalComment.tsx";
 import cssClass from "./CommentComponent.module.css";
 import { useRef, useState } from "react";
@@ -60,7 +60,7 @@ export function CommentComponent({ initComment, postId }: { initComment: Comment
       <LexicalComment readOnly={true} content={comment.content} />
       {!replyEditorOpen && <CommentTail likeThisComment={likeThisComment} openReplyEditor={openReplyEditor} />}
       {replyEditorOpen && <ReplyEditorComponent postId={postId} commentId={Number(comment.id)} closeReplyEditor={closeReplyEditor} />}
-      {comment.children && <CommentComponentList postId={postId} comments={comment.children} />}
+      {comment.children && <CommentComponents postId={postId} comments={comment.children} />}
     </div>
   );
 }

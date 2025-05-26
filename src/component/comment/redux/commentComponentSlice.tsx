@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { commentComponentReducer } from "./submitPostReducers.tsx";
-import { commentComponentInitialState } from "./submitPostInitialState.tsx";
+import { commentComponentReducer } from "./commentComponentReducer.tsx";
+import { commentComponentInitialState } from "./commentComponentInitialState.tsx";
 
 export const commentComponentSlice = createSlice({
   name: "commentComponentState",
@@ -8,4 +8,4 @@ export const commentComponentSlice = createSlice({
   reducers: commentComponentReducer,
 });
 
-export const { setCommentPage } = commentComponentSlice.actions;
+
