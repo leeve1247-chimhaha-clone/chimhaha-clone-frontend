@@ -32,7 +32,6 @@ export function DefaultBody() {
   function goToSubmit() {
     navigate("submit");
   }
-  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   if (data === undefined) return <div>No data</div>;
   if (queryData === undefined) return <div>캐시 불러오는 중...</div>;

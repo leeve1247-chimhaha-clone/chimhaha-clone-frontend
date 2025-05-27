@@ -48,6 +48,15 @@ function NewComponent() {
   );
 }
 
+function CommentPageInput({commentPageSize}:{commentPageSize:number}) {
+  return (
+    <div className={style.commentPageInput}>
+      <input type="number" min = {1} max = {commentPageSize} step = {1}/>
+      <button className={style.commentPageButton}>이동</button>
+    </div>
+  );
+}
+
 export function CommentPageButtons({ pageSize, id }: { pageSize: number; id?: string }) {
   // TODO: 5개 이하 => 1 2 3 4 5
 
@@ -80,10 +89,7 @@ export function CommentPageButtons({ pageSize, id }: { pageSize: number; id?: st
           <CommentPageButton pageNum={commentPageSize - 1} id={`${id}${3}`} />
           <CommentPageButton pageNum={commentPageSize} id={`${id}${4}`} />
         </div>
-        <div className={style.commentPageInput}>
-          <input type="text" />
-          <button className={style.commentPageButton}>이동</button>
-        </div>
+        <CommentPageInput commentPageSize={commentPageSize} />
       </div>
     );
   }
@@ -102,10 +108,7 @@ export function CommentPageButtons({ pageSize, id }: { pageSize: number; id?: st
           <CommentPageButton pageNum={commentPageSize - 1} id={`${id}${commentPageSize - 1}`} />
           <CommentPageButton pageNum={commentPageSize} id={`${id}${commentPageSize}`} />
         </div>
-        <div className={style.commentPageInput}>
-          <input type="text" />
-          <button className={style.commentPageButton}>이동</button>
-        </div>
+        <CommentPageInput commentPageSize={commentPageSize} />
       </div>
     );
   }
@@ -124,10 +127,7 @@ export function CommentPageButtons({ pageSize, id }: { pageSize: number; id?: st
         <CommentPageButton pageNum={commentPageSize - 1} id={`${id}${commentPageSize - 1}`} />
         <CommentPageButton pageNum={commentPageSize} id={`${id}${commentPageSize}`} />
       </div>
-      <div className={style.commentPageInput}>
-        <input type="text" />
-        <button className={style.commentPageButton}>이동</button>
-      </div>
+      <CommentPageInput commentPageSize={commentPageSize} />
     </div>
   );
 }
