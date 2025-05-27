@@ -1,8 +1,9 @@
 import type { CommentRootComponentStateProps } from "./CommentRootComponentStateProps.tsx";
 
 export const commentRootComponentInitialState: CommentRootComponentStateProps = {
-  commentPage: undefined,
+  commentPage: 1,
   focusedButton: undefined,
   editableCommentId: undefined,
-  initialCommentState: undefined
+  initialCommentState: undefined,
+  commentLikes: {},
 };

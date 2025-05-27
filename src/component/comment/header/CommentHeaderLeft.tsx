@@ -2,7 +2,7 @@ import cssClass from "../CommentComponent.module.css";
 import { CreatedDate } from "../../../utils/CreatedDate.tsx";
 import { Dot, HandThumbsUp } from "react-bootstrap-icons";
 
-export function CommentHeaderLeft(props: { username: string | undefined; date: string; likes: number }) {
+export function CommentHeaderLeft(props: { username: string | undefined; date: string; likes: number; setLikes?: (arg: number) => void }) {
   return (
     <div className={cssClass.commentHeaderContainerLeft}>
       <div className={cssClass.username}>{props.username}</div>
@@ -10,7 +10,7 @@ export function CommentHeaderLeft(props: { username: string | undefined; date: s
       <div className={cssClass.date}>
         <CreatedDate date={props.date} />
       </div>
-      {(props.likes !== 0) && (
+      {props.likes !== 0 && (
         <>
           <Dot className={cssClass.dot} />
           <div className={cssClass.likes}>

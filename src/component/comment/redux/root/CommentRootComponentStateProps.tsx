@@ -5,4 +5,5 @@ export interface CommentRootComponentStateProps {
   focusedButton: undefined|string
   editableCommentId: undefined|string
   initialCommentState: undefined|SerializedEditorState
+  commentLikes: {[key: string]: number}
 }

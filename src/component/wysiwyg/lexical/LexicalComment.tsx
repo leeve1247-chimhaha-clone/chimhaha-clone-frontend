@@ -22,15 +22,15 @@ function ReadOnlyTogglePlugin({ readOnly }: { readOnly: boolean }) {
   const [editor] = useLexicalComposerContext();
   const editable = !readOnly;
   useEffect(() => {
+    if (readOnly) {
+      editor.setEditable(false);
+      return;
+    }
     if (editable) {
-      editor.setEditable(editable);
+      editor.setEditable(true);
       return;
     }
-    if (!editable) {
-      editor.setEditable(!editable);
-      return;
-    }
-  }, [editor, editable]);
+  }, [editor, editable, readOnly]);
   return null;
 }
 

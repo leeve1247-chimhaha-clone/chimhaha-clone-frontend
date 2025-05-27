@@ -8,7 +8,6 @@ import { clearImageSrcInEditorState } from "../../body/submit/functions/clearIma
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import { isEmpty } from "../../body/submit/IsEmpty.tsx";
-import type { CommentProps } from "../CommentProps.tsx";
 import { useDispatch } from "react-redux";
 import type { CommentRootComponentDispatch } from "../redux/root/commentRootComponentStore.tsx";
 import { setCommentPage } from "../redux/root/commentRootComponentSlice.tsx";
@@ -38,24 +37,20 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
       content: content,
     };
     const access_token = auth?.user?.access_token;
-
-    await axios
-      .post<CommentProps>(CData.local_backend + "/save/comment", commentData, {
+    const commentPage = await axios
+      .post<number>(CData.local_backend + "/save/comment", commentData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${access_token}`,
         },
       })
-      .then(async () => {
-        await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentPageSize, postId]});
-        const commentPageSize = queryClient.getQueryData<number>([...queryKeys.CommentPageSize, postId]);
-        if (commentPageSize === undefined) return;
-        await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentList, postId, String(commentPageSize)] });
-        dispatch(setCommentPage(commentPageSize));
+      .then((res) => {
+        return res.data;
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch(() => undefined);
+    if (!commentPage) return;
+    await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentList, postId, String(commentPage)] });
+    dispatch(setCommentPage(commentPage));
   }
 
   return (

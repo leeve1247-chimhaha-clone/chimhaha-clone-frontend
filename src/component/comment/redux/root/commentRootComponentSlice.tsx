@@ -8,4 +8,4 @@ export const commentRootComponentSlice = createSlice({
   reducers: commentRootComponentReducer,
 });
 
-export const { setCommentPage, setFocusedButton, setEditableCommentId, setInitialCommentState } = commentRootComponentSlice.actions;
+export const { setCommentPage, setFocusedButton, setEditableCommentId, setInitialCommentState, setCommentLike } = commentRootComponentSlice.actions;

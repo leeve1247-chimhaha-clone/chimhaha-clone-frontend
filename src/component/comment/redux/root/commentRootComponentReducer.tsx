@@ -16,4 +16,7 @@ export const commentRootComponentReducer = {
   setInitialCommentState: (state: CommentRootComponentStateProps, action: PayloadAction<SerializedEditorState | undefined>) => {
     state.initialCommentState = action.payload;
   },
+  setCommentLike: (state: CommentRootComponentStateProps, action: PayloadAction<{ commentId:string, likes:number }>) => {
+    state.commentLikes[ action.payload.commentId ] = action.payload.likes;
+  },
 };
