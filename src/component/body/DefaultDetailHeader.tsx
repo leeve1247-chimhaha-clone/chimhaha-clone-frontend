@@ -60,7 +60,7 @@ export function DefaultDetailHeader({ korean, data }: { korean: string | undefin
             <button className={cssClass.options} onClick={openModal}>
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
-            <Modal className={cssClass.modal} isOpen={isModalOpen} onClose={closeModal}>
+            <Modal className={cssClass.modal} modalOpen={isModalOpen} handleModalClose={closeModal}>
               <button onClick={navigateToEdit}>수정</button>
               <button>삭제</button>
             </Modal>

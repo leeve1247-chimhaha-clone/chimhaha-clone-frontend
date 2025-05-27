@@ -13,7 +13,7 @@ export function CommentHeader(props: {
     <div className={cssClass.commentHeaderContainer}>
       <CommentHeaderLeft username={props.comment.username} date={props.comment.lastEditedDate}
                          likes={props.comment.likes} />
-      <CommentHeaderRight onClick={props.onClick} isModalOpen={props.modalOpen} onClose={props.onClose} />
+      <CommentHeaderRight comment={props.comment} onClick={props.onClick} isModalOpen={props.modalOpen} onClose={props.onClose} />
     </div>
   );
 }

@@ -1,27 +1,27 @@
 import { type HTMLAttributes, useEffect, useRef } from "react";
 
 interface ModalProps extends HTMLAttributes<HTMLDivElement> {
-  isOpen: boolean;
-  onClose: () => void;
+  modalOpen: boolean;
+  handleModalClose: () => void;
 }
 
-export function Modal({ isOpen, onClose, children, className }: ModalProps) {
+export function Modal({ modalOpen, handleModalClose, children, className }: ModalProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        onClose();
+        handleModalClose();
       }
     };
-    if (isOpen) {
+    if (modalOpen) {
       window.addEventListener("mouseup", handleClickOutside);
     } else {
       window.removeEventListener("mouseup", handleClickOutside);
     }
     return () => window.removeEventListener("mouseup", handleClickOutside);
-  }, [isOpen, onClose]);
+  }, [modalOpen, handleModalClose]);
 
-  if (!isOpen) return null;
+  if (!modalOpen) return null;
   return (
     <div ref={modalRef} className={className}>
       {children}
