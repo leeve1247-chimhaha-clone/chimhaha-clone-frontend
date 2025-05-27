@@ -10,7 +10,7 @@ export function CommentHeaderLeft(props: { username: string | undefined; date: s
       <div className={cssClass.date}>
         <CreatedDate date={props.date} />
       </div>
-      {!(props.likes === 0) && (
+      {(props.likes !== 0) && (
         <>
           <Dot className={cssClass.dot} />
           <div className={cssClass.likes}>

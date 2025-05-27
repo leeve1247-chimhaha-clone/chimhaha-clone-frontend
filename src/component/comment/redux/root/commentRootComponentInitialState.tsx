@@ -3,4 +3,6 @@ import type { CommentRootComponentStateProps } from "./CommentRootComponentState
 export const commentRootComponentInitialState: CommentRootComponentStateProps = {
   commentPage: undefined,
   focusedButton: undefined,
+  editableCommentId: undefined,
+  initialCommentState: undefined
 };

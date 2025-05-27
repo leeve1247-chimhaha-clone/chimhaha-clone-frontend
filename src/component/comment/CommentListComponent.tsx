@@ -37,11 +37,6 @@ export function CommentListComponent() {
   if (isLoading) return <div>Loading...</div>;
   if (pageSize === undefined) return <></>;
   if (postId === undefined) return <div>Fuck!</div>;
-  console.log("======");
-  console.log(commentPageNum);
-  console.log(data?.length);
-  console.log(pageSize);
-  console.log("======");
   return (
     <>
       {pageSize !== 0 && <CommentPageButtons pageSize={pageSize} id={"top"} />}

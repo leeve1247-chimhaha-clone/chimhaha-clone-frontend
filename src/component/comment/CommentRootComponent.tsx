@@ -35,7 +35,7 @@ export function CommentRootComponent() {
   if (postId === undefined) return <></>
   if (isLoading) return <></>
   if (error) return <></>
-  if (data === undefined) return <></>
+  if (data === undefined) return <></>;
   return (
     <>
       <CommentListComponent />

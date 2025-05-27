@@ -6,7 +6,7 @@ export function CommentComponents({ comments, postId }: { comments: CommentProps
   return (
     <div className={style.DefaultCommentRootContainer}>
       {comments.map((comment) => {
-        return <CommentComponent key={comment.id} postId = {postId} initComment={comment} />;
+        return <CommentComponent key={comment.id} postId = {postId} comment={comment} />;
       })}
     </div>
   );
