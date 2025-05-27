@@ -1,12 +1,12 @@
 import style from "../CommentComponent.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
-import type { CommentComponentDispatch, CommentComponentState } from "../redux/DefaultSubmitBodyStore.tsx";
-import { setCommentPage, setFocusedButton } from "../redux/commentComponentSlice.tsx";
+import type { CommentRootComponentDispatch, CommentRootComponentState } from "../redux/root/commentRootComponentStore.tsx";
+import { setCommentPage, setFocusedButton } from "../redux/root/commentRootComponentSlice.tsx";
 
 function CommentPageButton({ pageNum, id }: { pageNum: number; id?: string }) {
-  const dispatch = useDispatch<CommentComponentDispatch>();
-  const focusedButton = useSelector((state: CommentComponentState) => state.commentComponentState.focusedButton);
+  const dispatch = useDispatch<CommentRootComponentDispatch>();
+  const focusedButton = useSelector((state: CommentRootComponentState) => state.commentComponentState.focusedButton);
   const ref = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
