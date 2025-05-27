@@ -14,6 +14,7 @@ export function CommentComponent({ initComment, postId }: { initComment: Comment
   const auth = useAuth();
   const [comment, setComment] = useState(initComment);
   const [replyEditorOpen, setReplyEditorOpen] = useState(false);
+  const [readOnly, setReadOnly] = useState(true);
 
   function openReplyEditor() {
     setReplyEditorOpen(true);
@@ -34,6 +35,9 @@ export function CommentComponent({ initComment, postId }: { initComment: Comment
       likes: axiosResponse.data,
     }));
   }
+  function handleReadonly() {
+    setReadOnly(true);
+  }
 
   return (
     <div className={cssClass.DefaultCommentContainer}>
@@ -44,8 +48,9 @@ export function CommentComponent({ initComment, postId }: { initComment: Comment
         }}
         modalOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
+        handleReadOnly={handleReadonly}
       />
-      <LexicalComment readOnly={true} content={comment.content} />
+      <LexicalComment readOnly={readOnly} content={comment.content} />
       {!replyEditorOpen && <CommentTail likeThisComment={likeThisComment} openReplyEditor={openReplyEditor} />}
       {replyEditorOpen && <ReplyEditorComponent postId={postId} commentId={Number(comment.id)} closeReplyEditor={closeReplyEditor} />}
       {comment.children && <CommentComponents postId={postId} comments={comment.children} />}
