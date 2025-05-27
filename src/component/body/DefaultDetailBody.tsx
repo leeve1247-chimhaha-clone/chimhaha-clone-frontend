@@ -25,7 +25,6 @@ export function DefaultDetailBody() {
   const matches = useMatches();
   const category = matches[1].pathname.substring(1, matches[1].pathname.length);
   if (error) return <div>Error: {error.message}</div>;
-  if (isLoading) return <div>Loading...</div>;
   if (data === undefined) return <div>No data</div>;
   if (rawRoute === undefined) return <div>캐시 불러오는 중...</div>;
 

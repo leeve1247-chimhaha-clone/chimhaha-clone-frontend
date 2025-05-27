@@ -29,8 +29,6 @@ export function HeaderNav() {
         console.error("Error fetching data:", error);
       });
   }
-
-  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   if (data === undefined) return <div>No data</div>;
   return (

@@ -14,7 +14,7 @@ export function CommentListComponent() {
   const { postId } = useParams();
   const queryClient = useQueryClient();
   const pageSize = queryClient.getQueryData<number>([...queryKeys.CommentPageSize, postId]);
-  const { data, isLoading, error } = useQuery({
+  const { data, error } = useQuery({
     queryKey: [...queryKeys.CommentList, postId, commentPageNum !== undefined && commentPageNum !== 0 ? String(commentPageNum) : String(1)],
     queryFn: fetchCommentPage,
   });
@@ -34,7 +34,6 @@ export function CommentListComponent() {
   }
 
   if (error) return <div>Error: {error.message}</div>;
-  if (isLoading) return <div>Loading...</div>;
   if (pageSize === undefined) return <></>;
   if (postId === undefined) return <div>Fuck!</div>;
   return (

@@ -1,5 +1,5 @@
 import type { RefObject } from "react";
-import type { LexicalEditor } from "lexical";
+import { type LexicalEditor } from "lexical";
 import { useAuth } from "react-oidc-context";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
@@ -11,6 +11,7 @@ import { isEmpty } from "../../body/submit/IsEmpty.tsx";
 import { useDispatch } from "react-redux";
 import type { CommentRootComponentDispatch } from "../redux/root/commentRootComponentStore.tsx";
 import { setCommentPage } from "../redux/root/commentRootComponentSlice.tsx";
+import emptyEditor from "../../../../public/empty_editor_state.json";
 
 interface SubmitCommentButtonProps {
   postId: string;
@@ -49,8 +50,11 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
       })
       .catch(() => undefined);
     if (!commentPage) return;
+    await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentPageSize, postId] });
     await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentList, postId, String(commentPage)] });
     dispatch(setCommentPage(commentPage));
+    const emptyEditorState = editor.parseEditorState(JSON.stringify(emptyEditor));
+    editor.setEditorState(emptyEditorState);
   }
 
   return (

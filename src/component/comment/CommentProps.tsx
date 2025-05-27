@@ -7,4 +7,5 @@ export interface CommentProps {
   likes: number;
   lastEditedDate: string;
   children?: CommentProps[];
+  selfLiked: boolean;
 }
