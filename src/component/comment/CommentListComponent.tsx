@@ -7,10 +7,10 @@ import { CommentPageButtons } from "./buttons/CommentPageButtons.tsx";
 import { CommentComponents } from "./CommentComponents.tsx";
 import type { CommentProps } from "./CommentProps.tsx";
 import { useSelector } from "react-redux";
-import type { CommentComponentState } from "./redux/DefaultSubmitBodyStore.tsx";
+import type { CommentRootComponentState } from "./redux/root/commentRootComponentStore.tsx";
 
 export function CommentListComponent() {
-  const commentPageNum = useSelector((state: CommentComponentState) => state.commentComponentState.commentPage);
+  const commentPageNum = useSelector((state: CommentRootComponentState) => state.commentComponentState.commentPage);
   const { postId } = useParams();
   const queryClient = useQueryClient();
   const pageSize = queryClient.getQueryData<number>([...queryKeys.CommentPageSize, postId]);
