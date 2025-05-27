@@ -4,15 +4,16 @@ import type { LexicalEditor } from "lexical";
 import { SubmitCommentButton } from "./buttons/SubmitCommentButton.tsx";
 import style from "./CommentComponent.module.css";
 import { useParams } from "react-router";
+import { CommentListComponent } from "./CommentListComponent.tsx";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../../react-query/queryKeys.tsx";
 import axios from "axios";
 import { CData } from "../../../credential/data.ts";
-import { CommentListComponent } from "./CommentListComponent.tsx";
 
 export function CommentRootComponent() {
   const ref = useRef<LexicalEditor | undefined>(undefined);
   const { postId } = useParams();
+
   const { data, error, isLoading } = useQuery({
     queryKey: [...queryKeys.CommentPageSize, postId],
     queryFn: fetchCommentPageSize,
@@ -31,17 +32,17 @@ export function CommentRootComponent() {
       .catch(console.error);
   }
 
-  if (error) return <div>Error: {error.message}</div>;
-  if (isLoading) return <div>Loading...</div>;
-  if (postId === undefined) return <div>Fuck!</div>;
-  if (data === undefined) return <div>data is undefined</div>;
+  if (postId === undefined) return <></>
+  if (isLoading) return <></>
+  if (error) return <></>
+  if (data === undefined) return <></>
   return (
     <>
       <CommentListComponent />
       <div className={style.submitCommentContainer}>
         <LexicalComment ref={ref} />
         <div className={style.buttonContainer}>
-          <SubmitCommentButton postId={postId} ref={ref}/>
+          <SubmitCommentButton postId={postId} ref={ref} />
         </div>
       </div>
     </>

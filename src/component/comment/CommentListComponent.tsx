@@ -11,11 +11,11 @@ import type { CommentComponentState } from "./redux/DefaultSubmitBodyStore.tsx";
 
 export function CommentListComponent() {
   const commentPageNum = useSelector((state: CommentComponentState) => state.commentComponentState.commentPage);
-  const queryClient = useQueryClient();
   const { postId } = useParams();
+  const queryClient = useQueryClient();
   const pageSize = queryClient.getQueryData<number>([...queryKeys.CommentPageSize, postId]);
   const { data, isLoading, error } = useQuery({
-    queryKey: [...queryKeys.CommentList, postId, commentPageNum !== undefined ? String(commentPageNum) : String(1)],
+    queryKey: [...queryKeys.CommentList, postId, commentPageNum !== undefined && commentPageNum !== 0 ? String(commentPageNum) : String(1)],
     queryFn: fetchCommentPage,
   });
 
@@ -24,7 +24,7 @@ export function CommentListComponent() {
       .get<CommentProps[]>(CData.local_backend + "/get/comment/page", {
         params: {
           postId: postId,
-          pageNum: commentPageNum !== undefined ? String(commentPageNum) : String(1),
+          pageNum: commentPageNum !== undefined && commentPageNum !== 0 ? String(commentPageNum) : String(1),
         },
       })
       .then((response) => {
@@ -37,11 +37,16 @@ export function CommentListComponent() {
   if (isLoading) return <div>Loading...</div>;
   if (pageSize === undefined) return <></>;
   if (postId === undefined) return <div>Fuck!</div>;
+  console.log("======");
+  console.log(commentPageNum);
+  console.log(data?.length);
+  console.log(pageSize);
+  console.log("======");
   return (
     <>
       {pageSize !== 0 && <CommentPageButtons pageSize={pageSize} id={"top"} />}
       {data?.length !== undefined && data?.length > 0 && <CommentComponents postId={postId} comments={data} />}
-      {pageSize !== 0 && <CommentPageButtons pageSize={pageSize} id={"bottom"}/>}
+      {pageSize !== 0 && <CommentPageButtons pageSize={pageSize} id={"bottom"} />}
     </>
   );
 }

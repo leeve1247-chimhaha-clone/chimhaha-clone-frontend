@@ -23,7 +23,6 @@ interface SubmitCommentButtonProps {
 export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentButtonProps) {
   const auth = useAuth();
   const queryClient = useQueryClient();
-  const commentPageSize = queryClient.getQueryData<number>([...queryKeys.CommentPageSize, postId]);
   const dispatch = useDispatch<CommentComponentDispatch>();
 
   async function submitComment() {
@@ -47,11 +46,12 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
           Authorization: `Bearer ${access_token}`,
         },
       })
-      .then(async (r) => {
-        console.log(r.data);
-        const unwrapCommentPageSize = commentPageSize !== undefined ? commentPageSize : 1;
-        await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentList, postId, String(unwrapCommentPageSize)] });
-        dispatch(setCommentPage(unwrapCommentPageSize));
+      .then(async () => {
+        await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentPageSize, postId]});
+        const commentPageSize = queryClient.getQueryData<number>([...queryKeys.CommentPageSize, postId]);
+        if (commentPageSize === undefined) return;
+        await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentList, postId, String(commentPageSize)] });
+        dispatch(setCommentPage(commentPageSize));
       })
       .catch((err) => {
         console.error(err);
