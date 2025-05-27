@@ -2,7 +2,6 @@ import { CommentComponents } from "./CommentComponents.tsx";
 import { LexicalComment } from "../wysiwyg/lexical/LexicalComment.tsx";
 import cssClass from "./CommentComponent.module.css";
 import { useRef, useState } from "react";
-import { useAuth } from "react-oidc-context";
 import { CommentTail } from "./tail/CommentTail.tsx";
 import { CommentHeader } from "./header/CommentHeader.tsx";
 import type { CommentProps } from "./CommentProps.tsx";
@@ -18,7 +17,8 @@ export function CommentComponent({ comment, postId }: { comment: CommentProps; p
   const [replyEditorOpen, setReplyEditorOpen] = useState(false);
   const ref = useRef<LexicalEditor | undefined>(undefined);
   const editableCommentId = useSelector((state: CommentRootComponentState) => state.commentComponentState.editableCommentId);
-  const readOnly = editableCommentId !== comment.id;
+  const editable = editableCommentId === comment.id;
+  const readOnly = !editable;
 
   function openReplyEditor() {
     setReplyEditorOpen(true);
@@ -27,7 +27,6 @@ export function CommentComponent({ comment, postId }: { comment: CommentProps; p
   function closeReplyEditor() {
     setReplyEditorOpen(false);
   }
-
   return (
     <div className={cssClass.DefaultCommentContainer}>
       <CommentHeader
@@ -47,7 +46,7 @@ export function CommentComponent({ comment, postId }: { comment: CommentProps; p
       )}
       {!replyEditorOpen && <CommentTail postId={postId} commentId={comment.id} openReplyEditor={openReplyEditor} />}
       {replyEditorOpen && <ReplyEditorComponent postId={postId} commentId={Number(comment.id)} closeReplyEditor={closeReplyEditor} />}
-      {comment.children && <CommentComponents postId={postId} comments={comment.children} />}
+      {comment.children && comment.children.length > 0 && <CommentComponents postId={postId} comments={comment.children} />}
     </div>
   );
 }

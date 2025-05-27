@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { queryKeys } from "../../react-query/queryKeys.tsx";
 import axios from "axios";
 import { CData } from "../../../credential/data.ts";
-import { CommentPageButtons } from "./buttons/CommentPageButtons.tsx";
+import { CommentPageButtons } from "./CommentPageButtons.tsx";
 import { CommentComponents } from "./CommentComponents.tsx";
 import type { CommentProps } from "./CommentProps.tsx";
 import { useSelector } from "react-redux";
