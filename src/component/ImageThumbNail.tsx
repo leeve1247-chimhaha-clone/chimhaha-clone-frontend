@@ -18,8 +18,6 @@ export function ImageThumbNail({ fileName, className }: ImageThumbNailProps) {
       return undefined;
     })
   }
-
-
   if (isLoading) return <></>
   if (error) return <></>;
   if (data === undefined) return <></>;

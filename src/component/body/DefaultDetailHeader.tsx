@@ -47,7 +47,7 @@ export function DefaultDetailHeader({ korean, data }: { korean: string | undefin
   if (likes === undefined) return <></>
   return (
     <div className={cssClass.postHeader}>
-      <div className={cssClass.postNavigate}>{`${korean} 게시글 >`}</div>
+      <button className={cssClass.postNavigate} onClick={()=>{navigate(`/${category}`)}}>{`${korean} 게시글 >`}</button>
       <div className={cssClass.postHeader2}>
         <div className={cssClass.postCategory}>{korean}</div>
         <div className={cssClass.postTitle}>{data.title}</div>
