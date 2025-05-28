@@ -9,6 +9,7 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsis
 import { useState } from "react";
 import { type UIMatch, useNavigate } from "react-router-dom";
 import { useMatches } from "react-router";
+import { SubmitDeleteButton } from "./submit/SubmitDeleteButton.tsx";
 
 function getPostId(matches: UIMatch[]) {
   return matches[matches.length - 1].pathname.substring(matches[matches.length - 2].pathname.length + 1, matches[matches.length - 1].pathname.length);
@@ -62,7 +63,7 @@ export function DefaultDetailHeader({ korean, data }: { korean: string | undefin
             </button>
             <Modal className={cssClass.modal} modalOpen={isModalOpen} handleModalClose={closeModal}>
               <button onClick={navigateToEdit}>수정</button>
-              <button>삭제</button>
+              <SubmitDeleteButton/>
             </Modal>
           </div>
         </div>

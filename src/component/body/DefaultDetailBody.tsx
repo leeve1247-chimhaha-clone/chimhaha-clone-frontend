@@ -10,6 +10,7 @@ import { Lexical } from "../wysiwyg/lexical/Lexical.tsx";
 import type { RawRouteConfig } from "../../router/convertToRouteObjects.tsx";
 import { DefaultDetailHeader } from "./DefaultDetailHeader.tsx";
 import CommentRootComponentProvider from "../comment/redux/root/CommentRootComponentProvider.tsx";
+import { SubmitLikeButton } from "./submit/SubmitLikeButton.tsx";
 
 export function DefaultDetailBody() {
   const { postId } = useParams();
@@ -28,6 +29,7 @@ export function DefaultDetailBody() {
   if (data === undefined) return <div>No data</div>;
   if (rawRoute === undefined) return <div>캐시 불러오는 중...</div>;
 
+
   const korean = rawRoute.find((x) => x.key === category)?.korean;
   return (
     <>
@@ -37,6 +39,9 @@ export function DefaultDetailBody() {
           {isLoading && <div>Loading...</div>}
           {!isLoading && <Lexical readOnly={true} postId={postId} />}
         </>
+        <div>
+          <SubmitLikeButton/>
+        </div>
         <CommentRootComponentProvider />
       </div>
     </>

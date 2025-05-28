@@ -19,5 +19,5 @@ export const submitPostReducers = {
   },
   stopSubmitPost: (state: SubmitPostStateProps) => {
     state.run = false;
-  }
+  },
 };
