@@ -1,15 +1,12 @@
 import type { RefObject } from "react";
 import type { LexicalEditor } from "lexical";
 import { useDispatch, useSelector } from "react-redux";
-import type {
-  CommentRootComponentDispatch,
-  CommentRootComponentState
-} from "../redux/root/commentRootComponentStore.tsx";
-import { setEditableCommentId } from "../redux/root/commentRootComponentSlice.tsx";
+import { setEditableCommentId } from "../../../redux/comment/commentRootComponentSlice.tsx";
+import type { RootState } from "../../../redux/store.tsx";
 
 export function CancelUpdateButton({ ref }: { ref: RefObject<LexicalEditor | undefined> }) {
-  const initialCommentState = useSelector((state: CommentRootComponentState) => state.commentComponentState.initialCommentState);
-  const dispatch = useDispatch<CommentRootComponentDispatch>();
+  const initialCommentState = useSelector((state: RootState) => state.commentRootComponentStatus.initialCommentState);
+  const dispatch = useDispatch();
 
   function handleCancelEditedComment() {
     const editor = ref.current;

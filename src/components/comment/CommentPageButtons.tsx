@@ -1,18 +1,18 @@
 import style from "./CommentComponent.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
-import type { CommentRootComponentDispatch, CommentRootComponentState } from "./redux/root/commentRootComponentStore.tsx";
-import { setCommentPage, setFocusedButton } from "./redux/root/commentRootComponentSlice.tsx";
+import { setCommentPage, setFocusedButton } from "../../redux/comment/commentRootComponentSlice.tsx";
 import { queryKeys } from "../../react-query/queryKeys.tsx";
 import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import { Dot } from "react-bootstrap-icons";
+import type { RootState } from "../../redux/store.tsx";
 
 function CommentPageButton({ pageNum, id }: { pageNum: number; id?: string }) {
-  const dispatch = useDispatch<CommentRootComponentDispatch>();
-  const focusedButton = useSelector((state: CommentRootComponentState) => state.commentComponentState.focusedButton);
+  const dispatch = useDispatch();
+  const focusedButton = useSelector((state: RootState) => state.commentRootComponentStatus.focusedButton);
   const ref = useRef<HTMLButtonElement>(null);
-  const commentPage = Number(useSelector((state: CommentRootComponentState) => state.commentComponentState.commentPage));
+  const commentPage = Number(useSelector((state: RootState) => state.commentRootComponentStatus.commentPage));
 
   useEffect(() => {
     if (ref.current !== null && focusedButton == id) {
@@ -62,7 +62,7 @@ export function CommentPageButtons({ pageSize, id }: { pageSize: number; id?: st
 
   // TODO: 6 개 이상이지만 현재 페이지 1~5 => 1,2,3,4,5 맨뒤, [] 수치 입력값
   // TODO: 6 개 이상이지만 마지막 페이지 맨앞 n-4, n-3, n-2, n-1, n [] 수치 입력값
-  const commentPage = Number(useSelector((state: CommentRootComponentState) => state.commentComponentState.commentPage));
+  const commentPage = Number(useSelector((state: RootState) => state.commentRootComponentStatus.commentPage));
   const queryClient = useQueryClient();
   const { postId } = useParams();
   const commentPageSize = Number(queryClient.getQueryData<number>([...queryKeys.CommentPageSize, postId]));

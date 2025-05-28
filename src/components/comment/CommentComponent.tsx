@@ -7,16 +7,16 @@ import { CommentHeader } from "./header/CommentHeader.tsx";
 import type { CommentProps } from "./CommentProps.tsx";
 import { ReplyEditorComponent } from "./ReplyEditorComponent.tsx";
 import { useSelector } from "react-redux";
-import type { CommentRootComponentState } from "./redux/root/commentRootComponentStore.tsx";
 import type { LexicalEditor } from "lexical";
 import { SubmitUpdateButton } from "./buttons/SubmitUpdateButton.tsx";
 import { CancelUpdateButton } from "./buttons/CancelUpdateButton.tsx";
+import type { RootState } from "../../redux/store.tsx";
 
 export function CommentComponent({ comment, postId }: { comment: CommentProps; postId: string }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [replyEditorOpen, setReplyEditorOpen] = useState(false);
   const ref = useRef<LexicalEditor | undefined>(undefined);
-  const editableCommentId = useSelector((state: CommentRootComponentState) => state.commentComponentState.editableCommentId);
+  const editableCommentId = useSelector((state: RootState) => state.commentRootComponentStatus.editableCommentId);
   const editable = editableCommentId === comment.id;
   const readOnly = !editable;
 

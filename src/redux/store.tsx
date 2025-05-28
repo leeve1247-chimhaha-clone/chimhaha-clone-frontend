@@ -3,7 +3,7 @@ import { dropDownSlice } from "./dropDown/dropDownSlice.tsx";
 import { accountSlice } from "./account/accountSlice.tsx";
 import { defaultPostDetailSlice } from "./post/detail/defaultPostDetailSlice.tsx";
 import { submitPostSlice } from "../components/post/submit/submitPostSlice.tsx";
-
+import { commentRootComponentSlice } from "./comment/commentRootComponentSlice.tsx";
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +11,8 @@ export const store = configureStore({
     accountStatus: accountSlice.reducer,
     defaultPostDetailStatus: defaultPostDetailSlice.reducer,
     submitPostStatus: submitPostSlice.reducer,
-  }
+    commentRootComponentStatus: commentRootComponentSlice.reducer,
+  },
 });
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;

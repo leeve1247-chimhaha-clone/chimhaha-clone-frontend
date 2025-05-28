@@ -3,16 +3,13 @@ import { CommentHeaderLeft } from "./CommentHeaderLeft.tsx";
 import { CommentHeaderRight } from "./CommentHeaderRight.tsx";
 import type { CommentProps } from "../CommentProps.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import type {
-  CommentRootComponentDispatch,
-  CommentRootComponentState
-} from "../redux/root/commentRootComponentStore.tsx";
-import { setCommentLike } from "../redux/root/commentRootComponentSlice.tsx";
+import { setCommentLike } from "../../../redux/comment/commentRootComponentSlice.tsx";
+import type { RootState } from "../../../redux/store.tsx";
 
 export function CommentHeader(props: { comment: CommentProps; onClick: () => void; modalOpen: boolean; onClose: () => void }) {
 
-  const dispatch = useDispatch<CommentRootComponentDispatch>();
-  const likesData = useSelector((state: CommentRootComponentState) => state.commentComponentState.commentLikes[String(props.comment.id)]);
+  const dispatch = useDispatch();
+  const likesData = useSelector((state: RootState) => state.commentRootComponentStatus.commentLikes[String(props.comment.id)]);
   if (likesData === undefined) {
     dispatch(setCommentLike({ commentId: String(props.comment.id), likes: props.comment.likes, selfLiked: props.comment.selfLiked }))
   }
