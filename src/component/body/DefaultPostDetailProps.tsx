@@ -12,4 +12,5 @@ export interface DefaultPostDetailProps {
   createdDate: string;
   content: SerializedEditorState;
   comments: CommentProps[];
+  selfLiked: boolean;
 }

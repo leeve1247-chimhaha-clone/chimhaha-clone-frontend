@@ -14,7 +14,7 @@ export function DefaultBody() {
   useParams();
   const matches = useMatches();
   const category = matches[1].pathname.substring(1, matches[1].pathname.length);
-  const { data, isLoading, error } = useQuery({ queryKey: [...queryKeys.PostList, category], queryFn: fetchPostList });
+  const { data, error } = useQuery({ queryKey: [...queryKeys.PostList, category], queryFn: fetchPostList });
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
   async function fetchPostList() {
