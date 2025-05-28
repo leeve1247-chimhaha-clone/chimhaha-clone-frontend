@@ -2,13 +2,13 @@ import { ClockFill, StarFill } from "react-bootstrap-icons";
 
 export const HeaderSubCategory = {
   favorite: (
-    <>
-      <StarFill /> 즐겨찾기{" "}
-    </>
+    <div>
+      <StarFill/> 즐겨찾기{" "}
+    </div>
   ),
   recent: (
-    <>
-      <ClockFill /> 최근방문
-    </>
+    <div>
+      <ClockFill/> 최근방문
+    </div>
   ),
 };
