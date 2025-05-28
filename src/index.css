@@ -24,7 +24,6 @@
     background-color: #181818;
 
     --height-first-header: 4.5rem;
-
     --border-radius-100: 0.5rem;
 
     --color-gray-000: #ffffff;
@@ -69,6 +68,10 @@
     }
 }
 
+svg{
+    position: relative;
+    top: 2px;
+}
 
 div{
     all:unset;

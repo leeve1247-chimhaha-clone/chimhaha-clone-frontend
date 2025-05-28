@@ -37,7 +37,8 @@ export function SubmitLikeButton() {
   if (likes === undefined) return <></>;
   return (
     <>
-      {likes.selfLiked && <button onClick={likePost}>좋아요 취소</button>};{!likes.selfLiked && <button onClick={likePost}>좋아요</button>};
+      {likes.selfLiked && <button onClick={likePost}>좋아요 취소</button>}
+      {!likes.selfLiked && <button onClick={likePost}>좋아요</button>}
     </>
   );
 }

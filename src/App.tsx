@@ -20,10 +20,10 @@ export function App() {
   }>(undefined);
   const dispatch = useDispatch();
 
-  function isSubmit(matches: UIMatch[]|undefined) {
+  function isSubmit(matches: UIMatch[] | undefined) {
     if (matches === undefined) return false;
     if (matches.length < 3) return false;
-    return matches[2].pathname.substring(matches[1].pathname.length, matches[2].pathname.length) === '/submit';
+    return matches[2].pathname.substring(matches[1].pathname.length, matches[2].pathname.length) === "/submit";
   }
 
   useEffect(() => {
@@ -32,8 +32,8 @@ export function App() {
     if (prevParams ? prevParams["postId"] : undefined !== params["postId"]) {
       dispatch(initComments());
     }
-    if (isSubmit(prevMatches) && !isSubmit(matches)){
-      dispatch(initSubmits())
+    if (isSubmit(prevMatches) && !isSubmit(matches)) {
+      dispatch(initSubmits());
     }
     ref.current = { params: params, matches: matches };
   }, [dispatch, matches, params]);

@@ -1,4 +1,7 @@
 .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     background: var(--color-accent-100);
     font-weight: bold;
 }
@@ -7,12 +10,15 @@
     height: var(--height-first-header);
 }
 
-
 .subContainer{
+    width: 100%;
     padding: 0.5rem;
-    display: flex;
     border-bottom: 1px solid #0E7A80;
     box-shadow: 0 1px 0 0 rgb(255 255 255 / 20%) inset;
+}
+.subContainer > div{
+    display: flex;
+    margin: 0 10rem;
     justify-content: space-between;
 }
 
@@ -22,20 +28,23 @@
     gap: .2rem;
 }
 
-
 .headerTitleContainer {
     display: flex;
     font-family: GangwonEduPowerExtraBoldA, serif;
-    align-items: end;
+    align-items: center;
+}
+
+.headerMainLeft{
+    display: flex;
+    flex-direction: row;
 }
 
 .headerTitle {
     position: relative;
     font-size: 3rem;
-    min-width: 8.2rem;
 }
 
 .headerSmall {
     font-size: 0.7rem;
-    padding-bottom: 0.8rem;
+    padding-top: 1.5rem;
 }

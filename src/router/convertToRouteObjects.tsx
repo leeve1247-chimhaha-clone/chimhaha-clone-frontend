@@ -36,7 +36,13 @@ export function convertToRouteObjects(routes: RawRouteConfig[]): RouteObject[] {
     .concat({
       path: "/ALL",
       element: <DefaultBody />,
-    });
+    })
+    .concat({
+      path: "/BEST",
+      element: <DefaultBody/>
+    })
+  ;
+
   return [
     {
       path: "/",

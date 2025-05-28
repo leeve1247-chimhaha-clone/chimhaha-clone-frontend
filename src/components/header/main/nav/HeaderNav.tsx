@@ -17,7 +17,8 @@ export interface routerDataTree {
 }
 
 export function HeaderNav() {
-  const { data, error, isLoading } = useQuery({ queryKey: queryKeys.routerDataTree, queryFn: fetchRouterDataList });
+  const { data, error } = useQuery({ queryKey: queryKeys.routerDataTree, queryFn: fetchRouterDataList });
+
   async function fetchRouterDataList() {
     return axios
       .get<routerDataTree[]>(CData.local_backend + "/post-categories")
@@ -29,6 +30,7 @@ export function HeaderNav() {
         console.error("Error fetching data:", error);
       });
   }
+
   if (error) return <div>Error: {error.message}</div>;
   if (data === undefined) return <div>No data</div>;
   return (
@@ -37,7 +39,8 @@ export function HeaderNav() {
         <div className={cssClass.list}>
           <NavPopularPosts />
           <NavAllPosts />
-          <HeaderLevelZeroes theRouterDataList={data}/>
+          <HeaderLevelZeroes theRouterDataList={data} />
+          <button className={cssClass.myButton}/>
         </div>
       </div>
     </>

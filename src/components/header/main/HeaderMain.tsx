@@ -6,9 +6,15 @@ import { Login } from "../../login/Login.tsx";
 export function HeaderMain() {
   return (
     <div className={cssClass.subContainer}>
-      <HeaderTitle />
-      <HeaderNav />
-      <Login />
+      <div>
+        <div className={cssClass.headerMainLeft}>
+          <HeaderTitle />
+          <HeaderNav />
+        </div>
+        <div className={cssClass.headerMainRight}>
+          <Login />
+        </div>
+      </div>
     </div>
   );
 }

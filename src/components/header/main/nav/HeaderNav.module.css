@@ -7,7 +7,9 @@
 
 .list button {
   color: var(--color-gray-000);
-  font-weight: bold;
+}
+
+.list button svg{
 }
 
 .navContainer {

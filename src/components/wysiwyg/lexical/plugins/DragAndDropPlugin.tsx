@@ -95,6 +95,6 @@ export default function DragAndDropPlugin(): null {
       },
       COMMAND_PRIORITY_LOW,
     );
-  }, [editor]);
+  }, [auth.user?.access_token, editor]);
   return null;
 }
