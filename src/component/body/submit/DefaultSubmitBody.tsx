@@ -7,7 +7,7 @@ import type { LexicalEditor } from "lexical";
 import { useLocation } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
-import type { DefaultPostDetailProps } from "../DefaultPostDetailProps.tsx";
+import type { DefaultPostDetailProps } from "../../post/detail/DefaultPostDetailProps.tsx";
 import styles from "./DefaultSubmitBody.module.css";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";

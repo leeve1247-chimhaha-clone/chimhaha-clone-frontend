@@ -1,16 +1,16 @@
 import { useMatches, useParams } from "react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../../react-query/queryKeys.tsx";
-import { CData } from "../../../credential/data.ts";
+import { queryKeys } from "../../../react-query/queryKeys.tsx";
+import { CData } from "../../../../credential/data.ts";
 import axios from "axios";
 
 import type { DefaultPostDetailProps } from "./DefaultPostDetailProps.tsx";
 import cssClass from "./DefaultDetailBody.module.css";
-import { Lexical } from "../wysiwyg/lexical/Lexical.tsx";
-import type { RawRouteConfig } from "../../router/convertToRouteObjects.tsx";
+import { Lexical } from "../../wysiwyg/lexical/Lexical.tsx";
+import type { RawRouteConfig } from "../../../router/convertToRouteObjects.tsx";
 import { DefaultDetailHeader } from "./DefaultDetailHeader.tsx";
-import CommentRootComponentProvider from "../comment/redux/root/CommentRootComponentProvider.tsx";
-import { SubmitLikeButton } from "./submit/SubmitLikeButton.tsx";
+import CommentRootComponentProvider from "../../comment/redux/root/CommentRootComponentProvider.tsx";
+import { SubmitLikeButton } from "../../body/submit/SubmitLikeButton.tsx";
 
 export function DefaultDetailBody() {
   const { postId } = useParams();
