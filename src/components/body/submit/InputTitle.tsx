@@ -1,6 +1,6 @@
 import { type ChangeEvent, type KeyboardEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setTitle } from "../../post/submit/submitPostSlice.tsx";
+import { setTitle } from "../../../redux/post/submit/submitPostSlice.tsx";
 import styles from "./DefaultSubmitBody.module.css";
 import { useQueryClient } from "@tanstack/react-query";
 import type { DefaultPostDetailProps } from "../../post/detail/DefaultPostDetailProps.tsx";

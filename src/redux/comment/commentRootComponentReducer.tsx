@@ -2,6 +2,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 import type { CommentRootComponentReduxProps } from "./CommentRootComponentReduxProps.tsx";
 import type { SerializedEditorState } from "lexical";
+import { commentRootComponentInitialState } from "./commentRootComponentInitialState.tsx";
 
 export const commentRootComponentReducer = {
   setCommentPage: (state: CommentRootComponentReduxProps, action: PayloadAction<number>) => {
@@ -16,7 +17,11 @@ export const commentRootComponentReducer = {
   setInitialCommentState: (state: CommentRootComponentReduxProps, action: PayloadAction<SerializedEditorState | undefined>) => {
     state.initialCommentState = action.payload;
   },
-  setCommentLike: (state: CommentRootComponentReduxProps, action: PayloadAction<{ commentId:string, likes:number, selfLiked: boolean }>) => {
-    state.commentLikes[ action.payload.commentId ] = {likes: action.payload.likes, selfLiked: action.payload.selfLiked};
+  setCommentLike: (state: CommentRootComponentReduxProps, action: PayloadAction<{ commentId: string; likes: number; selfLiked: boolean }>) => {
+    state.commentLikes[action.payload.commentId] = { likes: action.payload.likes, selfLiked: action.payload.selfLiked };
+  },
+
+  initComments: (state: CommentRootComponentReduxProps) => {
+    Object.assign(state, commentRootComponentInitialState);
   },
 };

@@ -16,7 +16,7 @@ export function convertToRouteObjects(routes: RawRouteConfig[]): RouteObject[] {
   const children = routes
     .map<RouteObject>(({ key }) => {
       return {
-        path: `/${key}`,
+        path: `:${key}`,
         children: [
           {
             path: "",

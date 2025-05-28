@@ -5,7 +5,7 @@ import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
 import { useAuth } from "react-oidc-context";
 import { useLocation, useMatches } from "react-router";
-import { setCategory } from "../../post/submit/submitPostSlice.tsx";
+import { setCategory } from "../../../redux/post/submit/submitPostSlice.tsx";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";

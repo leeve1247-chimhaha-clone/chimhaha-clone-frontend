@@ -8,4 +8,4 @@ export const submitPostSlice = createSlice({
   reducers: submitPostReducers,
 });
 
-export const { setTitle, setCategory } = submitPostSlice.actions;
+export const { setTitle, setCategory, initSubmits } = submitPostSlice.actions;
