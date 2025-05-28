@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import { Header } from "./component/header/Header.tsx";
+import { Header } from "./components/header/Header.tsx";
 
 export interface presignedUrlProps {
   url: string;
