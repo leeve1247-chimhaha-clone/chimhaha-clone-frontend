@@ -1,6 +1,4 @@
 import { Lexical } from "../../wysiwyg/lexical/Lexical.tsx";
-import { Provider } from "react-redux";
-import { defaultSubmitBodyStore } from "../redux/submitPost/DefaultSubmitBodyStore.tsx";
 import { SubmitPostButton } from "./SubmitPostButton.tsx";
 import { useRef } from "react";
 import type { LexicalEditor } from "lexical";
@@ -29,19 +27,18 @@ export function DefaultSubmitBody() {
       return res.data;
     });
   }
+
   const { isLoading, error } = useQuery({ queryKey: [...queryKeys.PostDetail, postId], queryFn: fetchPostDetail });
   if (isLoading) return <div>isLoading</div>;
   if (error) return <div>error</div>;
   return (
-    <Provider store={defaultSubmitBodyStore}>
-      <div className={styles.container}>
-        <DefaultSubmitBodyHeader />
-        <Lexical ref={ref} postId={postId !== null ? postId : undefined} />
-        <div className={styles.tail}>
-          <SubmitPostButton ref={ref} />
-          <CancelButton />
-        </div>
+    <div className={styles.container}>
+      <DefaultSubmitBodyHeader />
+      <Lexical ref={ref} postId={postId !== null ? postId : undefined} />
+      <div className={styles.tail}>
+        <SubmitPostButton ref={ref} />
+        <CancelButton />
       </div>
-    </Provider>
+    </div>
   );
 }
