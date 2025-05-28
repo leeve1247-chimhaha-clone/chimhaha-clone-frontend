@@ -11,7 +11,7 @@ import DragAndDropPlugin from "./plugins/DragAndDropPlugin.tsx";
 import { type LexicalEditor, ParagraphNode, TextNode } from "lexical";
 import { ImageNode } from "./nodes/ImageNode.tsx";
 import ExampleTheme from "./ExampleTheme.tsx";
-import { RefEditorPlugin } from "./RefEditorPlugin.tsx";
+import { RefEditorPlugin } from "./plugins/RefEditorPlugin.tsx";
 import type { RefObject } from "react";
 import { UpdateEditorStatePlugin } from "./plugins/UpdateEditorStatePlugin.tsx";
 
