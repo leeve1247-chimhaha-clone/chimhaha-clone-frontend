@@ -11,8 +11,11 @@ export function UpdateEditorStatePlugin({ postId }: { postId?: string | undefine
   useEffect(() => {
     if (postId === undefined) return;
     if (queryData === undefined) return;
-    const editorState = editor.parseEditorState(queryData.content);
-    editor.setEditorState(editorState);
+    queueMicrotask(()=>{
+      const editorState = editor.parseEditorState(queryData.content);
+      editor.setEditorState(editorState);
+    })
+
   }, [editor, postId, queryData]);
   return null;
 }

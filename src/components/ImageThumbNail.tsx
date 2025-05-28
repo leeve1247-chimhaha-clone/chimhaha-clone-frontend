@@ -21,7 +21,6 @@ export function ImageThumbNail({ fileName, className }: ImageThumbNailProps) {
   if (isLoading) return <></>
   if (error) return <></>;
   if (data === undefined) return <></>;
-  console.log("data", data);
   return (
     <div className={className}>
       <img src={data} alt={""} />

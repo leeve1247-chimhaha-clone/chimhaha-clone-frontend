@@ -7,11 +7,17 @@ import { setCommentLike } from "../../../redux/comment/commentRootComponentSlice
 import type { RootState } from "../../../redux/store.tsx";
 
 export function CommentHeader(props: { comment: CommentProps; onClick: () => void; modalOpen: boolean; onClose: () => void }) {
-
   const dispatch = useDispatch();
   const likesData = useSelector((state: RootState) => state.commentRootComponentStatus.commentLikes[String(props.comment.id)]);
   if (likesData === undefined) {
-    dispatch(setCommentLike({ commentId: String(props.comment.id), likes: props.comment.likes, selfLiked: props.comment.selfLiked }))
+
+    dispatch(
+      setCommentLike({
+        commentId: String(props.comment.id),
+        likes: props.comment.likes? Number(props.comment.likes) : 0,
+        selfLiked: props.comment.selfLiked? props.comment.selfLiked : false,
+      }),
+    );
   }
   return (
     <div className={cssClass.commentHeaderContainer}>
