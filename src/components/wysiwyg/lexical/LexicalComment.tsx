@@ -7,7 +7,7 @@ import styles from "./LexicalComment.module.css";
 import { type LexicalEditor, ParagraphNode, type SerializedEditorState, TextNode } from "lexical";
 import ExampleTheme from "./ExampleTheme.tsx";
 import { type RefObject, useEffect } from "react";
-import { RefEditorPlugin } from "./RefEditorPlugin.tsx";
+import { RefEditorPlugin } from "./plugins/RefEditorPlugin.tsx";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
 interface LexicalCommentProps {
