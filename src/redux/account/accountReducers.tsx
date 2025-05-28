@@ -1,7 +1,7 @@
-import type { AccountState } from "./accountSlice.tsx";
+import type { AccountReduxProps } from "./accountReduxProps.tsx";
 
 export const accountReducers = {
-  setNickName: (state: AccountState, action: { payload: string }) => {
+  setNickName: (state: AccountReduxProps, action: { payload: string }) => {
     state.nickName = action.payload;
   }
 };

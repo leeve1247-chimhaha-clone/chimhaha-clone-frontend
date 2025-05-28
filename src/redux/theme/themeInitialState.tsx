@@ -1,5 +1,5 @@
-import type { ThemeState } from "./themeSlice.tsx";
+import type { ThemeReduxProps } from "./ThemeReduxProps.tsx";
 
-export const themeInitialState: ThemeState = {
+export const themeInitialState: ThemeReduxProps = {
   theme: undefined
 };

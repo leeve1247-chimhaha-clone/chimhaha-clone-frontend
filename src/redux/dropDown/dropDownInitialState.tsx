@@ -1,5 +1,5 @@
-import type { HeaderDropDownCategoryState } from "./dropDownSlice.tsx";
+import type { DropDownReduxProps } from "./DropDownReduxProps.tsx";
 
-export const dropDownInitialState: HeaderDropDownCategoryState = {
+export const dropDownInitialState: DropDownReduxProps = {
   value: ""
 };

@@ -2,10 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { accountInitialState } from "./accountInitialState.tsx";
 import { accountReducers } from "./accountReducers.tsx";
 
-export interface AccountState {
-  nickName: string;
-}
-
 export const accountSlice = createSlice({
   name: "account",
   initialState: accountInitialState,

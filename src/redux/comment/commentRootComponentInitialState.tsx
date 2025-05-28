@@ -1,6 +1,6 @@
-import type { CommentRootComponentStateProps } from "./CommentRootComponentStateProps.tsx";
+import type { CommentRootComponentReduxProps } from "./CommentRootComponentReduxProps.tsx";
 
-export const commentRootComponentInitialState: CommentRootComponentStateProps = {
+export const commentRootComponentInitialState: CommentRootComponentReduxProps = {
   commentPage: 1,
   focusedButton: undefined,
   editableCommentId: undefined,

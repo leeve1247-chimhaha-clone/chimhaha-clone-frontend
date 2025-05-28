@@ -1,5 +1,5 @@
-import type { AccountState } from "./accountSlice.tsx";
+import type { AccountReduxProps } from "./accountReduxProps.tsx";
 
-export const accountInitialState: AccountState = {
+export const accountInitialState: AccountReduxProps = {
   nickName: ""
 };
