@@ -9,8 +9,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import { isEmpty } from "../../body/submit/IsEmpty.tsx";
 import { useDispatch } from "react-redux";
-import type { CommentRootComponentDispatch } from "../redux/root/commentRootComponentStore.tsx";
-import { setCommentPage } from "../redux/root/commentRootComponentSlice.tsx";
+import { setCommentPage } from "../../../redux/comment/commentRootComponentSlice.tsx";
 import emptyEditor from "../../../../public/empty_editor_state.json";
 
 interface SubmitCommentButtonProps {
@@ -23,7 +22,7 @@ interface SubmitCommentButtonProps {
 export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentButtonProps) {
   const auth = useAuth();
   const queryClient = useQueryClient();
-  const dispatch = useDispatch<CommentRootComponentDispatch>();
+  const dispatch = useDispatch();
 
   async function submitComment() {
     if (ref.current === undefined) return;

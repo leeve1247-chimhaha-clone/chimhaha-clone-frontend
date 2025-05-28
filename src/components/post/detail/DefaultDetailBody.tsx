@@ -9,8 +9,8 @@ import cssClass from "./DefaultDetailBody.module.css";
 import { Lexical } from "../../wysiwyg/lexical/Lexical.tsx";
 import type { RawRouteConfig } from "../../../router/convertToRouteObjects.tsx";
 import { DefaultDetailHeader } from "./DefaultDetailHeader.tsx";
-import CommentRootComponentProvider from "../../comment/redux/root/CommentRootComponentProvider.tsx";
 import { SubmitLikeButton } from "../../body/submit/SubmitLikeButton.tsx";
+import { CommentRootComponent } from "../../comment/CommentRootComponent.tsx";
 
 export function DefaultDetailBody() {
   const { postId } = useParams();
@@ -39,7 +39,7 @@ export function DefaultDetailBody() {
         <div>
           <SubmitLikeButton/>
         </div>
-        <CommentRootComponentProvider />
+        <CommentRootComponent/>
       </div>
     </>
   );

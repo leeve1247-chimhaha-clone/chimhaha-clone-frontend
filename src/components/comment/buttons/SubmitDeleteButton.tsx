@@ -2,8 +2,7 @@ import { useAuth } from "react-oidc-context";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
 import { useDispatch } from "react-redux";
-import type { CommentRootComponentDispatch } from "../redux/root/commentRootComponentStore.tsx";
-import { setCommentPage } from "../redux/root/commentRootComponentSlice.tsx";
+import { setCommentPage } from "../../../redux/comment/commentRootComponentSlice.tsx";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 
@@ -13,7 +12,7 @@ interface SubmitUpdateButton {
 }
 
 export function SubmitDeleteButton({ postId, commentId }: SubmitUpdateButton) {
-  const dispatch = useDispatch<CommentRootComponentDispatch>();
+  const dispatch = useDispatch();
   const auth = useAuth();
   const queryClient = useQueryClient();
 

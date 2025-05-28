@@ -3,15 +3,12 @@ import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
 import { useAuth } from "react-oidc-context";
 import { useDispatch, useSelector } from "react-redux";
-import type {
-  CommentRootComponentDispatch,
-  CommentRootComponentState
-} from "../redux/root/commentRootComponentStore.tsx";
-import { setCommentLike } from "../redux/root/commentRootComponentSlice.tsx";
+import { setCommentLike } from "../../../redux/comment/commentRootComponentSlice.tsx";
+import type { RootState } from "../../../redux/store.tsx";
 function LikeThisCommentButton({ commentId }: { commentId: string; postId: string }) {
   const auth = useAuth();
-  const dispatch = useDispatch<CommentRootComponentDispatch>();
-  const selfLiked = useSelector((state: CommentRootComponentState)=>state.commentComponentState.commentLikes[commentId]?.selfLiked)
+  const dispatch = useDispatch();
+  const selfLiked = useSelector((state: RootState)=>state.commentRootComponentStatus.commentLikes[commentId]?.selfLiked)
   async function likeThisComment() {
     const access_token = auth?.user?.access_token;
     const commentData = {

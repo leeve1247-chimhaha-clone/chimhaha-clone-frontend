@@ -3,15 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
 import { Modal } from "../../modal/Modal.tsx";
 import { useDispatch } from "react-redux";
-import type { CommentRootComponentDispatch } from "../redux/root/commentRootComponentStore.tsx";
-import { setEditableCommentId, setInitialCommentState } from "../redux/root/commentRootComponentSlice.tsx";
+import { setEditableCommentId, setInitialCommentState } from "../../../redux/comment/commentRootComponentSlice.tsx";
 import { useState } from "react";
 import type { CommentProps } from "../CommentProps.tsx";
 import { SubmitDeleteButton } from "../buttons/SubmitDeleteButton.tsx";
 import { useParams } from "react-router";
 
 export function CommentHeaderRight(props: { onClick: () => void; isModalOpen: boolean; onClose: () => void; comment?: CommentProps }) {
-  const dispatch = useDispatch<CommentRootComponentDispatch>();
+  const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
   const { postId } = useParams();
   if (props.comment?.id === undefined) return <></>;
