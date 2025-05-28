@@ -1,6 +1,6 @@
 import type { SerializedEditorState } from "lexical";
 
-export interface CommentRootComponentStateProps {
+export interface CommentRootComponentReduxProps {
   commentPage: undefined | number;
   focusedButton: undefined | string;
   editableCommentId: undefined | string;

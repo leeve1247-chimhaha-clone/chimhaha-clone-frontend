@@ -1,7 +1,7 @@
-import type { ThemeState } from "./themeSlice.tsx";
+import type { ThemeReduxProps } from "./ThemeReduxProps.tsx";
 
 export const themeReducers = {
-  setTheme: (state: ThemeState, action: { payload: string }) => {
+  setTheme: (state: ThemeReduxProps, action: { payload: string }) => {
     state.theme = action.payload;
   }
 };

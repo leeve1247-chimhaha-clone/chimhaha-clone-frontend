@@ -2,10 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { themeInitialState } from "./themeInitialState.tsx";
 import { themeReducers } from "./themeReducers.tsx";
 
-export interface ThemeState {
-  theme: string|undefined;
-}
-
 export const themeSlice = createSlice({
   name: "theme",
   initialState: themeInitialState,
