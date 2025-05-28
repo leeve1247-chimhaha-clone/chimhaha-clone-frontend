@@ -20,7 +20,6 @@ export function DefaultDetailBody() {
     });
   }
   const { data, error, isLoading } = useQuery({ queryKey: [...queryKeys.PostDetail, postId], queryFn: fetchPostDetail });
-
   const queryClient = useQueryClient();
   const rawRoute = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
   const matches = useMatches();
@@ -28,8 +27,6 @@ export function DefaultDetailBody() {
   if (error) return <div>Error: {error.message}</div>;
   if (data === undefined) return <div>No data</div>;
   if (rawRoute === undefined) return <div>캐시 불러오는 중...</div>;
-
-
   const korean = rawRoute.find((x) => x.key === category)?.korean;
   return (
     <>

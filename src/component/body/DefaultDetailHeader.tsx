@@ -10,6 +10,9 @@ import { useState } from "react";
 import { type UIMatch, useNavigate } from "react-router-dom";
 import { useMatches } from "react-router";
 import { SubmitDeleteButton } from "./submit/SubmitDeleteButton.tsx";
+import { useDispatch, useSelector } from "react-redux";
+import type { DefaultPostDetailDispatch, DefaultPostDetailState } from "./redux/postDetail/defaultPostDetailStore.tsx";
+import { setLikes } from "./redux/postDetail/defaultPostDetailSlice.tsx";
 
 function getPostId(matches: UIMatch[]) {
   return matches[matches.length - 1].pathname.substring(matches[matches.length - 2].pathname.length + 1, matches[matches.length - 1].pathname.length);
@@ -25,6 +28,12 @@ export function DefaultDetailHeader({ korean, data }: { korean: string | undefin
   const matches = useMatches();
   const category = getCategory(matches);
   const postId = getPostId(matches);
+  const likes = useSelector((state: DefaultPostDetailState) => state.defaultPostDetailStore.likes);
+  const dispatch = useDispatch<DefaultPostDetailDispatch>()
+  if (likes === undefined) dispatch(setLikes({
+    likes: data.likes,
+    selfLiked: data.selfLiked
+  }))
   function openModal(){
     setIsModalOpen(true)
   }
@@ -35,8 +44,7 @@ export function DefaultDetailHeader({ korean, data }: { korean: string | undefin
   function navigateToEdit(){
     navigate(`/${category}/submit?postId=${postId}`)
   }
-
-
+  if (likes === undefined) return <></>
   return (
     <div className={cssClass.postHeader}>
       <div className={cssClass.postNavigate}>{`${korean} 게시글 >`}</div>
@@ -54,7 +62,7 @@ export function DefaultDetailHeader({ korean, data }: { korean: string | undefin
           <div>{data.views}</div>
           <Dot className={cssClass.dot} />
           <HandThumbsUp className={cssClass.likes} />
-          <div className={cssClass.likes}>{data.likes}</div>
+          <div className={cssClass.likes}>{likes.likes}</div>
         </div>
         <div>
           <div className={cssClass.modalOpenContainer}>

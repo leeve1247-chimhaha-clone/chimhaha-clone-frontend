@@ -2,8 +2,7 @@ import type { RouteObject } from "react-router";
 import { App } from "../App.tsx";
 import { DefaultBody } from "../component/body/DefaultBody.tsx";
 import { DefaultSubmitBody } from "../component/body/submit/DefaultSubmitBody.tsx";
-import { DefaultDetailBody } from "../component/body/DefaultDetailBody.tsx";
-
+import { DefaultDetailBodyProvider } from "../component/body/redux/postDetail/defaultDetailBodyProvider.tsx";
 
 export interface RawRouteConfig {
   id: number;
@@ -29,7 +28,7 @@ export function convertToRouteObjects(routes: RawRouteConfig[]): RouteObject[] {
           },
           {
             path: ":postId",
-            element: <DefaultDetailBody />,
+            element: <DefaultDetailBodyProvider />,
           },
         ],
       };
