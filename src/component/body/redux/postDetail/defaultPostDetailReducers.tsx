@@ -14,4 +14,7 @@ export const defaultPostDetailReducers = {
       selfLiked: action.payload.selfLiked,
     };
   },
+  initProps: (state: DefaultPostDetailReduxProps) => {
+    state.likes = undefined;
+  }
 };
