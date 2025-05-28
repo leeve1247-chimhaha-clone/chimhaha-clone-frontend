@@ -1,22 +1,22 @@
 import type { LexicalEditor } from "lexical";
 import { type RefObject } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { DefaultSubmitBodyDispatch, DefaultSubmitBodyState } from "../redux/submitPost/DefaultSubmitBodyStore.tsx";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
 import { useAuth } from "react-oidc-context";
 import { useLocation, useMatches } from "react-router";
-import { setCategory } from "../redux/submitPost/submitPostSlice.tsx";
+import { setCategory } from "../../post/submit/submitPostSlice.tsx";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import styles from "./DefaultSubmitBody.module.css";
 import { clearImageSrcInEditorState } from "./functions/clearImageSrcInEditorState.tsx";
 import { isEmpty } from "./IsEmpty.tsx";
+import type { RootState } from "../../../redux/store.tsx";
 
 export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undefined> }) {
-  const selector = useSelector((state: DefaultSubmitBodyState) => state.submitPostStatus);
-  const dispatch = useDispatch<DefaultSubmitBodyDispatch>();
+  const selector = useSelector((state: RootState) => state.submitPostStatus);
+  const dispatch = useDispatch();
   const matches = useMatches();
   const auth = useAuth();
   const navigate = useNavigate();

@@ -3,14 +3,14 @@ import { ImageData } from "../../../../credential/data.ts";
 import { useAuth } from "react-oidc-context";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import type { DefaultPostDetailDispatch, DefaultPostDetailState } from "../../../redux/post/detail/defaultPostDetailStore.tsx";
 import { setLikes } from "../../../redux/post/detail/defaultPostDetailSlice.tsx";
+import type { RootState } from "../../../redux/store.tsx";
 
 export function SubmitLikeButton() {
   const auth = useAuth();
   const { postId } = useParams();
-  const likes = useSelector((state: DefaultPostDetailState) => state.defaultPostDetailStatus.likes);
-  const dispatch = useDispatch<DefaultPostDetailDispatch>();
+  const likes = useSelector((state: RootState) => state.defaultPostDetailStatus.likes);
+  const dispatch = useDispatch();
 
   async function likePost() {
     const deltaJson = JSON.stringify({
