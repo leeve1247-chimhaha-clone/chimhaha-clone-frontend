@@ -4,7 +4,7 @@ import { setTitle } from "../redux/submitPost/submitPostSlice.tsx";
 import type { DefaultSubmitBodyDispatch } from "../redux/submitPost/DefaultSubmitBodyStore.tsx";
 import styles from "./DefaultSubmitBody.module.css"
 import { useQueryClient } from "@tanstack/react-query";
-import type { DefaultPostDetailProps } from "../DefaultPostDetailProps.tsx";
+import type { DefaultPostDetailProps } from "../../post/detail/DefaultPostDetailProps.tsx";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 
 export function InputTitle() {

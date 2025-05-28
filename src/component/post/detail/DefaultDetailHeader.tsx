@@ -1,18 +1,18 @@
 import type { DefaultPostDetailProps } from "./DefaultPostDetailProps.tsx";
 import cssClass from "./DefaultDetailBody.module.css";
 import { Dot, HandThumbsUp } from "react-bootstrap-icons";
-import { timeAgo } from "../../utils/CreatedDate.tsx";
+import { timeAgo } from "../../../utils/CreatedDate.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
-import { Modal } from "../modal/Modal.tsx";
+import { Modal } from "../../modal/Modal.tsx";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
 import { useState } from "react";
 import { type UIMatch, useNavigate } from "react-router-dom";
 import { useMatches } from "react-router";
-import { SubmitDeleteButton } from "./submit/SubmitDeleteButton.tsx";
+import { SubmitDeleteButton } from "../../body/submit/SubmitDeleteButton.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import type { DefaultPostDetailDispatch, DefaultPostDetailState } from "./redux/postDetail/defaultPostDetailStore.tsx";
-import { setLikes } from "./redux/postDetail/defaultPostDetailSlice.tsx";
+import { setLikes } from "../../../redux/post/detail/defaultPostDetailSlice.tsx";
+import type { RootState } from "../../../redux/store.tsx";
 
 function getPostId(matches: UIMatch[]) {
   return matches[matches.length - 1].pathname.substring(matches[matches.length - 2].pathname.length + 1, matches[matches.length - 1].pathname.length);
@@ -28,8 +28,8 @@ export function DefaultDetailHeader({ korean, data }: { korean: string | undefin
   const matches = useMatches();
   const category = getCategory(matches);
   const postId = getPostId(matches);
-  const likes = useSelector((state: DefaultPostDetailState) => state.defaultPostDetailStore.likes);
-  const dispatch = useDispatch<DefaultPostDetailDispatch>()
+  const likes = useSelector((state:RootState) => state.defaultPostDetailStatus.likes);
+  const dispatch = useDispatch()
   if (likes === undefined) dispatch(setLikes({
     likes: data.likes,
     selfLiked: data.selfLiked

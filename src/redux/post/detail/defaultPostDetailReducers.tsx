@@ -1,5 +1,6 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { DefaultPostDetailReduxProps } from "./DefaultPostDetailReduxProps.tsx";
+import { defaultPostDetailInitialState } from "./defaultPostDetailInitialState.tsx";
 
 export const defaultPostDetailReducers = {
   setLikes: (
@@ -15,6 +16,6 @@ export const defaultPostDetailReducers = {
     };
   },
   initProps: (state: DefaultPostDetailReduxProps) => {
-    state.likes = undefined;
+    Object.assign(state, defaultPostDetailInitialState);
   }
 };
