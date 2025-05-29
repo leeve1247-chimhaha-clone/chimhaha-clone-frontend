@@ -11,8 +11,8 @@
 
 .editorInner{
     position: relative;
-    border-top: 1px solid var(--color-gray-800);
-    border-bottom: 1px solid var(--color-gray-800);
+    border-top: 1px solid var(--color-gray-750);
+    border-bottom: 1px solid var(--color-gray-750);
 }
 
 .editorInput{

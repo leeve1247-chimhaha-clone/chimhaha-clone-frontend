@@ -30,7 +30,7 @@
 
 .category {
     width: 100%;
-    background-color: var(--color-gray-800);
+    background-color: var(--color-gray-750);
     border-radius: 0.5rem; /* 적절한 반경으로 조정 */
     padding: 0.5rem 1rem;
 }
