@@ -1,6 +1,6 @@
 .container{
     width: 100%;
-    background-color: var(--color-gray-850);
+    background-color: var(--color-gray-800);
     z-index: 999;
 }
 

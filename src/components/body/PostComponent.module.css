@@ -5,7 +5,7 @@
     flex-direction: row;
     align-items: center;
     border-bottom: 0.025rem solid;
-    border-color: var(--color-gray-800);
+    border-color: var(--color-gray-750);
 }
 
 .postContainer:visited{
@@ -14,7 +14,7 @@
     flex-direction: row;
     align-items: center;
     border-bottom: 0.025rem solid;
-    border-color: var(--color-gray-800);
+    border-color: var(--color-gray-750);
 }
 
 .imageThumbnailContainer{
@@ -58,7 +58,7 @@
     border: 0.025rem solid;
     border-radius: 0.5rem;
     border-color: var(--color-gray-700);
-    background-color: var(--color-gray-850);
+    background-color: var(--color-gray-800);
     padding: 0.0rem 0.4rem 0.0rem 0.4rem; /* 시계 방향으로 top, right, bottom, left */
 }
 
@@ -77,7 +77,7 @@
 }
 
 .dot{
-    color : var(--color-gray-800);
+    color : var(--color-gray-750);
     font-size: 0.15rem;
 }
 

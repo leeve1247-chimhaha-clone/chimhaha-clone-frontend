@@ -25,7 +25,7 @@
 }
 
 .dot {
-    color: var(--color-gray-800);
+    color: var(--color-gray-750);
     font-size: 1rem;
 }
 
@@ -75,7 +75,7 @@
 
 .modal {
     position: absolute;
-    background-color: var(--color-gray-875);
+    background-color: var(--color-gray-850);
     border-radius: 0.5rem;
     right: 0.25rem;
     z-index: 999;
@@ -102,7 +102,7 @@
 .editorContainer{
     display: flex;
     flex-direction: row;
-    background-color: var(--color-gray-850);;
+    background-color: var(--color-gray-800);;
 }
 
 .editorContainer > :first-child{
@@ -171,7 +171,7 @@
 
 .commentPageButton:hover{
     color: var(--color-gray-300);
-    background-color: var(--color-gray-800);
+    background-color: var(--color-gray-750);
 }
 
 .commentPageButton:active{
