@@ -25,12 +25,14 @@
 
     --height-first-header: 4.5rem;
     --border-radius-100: 0.5rem;
+    --root-margin: 0 10rem;
 
     --color-gray-000: #ffffff;
     --color-gray-050: #e9e9e9;
     --color-gray-100: #d7d7d7;
     --color-gray-150: #c3c3c3;
     --color-gray-200: #b2b2b2;
+    --color-gray-225: #ababab;
     --color-gray-250: #a1a1a1;
     --color-gray-300: #929292;
     --color-gray-350: #828282;
@@ -52,19 +54,17 @@
     --color-gray-1150: #030303;
     --color-gray-1200: #000000;
 
+    --color-accent-white-150: #8dcfd5;
+    --color-accent-white-225: #75B7BE;
 
+    --color-accent-150: #19dce3;
+    --color-accent-300: #00a7ae;
+    --color-accent-450: #007982;
+    --color-accent-600: #00535c;
 
-    --color-accent-white-000: #86d2da;
-    --color-accent-white-100: #75B7BE;
-
-    --color-accent-000: #1cdde4;
-    --color-accent-100: #1ca8af;
-    --color-accent-200: #1a7a80;
-    --color-accent-300: #1a5f65;
-
-    --color-red-400: #ff6868;
-    --color-red-500: #e14242;
-    --color-red-600: #cf3b3b;
+    --color-red-250: #ff6a64;
+    --color-red-350: #e74847;
+    --color-red-600: #c72830;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -73,13 +73,6 @@
 }
 
 @media (prefers-color-scheme: light) {
-    :root {
-        color: #213547;
-        background-color: #ffffff;
-    }
-    button {
-        background-color: #f9f9f9;
-    }
 }
 
 div{

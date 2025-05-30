@@ -17,7 +17,7 @@
     font-size: 0.8rem;
 }
 .likes{
-    color: var(--color-accent-100);
+    color: var(--color-accent-300);
     font-size: 0.8rem;
     display: flex;
     align-items: center;
@@ -193,33 +193,33 @@
 .buttonApply{
     width: 4rem;
     margin: 0.2rem;
-    background-color: var(--color-accent-100);
+    background-color: var(--color-accent-300);
     border-radius: 0.2rem;
     color: var(--color-gray-100);
     text-align: center;
 }
 
 .buttonApply:hover{
-    background-color: var(--color-accent-000);
+    background-color: var(--color-accent-150);
 }
 
 .buttonApply:active{
-    background-color: var(--color-accent-200);
+    background-color: var(--color-accent-450);
     color: var(--color-gray-200);
 }
 
 .buttonCancel{
     width: 4rem;
     margin: 0.2rem;
-    background-color: var(--color-red-500);
-    border : 1px solid var(--color-red-500);
+    background-color: var(--color-red-350);
+    border : 1px solid var(--color-red-350);
     border-radius: 0.2rem;
     color : var(--color-gray-100)
 }
 
 .buttonCancel:hover{
-    background-color: var(--color-red-400);
-    border : 1px solid var(--color-red-400);
+    background-color: var(--color-red-250);
+    border : 1px solid var(--color-red-250);
     color : var(--color-gray-000)
 }
 
