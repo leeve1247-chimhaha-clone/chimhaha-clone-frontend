@@ -1,11 +1,9 @@
 import cssClass from "./PostComponent.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CreatedDate } from "../../utils/CreatedDate.tsx";
-import { faCircle } from "@fortawesome/free-solid-svg-icons/faCircle";
-import { faEye, faFileLines, faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { NavLink } from "react-router-dom";
 import { ImageThumbNail } from "../ImageThumbNail.tsx";
 import type { PostItemProps } from "./PostItemProps.tsx";
+import { CircleFill, FileEarmarkText, HandThumbsUp } from "react-bootstrap-icons";
 
 export function DefaultPostComponent({ post }: { post: PostItemProps }) {
   const postId = post.postId;
@@ -14,7 +12,8 @@ export function DefaultPostComponent({ post }: { post: PostItemProps }) {
       {post.titleImageFileName ? (
         <ImageThumbNail fileName={post.titleImageFileName} className={cssClass.imageThumbnailContainer} />
       ) : (
-        <FontAwesomeIcon className={cssClass.imageThumbnailContainer} icon={faFileLines} />
+        // <FontAwesomeIcon className={cssClass.imageThumbnailContainer} icon={faFileLines} />
+        <FileEarmarkText className={cssClass.imageThumbnailContainer} />
       )}
       <div className={cssClass.rightSection}>
         <div className={cssClass.firstLine}>
@@ -23,15 +22,15 @@ export function DefaultPostComponent({ post }: { post: PostItemProps }) {
         </div>
         <div className={cssClass.secondLine}>
           <div>{post.username}</div>
-          <FontAwesomeIcon className={cssClass.dot} icon={faCircle} />
+          <CircleFill className={cssClass.dot} />
           <CreatedDate date={post.createdDate} />
-          <FontAwesomeIcon className={cssClass.dot} icon={faCircle} />
-          <FontAwesomeIcon icon={faEye} />
+          <CircleFill className={cssClass.dot} />
+          <CircleFill className={cssClass.dot} />
           <div>{post.views}</div>
           {post.likes > 0 && (
             <>
-              <FontAwesomeIcon className={cssClass.dot} icon={faCircle} />
-              <FontAwesomeIcon className={cssClass.likes} icon={faThumbsUp} />
+              <CircleFill className={cssClass.dot} />
+              <HandThumbsUp className={cssClass.likes} />
               <div className={cssClass.likes}>{post.likes}</div>
             </>
           )}

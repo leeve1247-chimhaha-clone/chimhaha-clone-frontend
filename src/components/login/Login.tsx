@@ -1,12 +1,11 @@
 import cssClass from "./Login.module.css";
 import { useAuth } from "react-oidc-context";
 import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRightToBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { setNickName } from "../../redux/account/accountSlice.tsx";
-import {ImageData} from "../../../credential/data.ts";
+import { ImageData } from "../../../credential/data.ts";
 import axios from "axios";
 import type { RootState } from "../../redux/store.tsx";
+import { Person } from "react-bootstrap-icons";
 
 export function Login() {
   const auth = useAuth();
@@ -60,11 +59,10 @@ export function Login() {
   return (
     <div className={cssClass.container}>
       <button className={cssClass.button}>
-        <FontAwesomeIcon icon={faUser} />
+        <Person />
         <div>회원가입</div>
       </button>
       <button className={cssClass.button} onClick={() => void auth.signinPopup()}>
-        <FontAwesomeIcon icon={faRightToBracket} />
         <div>로그인</div>
       </button>
     </div>

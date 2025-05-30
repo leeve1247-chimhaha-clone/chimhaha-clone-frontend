@@ -82,11 +82,6 @@
     }
 }
 
-svg{
-    position: relative;
-    top: 2px;
-}
-
 div{
     all:unset;
     display: block;
@@ -95,6 +90,8 @@ div{
 a, button {
     all: unset;
     cursor: pointer;
+    align-items: center;
+    display: flex;
 }
 
 a:visited{
