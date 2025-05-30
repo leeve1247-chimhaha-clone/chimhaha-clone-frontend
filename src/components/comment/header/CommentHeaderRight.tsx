@@ -1,6 +1,4 @@
 import cssClass from "../CommentComponent.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
 import { Modal } from "../../modal/Modal.tsx";
 import { useDispatch } from "react-redux";
 import { setEditableCommentId, setInitialCommentState } from "../../../redux/comment/commentRootComponentSlice.tsx";
@@ -8,6 +6,7 @@ import { useState } from "react";
 import type { CommentProps } from "../CommentProps.tsx";
 import { SubmitDeleteButton } from "../buttons/SubmitDeleteButton.tsx";
 import { useParams } from "react-router";
+import { ThreeDotsVertical } from "react-bootstrap-icons";
 
 export function CommentHeaderRight(props: { onClick: () => void; isModalOpen: boolean; onClose: () => void; comment?: CommentProps }) {
   const dispatch = useDispatch();
@@ -34,7 +33,7 @@ export function CommentHeaderRight(props: { onClick: () => void; isModalOpen: bo
       {
         <div className={cssClass.modalOpenContainer}>
           <button className={cssClass.options} onClick={handleModalOpen}>
-            <FontAwesomeIcon icon={faEllipsisVertical} />
+            <ThreeDotsVertical className={cssClass.options}/>
           </button>
           <Modal className={cssClass.modal} modalOpen={modalOpen} handleModalClose={handleModalClose}>
             <button onClick={handleEditableCommentId}>수정</button>

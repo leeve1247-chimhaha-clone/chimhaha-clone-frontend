@@ -2,10 +2,7 @@ import type { DefaultPostDetailProps } from "./DefaultPostDetailProps.tsx";
 import cssClass from "./DefaultDetailBody.module.css";
 import { Dot, HandThumbsUp } from "react-bootstrap-icons";
 import { timeAgo } from "../../../utils/CreatedDate.tsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { Modal } from "../../modal/Modal.tsx";
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
 import { useState } from "react";
 import { type UIMatch, useNavigate } from "react-router-dom";
 import { useMatches } from "react-router";
@@ -58,7 +55,7 @@ export function DefaultDetailHeader({ korean, data }: { korean: string | undefin
           <Dot className={cssClass.dot} />
           <div>{timeAgo(data.createdDate)}</div>
           <Dot className={cssClass.dot} />
-          <FontAwesomeIcon icon={faEye} />
+          {/*<FontAwesomeIcon icon={faEye} />*/}
           <div>{data.views}</div>
           <Dot className={cssClass.dot} />
           <HandThumbsUp className={cssClass.likes} />
@@ -67,7 +64,7 @@ export function DefaultDetailHeader({ korean, data }: { korean: string | undefin
         <div>
           <div className={cssClass.modalOpenContainer}>
             <button className={cssClass.options} onClick={openModal}>
-              <FontAwesomeIcon icon={faEllipsisVertical} />
+              {/*<FontAwesomeIcon icon={faEllipsisVertical} />*/}
             </button>
             <Modal className={cssClass.modal} modalOpen={isModalOpen} handleModalClose={closeModal}>
               <button onClick={navigateToEdit}>수정</button>

@@ -2,6 +2,8 @@ import type { routerDataTree } from "../main/nav/HeaderNav.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { setHeaderDropDownStatus } from "../../../redux/dropDown/dropDownSlice.tsx";
 import type { RootState } from "../../../redux/store.tsx";
+import { chevronUpCircleOutline, chevronDownCircleOutline } from "ionicons/icons";
+import { IonIcon } from "@ionic/react";
 
 export function HeaderLevelZero({ theRouterData }: { theRouterData: routerDataTree }) {
   const dispatch = useDispatch();
@@ -25,6 +27,8 @@ export function HeaderLevelZero({ theRouterData }: { theRouterData: routerDataTr
     <button
       onClick={handleDropDownStatus()}>
       {theRouterData.korean}
+      {selector === theRouterData.key && <IonIcon icon={chevronDownCircleOutline} />}
+      {selector !== theRouterData.key && <IonIcon icon={chevronUpCircleOutline} />}
     </button>
   );
 }

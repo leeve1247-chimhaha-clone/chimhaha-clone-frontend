@@ -5,7 +5,7 @@ import { Login } from "../../login/Login.tsx";
 
 export function HeaderMain() {
   return (
-    <div className={cssClass.subContainer}>
+    <div className={`${cssClass.subContainer} ${cssClass.subContainerFirst}`}>
       <div>
         <div className={cssClass.headerMainLeft}>
           <HeaderTitle />

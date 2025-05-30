@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ionic/react": "^8.5.8",
     "@lexical/react": "^0.31.1",
     "@lexical/utils": "^0.31.1",
     "@reduxjs/toolkit": "^2.8.1",
