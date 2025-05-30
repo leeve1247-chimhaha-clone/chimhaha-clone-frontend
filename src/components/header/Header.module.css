@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background: var(--color-accent-100);
+    background: var(--color-accent-300);
     font-weight: bold;
     position: relative;
 }
@@ -20,7 +20,7 @@
 .subContainer > div{
     width: 100%;
     display: flex;
-    margin: 0 10rem;
+    margin: var(--root-margin);
     justify-content: space-between;
     align-items: center;
 }

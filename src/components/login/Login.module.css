@@ -4,7 +4,7 @@
     align-items: center;
     display: flex;
     border-radius: 1rem;
-    background-color: var(--color-accent-white-100);
+    background-color: var(--color-accent-white-225);
     gap: 0.2rem;
     font-weight: bold;
     margin: 0.5rem;
@@ -12,7 +12,7 @@
 }
 
 .button:hover {
-    background-color: var(--color-accent-white-000);
+    background-color: var(--color-accent-white-150);
     cursor: pointer;
 }
 
