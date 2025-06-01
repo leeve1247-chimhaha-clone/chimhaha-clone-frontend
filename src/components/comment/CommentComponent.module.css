@@ -57,6 +57,10 @@
     gap: 0.5rem;
 }
 
+.replayEditorContainer{
+    margin-top: 0.5rem;
+}
+
 .DefaultCommentTail{
     display: flex;
     justify-content: flex-end;

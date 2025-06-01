@@ -45,8 +45,9 @@ export function CommentComponent({ comment, postId }: { comment: CommentProps; p
         </>
       )}
       {!replyEditorOpen && <CommentTail postId={postId} commentId={comment.id} openReplyEditor={openReplyEditor} />}
-      {replyEditorOpen && <ReplyEditorComponent postId={postId} commentId={Number(comment.id)} closeReplyEditor={closeReplyEditor} />}
+
       {comment.children && comment.children.length > 0 && <CommentComponents postId={postId} comments={comment.children} />}
+      {replyEditorOpen && <ReplyEditorComponent postId={postId} commentId={Number(comment.id)} closeReplyEditor={closeReplyEditor} />}
     </div>
   );
 }

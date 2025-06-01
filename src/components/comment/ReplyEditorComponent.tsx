@@ -12,12 +12,12 @@ interface ReplyEditorComponentProps {
 export function ReplyEditorComponent({ postId, commentId, closeReplyEditor }: ReplyEditorComponentProps) {
   const ref = useRef(undefined);
   return (
-    <>
+    <div className={cssClass.replayEditorContainer}>
       <LexicalComment ref={ref} />
       <SubmitCommentButton postId={postId} ref={ref} commentId={commentId} />
       <button className={cssClass.buttonCancel} onClick={closeReplyEditor}>
         취소
       </button>
-    </>
+    </div>
   );
 }
