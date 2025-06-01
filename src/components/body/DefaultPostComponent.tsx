@@ -1,7 +1,7 @@
 import cssClass from "./PostComponent.module.css";
 import { CreatedDate } from "../../utils/CreatedDate.tsx";
 import { NavLink } from "react-router-dom";
-import { ImageThumbNail } from "../ImageThumbNail.tsx";
+import { ImageThumbNail } from "./ImageThumbNail.tsx";
 import type { PostItemProps } from "./PostItemProps.tsx";
 import { CircleFill, FileEarmarkText, HandThumbsUp } from "react-bootstrap-icons";
 
@@ -12,7 +12,6 @@ export function DefaultPostComponent({ post }: { post: PostItemProps }) {
       {post.titleImageFileName ? (
         <ImageThumbNail fileName={post.titleImageFileName} className={cssClass.imageThumbnailContainer} />
       ) : (
-        // <FontAwesomeIcon className={cssClass.imageThumbnailContainer} icon={faFileLines} />
         <FileEarmarkText className={cssClass.imageThumbnailContainer} />
       )}
       <div className={cssClass.rightSection}>
@@ -24,7 +23,6 @@ export function DefaultPostComponent({ post }: { post: PostItemProps }) {
           <div>{post.username}</div>
           <CircleFill className={cssClass.dot} />
           <CreatedDate date={post.createdDate} />
-          <CircleFill className={cssClass.dot} />
           <CircleFill className={cssClass.dot} />
           <div>{post.views}</div>
           {post.likes > 0 && (

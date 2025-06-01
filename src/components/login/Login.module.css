@@ -11,6 +11,10 @@
     padding: 0.5rem 0.75rem;
 }
 
+.notButton{
+    cursor: default;
+}
+
 .button:hover {
     background-color: var(--color-accent-white-150);
     cursor: pointer;

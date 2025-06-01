@@ -27,8 +27,8 @@ export function HeaderLevelZero({ theRouterData }: { theRouterData: routerDataTr
     <button
       onClick={handleDropDownStatus()}>
       {theRouterData.korean}
-      {selector === theRouterData.key && <IonIcon icon={chevronDownCircleOutline} />}
-      {selector !== theRouterData.key && <IonIcon icon={chevronUpCircleOutline} />}
+      {selector === theRouterData.key && <IonIcon icon={chevronUpCircleOutline} />}
+      {selector !== theRouterData.key && <IonIcon icon={chevronDownCircleOutline} />}
     </button>
   );
 }

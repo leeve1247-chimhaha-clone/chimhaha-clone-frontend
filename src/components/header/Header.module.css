@@ -15,6 +15,7 @@
     padding: 0.5rem;
     border-bottom: 1px solid #0E7A80;
     box-shadow: 0 1px 0 0 rgb(255 255 255 / 20%) inset;
+    display: flex;
 }
 
 .subContainer > div{
@@ -23,6 +24,7 @@
     margin: var(--root-margin);
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .bContainer{

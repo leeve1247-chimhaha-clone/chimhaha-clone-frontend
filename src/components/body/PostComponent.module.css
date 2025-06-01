@@ -6,6 +6,7 @@
     align-items: center;
     border-bottom: 0.025rem solid;
     border-color: var(--color-gray-750);
+    padding: 0.5rem 0;
 }
 
 .postContainer:visited{
@@ -49,6 +50,7 @@
 .firstLine{
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 0.5rem
 }
 

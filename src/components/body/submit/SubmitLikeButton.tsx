@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLikes } from "../../../redux/post/detail/defaultPostDetailSlice.tsx";
 import type { RootState } from "../../../redux/store.tsx";
 
-export function SubmitLikeButton() {
+interface SubmitLikeButtonProps {
+  className?: string;
+}
+
+export function SubmitLikeButton({ className }: SubmitLikeButtonProps) {
   const auth = useAuth();
   const { postId } = useParams();
   const likes = useSelector((state: RootState) => state.defaultPostDetailStatus.likes);
@@ -37,8 +41,8 @@ export function SubmitLikeButton() {
   if (likes === undefined) return <></>;
   return (
     <>
-      {likes.selfLiked && <button onClick={likePost}>좋아요 취소</button>}
-      {!likes.selfLiked && <button onClick={likePost}>좋아요</button>}
+      {likes.selfLiked && <button className={className} onClick={likePost}>좋아요 취소</button>}
+      {!likes.selfLiked && <button className={className} onClick={likePost}>좋아요</button>}
     </>
   );
 }

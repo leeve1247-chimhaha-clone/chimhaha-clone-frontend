@@ -11,7 +11,7 @@ import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
 import { DefaultSubmitBodyHeader } from "./header/DefaultSubmitBodyHeader.tsx";
 
-function CancelButton() {
+function CancelPostButton() {
   return <button className={styles.buttonCancel}>취소</button>;
 }
 
@@ -35,9 +35,11 @@ export function DefaultSubmitBody() {
     <div className={styles.container}>
       <DefaultSubmitBodyHeader />
       <Lexical ref={ref} postId={postId !== null ? postId : undefined} />
+      <div className={styles.vote}>투표설정</div>
+      <div className={styles.categoryFixed}>태그</div>
       <div className={styles.tail}>
         <SubmitPostButton ref={ref} />
-        <CancelButton />
+        <CancelPostButton />
       </div>
     </div>
   );

@@ -36,9 +36,9 @@ export function Lexical({ readOnly = false, postId = undefined, ref }: LexicalPr
         editable: !readOnly,
       }}
     >
-      <div className={styles.editorContainer}>
+      <div className={`${styles.editorContainer} ${readOnly ?  styles.editorContainerReadOnly : ""}`}>
         {!readOnly && <ToolbarPlugin />}
-        <div className={styles.editorInner}>
+        <div className={`${styles.editorInner} ${readOnly ?  styles.editorInnerReadOnly : ""}`}>
           <RichTextPlugin
             contentEditable={
               <ContentEditable

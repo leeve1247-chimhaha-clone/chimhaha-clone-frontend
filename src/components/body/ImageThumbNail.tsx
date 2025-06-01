@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "../react-query/queryKeys.tsx";
-import { CData } from "../../credential/data.ts";
+import { queryKeys } from "../../react-query/queryKeys.tsx";
+import { CData } from "../../../credential/data.ts";
 import axios from "axios";
 
 interface ImageThumbNailProps extends HTMLAttributes<HTMLImageElement> {

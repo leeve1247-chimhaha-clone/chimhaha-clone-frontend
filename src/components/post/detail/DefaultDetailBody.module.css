@@ -123,10 +123,39 @@
 
 .postContainer {
   padding: 0.5rem 1rem;
+  margin: 0 10rem;
 }
 
 .modalOpenContainer {
   display: flex;
   justify-content: center;
   position: relative;
+}
+
+.containerRow{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.containerRow2{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.button{
+  gap: 0.25rem;
+  border-radius: 1rem;
+  background: var(--color-gray-700);
+  padding: 0.5rem 0.8rem;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.button:hover{
+  background: var(--color-gray-600);
 }

@@ -8,7 +8,7 @@ export function Header() {
   return (
     <div className={cssClass.container}>
       <HeaderMain />
-      <HeaderDropDown/>
+      <HeaderDropDown />
       <HeaderSub category={HeaderSubCategory.favorite} />
       <HeaderSub category={HeaderSubCategory.recent} />
     </div>

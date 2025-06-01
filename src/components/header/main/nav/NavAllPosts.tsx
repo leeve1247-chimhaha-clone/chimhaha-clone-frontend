@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { setHeaderDropDownStatus } from "../../../../redux/dropDown/dropDownSlice.tsx";
 import { useNavigate } from "react-router-dom";
-import { chevronUpCircleOutline } from "ionicons/icons";
+import { chevronDownCircleOutline } from "ionicons/icons";
 import { IonIcon } from "@ionic/react";
 
 export function NavAllPosts() {
@@ -11,10 +11,10 @@ export function NavAllPosts() {
     <button
       onClick={() => {
         dispatch(setHeaderDropDownStatus(""));
-        navigate("/All")
+        navigate("/All");
       }}
     >
-      전체글<IonIcon icon={chevronUpCircleOutline} />
+      전체글
     </button>
   );
 }

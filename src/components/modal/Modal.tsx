@@ -10,6 +10,7 @@ export function Modal({ modalOpen, handleModalClose, children, className }: Moda
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        setTimeout(() => handleModalClose(), 0);
         handleModalClose();
       }
     };
