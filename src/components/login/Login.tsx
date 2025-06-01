@@ -5,12 +5,13 @@ import { setNickName } from "../../redux/account/accountSlice.tsx";
 import { ImageData } from "../../../credential/data.ts";
 import axios from "axios";
 import type { RootState } from "../../redux/store.tsx";
-import { Person } from "react-bootstrap-icons";
+import { BoxArrowInRight, BoxArrowLeft, PersonFill } from "react-bootstrap-icons";
 
 export function Login() {
   const auth = useAuth();
   const dispatch = useDispatch();
   const nickName = useSelector((state: RootState) => state.accountStatus.nickName);
+
   async function fetchMeals() {
     const axiosResponse = await axios.get(ImageData.baseUrl + "/getMyNickName", {
       headers: {
@@ -26,16 +27,14 @@ export function Login() {
 
   if (auth.isLoading) {
     return (
-      <section className={cssClass.section}>
-        <ul className={cssClass.list}>
-          <div>로그인 중...</div>;
-        </ul>
-      </section>
+      <div className={`${cssClass.button} ${cssClass.notButton}`}>
+        <div>로그인 중...</div>
+      </div>
     );
   }
-
   if (auth.error) {
-    return <div>에러 발생... {auth.error.message}</div>;
+    window.location.reload();
+    return <div className={`${cssClass.button} ${cssClass.notButton}`}>로그인 실패...</div>;
   }
   if (auth.isAuthenticated) {
     if (nickName === "" && auth.user?.access_token !== undefined) {
@@ -51,6 +50,7 @@ export function Login() {
             void auth.removeUser();
           }}
         >
+          <BoxArrowLeft />
           로그아웃
         </button>
       </div>
@@ -59,10 +59,11 @@ export function Login() {
   return (
     <div className={cssClass.container}>
       <button className={cssClass.button}>
-        <Person />
+        <PersonFill />
         <div>회원가입</div>
       </button>
       <button className={cssClass.button} onClick={() => void auth.signinPopup()}>
+        <BoxArrowInRight />
         <div>로그인</div>
       </button>
     </div>

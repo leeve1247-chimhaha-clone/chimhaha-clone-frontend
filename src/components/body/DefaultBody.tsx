@@ -17,6 +17,7 @@ export function DefaultBody() {
   const { data, error } = useQuery({ queryKey: [...queryKeys.PostList, category], queryFn: fetchPostList });
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
+
   async function fetchPostList() {
     return axios
       .get<PostItemProps[]>(CData.local_backend + "/posts?category=" + category)
@@ -39,17 +40,22 @@ export function DefaultBody() {
   return (
     <>
       <div className={styles.container}>
-        <h2 className={styles.h2}>{`${korean !== undefined ? korean : "???"} 게시판`}</h2>
+        {korean !== undefined && <h2 className={styles.h2}>{korean} 게시판</h2>}
+        {category.toLowerCase() === "all" && <h2 className={styles.h2}>전체 게시판</h2>}
+        {category.toLowerCase() === "" && <h2 className={styles.h2}>인기 게시판</h2>}
         <div>
           {data.map((post, index) => (
             <DefaultPostComponent key={index} post={post} />
           ))}
         </div>
-        <div className={styles.tailContainer}>
-          <button onClick={goToSubmit} className={styles.button}>
-            글쓰기
-          </button>
-        </div>
+
+        {category.toLowerCase() !== "" && (
+          <div className={styles.tailContainer}>
+            <button onClick={goToSubmit} className={styles.button}>
+              글쓰기
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

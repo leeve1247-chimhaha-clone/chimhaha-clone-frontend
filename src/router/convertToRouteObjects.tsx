@@ -38,7 +38,7 @@ export function convertToRouteObjects(routes: RawRouteConfig[]): RouteObject[] {
       element: <DefaultBody />,
     })
     .concat({
-      path: "/BEST",
+      path: "",
       element: <DefaultBody/>
     })
   ;

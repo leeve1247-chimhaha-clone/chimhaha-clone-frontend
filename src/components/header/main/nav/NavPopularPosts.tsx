@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { setHeaderDropDownStatus } from "../../../../redux/dropDown/dropDownSlice.tsx";
 import { useNavigate } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
-import { chevronUpCircleOutline } from "ionicons/icons";
+import { chevronDownCircleOutline } from "ionicons/icons";
 
 export function NavPopularPosts() {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export function NavPopularPosts() {
         navigate("/");
       }}
     >
-      인기글<IonIcon icon={chevronUpCircleOutline} />
+      인기글<IonIcon icon={chevronDownCircleOutline} />
     </button>
   );
 }

@@ -8,9 +8,7 @@
 .list button {
   color: var(--color-gray-000);
   align-items: center;
-}
-
-.list button svg{
+  gap: 0.2rem;
 }
 
 .navContainer {

@@ -5,33 +5,33 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
-import {mergeRegister} from '@lexical/utils';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { mergeRegister } from "@lexical/utils";
 import {
-    $getSelection,
-    $isRangeSelection,
-    CAN_REDO_COMMAND,
-    CAN_UNDO_COMMAND,
-    FORMAT_ELEMENT_COMMAND,
-    FORMAT_TEXT_COMMAND,
-    REDO_COMMAND,
-    SELECTION_CHANGE_COMMAND,
-    UNDO_COMMAND,
-} from 'lexical';
-import {useCallback, useEffect, useRef, useState} from 'react';
+  $getSelection,
+  $isRangeSelection,
+  CAN_REDO_COMMAND,
+  CAN_UNDO_COMMAND,
+  FORMAT_ELEMENT_COMMAND,
+  FORMAT_TEXT_COMMAND,
+  REDO_COMMAND,
+  SELECTION_CHANGE_COMMAND,
+  UNDO_COMMAND,
+} from "lexical";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
-    ArrowClockwise, ArrowCounterclockwise,
-    Justify,
-    TextCenter,
-    TextLeft,
-    TextRight, TypeBold,
-    TypeItalic,
-    TypeStrikethrough,
-    TypeUnderline
+  ArrowClockwise,
+  ArrowCounterclockwise,
+  Justify,
+  TextCenter,
+  TextLeft,
+  TextRight,
+  TypeBold,
+  TypeItalic,
+  TypeStrikethrough,
+  TypeUnderline,
 } from "react-bootstrap-icons";
 import style from "./ToolbarPlugin.module.css";
-import type { InsertImagePayload } from "./ImagePlugin.tsx";
-import {INSERT_IMAGE_COMMAND} from "../commands/INSERT_IMAGE_COMMAND.tsx";
 
 const LowPriority = 1;
 
@@ -95,10 +95,6 @@ export default function ToolbarPlugin() {
         );
     }, [editor, $updateToolbar]);
 
-    const onClick = (payload: InsertImagePayload) => {
-        editor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
-    };
-
     return (
         <div className={style.toolbar} ref={toolbarRef}>
             <button
@@ -150,7 +146,7 @@ export default function ToolbarPlugin() {
                 className={`${style.toolbarItemButton} ${style.spaced} ${isStrikethrough ? style.active : ''}`}
             >
                 <TypeStrikethrough className={style.toolbarItemIcon}/>
-              
+
             </button>
             <Divider/>
             <button
@@ -179,15 +175,6 @@ export default function ToolbarPlugin() {
             </button>
             <button onClick={() => {
                 editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify');
-            }} className={style.toolbarItemButton}>
-                <Justify className={style.toolbarItemIcon}/>
-            </button>
-            <Divider/>
-            <button onClick={() => {
-                onClick({
-                    altText: "Pink flowers",
-                    src: "https://dummyimage.com/600x400/000/fff"
-                })
             }} className={style.toolbarItemButton}>
                 <Justify className={style.toolbarItemIcon}/>
             </button>

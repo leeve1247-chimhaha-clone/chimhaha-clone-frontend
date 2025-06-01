@@ -8,6 +8,7 @@ import { CommentComponents } from "./CommentComponents.tsx";
 import type { CommentProps } from "./CommentProps.tsx";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/store.tsx";
+import style from "./CommentComponent.module.css";
 
 export function CommentListComponent() {
   const commentPageNum = useSelector((state: RootState) => state.commentRootComponentStatus.commentPage);
@@ -37,10 +38,10 @@ export function CommentListComponent() {
   if (pageSize === undefined) return <></>;
   if (postId === undefined) return <div>Fuck!</div>;
   return (
-    <>
+    <div className={style.marginBottom}>
       {pageSize !== 0 && <CommentPageButtons pageSize={pageSize} id={"top"} />}
       {data?.length !== undefined && data?.length > 0 && <CommentComponents postId={postId} comments={data} />}
       {pageSize !== 0 && <CommentPageButtons pageSize={pageSize} id={"bottom"} />}
-    </>
+    </div>
   );
 }
