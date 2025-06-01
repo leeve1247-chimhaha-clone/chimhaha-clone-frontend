@@ -1,5 +1,5 @@
 import cssClass from "../CommentComponent.module.css";
-import { Modal } from "../../modal/Modal.tsx";
+import { Modal } from "../../utils/modal/Modal.tsx";
 import { useDispatch } from "react-redux";
 import { setEditableCommentId, setInitialCommentState } from "../../../redux/comment/commentRootComponentSlice.tsx";
 import { useState } from "react";

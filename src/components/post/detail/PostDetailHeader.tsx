@@ -2,11 +2,11 @@ import type { PostDetailProps } from "./PostDetailProps.tsx";
 import cssClass from "./PostDetail.module.css";
 import { Dot, HandThumbsUp, ThreeDotsVertical } from "react-bootstrap-icons";
 import { CreatedDate } from "../../../utils/CreatedDate.tsx";
-import { Modal } from "../../modal/Modal.tsx";
+import { Modal } from "../../utils/modal/Modal.tsx";
 import { useState } from "react";
 import { type UIMatch, useNavigate } from "react-router-dom";
 import { useMatches } from "react-router";
-import { SubmitDeleteButton } from "../../body/submit/SubmitDeleteButton.tsx";
+import { PostSubmitDeleteButton } from "../submit/PostSubmitDeleteButton.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { setLikes } from "../../../redux/post/detail/defaultPostDetailSlice.tsx";
 import type { RootState } from "../../../redux/store.tsx";
@@ -82,7 +82,7 @@ export function PostDetailHeader({ data }: { data: PostDetailProps }) {
             </button>
             <Modal className={cssClass.modal} modalOpen={isModalOpen} handleModalClose={closeModal}>
               <button onClick={navigateToEdit}>수정</button>
-              <SubmitDeleteButton />
+              <PostSubmitDeleteButton />
             </Modal>
           </div>
         </div>
