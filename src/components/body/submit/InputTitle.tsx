@@ -3,14 +3,14 @@ import { useDispatch } from "react-redux";
 import { setTitle } from "../../../redux/post/submit/submitPostSlice.tsx";
 import styles from "./DefaultSubmitBody.module.css";
 import { useQueryClient } from "@tanstack/react-query";
-import type { DefaultPostDetailProps } from "../../post/detail/DefaultPostDetailProps.tsx";
+import type { PostDetailProps } from "../../post/detail/PostDetailProps.tsx";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 
 export function InputTitle() {
   const queryParams = new URLSearchParams(location.search);
   const postId = queryParams.get("postId");
   const queryClient = useQueryClient();
-  const postDetailProps = queryClient.getQueryData<DefaultPostDetailProps>([...queryKeys.PostDetail, postId]);
+  const postDetailProps = queryClient.getQueryData<PostDetailProps>([...queryKeys.PostDetail, postId]);
   const [onChangeText, setOnChangeText] = useState(postDetailProps?.title === undefined ? "" : postDetailProps?.title);
   const dispatch = useDispatch();
 

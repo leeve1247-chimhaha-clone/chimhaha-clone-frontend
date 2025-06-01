@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import styles from "./DefaultBody.module.css";
-import { DefaultPostComponent } from "./DefaultPostComponent.tsx";
+import styles from "./PostList.module.css";
+import { PostListComponent } from "./PostListComponent.tsx";
 import axios from "axios";
-import { CData } from "../../../credential/data.ts";
+import { CData } from "../../../../credential/data.ts";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../../react-query/queryKeys.tsx";
+import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import { useMatches, useParams } from "react-router";
-import type { RawRouteConfig } from "../../router/convertToRouteObjects.tsx";
-import type { PostItemProps } from "./PostItemProps.tsx";
+import type { RawRouteConfig } from "../../../router/convertToRouteObjects.tsx";
+import type { PostListComponentProps } from "./PostListComponentProps.tsx";
 
-export function DefaultBody() {
+export function PostListComponents() {
   const navigate = useNavigate();
   useParams();
   const matches = useMatches();
@@ -20,7 +20,7 @@ export function DefaultBody() {
 
   async function fetchPostList() {
     return axios
-      .get<PostItemProps[]>(CData.local_backend + "/posts?category=" + category)
+      .get<PostListComponentProps[]>(CData.local_backend + "/posts?category=" + category)
       .then((res) => {
         return res.data;
       })
@@ -45,7 +45,7 @@ export function DefaultBody() {
         {category.toLowerCase() === "" && <h2 className={styles.h2}>인기 게시판</h2>}
         <div>
           {data.map((post, index) => (
-            <DefaultPostComponent key={index} post={post} />
+            <PostListComponent key={index} post={post} />
           ))}
         </div>
 
