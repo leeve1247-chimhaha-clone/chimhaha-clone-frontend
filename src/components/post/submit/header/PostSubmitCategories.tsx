@@ -1,11 +1,11 @@
-import styles from "../DefaultSubmitBody.module.css";
+import styles from "../PostSubmit.module.css";
 import { ChevronDown } from "react-bootstrap-icons";
-import { SubmitBodyMainCategory } from "./SubmitBodyMainCategory.tsx";
+import { PostSubmitMainCategory } from "./PostSubmitMainCategory.tsx";
 
-export function DefaultSubmitBodyCategories() {
+export function PostSubmitCategories() {
   return (
     <div className={styles.categories}>
-      <SubmitBodyMainCategory />
+      <PostSubmitMainCategory />
       <button className={`${styles.category} ${styles.categoryInactive}`}>
         <div>카테고리 없음</div>
         <div>

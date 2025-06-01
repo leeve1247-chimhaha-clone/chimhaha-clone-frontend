@@ -1,8 +1,8 @@
 import { useAuth } from "react-oidc-context";
 import type { RefObject } from "react";
 import type { LexicalEditor } from "lexical";
-import { clearImageSrcInEditorState } from "../../body/submit/functions/clearImageSrcInEditorState.tsx";
-import { isEmpty } from "../../body/submit/IsEmpty.tsx";
+import { clearImageSrcInEditorState } from "../../post/submit/functions/clearImageSrcInEditorState.ts";
+import { isEmpty } from "../../post/submit/functions/isEmpty.ts";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
 import { useDispatch } from "react-redux";

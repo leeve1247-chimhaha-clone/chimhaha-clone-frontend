@@ -1,11 +1,11 @@
 import { useQueryClient } from "@tanstack/react-query";
 import type { RawRouteConfig } from "../../../../router/convertToRouteObjects.tsx";
 import { queryKeys } from "../../../../react-query/queryKeys.tsx";
-import styles from "../DefaultSubmitBody.module.css";
+import styles from "../PostSubmit.module.css";
 import { useDispatch } from "react-redux";
 import { setCategory } from "../../../../redux/post/submit/submitPostSlice.tsx";
 
-export function SubmitBodyMainCategoryModalList({ handleModalClose }: { handleModalClose: () => void }) {
+export function PostSubmitMainCategoryModalList({ handleModalClose }: { handleModalClose: () => void }) {
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
   const mainCategories = queryData?.map((rawRouteConfig) => {

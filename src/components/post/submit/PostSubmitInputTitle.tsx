@@ -1,12 +1,12 @@
 import { type ChangeEvent, type KeyboardEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../../redux/post/submit/submitPostSlice.tsx";
-import styles from "./DefaultSubmitBody.module.css";
+import styles from "./PostSubmit.module.css";
 import { useQueryClient } from "@tanstack/react-query";
-import type { PostDetailProps } from "../../post/detail/PostDetailProps.tsx";
+import type { PostDetailProps } from "../detail/PostDetailProps.tsx";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 
-export function InputTitle() {
+export function PostSubmitInputTitle() {
   const queryParams = new URLSearchParams(location.search);
   const postId = queryParams.get("postId");
   const queryClient = useQueryClient();
