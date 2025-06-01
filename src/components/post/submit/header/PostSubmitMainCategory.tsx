@@ -1,8 +1,8 @@
 import { useState } from "react";
-import styles from "../DefaultSubmitBody.module.css";
+import styles from "../PostSubmit.module.css";
 import { ChevronDown } from "react-bootstrap-icons";
-import { Modal } from "../../../modal/Modal.tsx";
-import { SubmitBodyMainCategoryModalList } from "./SubmitBodyMainCategoryModalList.tsx";
+import { Modal } from "../../../utils/modal/Modal.tsx";
+import { PostSubmitMainCategoryModalList } from "./PostSubmitMainCategoryModalList.tsx";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../../redux/store.tsx";
 import type { RawRouteConfig } from "../../../../router/convertToRouteObjects.tsx";
@@ -10,7 +10,7 @@ import { queryKeys } from "../../../../react-query/queryKeys.tsx";
 import { useQueryClient } from "@tanstack/react-query";
 import { useMatches } from "react-router";
 
-export function SubmitBodyMainCategory() {
+export function PostSubmitMainCategory() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const category = useSelector((state: RootState)=> state.submitPostStatus.category);
   const queryData = useQueryClient().getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
@@ -39,7 +39,7 @@ export function SubmitBodyMainCategory() {
         </div>
       </button>
       <Modal className={styles.categoryList} modalOpen={isModalOpen} handleModalClose={handleModalClose}>
-        <SubmitBodyMainCategoryModalList handleModalClose = {handleModalClose} />
+        <PostSubmitMainCategoryModalList handleModalClose = {handleModalClose} />
       </Modal>
     </div>
   );

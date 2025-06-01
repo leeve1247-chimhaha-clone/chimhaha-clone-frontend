@@ -4,7 +4,7 @@ import { useAuth } from "react-oidc-context";
 import { useMatches, useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
-export function SubmitDeleteButton() {
+export function PostSubmitDeleteButton() {
   const auth = useAuth();
   const { postId } = useParams();
   const matches = useMatches();

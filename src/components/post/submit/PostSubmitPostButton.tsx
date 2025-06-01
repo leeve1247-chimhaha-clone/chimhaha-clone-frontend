@@ -9,12 +9,12 @@ import { setCategory } from "../../../redux/post/submit/submitPostSlice.tsx";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
-import styles from "./DefaultSubmitBody.module.css";
-import { clearImageSrcInEditorState } from "./functions/clearImageSrcInEditorState.tsx";
-import { isEmpty } from "./IsEmpty.tsx";
+import styles from "./PostSubmit.module.css";
+import { clearImageSrcInEditorState } from "./functions/clearImageSrcInEditorState.ts";
+import { isEmpty } from "./functions/isEmpty.ts";
 import type { RootState } from "../../../redux/store.tsx";
 
-export function SubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undefined> }) {
+export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undefined> }) {
   const selector = useSelector((state: RootState) => state.submitPostStatus);
   const dispatch = useDispatch();
   const matches = useMatches();

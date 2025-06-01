@@ -1,21 +1,21 @@
 import { Lexical } from "../../wysiwyg/lexical/Lexical.tsx";
-import { SubmitPostButton } from "./SubmitPostButton.tsx";
+import { PostSubmitPostButton } from "./PostSubmitPostButton.tsx";
 import { useRef } from "react";
 import type { LexicalEditor } from "lexical";
 import { useLocation } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
-import type { DefaultPostDetailProps } from "../../post/detail/DefaultPostDetailProps.tsx";
-import styles from "./DefaultSubmitBody.module.css";
+import type { PostDetailProps } from "../detail/PostDetailProps.tsx";
+import styles from "./PostSubmit.module.css";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
-import { DefaultSubmitBodyHeader } from "./header/DefaultSubmitBodyHeader.tsx";
+import { PostSubmitHeader } from "./header/PostSubmitHeader.tsx";
 
 function CancelPostButton() {
   return <button className={styles.buttonCancel}>취소</button>;
 }
 
-export function DefaultSubmitBody() {
+export function PostSubmit() {
   const ref = useRef<LexicalEditor>(undefined);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -23,7 +23,7 @@ export function DefaultSubmitBody() {
 
   async function fetchPostDetail() {
     if (postId === null) return "";
-    return axios.get<DefaultPostDetailProps>(CData.local_backend + "/posts/detail?num=" + postId).then((res) => {
+    return axios.get<PostDetailProps>(CData.local_backend + "/posts/detail?num=" + postId).then((res) => {
       return res.data;
     });
   }
@@ -33,12 +33,12 @@ export function DefaultSubmitBody() {
   if (error) return <div>error</div>;
   return (
     <div className={styles.container}>
-      <DefaultSubmitBodyHeader />
+      <PostSubmitHeader />
       <Lexical ref={ref} postId={postId !== null ? postId : undefined} />
       <div className={styles.vote}>투표설정</div>
       <div className={styles.categoryFixed}>태그</div>
       <div className={styles.tail}>
-        <SubmitPostButton ref={ref} />
+        <PostSubmitPostButton ref={ref} />
         <CancelPostButton />
       </div>
     </div>

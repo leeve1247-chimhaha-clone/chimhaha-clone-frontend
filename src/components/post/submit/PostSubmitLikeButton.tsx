@@ -10,7 +10,7 @@ interface SubmitLikeButtonProps {
   className?: string;
 }
 
-export function SubmitLikeButton({ className }: SubmitLikeButtonProps) {
+export function PostSubmitLikeButton({ className }: SubmitLikeButtonProps) {
   const auth = useAuth();
   const { postId } = useParams();
   const likes = useSelector((state: RootState) => state.defaultPostDetailStatus.likes);
