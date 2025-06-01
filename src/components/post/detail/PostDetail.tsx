@@ -4,21 +4,21 @@ import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import { CData } from "../../../../credential/data.ts";
 import axios from "axios";
 
-import type { DefaultPostDetailProps } from "./DefaultPostDetailProps.tsx";
-import cssClass from "./DefaultDetailBody.module.css";
+import type { PostDetailProps } from "./PostDetailProps.tsx";
+import cssClass from "./PostDetail.module.css";
 import { Lexical } from "../../wysiwyg/lexical/Lexical.tsx";
-import { DefaultDetailHeader } from "./DefaultDetailHeader.tsx";
+import { PostDetailHeader } from "./PostDetailHeader.tsx";
 import { CommentRootComponent } from "../../comment/CommentRootComponent.tsx";
 import { useAuth } from "react-oidc-context";
-import { SignedInFeaturesComponent } from "./SignedInFeaturesComponent.tsx";
+import { PostDetailAuthRequired } from "./PostDetailAuthRequired.tsx";
 
-export function DefaultDetailBody() {
+export function PostDetail() {
   const { postId } = useParams();
   const auth = useAuth();
   const access_token = auth?.user?.access_token;
 
   async function fetchPostDetail() {
-    return axios.get<DefaultPostDetailProps>(CData.local_backend + "/posts/detail?num=" + postId).then((res) => {
+    return axios.get<PostDetailProps>(CData.local_backend + "/posts/detail?num=" + postId).then((res) => {
       return res.data;
     });
   }
@@ -32,12 +32,12 @@ export function DefaultDetailBody() {
   return (
     <>
       <div className={cssClass.postContainer}>
-        <DefaultDetailHeader data={data} />
+        <PostDetailHeader data={data} />
         <>
           {isLoading && <div>Loading...</div>}
           {!isLoading && <Lexical readOnly={true} postId={postId} />}
         </>
-        {access_token && <SignedInFeaturesComponent />}
+        {access_token && <PostDetailAuthRequired />}
         <CommentRootComponent />
       </div>
     </>

@@ -1,8 +1,8 @@
 import type { RouteObject } from "react-router";
 import { App } from "../App.tsx";
-import { DefaultBody } from "../components/body/DefaultBody.tsx";
+import { PostListComponents } from "../components/post/list/PostListComponents.tsx";
 import { DefaultSubmitBody } from "../components/body/submit/DefaultSubmitBody.tsx";
-import { DefaultDetailBody } from "../components/post/detail/DefaultDetailBody.tsx";
+import { PostDetail } from "../components/post/detail/PostDetail.tsx";
 
 export interface RawRouteConfig {
   id: number;
@@ -20,7 +20,7 @@ export function convertToRouteObjects(routes: RawRouteConfig[]): RouteObject[] {
         children: [
           {
             path: "",
-            element: <DefaultBody />,
+            element: <PostListComponents />,
           },
           {
             path: "submit",
@@ -28,18 +28,18 @@ export function convertToRouteObjects(routes: RawRouteConfig[]): RouteObject[] {
           },
           {
             path: ":postId",
-            element: <DefaultDetailBody />,
+            element: <PostDetail />,
           },
         ],
       };
     })
     .concat({
       path: "/ALL",
-      element: <DefaultBody />,
+      element: <PostListComponents />,
     })
     .concat({
       path: "",
-      element: <DefaultBody/>
+      element: <PostListComponents/>
     })
     .concat({
       path:"/mypage",

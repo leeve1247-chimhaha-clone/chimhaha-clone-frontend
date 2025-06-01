@@ -1,8 +1,8 @@
-import cssClass from "./DefaultDetailBody.module.css";
+import cssClass from "./PostDetail.module.css";
 import { SubmitLikeButton } from "../../body/submit/SubmitLikeButton.tsx";
 import { ArrowLeft, ArrowRight, BookmarkFill, ListTask } from "react-bootstrap-icons";
 
-export function SignedInFeaturesComponent() {
+export function PostDetailAuthRequired() {
   return (
     <>
       <div className={cssClass.containerRow}>

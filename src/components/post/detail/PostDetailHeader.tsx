@@ -1,5 +1,5 @@
-import type { DefaultPostDetailProps } from "./DefaultPostDetailProps.tsx";
-import cssClass from "./DefaultDetailBody.module.css";
+import type { PostDetailProps } from "./PostDetailProps.tsx";
+import cssClass from "./PostDetail.module.css";
 import { Dot, HandThumbsUp, ThreeDotsVertical } from "react-bootstrap-icons";
 import { CreatedDate } from "../../../utils/CreatedDate.tsx";
 import { Modal } from "../../modal/Modal.tsx";
@@ -22,7 +22,7 @@ function getCategory(matches: UIMatch[]) {
   return matches[1].pathname.substring(1, matches[1].pathname.length);
 }
 
-export function DefaultDetailHeader({ data }: { data: DefaultPostDetailProps }) {
+export function PostDetailHeader({ data }: { data: PostDetailProps }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const matches = useMatches();

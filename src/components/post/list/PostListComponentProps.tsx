@@ -1,4 +1,4 @@
-export interface PostItemProps {
+export interface PostListComponentProps {
   title: string;
   content: string;
   username: string;

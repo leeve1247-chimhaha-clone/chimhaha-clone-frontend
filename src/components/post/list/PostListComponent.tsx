@@ -1,11 +1,11 @@
-import cssClass from "./PostComponent.module.css";
-import { CreatedDate } from "../../utils/CreatedDate.tsx";
+import cssClass from "./PostListComponent.module.css";
+import { CreatedDate } from "../../../utils/CreatedDate.tsx";
 import { NavLink } from "react-router-dom";
 import { ImageThumbNail } from "./ImageThumbNail.tsx";
-import type { PostItemProps } from "./PostItemProps.tsx";
+import type { PostListComponentProps } from "./PostListComponentProps.tsx";
 import { CircleFill, FileEarmarkText, HandThumbsUp } from "react-bootstrap-icons";
 
-export function DefaultPostComponent({ post }: { post: PostItemProps }) {
+export function PostListComponent({ post }: { post: PostListComponentProps }) {
   const postId = post.postId;
   return (
     <NavLink to={postId?.toString() ?? ""} className={cssClass.postContainer}>

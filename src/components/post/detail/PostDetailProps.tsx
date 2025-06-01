@@ -1,7 +1,7 @@
 import type { SerializedEditorState } from "lexical";
 import type { CommentProps } from "../../comment/CommentProps.tsx";
 
-export interface DefaultPostDetailProps {
+export interface PostDetailProps {
   title: string;
   username: string;
   postId: string;
