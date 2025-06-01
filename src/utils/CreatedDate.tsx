@@ -1,15 +1,15 @@
 import type { HTMLAttributes } from "react";
 
-interface CreatedDateProps extends HTMLAttributes<HTMLDivElement>{
-  date : string
+interface CreatedDateProps extends HTMLAttributes<HTMLDivElement> {
+  date: string;
 }
 
 export function CreatedDate({ date }: CreatedDateProps) {
-  const s = timeAgo(date);
-  return <>{s}</>;
+  const dateString = timeAgo(date);
+  return <>{dateString}</>;
 }
 
-export function timeAgo(dateString: string): string {
+function timeAgo(dateString: string): string {
   const date = new Date(dateString);
   const now = new Date();
   const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);

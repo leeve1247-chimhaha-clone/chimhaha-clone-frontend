@@ -1,7 +1,7 @@
 import type { DefaultPostDetailProps } from "./DefaultPostDetailProps.tsx";
 import cssClass from "./DefaultDetailBody.module.css";
 import { Dot, HandThumbsUp, ThreeDotsVertical } from "react-bootstrap-icons";
-import { timeAgo } from "../../../utils/CreatedDate.tsx";
+import { CreatedDate } from "../../../utils/CreatedDate.tsx";
 import { Modal } from "../../modal/Modal.tsx";
 import { useState } from "react";
 import { type UIMatch, useNavigate } from "react-router-dom";
@@ -22,35 +22,43 @@ function getCategory(matches: UIMatch[]) {
   return matches[1].pathname.substring(1, matches[1].pathname.length);
 }
 
-export function DefaultDetailHeader({data }: { data: DefaultPostDetailProps }) {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+export function DefaultDetailHeader({ data }: { data: DefaultPostDetailProps }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const matches = useMatches();
   const routerCategory = getCategory(matches);
   const postId = getPostId(matches);
-  const likes = useSelector((state:RootState) => state.defaultPostDetailStatus.likes);
-  const dispatch = useDispatch()
+  const likes = useSelector((state: RootState) => state.defaultPostDetailStatus.likes);
+  const dispatch = useDispatch();
   const rawRoute = useQueryClient().getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
-  const preRouterKorean = rawRoute?.find((x) => x.key === routerCategory)
-  const korean = preRouterKorean?.korean ?? "전체"
-  if (likes === undefined) dispatch(setLikes({
-    likes: data.likes,
-    selfLiked: data.selfLiked
-  }))
-  function openModal(){
-    setIsModalOpen(true)
+  const preRouterKorean = rawRoute?.find((x) => x.key === routerCategory);
+  const korean = preRouterKorean?.korean ?? "전체";
+  if (likes === undefined)
+    dispatch(
+      setLikes({
+        likes: data.likes,
+        selfLiked: data.selfLiked,
+      }),
+    );
+  function openModal() {
+    setIsModalOpen(true);
   }
-  function closeModal(){
-    setIsModalOpen(false)
+  function closeModal() {
+    setIsModalOpen(false);
   }
 
-  function navigateToEdit(){
-    navigate(`/${data.category}/submit?postId=${postId}`)
+  function navigateToEdit() {
+    navigate(`/${data.category}/submit?postId=${postId}`);
   }
-  if (likes === undefined) return <></>
+  if (likes === undefined) return <></>;
   return (
     <div className={cssClass.postHeader}>
-      <button className={cssClass.postNavigate} onClick={()=>{navigate(`/${routerCategory}`)}}>{`${korean} 게시글 >`}</button>
+      <button
+        className={cssClass.postNavigate}
+        onClick={() => {
+          navigate(`/${routerCategory}`);
+        }}
+      >{`${korean} 게시글 >`}</button>
       <div className={cssClass.postHeader2}>
         <div className={cssClass.postCategory}>{korean}</div>
         <div className={cssClass.postTitle}>{data.title}</div>
@@ -59,7 +67,7 @@ export function DefaultDetailHeader({data }: { data: DefaultPostDetailProps }) {
         <div className={cssClass.postHeader3left}>
           <div>{data.username}</div>
           <Dot className={cssClass.dot} />
-          <div>{timeAgo(data.createdDate)}</div>
+          <CreatedDate date={data.createdDate} />
           <Dot className={cssClass.dot} />
           {/*<FontAwesomeIcon icon={faEye} />*/}
           <div>{data.views}</div>
@@ -70,11 +78,11 @@ export function DefaultDetailHeader({data }: { data: DefaultPostDetailProps }) {
         <div>
           <div className={cssClass.modalOpenContainer}>
             <button className={cssClass.options} onClick={openModal}>
-              <ThreeDotsVertical/>
+              <ThreeDotsVertical />
             </button>
             <Modal className={cssClass.modal} modalOpen={isModalOpen} handleModalClose={closeModal}>
               <button onClick={navigateToEdit}>수정</button>
-              <SubmitDeleteButton/>
+              <SubmitDeleteButton />
             </Modal>
           </div>
         </div>
