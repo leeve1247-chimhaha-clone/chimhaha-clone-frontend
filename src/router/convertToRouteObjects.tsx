@@ -41,6 +41,10 @@ export function convertToRouteObjects(routes: RawRouteConfig[]): RouteObject[] {
       path: "",
       element: <DefaultBody/>
     })
+    .concat({
+      path:"/mypage",
+      element: <div></div>
+    })
   ;
 
   return [
