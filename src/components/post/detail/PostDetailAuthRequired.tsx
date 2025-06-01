@@ -1,12 +1,12 @@
 import cssClass from "./PostDetail.module.css";
-import { SubmitLikeButton } from "../../body/submit/SubmitLikeButton.tsx";
+import { PostSubmitLikeButton } from "../submit/PostSubmitLikeButton.tsx";
 import { ArrowLeft, ArrowRight, BookmarkFill, ListTask } from "react-bootstrap-icons";
 
 export function PostDetailAuthRequired() {
   return (
     <>
       <div className={cssClass.containerRow}>
-        <SubmitLikeButton className={cssClass.button} />
+        <PostSubmitLikeButton className={cssClass.button} />
         <button className={cssClass.button}>싫어요</button>
       </div>
       <div className={cssClass.containerRow}>
