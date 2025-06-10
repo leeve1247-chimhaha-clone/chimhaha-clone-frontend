@@ -1,17 +1,17 @@
-import cssClass from "../Header.module.css";
+import styles from "../Header.module.css";
 import { HeaderTitle } from "./title/HeaderTitle.tsx";
 import { HeaderNav } from "./nav/HeaderNav.tsx";
 import { Login } from "../../login/Login.tsx";
 
 export function HeaderMain() {
   return (
-    <div className={`${cssClass.subContainer} ${cssClass.subContainerFirst}`}>
+    <div className={`${styles.subContainer} ${styles.subContainerFirst}`}>
       <div>
-        <div className={cssClass.headerMainLeft}>
+        <div className={styles.headerMainLeft}>
           <HeaderTitle />
           <HeaderNav />
         </div>
-        <div className={cssClass.headerMainRight}>
+        <div className={styles.headerMainRight}>
           <Login />
         </div>
       </div>

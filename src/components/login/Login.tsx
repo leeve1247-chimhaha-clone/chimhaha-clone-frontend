@@ -1,4 +1,4 @@
-import cssClass from "./Login.module.css";
+import styles from "./Login.module.css";
 import { useAuth } from "react-oidc-context";
 import { useDispatch, useSelector } from "react-redux";
 import { setNickName } from "../../redux/account/accountSlice.tsx";
@@ -19,7 +19,7 @@ export function Login() {
         Authorization: `Bearer ${auth.user?.access_token}`,
       },
     });
-    console.log("axios response is :" + axiosResponse.data);
+    // console.log("axios response is :" + axiosResponse.data);
     if (axiosResponse.data !== "") {
       dispatch(setNickName(axiosResponse.data));
     }
@@ -27,24 +27,24 @@ export function Login() {
 
   if (auth.isLoading) {
     return (
-      <div className={`${cssClass.button} ${cssClass.notButton}`}>
+      <div className={`${styles.button} ${styles.notButton}`}>
         <div>로그인 중...</div>
       </div>
     );
   }
   if (auth.error) {
     window.location.reload();
-    return <div className={`${cssClass.button} ${cssClass.notButton}`}>로그인 실패...</div>;
+    return <div className={`${styles.button} ${styles.notButton}`}>로그인 실패...</div>;
   }
   if (auth.isAuthenticated) {
     if (nickName === "" && auth.user?.access_token !== undefined) {
       fetchMeals().then();
     }
     return (
-      <div className={cssClass.container}>
-        <button className={cssClass.button}>마이페이지</button>
+      <div className={styles.container}>
+        <button className={styles.button}>마이페이지</button>
         <button
-          className={cssClass.button}
+          className={styles.button}
           onClick={() => {
             void auth.signoutRedirect();
             void auth.removeUser();
@@ -57,12 +57,12 @@ export function Login() {
     );
   }
   return (
-    <div className={cssClass.container}>
-      <button className={cssClass.button}>
+    <div className={styles.container}>
+      <button className={styles.button}>
         <PersonFill />
         <div>회원가입</div>
       </button>
-      <button className={cssClass.button} onClick={() => void auth.signinPopup()}>
+      <button className={styles.button} onClick={() => void auth.signinPopup()}>
         <BoxArrowInRight />
         <div>로그인</div>
       </button>
