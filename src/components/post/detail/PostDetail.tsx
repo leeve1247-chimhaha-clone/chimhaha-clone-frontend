@@ -5,7 +5,7 @@ import { CData } from "../../../../credential/data.ts";
 import axios from "axios";
 
 import type { PostDetailProps } from "./PostDetailProps.tsx";
-import cssClass from "./PostDetail.module.css";
+import styles from "./PostDetail.module.css";
 import { Lexical } from "../../wysiwyg/lexical/Lexical.tsx";
 import { PostDetailHeader } from "./PostDetailHeader.tsx";
 import { CommentRootComponent } from "../../comment/CommentRootComponent.tsx";
@@ -31,7 +31,7 @@ export function PostDetail() {
   if (data === undefined) return <div>No data</div>;
   return (
     <>
-      <div className={cssClass.postContainer}>
+      <div className={styles.postContainer}>
         <PostDetailHeader data={data} />
         <>
           {isLoading && <div>Loading...</div>}

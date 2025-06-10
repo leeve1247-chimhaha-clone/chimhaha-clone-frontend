@@ -1,5 +1,5 @@
 import type { PostDetailProps } from "./PostDetailProps.tsx";
-import cssClass from "./PostDetail.module.css";
+import styles from "./PostDetail.module.css";
 import { Dot, HandThumbsUp, ThreeDotsVertical } from "react-bootstrap-icons";
 import { CreatedDate } from "../../../utils/CreatedDate.tsx";
 import { Modal } from "../../utils/modal/Modal.tsx";
@@ -52,35 +52,35 @@ export function PostDetailHeader({ data }: { data: PostDetailProps }) {
   }
   if (likes === undefined) return <></>;
   return (
-    <div className={cssClass.postHeader}>
+    <div className={styles.postHeader}>
       <button
-        className={cssClass.postNavigate}
+        className={styles.postNavigate}
         onClick={() => {
           navigate(`/${routerCategory}`);
         }}
       >{`${korean} 게시글 >`}</button>
-      <div className={cssClass.postHeader2}>
-        <div className={cssClass.postCategory}>{korean}</div>
-        <div className={cssClass.postTitle}>{data.title}</div>
+      <div className={styles.postHeader2}>
+        <div className={styles.postCategory}>{korean}</div>
+        <div className={styles.postTitle}>{data.title}</div>
       </div>
-      <div className={cssClass.postHeader3}>
-        <div className={cssClass.postHeader3left}>
+      <div className={styles.postHeader3}>
+        <div className={styles.postHeader3left}>
           <div>{data.username}</div>
-          <Dot className={cssClass.dot} />
+          <Dot className={styles.dot} />
           <CreatedDate date={data.createdDate} />
-          <Dot className={cssClass.dot} />
+          <Dot className={styles.dot} />
           {/*<FontAwesomeIcon icon={faEye} />*/}
           <div>{data.views}</div>
-          <Dot className={cssClass.dot} />
-          <HandThumbsUp className={cssClass.likes} />
-          <div className={cssClass.likes}>{likes.likes}</div>
+          <Dot className={styles.dot} />
+          <HandThumbsUp className={styles.likes} />
+          <div className={styles.likes}>{likes.likes}</div>
         </div>
         <div>
-          <div className={cssClass.modalOpenContainer}>
-            <button className={cssClass.options} onClick={openModal}>
+          <div className={styles.modalOpenContainer}>
+            <button className={styles.options} onClick={openModal}>
               <ThreeDotsVertical />
             </button>
-            <Modal className={cssClass.modal} modalOpen={isModalOpen} handleModalClose={closeModal}>
+            <Modal className={styles.modal} modalOpen={isModalOpen} handleModalClose={closeModal}>
               <button onClick={navigateToEdit}>수정</button>
               <PostSubmitDeleteButton />
             </Modal>

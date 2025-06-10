@@ -1,4 +1,4 @@
-import cssClass from "./PostListComponent.module.css";
+import styles from "./PostListComponent.module.css";
 import { CreatedDate } from "../../../utils/CreatedDate.tsx";
 import { NavLink } from "react-router-dom";
 import { ImageThumbNail } from "./ImageThumbNail.tsx";
@@ -8,28 +8,28 @@ import { CircleFill, FileEarmarkText, HandThumbsUp } from "react-bootstrap-icons
 export function PostListComponent({ post }: { post: PostListComponentProps }) {
   const postId = post.postId;
   return (
-    <NavLink to={postId?.toString() ?? ""} className={cssClass.postContainer}>
+    <NavLink to={postId?.toString() ?? ""} className={styles.postContainer}>
       {post.titleImageFileName ? (
-        <ImageThumbNail fileName={post.titleImageFileName} className={cssClass.imageThumbnailContainer} />
+        <ImageThumbNail fileName={post.titleImageFileName} className={styles.imageThumbnailContainer} />
       ) : (
-        <FileEarmarkText className={cssClass.imageThumbnailContainer} />
+        <FileEarmarkText className={styles.imageThumbnailContainer} />
       )}
-      <div className={cssClass.rightSection}>
-        <div className={cssClass.firstLine}>
-          <div className={cssClass.title}>{post.title}</div>
-          <div className={cssClass.commentsCount}>{post.commentsCount}</div>
+      <div className={styles.rightSection}>
+        <div className={styles.firstLine}>
+          <div className={styles.title}>{post.title}</div>
+          <div className={styles.commentsCount}>{post.commentsCount}</div>
         </div>
-        <div className={cssClass.secondLine}>
+        <div className={styles.secondLine}>
           <div>{post.username}</div>
-          <CircleFill className={cssClass.dot} />
+          <CircleFill className={styles.dot} />
           <CreatedDate date={post.createdDate} />
-          <CircleFill className={cssClass.dot} />
+          <CircleFill className={styles.dot} />
           <div>{post.views}</div>
           {post.likes > 0 && (
             <>
-              <CircleFill className={cssClass.dot} />
-              <HandThumbsUp className={cssClass.likes} />
-              <div className={cssClass.likes}>{post.likes}</div>
+              <CircleFill className={styles.dot} />
+              <HandThumbsUp className={styles.likes} />
+              <div className={styles.likes}>{post.likes}</div>
             </>
           )}
         </div>

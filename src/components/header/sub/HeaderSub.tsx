@@ -1,9 +1,9 @@
 import type { JSX } from "react";
-import cssClass from "../Header.module.css";
+import styles from "../Header.module.css";
 
 export function HeaderSub({ category }: { category: JSX.Element }) {
   return (
-    <div className={cssClass.subContainer}>
+    <div className={styles.subContainer}>
       <div>{category}</div>
     </div>
   );

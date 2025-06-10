@@ -1,4 +1,4 @@
-import cssClass from "./HeaderNav.module.css";
+import styles from "./HeaderNav.module.css";
 import { HeaderLevelZeroes } from "../../refactor/HeaderLevelZeroes.tsx";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -35,12 +35,12 @@ export function HeaderNav() {
   if (data === undefined) return <div>No data</div>;
   return (
     <>
-      <div className={cssClass.navContainer}>
-        <div className={cssClass.list}>
+      <div className={styles.navContainer}>
+        <div className={styles.list}>
           <NavPopularPosts />
           <NavAllPosts />
           <HeaderLevelZeroes theRouterDataList={data} />
-          <button className={cssClass.myButton}/>
+          <button className={styles.myButton}/>
         </div>
       </div>
     </>
