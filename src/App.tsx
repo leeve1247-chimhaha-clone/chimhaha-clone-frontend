@@ -20,7 +20,7 @@ export function App() {
   }>(undefined);
   const dispatch = useDispatch();
 
-  function isSubmit(matches: UIMatch[] | undefined) {
+  function isSubmitPage(matches: UIMatch[] | undefined) {
     if (matches === undefined) return false;
     if (matches.length < 3) return false;
     return matches[2].pathname.substring(matches[1].pathname.length, matches[2].pathname.length) === "/submit";
@@ -32,7 +32,7 @@ export function App() {
     if (prevParams ? prevParams["postId"] : undefined !== params["postId"]) {
       dispatch(initComments());
     }
-    if (isSubmit(prevMatches) && !isSubmit(matches)) {
+    if (isSubmitPage(prevMatches) && !isSubmitPage(matches)) {
       dispatch(initSubmits());
     }
     ref.current = { params: params, matches: matches };

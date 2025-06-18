@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./PostList.module.css";
-import { PostListComponent } from "./PostListComponent.tsx";
+import { PostCard } from "./PostCard/PostCard.tsx";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import { useMatches, useParams } from "react-router";
 import type { RawRouteConfig } from "../../../router/convertToRouteObjects.tsx";
-import type { PostListComponentProps } from "./PostListComponentProps.tsx";
+import type { PostProps } from "./PostProps.tsx";
 
 export function PostListComponents() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export function PostListComponents() {
 
   async function fetchPostList() {
     return axios
-      .get<PostListComponentProps[]>(CData.local_backend + "/posts?category=" + category)
+      .get<PostProps[]>(CData.local_backend + "/posts?category=" + category)
       .then((res) => {
         return res.data;
       })
@@ -45,7 +45,7 @@ export function PostListComponents() {
         {category.toLowerCase() === "" && <h2 className={styles.h2}>인기 게시판</h2>}
         <div>
           {data.map((post, index) => (
-            <PostListComponent key={index} post={post} />
+            <PostCard key={index} post={post} />
           ))}
         </div>
 
