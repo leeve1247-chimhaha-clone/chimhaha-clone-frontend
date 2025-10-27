@@ -1,11 +1,11 @@
 import styles from "./HeaderNav.module.css";
-import { HeaderLevelZeroes } from "../../refactor/HeaderLevelZeroes.tsx";
-import { useQuery } from "@tanstack/react-query";
+import {HeaderLevelZeroes} from "../../refactor/HeaderLevelZeroes.tsx";
+import {useQuery} from "@tanstack/react-query";
 import axios from "axios";
-import { CData } from "../../../../../credential/data.ts";
-import { queryKeys } from "../../../../react-query/queryKeys.tsx";
-import { NavPopularPosts } from "./NavPopularPosts.tsx";
-import { NavAllPosts } from "./NavAllPosts.tsx";
+import {CData} from "../../../../../credential/data.ts";
+import {queryKeys} from "../../../../react-query/queryKeys.tsx";
+import {NavPopularPosts} from "./NavPopularPosts.tsx";
+import {NavAllPosts} from "./NavAllPosts.tsx";
 
 export interface routerDataTree {
   id: number;

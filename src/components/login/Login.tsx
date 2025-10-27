@@ -1,11 +1,11 @@
 import styles from "./Login.module.css";
-import { useAuth } from "react-oidc-context";
-import { useDispatch, useSelector } from "react-redux";
-import { setNickName } from "../../redux/account/accountSlice.tsx";
-import { ImageData } from "../../../credential/data.ts";
+import {useAuth} from "react-oidc-context";
+import {useDispatch, useSelector} from "react-redux";
+import {setNickName} from "../../redux/account/accountSlice.tsx";
+import {ImageData} from "../../../credential/data.ts";
 import axios from "axios";
-import type { RootState } from "../../redux/store.tsx";
-import { BoxArrowInRight, BoxArrowLeft, PersonFill } from "react-bootstrap-icons";
+import type {RootState} from "../../redux/store.tsx";
+import {BoxArrowInRight, BoxArrowLeft, PersonFill} from "react-bootstrap-icons";
 
 export function Login() {
   const auth = useAuth();

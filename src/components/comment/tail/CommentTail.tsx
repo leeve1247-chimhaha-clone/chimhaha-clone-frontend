@@ -1,10 +1,11 @@
 import cssClass from "../CommentComponent.module.css";
 import axios from "axios";
-import { CData } from "../../../../credential/data.ts";
-import { useAuth } from "react-oidc-context";
-import { useDispatch, useSelector } from "react-redux";
-import { setCommentLike } from "../../../redux/comment/commentRootComponentSlice.tsx";
-import type { RootState } from "../../../redux/store.tsx";
+import {CData} from "../../../../credential/data.ts";
+import {useAuth} from "react-oidc-context";
+import {useDispatch, useSelector} from "react-redux";
+import {setCommentLike} from "../../../redux/comment/commentRootComponentSlice.tsx";
+import type {RootState} from "../../../redux/store.tsx";
+
 function LikeThisCommentButton({ commentId }: { commentId: string; postId: string }) {
   const auth = useAuth();
   const dispatch = useDispatch();

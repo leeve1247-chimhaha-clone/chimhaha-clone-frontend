@@ -1,10 +1,10 @@
-import { useAuth } from "react-oidc-context";
+import {useAuth} from "react-oidc-context";
 import axios from "axios";
-import { CData } from "../../../../credential/data.ts";
-import { useDispatch } from "react-redux";
-import { setCommentPage } from "../../../redux/comment/commentRootComponentSlice.tsx";
-import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../../../react-query/queryKeys.tsx";
+import {CData} from "../../../../credential/data.ts";
+import {useDispatch} from "react-redux";
+import {setCommentPage} from "../../../redux/comment/commentRootComponentSlice.tsx";
+import {useQueryClient} from "@tanstack/react-query";
+import {queryKeys} from "../../../react-query/queryKeys.tsx";
 
 interface SubmitUpdateButton {
   postId: string;

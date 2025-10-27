@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { dropDownReducers } from "./dropDownReducers.tsx";
-import { dropDownInitialState } from "./dropDownInitialState.tsx";
+import {createSlice} from "@reduxjs/toolkit";
+import {dropDownReducers} from "./dropDownReducers.tsx";
+import {dropDownInitialState} from "./dropDownInitialState.tsx";
 
 export const dropDownSlice = createSlice({
   name: "headerDropDownStatus",

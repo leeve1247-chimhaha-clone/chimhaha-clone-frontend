@@ -1,5 +1,5 @@
 import React, {useRef} from "react";
-import type { LexicalEditor } from "lexical";
+import type {LexicalEditor} from "lexical";
 import {calculateZoomLevel} from "@lexical/utils";
 import style from "./ImageResizer.module.css"
 

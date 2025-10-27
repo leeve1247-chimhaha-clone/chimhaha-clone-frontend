@@ -1,14 +1,14 @@
-import { useAuth } from "react-oidc-context";
-import type { RefObject } from "react";
-import type { LexicalEditor } from "lexical";
-import { clearImageSrcInEditorState } from "../../post/submit/functions/clearImageSrcInEditorState.ts";
-import { isEmpty } from "../../post/submit/functions/isEmpty.ts";
+import {useAuth} from "react-oidc-context";
+import type {RefObject} from "react";
+import type {LexicalEditor} from "lexical";
+import {clearImageSrcInEditorState} from "../../post/submit/functions/clearImageSrcInEditorState.ts";
+import {isEmpty} from "../../post/submit/functions/isEmpty.ts";
 import axios from "axios";
-import { CData } from "../../../../credential/data.ts";
-import { useDispatch } from "react-redux";
-import { setCommentPage, setEditableCommentId } from "../../../redux/comment/commentRootComponentSlice.tsx";
-import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../../../react-query/queryKeys.tsx";
+import {CData} from "../../../../credential/data.ts";
+import {useDispatch} from "react-redux";
+import {setCommentPage, setEditableCommentId} from "../../../redux/comment/commentRootComponentSlice.tsx";
+import {useQueryClient} from "@tanstack/react-query";
+import {queryKeys} from "../../../react-query/queryKeys.tsx";
 
 interface SubmitUpdateButton {
   postId: string;

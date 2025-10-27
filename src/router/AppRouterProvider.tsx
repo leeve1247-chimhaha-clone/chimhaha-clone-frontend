@@ -1,10 +1,10 @@
-import { Suspense } from "react";
-import { convertToRouteObjects, type RawRouteConfig } from "./convertToRouteObjects.tsx";
+import {Suspense} from "react";
+import {convertToRouteObjects, type RawRouteConfig} from "./convertToRouteObjects.tsx";
 import axios from "axios";
-import { CData } from "../../credential/data.ts";
-import { createBrowserRouter, RouterProvider } from "react-router";
-import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "../react-query/queryKeys.tsx";
+import {CData} from "../../credential/data.ts";
+import {createBrowserRouter, RouterProvider} from "react-router";
+import {useQuery} from "@tanstack/react-query";
+import {queryKeys} from "../react-query/queryKeys.tsx";
 
 export function AppRouterProvider() {
   const { data, error, isLoading } = useQuery({ queryKey: queryKeys.RouterDataFlat, queryFn: fetchRouterDataFlat });

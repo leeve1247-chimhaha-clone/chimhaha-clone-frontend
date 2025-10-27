@@ -1,6 +1,6 @@
-import { $getNodeByKey, CLICK_COMMAND, COMMAND_PRIORITY_LOW, DRAGSTART_COMMAND, type NodeKey } from "lexical";
+import {$getNodeByKey, CLICK_COMMAND, COMMAND_PRIORITY_LOW, DRAGSTART_COMMAND, type NodeKey} from "lexical";
 
-import { type JSX, Suspense, useCallback, useEffect, useRef, useState } from "react";
+import {type JSX, Suspense, useCallback, useEffect, useRef, useState} from "react";
 import {useLexicalNodeSelection} from "@lexical/react/useLexicalNodeSelection";
 import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
 import {mergeRegister} from "@lexical/utils";

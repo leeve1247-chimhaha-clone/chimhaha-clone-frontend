@@ -1,4 +1,4 @@
-import type { InitialConfigType } from "@lexical/react/LexicalComposer";
+import type {InitialConfigType} from "@lexical/react/LexicalComposer";
 import {ParagraphNode, TextNode} from "lexical";
 import {ImageNode} from "../nodes/ImageNode.tsx";
 import ExampleTheme from "../ExampleTheme.tsx";

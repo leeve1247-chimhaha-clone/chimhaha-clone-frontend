@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { accountInitialState } from "./accountInitialState.tsx";
-import { accountReducers } from "./accountReducers.tsx";
+import {createSlice} from "@reduxjs/toolkit";
+import {accountInitialState} from "./accountInitialState.tsx";
+import {accountReducers} from "./accountReducers.tsx";
 
 export const accountSlice = createSlice({
   name: "account",

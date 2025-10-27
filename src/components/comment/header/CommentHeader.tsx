@@ -1,10 +1,10 @@
 import cssClass from "../CommentComponent.module.css";
-import { CommentHeaderLeft } from "./CommentHeaderLeft.tsx";
-import { CommentHeaderRight } from "./CommentHeaderRight.tsx";
-import type { CommentProps } from "../CommentProps.tsx";
-import { useDispatch, useSelector } from "react-redux";
-import { setCommentLike } from "../../../redux/comment/commentRootComponentSlice.tsx";
-import type { RootState } from "../../../redux/store.tsx";
+import {CommentHeaderLeft} from "./CommentHeaderLeft.tsx";
+import {CommentHeaderRight} from "./CommentHeaderRight.tsx";
+import type {CommentProps} from "../CommentProps.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import {setCommentLike} from "../../../redux/comment/commentRootComponentSlice.tsx";
+import type {RootState} from "../../../redux/store.tsx";
 
 export function CommentHeader(props: { comment: CommentProps; onClick: () => void; modalOpen: boolean; onClose: () => void }) {
   const dispatch = useDispatch();

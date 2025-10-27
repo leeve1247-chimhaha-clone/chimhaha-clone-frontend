@@ -5,31 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { mergeRegister } from "@lexical/utils";
+import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
+import {mergeRegister} from "@lexical/utils";
 import {
-  $getSelection,
-  $isRangeSelection,
-  CAN_REDO_COMMAND,
-  CAN_UNDO_COMMAND,
-  FORMAT_ELEMENT_COMMAND,
-  FORMAT_TEXT_COMMAND,
-  REDO_COMMAND,
-  SELECTION_CHANGE_COMMAND,
-  UNDO_COMMAND,
+    $getSelection,
+    $isRangeSelection,
+    CAN_REDO_COMMAND,
+    CAN_UNDO_COMMAND,
+    FORMAT_ELEMENT_COMMAND,
+    FORMAT_TEXT_COMMAND,
+    REDO_COMMAND,
+    SELECTION_CHANGE_COMMAND,
+    UNDO_COMMAND,
 } from "lexical";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {
-  ArrowClockwise,
-  ArrowCounterclockwise,
-  Justify,
-  TextCenter,
-  TextLeft,
-  TextRight,
-  TypeBold,
-  TypeItalic,
-  TypeStrikethrough,
-  TypeUnderline,
+    ArrowClockwise,
+    ArrowCounterclockwise,
+    Justify,
+    TextCenter,
+    TextLeft,
+    TextRight,
+    TypeBold,
+    TypeItalic,
+    TypeStrikethrough,
+    TypeUnderline,
 } from "react-bootstrap-icons";
 import style from "./ToolbarPlugin.module.css";
 
