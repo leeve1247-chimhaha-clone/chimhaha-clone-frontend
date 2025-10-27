@@ -41,6 +41,7 @@ export function PostListComponents() {
   return (
     <>
       <div className={styles.container}>
+        <PostListYoutubeCards/>
         {korean !== undefined && <h2 className={styles.h2}>{korean} 게시판</h2>}
         {category.toLowerCase() === "all" && <h2 className={styles.h2}>전체 게시판</h2>}
         {category.toLowerCase() === "" && <h2 className={styles.h2}>인기 게시판</h2>}
