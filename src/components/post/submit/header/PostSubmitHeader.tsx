@@ -1,6 +1,6 @@
 import styles from "../PostSubmit.module.css";
-import { PostSubmitCategories } from "./PostSubmitCategories.tsx";
-import { PostSubmitInputTitle } from "../PostSubmitInputTitle.tsx";
+import {PostSubmitCategories} from "./PostSubmitCategories.tsx";
+import {PostSubmitInputTitle} from "../PostSubmitInputTitle.tsx";
 
 export function PostSubmitHeader() {
   return (

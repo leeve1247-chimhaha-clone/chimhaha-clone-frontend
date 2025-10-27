@@ -1,4 +1,4 @@
-import type { SerializedEditorState, SerializedParagraphNode, SerializedTextNode } from "lexical";
+import type {SerializedEditorState, SerializedParagraphNode, SerializedTextNode} from "lexical";
 
 export function getFirstLine(content: SerializedEditorState) {
   if (content.root.children[0]?.type !== "paragraph") {

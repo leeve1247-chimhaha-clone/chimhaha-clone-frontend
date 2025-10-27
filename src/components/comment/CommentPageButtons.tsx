@@ -1,12 +1,12 @@
 import style from "./CommentComponent.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { type ChangeEvent, useEffect, useRef, useState } from "react";
-import { setCommentPage, setFocusedButton } from "../../redux/comment/commentRootComponentSlice.tsx";
-import { queryKeys } from "../../react-query/queryKeys.tsx";
-import { useQueryClient } from "@tanstack/react-query";
-import { useParams } from "react-router";
-import { Dot } from "react-bootstrap-icons";
-import type { RootState } from "../../redux/store.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import {type ChangeEvent, useEffect, useRef, useState} from "react";
+import {setCommentPage, setFocusedButton} from "../../redux/comment/commentRootComponentSlice.tsx";
+import {queryKeys} from "../../react-query/queryKeys.tsx";
+import {useQueryClient} from "@tanstack/react-query";
+import {useParams} from "react-router";
+import {Dot} from "react-bootstrap-icons";
+import type {RootState} from "../../redux/store.tsx";
 
 function CommentPageButton({ pageNum, id }: { pageNum: number; id?: string }) {
   const dispatch = useDispatch();

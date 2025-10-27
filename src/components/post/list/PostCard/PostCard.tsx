@@ -1,8 +1,8 @@
 import styles from "../PostListComponent.module.css";
-import { NavLink } from "react-router-dom";
-import type { PostProps } from "../PostProps.tsx";
-import { PostCardHeader } from "./PostCardHeader.tsx";
-import { PostCardBody } from "./PostCardBody.tsx";
+import {NavLink} from "react-router-dom";
+import type {PostProps} from "../PostProps.tsx";
+import {PostCardHeader} from "./PostCardHeader.tsx";
+import {PostCardBody} from "./PostCardBody.tsx";
 
 export function PostCard({ post }: { post: PostProps }) {
   const postId = post.postId;

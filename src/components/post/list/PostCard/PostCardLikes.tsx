@@ -1,5 +1,5 @@
-import type { PostProps } from "../PostProps.tsx";
-import { CircleFill, HandThumbsUp } from "react-bootstrap-icons";
+import type {PostProps} from "../PostProps.tsx";
+import {CircleFill, HandThumbsUp} from "react-bootstrap-icons";
 import styles from "../PostListComponent.module.css";
 
 export function PostCardLikes({ post }: { post: PostProps }) {

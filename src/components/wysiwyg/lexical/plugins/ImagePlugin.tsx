@@ -14,12 +14,13 @@ import {
     DRAGOVER_COMMAND,
     DRAGSTART_COMMAND,
     DROP_COMMAND,
-    getDOMSelectionFromTarget, type LexicalEditor
+    getDOMSelectionFromTarget,
+    type LexicalEditor
 } from "lexical";
-import { type ReactNode, useEffect } from "react";
+import {type ReactNode, useEffect} from "react";
 
 import {INSERT_IMAGE_COMMAND} from "../commands/INSERT_IMAGE_COMMAND.tsx";
-import { $createImageNode, $isImageNode, ImageNode, type ImagePayload } from "../nodes/ImageNode.tsx";
+import {$createImageNode, $isImageNode, ImageNode, type ImagePayload} from "../nodes/ImageNode.tsx";
 
 export type InsertImagePayload = Readonly<ImagePayload>;
 

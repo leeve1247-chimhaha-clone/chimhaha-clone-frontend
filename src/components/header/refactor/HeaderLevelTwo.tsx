@@ -1,7 +1,7 @@
-import type { routerDataTree } from "../main/nav/HeaderNav.tsx";
-import { useNavigate } from "react-router-dom";
-import { setHeaderDropDownStatus } from "../../../redux/dropDown/dropDownSlice.tsx";
-import { useDispatch } from "react-redux";
+import type {routerDataTree} from "../main/nav/HeaderNav.tsx";
+import {useNavigate} from "react-router-dom";
+import {setHeaderDropDownStatus} from "../../../redux/dropDown/dropDownSlice.tsx";
+import {useDispatch} from "react-redux";
 
 export function HeaderLevelTwo({ theRouterData }: { theRouterData: routerDataTree }) {
   const navigate = useNavigate();

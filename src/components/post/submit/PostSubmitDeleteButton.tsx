@@ -1,8 +1,8 @@
-import { CData } from "../../../../credential/data.ts";
+import {CData} from "../../../../credential/data.ts";
 import axios from "axios";
-import { useAuth } from "react-oidc-context";
-import { useMatches, useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
+import {useAuth} from "react-oidc-context";
+import {useMatches, useParams} from "react-router";
+import {useNavigate} from "react-router-dom";
 
 export function PostSubmitDeleteButton() {
   const auth = useAuth();

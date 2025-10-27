@@ -1,16 +1,16 @@
-import { LexicalComment } from "../wysiwyg/lexical/LexicalComment.tsx";
-import { useRef } from "react";
-import type { LexicalEditor } from "lexical";
-import { SubmitCommentButton } from "./buttons/SubmitCommentButton.tsx";
+import {LexicalComment} from "../wysiwyg/lexical/LexicalComment.tsx";
+import {useRef} from "react";
+import type {LexicalEditor} from "lexical";
+import {SubmitCommentButton} from "./buttons/SubmitCommentButton.tsx";
 import style from "./CommentComponent.module.css";
-import { useParams } from "react-router";
-import { CommentListComponent } from "./CommentListComponent.tsx";
-import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "../../react-query/queryKeys.tsx";
-import axios from "axios";
-import { CData } from "../../../credential/data.ts";
-import { useAuth } from "react-oidc-context";
 import styles from "./CommentComponent.module.css";
+import {useParams} from "react-router";
+import {CommentListComponent} from "./CommentListComponent.tsx";
+import {useQuery} from "@tanstack/react-query";
+import {queryKeys} from "../../react-query/queryKeys.tsx";
+import axios from "axios";
+import {CData} from "../../../credential/data.ts";
+import {useAuth} from "react-oidc-context";
 
 export function CommentRootComponent() {
   const ref = useRef<LexicalEditor | undefined>(undefined);

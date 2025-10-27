@@ -1,10 +1,10 @@
 import axios from "axios";
-import { ImageData } from "../../../../credential/data.ts";
-import { useAuth } from "react-oidc-context";
-import { useParams } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { setLikes } from "../../../redux/post/detail/defaultPostDetailSlice.tsx";
-import type { RootState } from "../../../redux/store.tsx";
+import {ImageData} from "../../../../credential/data.ts";
+import {useAuth} from "react-oidc-context";
+import {useParams} from "react-router";
+import {useDispatch, useSelector} from "react-redux";
+import {setLikes} from "../../../redux/post/detail/defaultPostDetailSlice.tsx";
+import type {RootState} from "../../../redux/store.tsx";
 
 interface SubmitLikeButtonProps {
   className?: string;

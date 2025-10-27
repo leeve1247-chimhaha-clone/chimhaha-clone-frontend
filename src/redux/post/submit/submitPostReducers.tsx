@@ -1,8 +1,8 @@
-import type { PayloadAction } from "@reduxjs/toolkit";
+import type {PayloadAction} from "@reduxjs/toolkit";
 
-import type { SubmitPostStateProps } from "./SubmitPostStateProps.tsx";
-import type { SerializedEditorState } from "lexical";
-import { submitPostInitialState } from "./submitPostInitialState.tsx";
+import type {SubmitPostStateProps} from "./SubmitPostStateProps.tsx";
+import type {SerializedEditorState} from "lexical";
+import {submitPostInitialState} from "./submitPostInitialState.tsx";
 
 export const submitPostReducers = {
   setTitle: (state: SubmitPostStateProps, action: PayloadAction<string>) => {

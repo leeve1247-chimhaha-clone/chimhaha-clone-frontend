@@ -1,4 +1,4 @@
-import { type JSX, useEffect, useState } from "react";
+import {type JSX, useEffect, useState} from "react";
 import {BrokenImage} from "./BrokenImage.tsx";
 
 

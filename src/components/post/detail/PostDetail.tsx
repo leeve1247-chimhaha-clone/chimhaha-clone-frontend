@@ -1,16 +1,16 @@
-import { useParams } from "react-router";
-import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "../../../react-query/queryKeys.tsx";
-import { CData } from "../../../../credential/data.ts";
+import {useParams} from "react-router";
+import {useQuery} from "@tanstack/react-query";
+import {queryKeys} from "../../../react-query/queryKeys.tsx";
+import {CData} from "../../../../credential/data.ts";
 import axios from "axios";
 
-import type { PostDetailProps } from "./PostDetailProps.tsx";
+import type {PostDetailProps} from "./PostDetailProps.tsx";
 import styles from "./PostDetail.module.css";
-import { Lexical } from "../../wysiwyg/lexical/Lexical.tsx";
-import { PostDetailHeader } from "./PostDetailHeader.tsx";
-import { CommentRootComponent } from "../../comment/CommentRootComponent.tsx";
-import { useAuth } from "react-oidc-context";
-import { PostDetailAuthRequired } from "./PostDetailAuthRequired.tsx";
+import {Lexical} from "../../wysiwyg/lexical/Lexical.tsx";
+import {PostDetailHeader} from "./PostDetailHeader.tsx";
+import {CommentRootComponent} from "../../comment/CommentRootComponent.tsx";
+import {useAuth} from "react-oidc-context";
+import {PostDetailAuthRequired} from "./PostDetailAuthRequired.tsx";
 
 export function PostDetail() {
   const { postId } = useParams();

@@ -1,14 +1,14 @@
-import { useState } from "react";
+import {useState} from "react";
 import styles from "../PostSubmit.module.css";
-import { ChevronDown } from "react-bootstrap-icons";
-import { Modal } from "../../../utils/modal/Modal.tsx";
-import { PostSubmitMainCategoryModalList } from "./PostSubmitMainCategoryModalList.tsx";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../../../redux/store.tsx";
-import type { RawRouteConfig } from "../../../../router/convertToRouteObjects.tsx";
-import { queryKeys } from "../../../../react-query/queryKeys.tsx";
-import { useQueryClient } from "@tanstack/react-query";
-import { useMatches } from "react-router";
+import {ChevronDown} from "react-bootstrap-icons";
+import {Modal} from "../../../utils/modal/Modal.tsx";
+import {PostSubmitMainCategoryModalList} from "./PostSubmitMainCategoryModalList.tsx";
+import {useSelector} from "react-redux";
+import type {RootState} from "../../../../redux/store.tsx";
+import type {RawRouteConfig} from "../../../../router/convertToRouteObjects.tsx";
+import {queryKeys} from "../../../../react-query/queryKeys.tsx";
+import {useQueryClient} from "@tanstack/react-query";
+import {useMatches} from "react-router";
 
 export function PostSubmitMainCategory() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

@@ -1,8 +1,8 @@
-import type { PostProps } from "../PostProps.tsx";
+import type {PostProps} from "../PostProps.tsx";
 import styles from "../PostListComponent.module.css";
-import { CircleFill } from "react-bootstrap-icons";
-import { CreatedDate } from "../../../../utils/CreatedDate.tsx";
-import { PostCardLikes } from "./PostCardLikes.tsx";
+import {CircleFill} from "react-bootstrap-icons";
+import {CreatedDate} from "../../../../utils/CreatedDate.tsx";
+import {PostCardLikes} from "./PostCardLikes.tsx";
 
 export function PostCardBody({ post }: { post: PostProps }) {
   return (

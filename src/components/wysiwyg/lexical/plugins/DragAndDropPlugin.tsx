@@ -1,13 +1,13 @@
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { useEffect } from "react";
-import { isMimeType, mediaFileReader } from "@lexical/utils";
-import { INSERT_IMAGE_COMMAND } from "../commands/INSERT_IMAGE_COMMAND.tsx";
-import { DRAG_DROP_PASTE } from "@lexical/rich-text";
-import { COMMAND_PRIORITY_LOW } from "lexical";
+import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
+import {useEffect} from "react";
+import {isMimeType, mediaFileReader} from "@lexical/utils";
+import {INSERT_IMAGE_COMMAND} from "../commands/INSERT_IMAGE_COMMAND.tsx";
+import {DRAG_DROP_PASTE} from "@lexical/rich-text";
+import {COMMAND_PRIORITY_LOW} from "lexical";
 import axios from "axios";
-import { CData } from "../../../../../credential/data.ts";
-import type { presignedUrlProps } from "../../../../App.tsx";
-import { useAuth } from "react-oidc-context";
+import {CData} from "../../../../../credential/data.ts";
+import type {presignedUrlProps} from "../../../../App.tsx";
+import {useAuth} from "react-oidc-context";
 
 const ACCEPTABLE_IMAGE_TYPES = ["image/", "image/heic", "image/heif", "image/gif", "image/webp"];
 

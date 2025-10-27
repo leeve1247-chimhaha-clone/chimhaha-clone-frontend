@@ -1,4 +1,4 @@
-import type { DropDownReduxProps } from "./DropDownReduxProps.tsx";
+import type {DropDownReduxProps} from "./DropDownReduxProps.tsx";
 
 export const dropDownInitialState: DropDownReduxProps = {
   value: ""

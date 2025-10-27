@@ -1,18 +1,18 @@
-import type { LexicalEditor } from "lexical";
-import { type RefObject } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import type {LexicalEditor} from "lexical";
+import {type RefObject} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
-import { CData } from "../../../../credential/data.ts";
-import { useAuth } from "react-oidc-context";
-import { useLocation, useMatches } from "react-router";
-import { setCategory } from "../../../redux/post/submit/submitPostSlice.tsx";
-import { useNavigate } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../../../react-query/queryKeys.tsx";
+import {CData} from "../../../../credential/data.ts";
+import {useAuth} from "react-oidc-context";
+import {useLocation, useMatches} from "react-router";
+import {setCategory} from "../../../redux/post/submit/submitPostSlice.tsx";
+import {useNavigate} from "react-router-dom";
+import {useQueryClient} from "@tanstack/react-query";
+import {queryKeys} from "../../../react-query/queryKeys.tsx";
 import styles from "./PostSubmit.module.css";
-import { clearImageSrcInEditorState } from "./functions/clearImageSrcInEditorState.ts";
-import { isEmpty } from "./functions/isEmpty.ts";
-import type { RootState } from "../../../redux/store.tsx";
+import {clearImageSrcInEditorState} from "./functions/clearImageSrcInEditorState.ts";
+import {isEmpty} from "./functions/isEmpty.ts";
+import type {RootState} from "../../../redux/store.tsx";
 
 export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undefined> }) {
   const selector = useSelector((state: RootState) => state.submitPostStatus);

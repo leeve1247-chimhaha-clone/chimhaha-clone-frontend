@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
-import { setHeaderDropDownStatus } from "../../../../redux/dropDown/dropDownSlice.tsx";
-import { useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setHeaderDropDownStatus} from "../../../../redux/dropDown/dropDownSlice.tsx";
+import {useNavigate} from "react-router-dom";
 
 export function NavAllPosts() {
   const dispatch = useDispatch();

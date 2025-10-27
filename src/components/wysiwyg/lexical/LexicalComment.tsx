@@ -1,14 +1,14 @@
-import { LexicalComposer } from "@lexical/react/LexicalComposer";
-import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
-import { ContentEditable } from "@lexical/react/LexicalContentEditable";
-import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
-import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import {LexicalComposer} from "@lexical/react/LexicalComposer";
+import {RichTextPlugin} from "@lexical/react/LexicalRichTextPlugin";
+import {ContentEditable} from "@lexical/react/LexicalContentEditable";
+import {LexicalErrorBoundary} from "@lexical/react/LexicalErrorBoundary";
+import {HistoryPlugin} from "@lexical/react/LexicalHistoryPlugin";
 import styles from "./LexicalComment.module.css";
-import { type LexicalEditor, ParagraphNode, type SerializedEditorState, TextNode } from "lexical";
+import {type LexicalEditor, ParagraphNode, type SerializedEditorState, TextNode} from "lexical";
 import ExampleTheme from "./ExampleTheme.tsx";
-import { type RefObject, useEffect } from "react";
-import { RefEditorPlugin } from "./plugins/RefEditorPlugin.tsx";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import {type RefObject, useEffect} from "react";
+import {RefEditorPlugin} from "./plugins/RefEditorPlugin.tsx";
+import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
 
 interface LexicalCommentProps {
   readOnly?: boolean;
