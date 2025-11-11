@@ -1,4 +1,4 @@
-import {ClockFill, StarFill} from "react-bootstrap-icons";
+import { ClockFill, StarFill } from "react-bootstrap-icons";
 import styles from "../Header.module.css";
 
 export const HeaderSubCategory = {

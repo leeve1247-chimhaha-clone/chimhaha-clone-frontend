@@ -1,6 +1,6 @@
-import type {routerDataTree} from "../main/nav/HeaderNav.tsx";
+import type { routerDataTree } from "../main/nav/HeaderNav.tsx";
 import styles from "./HeaderLevelTwos.module.css";
-import {HeaderLevelTwo} from "./HeaderLevelTwo.tsx";
+import { HeaderLevelTwo } from "./HeaderLevelTwo.tsx";
 
 export function HeaderLevelTwos({ theRouterDataList }: { theRouterDataList: routerDataTree[] }) {
   return (

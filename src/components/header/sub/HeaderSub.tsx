@@ -1,4 +1,4 @@
-import type {JSX} from "react";
+import type { JSX } from "react";
 import styles from "../Header.module.css";
 
 export function HeaderSub({ category }: { category: JSX.Element }) {

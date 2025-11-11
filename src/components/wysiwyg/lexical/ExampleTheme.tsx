@@ -6,7 +6,7 @@
  *
  */
 import style from "./ExampleTheme.module.css";
-import type {EditorThemeClasses} from "lexical";
+import type { EditorThemeClasses } from "lexical";
 
 const ExampleTheme :  EditorThemeClasses = {
     code: 'editor-code',

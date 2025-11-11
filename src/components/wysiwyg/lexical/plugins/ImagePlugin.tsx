@@ -1,26 +1,26 @@
-import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
-import {$wrapNodeInElement, mergeRegister} from "@lexical/utils";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $wrapNodeInElement, mergeRegister } from "@lexical/utils";
 import {
-    $createParagraphNode,
-    $createRangeSelection,
-    $getSelection,
-    $insertNodes,
-    $isNodeSelection,
-    $isRootOrShadowRoot,
-    $setSelection,
-    COMMAND_PRIORITY_EDITOR,
-    COMMAND_PRIORITY_HIGH,
-    COMMAND_PRIORITY_LOW,
-    DRAGOVER_COMMAND,
-    DRAGSTART_COMMAND,
-    DROP_COMMAND,
-    getDOMSelectionFromTarget,
-    type LexicalEditor
+  $createParagraphNode,
+  $createRangeSelection,
+  $getSelection,
+  $insertNodes,
+  $isNodeSelection,
+  $isRootOrShadowRoot,
+  $setSelection,
+  COMMAND_PRIORITY_EDITOR,
+  COMMAND_PRIORITY_HIGH,
+  COMMAND_PRIORITY_LOW,
+  DRAGOVER_COMMAND,
+  DRAGSTART_COMMAND,
+  DROP_COMMAND,
+  getDOMSelectionFromTarget,
+  type LexicalEditor
 } from "lexical";
-import {type ReactNode, useEffect} from "react";
+import { type ReactNode, useEffect } from "react";
 
-import {INSERT_IMAGE_COMMAND} from "../commands/INSERT_IMAGE_COMMAND.tsx";
-import {$createImageNode, $isImageNode, ImageNode, type ImagePayload} from "../nodes/ImageNode.tsx";
+import { INSERT_IMAGE_COMMAND } from "../commands/INSERT_IMAGE_COMMAND.tsx";
+import { $createImageNode, $isImageNode, ImageNode, type ImagePayload } from "../nodes/ImageNode.tsx";
 
 export type InsertImagePayload = Readonly<ImagePayload>;
 

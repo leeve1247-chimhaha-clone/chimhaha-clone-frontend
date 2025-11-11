@@ -1,4 +1,4 @@
-import type {SubmitPostStateProps} from "./SubmitPostStateProps.tsx";
+import type { SubmitPostStateProps } from "./SubmitPostStateProps.tsx";
 
 export const submitPostInitialState: SubmitPostStateProps = {
   title: undefined,

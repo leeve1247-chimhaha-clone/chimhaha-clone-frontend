@@ -1,5 +1,5 @@
-import type {routerDataTree} from "../main/nav/HeaderNav.tsx";
-import {HeaderLevelOne} from "./HeaderLevelOne.tsx";
+import type { routerDataTree } from "../main/nav/HeaderNav.tsx";
+import { HeaderLevelOne } from "./HeaderLevelOne.tsx";
 import styles from "./HeaderLevelOnes.module.css";
 
 interface HeaderLevelOnesProps {

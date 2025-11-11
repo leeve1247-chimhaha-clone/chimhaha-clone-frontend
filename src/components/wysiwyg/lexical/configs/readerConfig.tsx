@@ -1,7 +1,7 @@
-import {$createParagraphNode, $createTextNode, $getRoot, ParagraphNode, TextNode} from "lexical";
+import { $createParagraphNode, $createTextNode, $getRoot, ParagraphNode, TextNode } from "lexical";
 import ExampleTheme from "../ExampleTheme.tsx";
-import type {InitialConfigType} from "@lexical/react/LexicalComposer";
-import {ImageNode} from "../nodes/ImageNode.tsx";
+import type { InitialConfigType } from "@lexical/react/LexicalComposer";
+import { ImageNode } from "../nodes/ImageNode.tsx";
 
 
 export const readerConfig : InitialConfigType = {

@@ -1,16 +1,16 @@
-import {CommentComponents} from "./CommentComponents.tsx";
-import {LexicalComment} from "../wysiwyg/lexical/LexicalComment.tsx";
+import { CommentComponents } from "./CommentComponents.tsx";
+import { LexicalComment } from "../wysiwyg/lexical/LexicalComment.tsx";
 import cssClass from "./CommentComponent.module.css";
-import {useRef, useState} from "react";
-import {CommentTail} from "./tail/CommentTail.tsx";
-import {CommentHeader} from "./header/CommentHeader.tsx";
-import type {CommentProps} from "./CommentProps.tsx";
-import {ReplyEditorComponent} from "./ReplyEditorComponent.tsx";
-import {useSelector} from "react-redux";
-import type {LexicalEditor} from "lexical";
-import {SubmitUpdateButton} from "./buttons/SubmitUpdateButton.tsx";
-import {CancelUpdateButton} from "./buttons/CancelUpdateButton.tsx";
-import type {RootState} from "../../redux/store.tsx";
+import { useRef, useState } from "react";
+import { CommentTail } from "./tail/CommentTail.tsx";
+import { CommentHeader } from "./header/CommentHeader.tsx";
+import type { CommentProps } from "./CommentProps.tsx";
+import { ReplyEditorComponent } from "./ReplyEditorComponent.tsx";
+import { useSelector } from "react-redux";
+import type { LexicalEditor } from "lexical";
+import { SubmitUpdateButton } from "./buttons/SubmitUpdateButton.tsx";
+import { CancelUpdateButton } from "./buttons/CancelUpdateButton.tsx";
+import type { RootState } from "../../redux/store.tsx";
 
 export function CommentComponent({ comment, postId }: { comment: CommentProps; postId: string }) {
   const [isModalOpen, setModalOpen] = useState(false);

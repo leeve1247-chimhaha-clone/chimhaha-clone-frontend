@@ -1,6 +1,6 @@
 import cssClass from "../CommentComponent.module.css";
-import {CreatedDate} from "../../../utils/CreatedDate.tsx";
-import {Dot, HandThumbsUp} from "react-bootstrap-icons";
+import { CreatedDate } from "../../../utils/CreatedDate.tsx";
+import { Dot, HandThumbsUp } from "react-bootstrap-icons";
 
 export function CommentHeaderLeft(props: { username: string | undefined; date: string; likes: number; setLikes?: (arg: number) => void }) {
   return (

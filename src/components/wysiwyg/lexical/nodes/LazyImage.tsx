@@ -1,5 +1,5 @@
-import {type JSX, useEffect, useState} from "react";
-import {BrokenImage} from "./BrokenImage.tsx";
+import { type JSX, useEffect, useState } from "react";
+import { BrokenImage } from "./BrokenImage.tsx";
 
 
 const imageCache = new Map<string, Promise<boolean> | boolean>();

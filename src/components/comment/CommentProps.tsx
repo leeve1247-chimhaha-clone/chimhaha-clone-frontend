@@ -1,4 +1,4 @@
-import type {SerializedEditorState} from "lexical";
+import type { SerializedEditorState } from "lexical";
 
 export interface CommentProps {
   username?: string;

@@ -1,15 +1,15 @@
-import {Lexical} from "../../wysiwyg/lexical/Lexical.tsx";
-import {PostSubmitPostButton} from "./PostSubmitPostButton.tsx";
-import {useRef} from "react";
-import type {LexicalEditor} from "lexical";
-import {useLocation} from "react-router";
-import {useQuery} from "@tanstack/react-query";
-import {queryKeys} from "../../../react-query/queryKeys.tsx";
-import type {PostDetailProps} from "../detail/PostDetailProps.tsx";
+import { Lexical } from "../../wysiwyg/lexical/Lexical.tsx";
+import { PostSubmitPostButton } from "./PostSubmitPostButton.tsx";
+import { useRef } from "react";
+import type { LexicalEditor } from "lexical";
+import { useLocation } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "../../../react-query/queryKeys.tsx";
+import type { PostDetailProps } from "../detail/PostDetailProps.tsx";
 import styles from "./PostSubmit.module.css";
 import axios from "axios";
-import {CData} from "../../../../credential/data.ts";
-import {PostSubmitHeader} from "./header/PostSubmitHeader.tsx";
+import { CData } from "../../../../credential/data.ts";
+import { PostSubmitHeader } from "./header/PostSubmitHeader.tsx";
 
 function CancelPostButton() {
   return <button className={styles.buttonCancel}>취소</button>;
