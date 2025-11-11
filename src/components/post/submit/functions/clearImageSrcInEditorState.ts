@@ -1,4 +1,4 @@
-import type {SerializedEditorState, SerializedLexicalNode} from "lexical";
+import type { SerializedEditorState, SerializedLexicalNode } from "lexical";
 
 export function clearImageSrcInEditorState(json: SerializedEditorState): void {
   clearImageSrcInLexicalNodes(json.root.children);

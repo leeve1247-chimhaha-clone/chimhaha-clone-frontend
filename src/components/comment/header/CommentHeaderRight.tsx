@@ -1,12 +1,12 @@
 import cssClass from "../CommentComponent.module.css";
-import {Modal} from "../../utils/modal/Modal.tsx";
-import {useDispatch} from "react-redux";
-import {setEditableCommentId, setInitialCommentState} from "../../../redux/comment/commentRootComponentSlice.tsx";
-import {useState} from "react";
-import type {CommentProps} from "../CommentProps.tsx";
-import {SubmitDeleteButton} from "../buttons/SubmitDeleteButton.tsx";
-import {useParams} from "react-router";
-import {ThreeDotsVertical} from "react-bootstrap-icons";
+import { Modal } from "../../utils/modal/Modal.tsx";
+import { useDispatch } from "react-redux";
+import { setEditableCommentId, setInitialCommentState } from "../../../redux/comment/commentRootComponentSlice.tsx";
+import { useState } from "react";
+import type { CommentProps } from "../CommentProps.tsx";
+import { SubmitDeleteButton } from "../buttons/SubmitDeleteButton.tsx";
+import { useParams } from "react-router";
+import { ThreeDotsVertical } from "react-bootstrap-icons";
 
 export function CommentHeaderRight(props: { onClick: () => void; isModalOpen: boolean; onClose: () => void; comment?: CommentProps }) {
   const dispatch = useDispatch();

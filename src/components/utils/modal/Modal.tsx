@@ -1,4 +1,4 @@
-import {type HTMLAttributes, useEffect, useRef} from "react";
+import { type HTMLAttributes, useEffect, useRef } from "react";
 
 interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   modalOpen: boolean;

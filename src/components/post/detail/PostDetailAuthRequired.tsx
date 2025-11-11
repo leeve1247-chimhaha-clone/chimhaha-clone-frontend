@@ -1,6 +1,6 @@
 import styles from "./PostDetail.module.css";
-import {PostSubmitLikeButton} from "../submit/PostSubmitLikeButton.tsx";
-import {ArrowLeft, ArrowRight, BookmarkFill, ListTask} from "react-bootstrap-icons";
+import { PostSubmitLikeButton } from "../submit/PostSubmitLikeButton.tsx";
+import { ArrowLeft, ArrowRight, BookmarkFill, ListTask } from "react-bootstrap-icons";
 
 export function PostDetailAuthRequired() {
   return (

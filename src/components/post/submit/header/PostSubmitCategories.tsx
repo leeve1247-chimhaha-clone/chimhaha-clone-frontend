@@ -1,6 +1,6 @@
 import styles from "../PostSubmit.module.css";
-import {ChevronDown} from "react-bootstrap-icons";
-import {PostSubmitMainCategory} from "./PostSubmitMainCategory.tsx";
+import { ChevronDown } from "react-bootstrap-icons";
+import { PostSubmitMainCategory } from "./PostSubmitMainCategory.tsx";
 
 export function PostSubmitCategories() {
   return (

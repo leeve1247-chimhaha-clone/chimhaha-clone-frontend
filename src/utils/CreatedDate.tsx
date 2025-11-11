@@ -1,4 +1,4 @@
-import type {HTMLAttributes} from "react";
+import type { HTMLAttributes } from "react";
 
 interface CreatedDateProps extends HTMLAttributes<HTMLDivElement> {
   date: string;

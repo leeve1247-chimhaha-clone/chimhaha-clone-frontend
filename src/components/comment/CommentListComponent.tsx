@@ -1,13 +1,13 @@
-import {useQuery, useQueryClient} from "@tanstack/react-query";
-import {useParams} from "react-router";
-import {queryKeys} from "../../react-query/queryKeys.tsx";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router";
+import { queryKeys } from "../../react-query/queryKeys.tsx";
 import axios from "axios";
-import {CData} from "../../../credential/data.ts";
-import {CommentPageButtons} from "./CommentPageButtons.tsx";
-import {CommentComponents} from "./CommentComponents.tsx";
-import type {CommentProps} from "./CommentProps.tsx";
-import {useSelector} from "react-redux";
-import type {RootState} from "../../redux/store.tsx";
+import { CData } from "../../../credential/data.ts";
+import { CommentPageButtons } from "./CommentPageButtons.tsx";
+import { CommentComponents } from "./CommentComponents.tsx";
+import type { CommentProps } from "./CommentProps.tsx";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../redux/store.tsx";
 import style from "./CommentComponent.module.css";
 
 export function CommentListComponent() {

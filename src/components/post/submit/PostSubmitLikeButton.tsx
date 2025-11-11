@@ -1,10 +1,10 @@
 import axios from "axios";
-import {ImageData} from "../../../../credential/data.ts";
-import {useAuth} from "react-oidc-context";
-import {useParams} from "react-router";
-import {useDispatch, useSelector} from "react-redux";
-import {setLikes} from "../../../redux/post/detail/defaultPostDetailSlice.tsx";
-import type {RootState} from "../../../redux/store.tsx";
+import { CData } from "../../../../credential/data.ts";
+import { useAuth } from "react-oidc-context";
+import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { setLikes } from "../../../redux/post/detail/defaultPostDetailSlice.tsx";
+import type { RootState } from "../../../redux/store.tsx";
 
 interface SubmitLikeButtonProps {
   className?: string;
@@ -21,7 +21,7 @@ export function PostSubmitLikeButton({ className }: SubmitLikeButtonProps) {
       postId: postId,
     });
     const newLikes = await axios
-      .post<number>(ImageData.baseUrl + "/posts/like", deltaJson, {
+      .post<number>(CData.local_backend + "/posts/like", deltaJson, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${auth?.user?.access_token}`,

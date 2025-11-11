@@ -1,4 +1,4 @@
-import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
 export default function LogButtonPlugin() {
     const [editor] = useLexicalComposerContext();

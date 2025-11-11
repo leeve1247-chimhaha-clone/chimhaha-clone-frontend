@@ -1,7 +1,7 @@
-import React, {useRef} from "react";
-import type {LexicalEditor} from "lexical";
-import {calculateZoomLevel} from "@lexical/utils";
-import style from "./ImageResizer.module.css"
+import React, { useRef } from "react";
+import type { LexicalEditor } from "lexical";
+import { calculateZoomLevel } from "@lexical/utils";
+import style from "./ImageResizer.module.css";
 
 function clamp(value: number, min: number, max: number) {
     return Math.min(Math.max(value, min), max);

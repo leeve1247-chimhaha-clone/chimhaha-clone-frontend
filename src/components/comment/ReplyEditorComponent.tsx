@@ -1,6 +1,6 @@
-import {useRef} from "react";
-import {LexicalComment} from "../wysiwyg/lexical/LexicalComment.tsx";
-import {SubmitCommentButton} from "./buttons/SubmitCommentButton.tsx";
+import { useRef } from "react";
+import { LexicalComment } from "../wysiwyg/lexical/LexicalComment.tsx";
+import { SubmitCommentButton } from "./buttons/SubmitCommentButton.tsx";
 import cssClass from "./CommentComponent.module.css";
 
 interface ReplyEditorComponentProps {

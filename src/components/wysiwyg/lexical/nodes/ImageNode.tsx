@@ -1,15 +1,15 @@
 import type {
-    DOMConversionMap,
-    DOMConversionOutput,
-    DOMExportOutput,
-    LexicalNode,
-    NodeKey,
-    SerializedLexicalNode,
-    Spread
+  DOMConversionMap,
+  DOMConversionOutput,
+  DOMExportOutput,
+  LexicalNode,
+  NodeKey,
+  SerializedLexicalNode,
+  Spread
 } from "lexical";
-import {DecoratorNode} from "lexical";
+import { DecoratorNode } from "lexical";
 import * as React from "react";
-import {type JSX, Suspense} from "react";
+import { type JSX, Suspense } from "react";
 import style from "./ImageNode.module.css";
 
 const ImageComponent = React.lazy(

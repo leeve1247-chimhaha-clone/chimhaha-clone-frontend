@@ -1,4 +1,4 @@
-import type {CommentRootComponentReduxProps} from "./CommentRootComponentReduxProps.tsx";
+import type { CommentRootComponentReduxProps } from "./CommentRootComponentReduxProps.tsx";
 
 export const commentRootComponentInitialState: CommentRootComponentReduxProps = {
   commentPage: 1,

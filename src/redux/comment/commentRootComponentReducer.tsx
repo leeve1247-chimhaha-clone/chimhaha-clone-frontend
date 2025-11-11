@@ -1,8 +1,8 @@
-import type {PayloadAction} from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
-import type {CommentRootComponentReduxProps} from "./CommentRootComponentReduxProps.tsx";
-import type {SerializedEditorState} from "lexical";
-import {commentRootComponentInitialState} from "./commentRootComponentInitialState.tsx";
+import type { CommentRootComponentReduxProps } from "./CommentRootComponentReduxProps.tsx";
+import type { SerializedEditorState } from "lexical";
+import { commentRootComponentInitialState } from "./commentRootComponentInitialState.tsx";
 
 export const commentRootComponentReducer = {
   setCommentPage: (state: CommentRootComponentReduxProps, action: PayloadAction<number>) => {

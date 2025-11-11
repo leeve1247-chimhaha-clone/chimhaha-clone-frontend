@@ -1,6 +1,6 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {commentRootComponentReducer} from "./commentRootComponentReducer.tsx";
-import {commentRootComponentInitialState} from "./commentRootComponentInitialState.tsx";
+import { createSlice } from "@reduxjs/toolkit";
+import { commentRootComponentReducer } from "./commentRootComponentReducer.tsx";
+import { commentRootComponentInitialState } from "./commentRootComponentInitialState.tsx";
 
 export const commentRootComponentSlice = createSlice({
   name: "commentComponentState",

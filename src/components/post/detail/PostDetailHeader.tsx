@@ -1,18 +1,18 @@
-import type {PostDetailProps} from "./PostDetailProps.tsx";
+import type { PostDetailProps } from "./PostDetailProps.tsx";
 import styles from "./PostDetail.module.css";
-import {Dot, HandThumbsUp, ThreeDotsVertical} from "react-bootstrap-icons";
-import {CreatedDate} from "../../../utils/CreatedDate.tsx";
-import {Modal} from "../../utils/modal/Modal.tsx";
-import {useState} from "react";
-import {type UIMatch, useNavigate} from "react-router-dom";
-import {useMatches} from "react-router";
-import {PostSubmitDeleteButton} from "../submit/PostSubmitDeleteButton.tsx";
-import {useDispatch, useSelector} from "react-redux";
-import {setLikes} from "../../../redux/post/detail/defaultPostDetailSlice.tsx";
-import type {RootState} from "../../../redux/store.tsx";
-import type {RawRouteConfig} from "../../../router/convertToRouteObjects.tsx";
-import {queryKeys} from "../../../react-query/queryKeys.tsx";
-import {useQueryClient} from "@tanstack/react-query";
+import { Dot, HandThumbsUp, ThreeDotsVertical } from "react-bootstrap-icons";
+import { CreatedDate } from "../../../utils/CreatedDate.tsx";
+import { Modal } from "../../utils/modal/Modal.tsx";
+import { useState } from "react";
+import { type UIMatch, useNavigate } from "react-router-dom";
+import { useMatches } from "react-router";
+import { PostSubmitDeleteButton } from "../submit/PostSubmitDeleteButton.tsx";
+import { useDispatch, useSelector } from "react-redux";
+import { setLikes } from "../../../redux/post/detail/defaultPostDetailSlice.tsx";
+import type { RootState } from "../../../redux/store.tsx";
+import type { RawRouteConfig } from "../../../router/convertToRouteObjects.tsx";
+import { queryKeys } from "../../../react-query/queryKeys.tsx";
+import { useQueryClient } from "@tanstack/react-query";
 
 function getPostId(matches: UIMatch[]) {
   return matches[matches.length - 1].pathname.substring(matches[matches.length - 2].pathname.length + 1, matches[matches.length - 1].pathname.length);
