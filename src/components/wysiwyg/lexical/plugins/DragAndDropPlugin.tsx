@@ -35,7 +35,7 @@ async function getPresignedUrl(access_token: string): Promise<presignedUrlProps 
 
 async function putImageTo(urlForPut: presignedUrlProps, file: File, access_token: string): Promise<string> {
   return await axios
-    .put(CData.local_image_uri + "/" + urlForPut.url, file, {
+    .put(urlForPut.url, file, {
       headers: {
         "Content-Type": file.type,
       },
@@ -86,7 +86,7 @@ export default function DragAndDropPlugin(): null {
             if (isMimeType(file, ACCEPTABLE_IMAGE_TYPES)) {
               editor.dispatchCommand(INSERT_IMAGE_COMMAND, {
                 altText: urlForPut.fileName,
-                src: CData.local_image_uri + "/" + result,
+                src: result,
               });
             }
           }

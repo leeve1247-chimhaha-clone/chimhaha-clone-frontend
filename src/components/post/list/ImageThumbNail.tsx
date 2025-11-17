@@ -12,7 +12,7 @@ export function ImageThumbNail({ fileName, className }: ImageThumbNailProps) {
   const {data, isLoading, error } = useQuery({queryKey: [...queryKeys.ThumbNails, fileName], queryFn:fetchThumbNailImage});
   async function fetchThumbNailImage() {
     return axios.get(CData.local_backend+"/get/thumbnail-src-url?filename=" + fileName).then((res) => {
-      return CData.local_image_uri+"/"+res.data;
+      return res.data;
     }).catch((err) => {
       console.error(err);
       return undefined;
