@@ -10,8 +10,8 @@ import type { RawRouteConfig } from "../../../router/convertToRouteObjects.tsx";
 import type { PostProps } from "./PostProps.tsx";
 import { PostListYoutubeCards } from "./YoutubeCard/PostListYoutubeCards.tsx";
 import { NoticeListComponent } from "./NoticeListComponent.tsx";
-import { PostCardLightWeight } from "./PostCard/PostCardLightWeight.tsx";
 import { useAuth } from "react-oidc-context";
+import { PopularComponent } from "./PopularComponent.tsx";
 
 export function PostListComponents() {
   const navigate = useNavigate();
@@ -55,12 +55,7 @@ export function PostListComponents() {
         {korean !== undefined && <h2 className={styles.h2}>{korean} 게시판</h2>}
         {category.toLowerCase() === "all" && <h2 className={styles.h2}>전체 게시판</h2>}
         {category.toLowerCase() === "" && <>
-          <h2 className={styles.h2}>인기 게시판</h2>
-          <div>
-            {data.map((post, index) => (
-              <PostCardLightWeight key={index} post={post} />
-            ))}
-          </div>
+          <PopularComponent/>
         </>}
         {category.toLowerCase() !== "" && <>
           <div><NoticeListComponent long = {true} />

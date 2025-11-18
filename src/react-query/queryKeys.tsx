@@ -7,5 +7,6 @@ export const queryKeys = {
   RouterDataFlat: ["theRouterDataFlat"],
   ThumbNails: ["ThumbNails"],
   CommentPageSize: ["CommentPageSize"],
-  Comment: ["Comment"]
+  Comment: ["Comment"],
+  NickName: ["NickName"]
 };
