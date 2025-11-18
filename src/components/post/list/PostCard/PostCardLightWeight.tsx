@@ -1,13 +1,13 @@
 import type { PostProps } from "../PostProps.tsx";
-import { NavLink } from "react-router-dom";
-import styles from "./NoticeCard.module.css";
-import { CreatedDate } from "../../../../utils/CreatedDate.tsx";
 import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "../../../../react-query/queryKeys.tsx";
 import type { RawRouteConfig } from "../../../../router/convertToRouteObjects.tsx";
+import { queryKeys } from "../../../../react-query/queryKeys.tsx";
+import { NavLink } from "react-router-dom";
+import styles from "./PostCardLightWeight.module.css";
 import { ChatDots, CircleFill, Eye, HandThumbsUp } from "react-bootstrap-icons";
+import { CreatedDate } from "../../../../utils/CreatedDate.tsx";
 
-export function NoticeCard({ post, long }: { post: PostProps, long?: boolean | undefined }) {
+export function PostCardLightWeight({ post }: { post: PostProps }) {
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
   const postId = post.postId;
@@ -17,7 +17,7 @@ export function NoticeCard({ post, long }: { post: PostProps, long?: boolean | u
   const filter = queryData.filter((rawRouteConfig) => rawRouteConfig.key === category);
   const korean = filter[0].korean;
   return (
-    <NavLink to={link} className={`${styles.noticeBox} ${long ? styles.noticeBoxLong : ""}`}>
+    <NavLink to={link} className={styles.noticeBox}>
       <div className={styles.noticeBoxElementHead}>
         <div className={styles.category}>{korean}</div>
         <div className={styles.title}>{post.title}</div>

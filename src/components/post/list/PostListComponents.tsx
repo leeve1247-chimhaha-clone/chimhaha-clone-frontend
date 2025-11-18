@@ -10,6 +10,8 @@ import type { RawRouteConfig } from "../../../router/convertToRouteObjects.tsx";
 import type { PostProps } from "./PostProps.tsx";
 import { PostListYoutubeCards } from "./YoutubeCard/PostListYoutubeCards.tsx";
 import { NoticeListComponent } from "./NoticeListComponent.tsx";
+import { PostCardLightWeight } from "./PostCard/PostCardLightWeight.tsx";
+import { useAuth } from "react-oidc-context";
 
 export function PostListComponents() {
   const navigate = useNavigate();
@@ -18,6 +20,7 @@ export function PostListComponents() {
   const { data, error } = useQuery({ queryKey: [...queryKeys.PostList, category], queryFn: fetchPostList });
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
+  const auth = useAuth();
 
   async function fetchPostList() {
     return axios
@@ -42,24 +45,39 @@ export function PostListComponents() {
   return (
     <>
       <div className={styles.container}>
-        <PostListYoutubeCards/>
-        <NoticeListComponent/>
+        <PostListYoutubeCards />
+        {category.toLowerCase() === "" && <>
+          <div className={styles.row}>
+            <h2 className={styles.h2}>공지</h2> <h2 className={styles.h2mark}>!</h2>
+          </div>
+          <NoticeListComponent />
+        </>}
         {korean !== undefined && <h2 className={styles.h2}>{korean} 게시판</h2>}
         {category.toLowerCase() === "all" && <h2 className={styles.h2}>전체 게시판</h2>}
-        {category.toLowerCase() === "" && <h2 className={styles.h2}>인기 게시판</h2>}
-        <div>
-          {data.map((post, index) => (
-            <PostCard key={index} post={post} />
-          ))}
-        </div>
-
-        {category.toLowerCase() !== "" && (
-          <div className={styles.tailContainer}>
-            <button onClick={goToSubmit} className={styles.button}>
-              글쓰기
-            </button>
+        {category.toLowerCase() === "" && <>
+          <h2 className={styles.h2}>인기 게시판</h2>
+          <div>
+            {data.map((post, index) => (
+              <PostCardLightWeight key={index} post={post} />
+            ))}
           </div>
-        )}
+        </>}
+        {category.toLowerCase() !== "" && <>
+          <div><NoticeListComponent long = {true} />
+            {data.map((post, index) => (
+              <PostCard key={index} post={post} />
+            ))}
+          </div>
+
+          {category.toLowerCase() !== "" && auth.isAuthenticated && (
+            <div className={styles.tailContainer}>
+              <button onClick={goToSubmit} className={styles.button}>
+                글쓰기
+              </button>
+            </div>
+          )}</>
+
+        }
       </div>
     </>
   );
