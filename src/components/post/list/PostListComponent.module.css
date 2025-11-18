@@ -5,12 +5,12 @@
 
 .h2mark{
     color: var(--color-accent-300);
-    margin-left: 0.5rem;
 }
 
 .row{
     display: flex;
     flex-direction: row;
+    gap: 0.5rem;
 }
 
 .container{

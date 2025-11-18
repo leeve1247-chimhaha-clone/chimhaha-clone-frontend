@@ -1,7 +1,7 @@
 import styles from "../Header.module.css";
 import { HeaderTitle } from "./title/HeaderTitle.tsx";
 import { HeaderNav } from "./nav/HeaderNav.tsx";
-import { Login } from "../../login/Login.tsx";
+import { Account } from "../../login/Account.tsx";
 
 export function HeaderMain() {
   return (
@@ -12,7 +12,7 @@ export function HeaderMain() {
           <HeaderNav />
         </div>
         <div className={styles.headerMainRight}>
-          <Login />
+          <Account />
         </div>
       </div>
     </div>
