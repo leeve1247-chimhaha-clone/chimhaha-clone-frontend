@@ -1,0 +1,73 @@
+.noticeBox {
+    border-bottom: 0.025rem solid var(--color-gray-550);
+    background-color: var(--color-gray-750);
+    padding: 0.5rem 0.25rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.noticeBox > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.noticeBoxElementHead {
+}
+
+.noticeBoxElementTail {
+}
+
+.noticeBoxElementTail > div {
+    line-height: 0.8rem;
+    font-size: 0.8rem;
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+}
+
+.category {
+    border-radius: 0.2rem;
+    background-color: var(--color-gray-100);
+    padding: 0.25rem 0.5rem;
+    line-height: 0.8rem;
+    font-size: 0.8rem;
+    color: var(--color-gray-1050);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    line-height: 1rem;
+    font-size: 1rem;
+}
+
+.commentsCount {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--color-accent-100);
+    line-height: 0.8rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.dot {
+    color: var(--color-gray-300);
+    font-size: 0.1rem;
+}
+
+.userName {
+    color: var(--color-gray-300);
+}
+
+.views {
+    color: var(--color-gray-300);
+}
+
+.time {
+    color: var(--color-gray-300);
+}
+                                            
