@@ -1,6 +1,16 @@
 .h2 {
-  font-size: 1.45rem;
-  color: var(--color-gray-000);
+    font-size: 1.45rem;
+    color: var(--color-gray-000);
+}
+
+.h2mark{
+    color: var(--color-accent-300);
+    margin-left: 0.5rem;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
 }
 
 .container{

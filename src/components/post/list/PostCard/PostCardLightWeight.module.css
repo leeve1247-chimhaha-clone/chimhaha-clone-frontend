@@ -1,13 +1,8 @@
 .noticeBox {
     border-bottom: 0.025rem solid var(--color-gray-550);
-    background-color: var(--color-gray-750);
     padding: 0.5rem 0.25rem;
     display: flex;
     justify-content: space-between;
-}
-
-.noticeBoxLong {
-    height: 2rem;
 }
 
 .noticeBox > div {
@@ -33,12 +28,10 @@
 
 .category {
     border-radius: 0.2rem;
-    background-color: var(--color-gray-100);
+    background-color: var(--color-gray-500);
     padding: 0.25rem 0.5rem;
     line-height: 0.8rem;
     font-size: 0.8rem;
-    color: var(--color-gray-1050);
-    font-weight: bold;
     display: flex;
     align-items: center;
 }
