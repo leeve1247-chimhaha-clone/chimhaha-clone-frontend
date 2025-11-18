@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import styles from "./PostList.module.css";
+import styles from "./PostListComponent.module.css";
 import { PostCard } from "./PostCard/PostCard.tsx";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
@@ -9,6 +9,7 @@ import { useMatches } from "react-router";
 import type { RawRouteConfig } from "../../../router/convertToRouteObjects.tsx";
 import type { PostProps } from "./PostProps.tsx";
 import { PostListYoutubeCards } from "./YoutubeCard/PostListYoutubeCards.tsx";
+import { NoticeListComponent } from "./NoticeListComponent.tsx";
 
 export function PostListComponents() {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ export function PostListComponents() {
     <>
       <div className={styles.container}>
         <PostListYoutubeCards/>
+        <NoticeListComponent/>
         {korean !== undefined && <h2 className={styles.h2}>{korean} 게시판</h2>}
         {category.toLowerCase() === "all" && <h2 className={styles.h2}>전체 게시판</h2>}
         {category.toLowerCase() === "" && <h2 className={styles.h2}>인기 게시판</h2>}

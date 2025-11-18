@@ -1,5 +1,5 @@
 import type { PostProps } from "../PostProps.tsx";
-import styles from "../PostListComponent.module.css";
+import styles from "./PostCard.module.css";
 import { CircleFill } from "react-bootstrap-icons";
 import { CreatedDate } from "../../../../utils/CreatedDate.tsx";
 import { PostCardLikes } from "./PostCardLikes.tsx";

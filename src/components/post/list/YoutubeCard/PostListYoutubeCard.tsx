@@ -10,7 +10,7 @@ export function PostListYoutubeCard({ title, link }: { title: string, link: stri
       <div className={styles.youtubeCard__title}>{title}</div>
     </div>
     {link == "" ?
-      <div className={styles.youtubeCard__title}>None</div>
+      <div>None</div>
       :
       <iframe className={styles.youtubeCard__body}
               width={width > 800 ? width / 4 : 270}
