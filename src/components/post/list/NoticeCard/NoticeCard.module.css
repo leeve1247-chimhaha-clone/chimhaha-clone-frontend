@@ -1,4 +1,4 @@
-.noticeBox {
+.container {
     border-bottom: 0.025rem solid var(--color-gray-550);
     background-color: var(--color-gray-750);
     padding: 0.5rem 0.25rem;
@@ -6,24 +6,26 @@
     justify-content: space-between;
 }
 
-.noticeBoxLong {
-    height: 2rem;
-}
-
-.noticeBox > div {
+.container > div {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
 }
 
-.noticeBoxElementHead {
+.long {
+    height: 2rem;
 }
 
-.noticeBoxElementTail {
+
+
+.head {
 }
 
-.noticeBoxElementTail > div {
+.tail {
+}
+
+.tail > div {
     line-height: 0.8rem;
     font-size: 0.8rem;
     display: flex;
@@ -48,7 +50,7 @@
     font-size: 1rem;
 }
 
-.commentsCount {
+.comments-count {
     display: flex;
     align-items: center;
     gap: 0.25rem;
@@ -63,7 +65,7 @@
     font-size: 0.1rem;
 }
 
-.userName {
+.user-name {
     color: var(--color-gray-300);
 }
 

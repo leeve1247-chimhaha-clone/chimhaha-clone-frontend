@@ -5,6 +5,11 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   envDir: path.resolve(__dirname, 'credential'),
+  css: {
+    modules: {
+      localsConvention: 'camelCaseOnly',
+    },
+  },
   server:{
     host: true,
     port: 5173
