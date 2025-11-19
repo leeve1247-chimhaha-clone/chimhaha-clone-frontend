@@ -17,13 +17,13 @@ export function NoticeCard({ post, long }: { post: PostProps, long?: boolean | u
   const filter = queryData.filter((rawRouteConfig) => rawRouteConfig.key === category);
   const korean = filter[0].korean;
   return (
-    <NavLink to={link} className={`${styles.noticeBox} ${long ? styles.noticeBoxLong : ""}`}>
-      <div className={styles.noticeBoxElementHead}>
+    <NavLink to={link} className={`${styles.container} ${long && styles.long}`}>
+      <div className={styles.head}>
         <div className={styles.category}>{korean}</div>
         <div className={styles.title}>{post.title}</div>
         <div className={styles.commentsCount}><ChatDots/>{post.commentsCount}</div>
       </div>
-      <div className={styles.noticeBoxElementTail}>
+      <div className={styles.tail}>
         <div className={styles.likes}><HandThumbsUp/>{post.likes}</div>
         <div className={styles.userName}>{post.username}</div>
         <CircleFill className={styles.dot} />
