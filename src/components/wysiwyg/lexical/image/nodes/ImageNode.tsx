@@ -1,52 +1,11 @@
-import type {
-  DOMConversionMap,
-  DOMConversionOutput,
-  DOMExportOutput,
-  LexicalNode,
-  NodeKey,
-  SerializedLexicalNode,
-  Spread
-} from "lexical";
-import { DecoratorNode } from "lexical";
-import * as React from "react";
-import { type JSX, Suspense } from "react";
+import type {DOMConversionMap, DOMExportOutput} from "lexical";
+import {DecoratorNode} from "lexical";
+import {type JSX, Suspense} from "react";
 import style from "./ImageNode.module.css";
-
-const ImageComponent = React.lazy(
-    () => import("../components/imageComponent/ImageComponent.tsx")
-);
-
-export interface ImagePayload {
-    altText: string;
-    height?: number;
-    key?: NodeKey;
-    maxWidth?: number;
-    src: string;
-    width?: number;
-}
-
-function $convertImageElement(domNode: Node): null | DOMConversionOutput {
-    const img = domNode as HTMLImageElement;
-    if (img.src.startsWith('file:///')) {
-        return null;
-    }
-    const {alt: altText, src, width, height} = img;
-    const node = $createImageNode({altText, height, src, width});
-    return {node};
-}
-
-export type SerializedImageNode = Spread<
-    {
-        altText: string;
-        height?: number;
-        maxWidth: number;
-        src: string;
-        width?: number;
-        type: string;
-        version: 1;
-    },
-    SerializedLexicalNode
->;
+import type {ImagePayload} from "./ImagePayload.tsx";
+import {convertImageElement} from "./utils.tsx";
+import {LazyImageComponent} from "../components/imageComponent/LazyImageComponent.tsx";
+import type {SerializedImageNode} from "./SerializedImageNode.tsx";
 
 export class ImageNode extends DecoratorNode<JSX.Element> {
     __src: string;
@@ -55,111 +14,19 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     __height: "inherit" | number;
     __maxWidth: number;
 
-    static getType(): string {
-        return "image";
-    }
-
-    static clone(node: ImageNode): ImageNode {
-        return new ImageNode(
-            node.__src,
-            node.__altText,
-            node.__maxWidth,
-            node.__width,
-            node.__height,
-            node.__key
-        );
-    }
-
-    static importJSON(serializedNode: SerializedImageNode): ImageNode {
-        const {altText, height, width, maxWidth, src} = serializedNode;
-        return $createImageNode({
-            altText,
-            height,
-            maxWidth,
-            src,
-            width,
-        }).updateFromJSON(serializedNode);
-    }
-
-    exportDOM(): DOMExportOutput {
-        const element = document.createElement("img");
-        element.setAttribute("src", this.__src);
-        element.setAttribute("alt", this.__altText);
-        return {element};
-    }
-
-    static importDOM(): DOMConversionMap | null {
-        return {
-            img: () => ({
-                conversion: $convertImageElement,
-                priority: 0
-            })
-        };
-    }
-
-    constructor(
-        src: string,
-        altText: string,
-        maxWidth: number,
-        width?: "inherit" | number,
-        height?: "inherit" | number,
-        key?: NodeKey
-    ) {
+    constructor({src, altText, maxWidth, width, height, key}: ImagePayload) {
         super(key);
         this.__src = src;
         this.__altText = altText;
-        this.__maxWidth = maxWidth;
+        this.__maxWidth = maxWidth == undefined ? 500 : maxWidth;
         this.__width = width || "inherit";
         this.__height = height || "inherit";
     }
 
-    exportJSON(): SerializedImageNode {
-        return {
-            altText: this.getAltText(),
-            height: this.__height === "inherit" ? 0 : this.__height,
-            maxWidth: this.__maxWidth,
-            src: this.getSrc(),
-            type: "image",
-            version: 1,
-            width: this.__width === "inherit" ? 0 : this.__width
-        };
-    }
-
-    setWidthAndHeight(
-        width: "inherit" | number,
-        height: "inherit" | number
-    ): void {
-        const writable = this.getWritable();
-        writable.__width = width;
-        writable.__height = height;
-    }
-
-    // View
-    createDOM(): HTMLElement {
-        const span = document.createElement("span");
-        const className = style.editorImage;
-        if (className !== undefined) {
-            span.className = className;
-        }
-        return span;
-    }
-
-    updateDOM(): false {
-        return false;
-    }
-
-    getSrc(): string {
-        return this.__src;
-    }
-
-    getAltText(): string {
-        return this.__altText;
-    }
-
-    decorate(): JSX.Element {
+    override decorate(): JSX.Element {
         return (
             <Suspense fallback={null}>
-                <ImageComponent
+                <LazyImageComponent
                     src={this.__src}
                     altText={this.__altText}
                     width={this.__width}
@@ -171,27 +38,84 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
             </Suspense>
         );
     }
+
+    static override clone(node: ImageNode): ImageNode {
+        return new ImageNode({
+                src: node.__src,
+                altText: node.__altText,
+                maxWidth: node.__maxWidth,
+                width: node.__width,
+                height: node.__height,
+                key: node.__key
+            }
+        );
+    }
+
+    static override importJSON(serializedNode: SerializedImageNode): ImageNode {
+        const {altText, height, width, maxWidth, src} = serializedNode;
+        return new ImageNode({altText, height, width, maxWidth, src}).updateFromJSON(serializedNode);
+    }
+
+    override createDOM(): HTMLElement {
+        const span = document.createElement("span");
+        const className = style.editorImage;
+        if (className !== undefined) {
+            span.className = className;
+        }
+        return span;
+    }
+
+    override updateDOM(): false {
+        return false;
+    }
+
+    static override importDOM(): DOMConversionMap | null {
+        return {
+            img: () => ({
+                conversion: convertImageElement,
+                priority: 0
+            })
+        };
+    }
+
+    override exportJSON(): SerializedImageNode {
+        return {
+            altText: this.getAltText(),
+            height: this.__height === "inherit" ? 0 : this.__height,
+            maxWidth: this.__maxWidth,
+            src: this.getSrc(),
+            type: "image",
+            version: 1,
+            width: this.__width === "inherit" ? 0 : this.__width
+        };
+    }
+
+    override exportDOM(): DOMExportOutput {
+        const element = document.createElement("img");
+        element.setAttribute("src", this.__src);
+        element.setAttribute("alt", this.__altText);
+        return {element};
+    }
+
+    static override getType(): string {
+        return "image";
+    }
+
+    setWidthAndHeight(
+        width: "inherit" | number,
+        height: "inherit" | number
+    ): void {
+        const writable = this.getWritable();
+        writable.__width = width;
+        writable.__height = height;
+    }
+
+    getSrc(): string {
+        return this.__src;
+    }
+
+    getAltText(): string {
+        return this.__altText;
+    }
 }
 
-export function $createImageNode(
-    {
-        altText,
-        height,
-        maxWidth = 500,
-        src,
-        width,
-    }: ImagePayload): ImageNode {
-    return new ImageNode(
-        src,
-        altText,
-        maxWidth,
-        width,
-        height,
-    );
-}
-
-export function $isImageNode(
-    node: LexicalNode | null | undefined
-): node is ImageNode {
-    return node instanceof ImageNode;
-}

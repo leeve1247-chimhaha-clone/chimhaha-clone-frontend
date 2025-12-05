@@ -8,49 +8,49 @@
 }
 
 
-.imageResizerNorth{
+.imageResizerNorth {
     top: -6px;
     left: 48%;
     cursor: n-resize;
 }
 
-.imageResizerNorthEast{
+.imageResizerNorthEast {
     top: -6px;
     right: -6px;
     cursor: ne-resize;
 }
 
-.imageResizerEast{
+.imageResizerEast {
     bottom: 48%;
     right: -6px;
     cursor: e-resize;
 }
 
-.imageResizerSouthEast{
+.imageResizerSouthEast {
     bottom: -2px;
     right: -6px;
     cursor: nwse-resize;
 }
 
-.imageResizerSouth{
+.imageResizerSouth {
     bottom: -2px;
     left: 48%;
     cursor: s-resize;
 }
 
-.imageResizerSouthWest{
+.imageResizerSouthWest {
     bottom: -2px;
     left: -6px;
     cursor: sw-resize;
 }
 
-.imageResizerWest{
+.imageResizerWest {
     bottom: 48%;
     left: -6px;
     cursor: w-resize;
 }
 
-.imageResizerNorthWest{
+.imageResizerNorthWest {
     top: -6px;
     left: -6px;
     cursor: nw-resize;

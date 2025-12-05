@@ -1,26 +1,8 @@
-import React, { useRef } from "react";
-import type { LexicalEditor } from "lexical";
-import { calculateZoomLevel } from "@lexical/utils";
-import style from "./ImageResizer.module.css";
-
-function clamp(value: number, min: number, max: number) {
-    return Math.min(Math.max(value, min), max);
-}
-
-const Direction = {
-    east: 1 << 0,
-    north: 1 << 3,
-    south: 1 << 1,
-    west: 1 << 2,
-};
-
-interface ImageResizerProps {
-    imageRef: {current: null | HTMLElement};
-    maxWidth?: number;
-    onResizeStart: () => void;
-    onResizeEnd: (width: 'inherit' | number, height: 'inherit' | number) => void;
-    editor: LexicalEditor;
-}
+import {useRef} from "react";
+import {calculateZoomLevel} from "@lexical/utils";
+import style from "./ImageResizer.module.css"
+import {clamp, Direction} from "./utils.tsx";
+import type {ImageResizerProps} from "./ImageResizerProps.tsx";
 
 export function ImageResizer(
     {

@@ -1,14 +1,14 @@
-import { $getNodeByKey, CLICK_COMMAND, COMMAND_PRIORITY_LOW, DRAGSTART_COMMAND, type NodeKey } from "lexical";
+import {$getNodeByKey, CLICK_COMMAND, COMMAND_PRIORITY_LOW, DRAGSTART_COMMAND, type NodeKey} from "lexical";
 
-import { type JSX, Suspense, useCallback, useEffect, useRef, useState } from "react";
-import { useLexicalNodeSelection } from "@lexical/react/useLexicalNodeSelection";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { mergeRegister } from "@lexical/utils";
-import { ImageResizer } from "../resizer/ImageResizer.tsx";
-import { $isImageNode } from "../../nodes/ImageNode.tsx";
-import { LazyImage } from "../lazyImage/LazyImage.tsx";
-import { useLexicalEditable } from "@lexical/react/useLexicalEditable";
+import {type JSX, Suspense, useCallback, useEffect, useRef, useState} from "react";
+import {useLexicalNodeSelection} from "@lexical/react/useLexicalNodeSelection";
+import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
+import {mergeRegister} from "@lexical/utils";
+import {ImageResizer} from "../resizer/ImageResizer.tsx";
+import {LazyImage} from "../lazyImage/LazyImage.tsx";
+import {useLexicalEditable} from "@lexical/react/useLexicalEditable";
 import style from "./ImageComponent.module.css";
+import {isImageNode} from "../../nodes/utils.tsx";
 
 export default function ImageComponent(
     {
@@ -28,8 +28,7 @@ export default function ImageComponent(
         width: "inherit" | number;
     }): JSX.Element {
     const imageRef = useRef<null | HTMLImageElement>(null);
-    const [isSelected, setSelected, clearSelection] =
-        useLexicalNodeSelection(nodeKey);
+    const [isSelected, setSelected, clearSelection] = useLexicalNodeSelection(nodeKey);
     const [editor] = useLexicalComposerContext();
     const [isResizing, setIsResizing] = useState<boolean>(false);
     const isEditable = useLexicalEditable();
@@ -49,7 +48,7 @@ export default function ImageComponent(
 
         editor.update(() => {
             const node = $getNodeByKey(nodeKey);
-            if ($isImageNode(node)) {
+            if (isImageNode(node)) {
                 node.setWidthAndHeight(nextWidth, nextHeight);
             }
         });
@@ -77,7 +76,6 @@ export default function ImageComponent(
 
     useEffect(() => {
         const unregister = mergeRegister(
-
             editor.registerCommand<MouseEvent>(
                 CLICK_COMMAND,
                 onClick,
@@ -127,7 +125,7 @@ export default function ImageComponent(
                         height={height}
                         maxWidth={maxWidth} onError={function (): void {
                         throw new Error("Function not implemented.");
-                    }} />
+                    }}/>
                 </div>
                 {isFocused && (
                     <ImageResizer
