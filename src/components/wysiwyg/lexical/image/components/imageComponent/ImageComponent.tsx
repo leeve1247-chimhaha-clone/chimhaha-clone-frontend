@@ -4,9 +4,9 @@ import { type JSX, Suspense, useCallback, useEffect, useRef, useState } from "re
 import { useLexicalNodeSelection } from "@lexical/react/useLexicalNodeSelection";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { mergeRegister } from "@lexical/utils";
-import { ImageResizer } from "../ui/ImageResizer.tsx";
-import { $isImageNode } from "./ImageNode.tsx";
-import { LazyImage } from "./LazyImage.tsx";
+import { ImageResizer } from "../resizer/ImageResizer.tsx";
+import { $isImageNode } from "../../nodes/ImageNode.tsx";
+import { LazyImage } from "../lazyImage/LazyImage.tsx";
 import { useLexicalEditable } from "@lexical/react/useLexicalEditable";
 import style from "./ImageComponent.module.css";
 

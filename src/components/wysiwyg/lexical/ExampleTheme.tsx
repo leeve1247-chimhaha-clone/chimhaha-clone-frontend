@@ -20,9 +20,9 @@ const ExampleTheme :  EditorThemeClasses = {
     image: style.editorImage,
     link: style.editorLink,
     list: {
-        listitem: style.editorListitem,
+        listitem: style.editorListItem,
         nested: {
-            listitem: style.editorNestedListitem,
+            listitem: style.editorNestedListItem,
         },
         ol: style.editorListOl,
         ul: style.editorListUl,

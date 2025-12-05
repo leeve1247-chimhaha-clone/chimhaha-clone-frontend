@@ -66,11 +66,11 @@
     margin: 0 0 0 16px;
 }
 
-.editorNestedListitem {
+.editorNestedListItem {
     list-style-type: none;
 }
 
-.editorListitem {
+.editorListItem {
     margin: 8px 32px 8px 32px;
 }
 
