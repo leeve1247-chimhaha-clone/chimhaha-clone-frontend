@@ -1,4 +1,4 @@
-import { LexicalComment } from "../wysiwyg/lexical/LexicalComment.tsx";
+import { LexicalComment } from "../wysiwyg/lexical/comment/LexicalComment.tsx";
 import { useRef } from "react";
 import type { LexicalEditor } from "lexical";
 import { SubmitCommentButton } from "./buttons/SubmitCommentButton.tsx";

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { LexicalComment } from "../wysiwyg/lexical/LexicalComment.tsx";
+import { LexicalComment } from "../wysiwyg/lexical/comment/LexicalComment.tsx";
 import { SubmitCommentButton } from "./buttons/SubmitCommentButton.tsx";
 import cssClass from "./CommentComponent.module.css";
 

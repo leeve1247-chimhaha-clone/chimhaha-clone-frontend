@@ -1,5 +1,5 @@
 import { CommentComponents } from "./CommentComponents.tsx";
-import { LexicalComment } from "../wysiwyg/lexical/LexicalComment.tsx";
+import { LexicalComment } from "../wysiwyg/lexical/comment/LexicalComment.tsx";
 import cssClass from "./CommentComponent.module.css";
 import { useRef, useState } from "react";
 import { CommentTail } from "./tail/CommentTail.tsx";

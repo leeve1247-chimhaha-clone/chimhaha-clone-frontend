@@ -13,7 +13,7 @@ import { type JSX, Suspense } from "react";
 import style from "./ImageNode.module.css";
 
 const ImageComponent = React.lazy(
-    () => import("./ImageComponent")
+    () => import("../components/imageComponent/ImageComponent.tsx")
 );
 
 export interface ImagePayload {
