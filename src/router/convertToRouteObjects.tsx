@@ -3,6 +3,7 @@ import { App } from "../App.tsx";
 import { PostListComponents } from "../components/post/list/PostListComponents.tsx";
 import { PostSubmit } from "../components/post/submit/PostSubmit.tsx";
 import { PostDetail } from "../components/post/detail/PostDetail.tsx";
+import { PostPopularListComponents } from "../components/post/list/PostPopularListComponents.tsx";
 
 export interface RawRouteConfig {
   id: number;
@@ -39,7 +40,7 @@ export function convertToRouteObjects(routes: RawRouteConfig[]): RouteObject[] {
     })
     .concat({
       path: "",
-      element: <PostListComponents/>
+      element: <PostPopularListComponents/>
     })
     .concat({
       path:"/mypage",

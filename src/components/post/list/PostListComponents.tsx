@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import styles from "./PostListComponent.module.css";
 import { PostCard } from "./PostCard/PostCard.tsx";
 import axios from "axios";
@@ -12,9 +11,9 @@ import { PostListYoutubeCards } from "./YoutubeCard/PostListYoutubeCards.tsx";
 import { NoticeListComponent } from "./NoticeListComponent.tsx";
 import { useAuth } from "react-oidc-context";
 import { PopularComponent } from "./PopularComponent.tsx";
+import { PostButton } from "./PostButton.tsx";
 
 export function PostListComponents() {
-  const navigate = useNavigate();
   const matches = useMatches();
   const category = matches[1].pathname.substring(1, matches[1].pathname.length);
   const { data, error } = useQuery({ queryKey: [...queryKeys.PostList, category], queryFn: fetchPostList });
@@ -34,46 +33,39 @@ export function PostListComponents() {
       });
   }
 
-  function goToSubmit() {
-    navigate("submit");
-  }
-
   if (error) return <div>Error: {error.message}</div>;
   if (data === undefined) return <div>No data</div>;
   if (queryData === undefined) return <div>캐시 불러오는 중...</div>;
   const korean = queryData.find((x) => x.key === category)?.korean;
   return (
     <>
-      <div className={styles.container}>
-        <PostListYoutubeCards />
-        {category.toLowerCase() === "" && <>
+      {category.toLowerCase() === "" && <>
+        <div className={styles.container}>
+          <PostListYoutubeCards />
           <div className={styles.row}>
-            <h2 className={styles.h2}>공지</h2> <h2 className={styles.h2mark}>!</h2>
+            <h2 className={styles.h2}>공지</h2><h2 className={styles.mark}>!</h2>
           </div>
           <NoticeListComponent />
-        </>}
-        {korean !== undefined && <h2 className={styles.h2}>{korean} 게시판</h2>}
-        {category.toLowerCase() === "all" && <h2 className={styles.h2}>전체 게시판</h2>}
-        {category.toLowerCase() === "" && <>
-          <PopularComponent/>
-        </>}
-        {category.toLowerCase() !== "" && <>
-          <div><NoticeListComponent long = {true} />
+        </div>
+        <div className={styles.container}>
+          <PopularComponent />
+        </div>
+      </>
+      }
+
+      {category.toLowerCase() !== "" && <>
+        <div className={styles.container}>
+          <h2 className={styles.h2}>{korean} 게시판</h2>
+          <div><NoticeListComponent long={true} />
             {data.map((post, index) => (
               <PostCard key={index} post={post} />
             ))}
           </div>
-
-          {category.toLowerCase() !== "" && auth.isAuthenticated && (
-            <div className={styles.tailContainer}>
-              <button onClick={goToSubmit} className={styles.button}>
-                글쓰기
-              </button>
-            </div>
-          )}</>
-
-        }
-      </div>
+          {auth.isAuthenticated && (
+            <PostButton />
+          )}
+        </div>
+      </>}
     </>
   );
 }
