@@ -21,8 +21,8 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowClockwise,
-  ArrowCounterclockwise,
-  Justify,
+  ArrowCounterclockwise, CameraVideo, CardImage, Fonts, Image,
+  Justify, Link, Palette,
   TextCenter,
   TextLeft,
   TextRight,
@@ -36,6 +36,7 @@ import { DropDownTrigger } from "./dropdown/DropDownTrigger.tsx";
 import { DropDownMenu } from "./dropdown/DropDownMenu.tsx";
 import { DropDown } from "./dropdown/DropDown.tsx";
 import { DropDownItems } from "./dropdown/DropDownItems.tsx";
+import { TextAlignStart } from "lucide-react";
 
 const LowPriority = 1;
 
@@ -103,6 +104,18 @@ export default function ToolbarPlugin() {
 
   return (
     <div className={style.toolbar} ref={toolbarRef}>
+      <button><TextAlignStart /></button>
+      <button><Fonts/></button>
+      <button>FontSize</button>
+      <Divider/>
+      <button><Image/></button>
+      <button><CameraVideo/></button>
+      <button><Link/></button>
+      <Divider/>
+      <button><Palette/></button>
+      <button>Bg Color</button>
+      <button>Init Font</button>
+      <Divider/>
       <button
         onClick={() => {
           editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
@@ -174,8 +187,13 @@ export default function ToolbarPlugin() {
           </DropDownItems>
         </DropDownMenu>
       </DropDown>
-
+      <button>numberTagging</button>
+      <button>dotTagging</button>
+      <button>Tab</button>
+      <button>R.Tab</button>
       <Divider />
+      <button>Quote</button>
+      <button>HorizontalRule</button>
       <button
         disabled={!canUndo}
         onClick={() => {

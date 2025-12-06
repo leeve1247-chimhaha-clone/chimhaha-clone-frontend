@@ -13,6 +13,8 @@
     border-top-right-radius: 10px;
     vertical-align: middle;
     gap: 2px;
+
+    overflow-x: auto;
 }
 
 .toolbarItemButton{
