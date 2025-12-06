@@ -1,11 +1,12 @@
 import { createPortal } from "react-dom";
 import style from "../ToolbarPlugin.module.css";
 import type { Coords } from "./utils.tsx";
-import React from "react";
+import type { RefObject } from "react";
+
 
 export function DropDownItems({ coords, dropDownRef }: {
   coords: Coords,
-  dropDownRef: React.RefObject<HTMLDivElement|null>
+  dropDownRef: RefObject<HTMLDivElement| null>
 }){
   return createPortal(
     <div
