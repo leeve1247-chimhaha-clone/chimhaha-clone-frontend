@@ -32,6 +32,7 @@ import {
   TypeUnderline
 } from "react-bootstrap-icons";
 import style from "./ToolbarPlugin.module.css";
+import { DropDown } from "./dropdown/DropDown.tsx";
 
 const LowPriority = 1;
 
@@ -97,6 +98,8 @@ export default function ToolbarPlugin() {
 
     return (
         <div className={style.toolbar} ref={toolbarRef}>
+            <DropDown/>
+            <Divider/>
             <button
                 disabled={!canUndo}
                 onClick={() => {
