@@ -20,46 +20,46 @@ import type {ImagePayload} from "../nodes/ImagePayload.tsx";
 export type InsertImagePayload = Readonly<ImagePayload>;
 
 export default function ImagesPlugin(): JSX.Element | null {
-    const [editor] = useLexicalComposerContext();
-    useEffect(() => {
-        if (!editor.hasNodes([ImageNode])) {
-            throw new Error('ImagesPlugin: ImageNode not registered on editor');
-        }
-        return mergeRegister(
-            editor.registerCommand<InsertImagePayload>(
-                INSERT_IMAGE_COMMAND,
-                (payload) => {
-                    const imageNode = new ImageNode(payload);
-                    $insertNodes([imageNode]);
-                    if ($isRootOrShadowRoot(imageNode.getParentOrThrow())) {
-                        $wrapNodeInElement(imageNode, $createParagraphNode).selectEnd();
-                    }
-                    return true;
-                },
-                COMMAND_PRIORITY_EDITOR,
-            ),
-            editor.registerCommand<DragEvent>(
-                DRAGSTART_COMMAND,
-                (event) => {
-                    return onDragStart(event);
-                },
-                COMMAND_PRIORITY_HIGH,
-            ),
-            editor.registerCommand<DragEvent>(
-                DRAGOVER_COMMAND,
-                () => {
-                    return onDragover();
-                },
-                COMMAND_PRIORITY_LOW,
-            ),
-            editor.registerCommand<DragEvent>(
-                DROP_COMMAND,
-                (event) => {
-                    return onDrop(event, editor);
-                },
-                COMMAND_PRIORITY_HIGH,
-            ),
-        );
-    }, [editor]);
-    return null;
+  const [editor] = useLexicalComposerContext();
+  useEffect(() => {
+    if (!editor.hasNodes([ImageNode])) {
+      throw new Error('ImagesPlugin: ImageNode not registered on editor');
+    }
+    return mergeRegister(
+      editor.registerCommand<InsertImagePayload>(
+        INSERT_IMAGE_COMMAND,
+        (payload) => {
+          const imageNode = new ImageNode(payload);
+          $insertNodes([imageNode]);
+          if ($isRootOrShadowRoot(imageNode.getParentOrThrow())) {
+            $wrapNodeInElement(imageNode, $createParagraphNode).selectEnd();
+          }
+          return true;
+        },
+        COMMAND_PRIORITY_EDITOR,
+      ),
+      editor.registerCommand<DragEvent>(
+        DRAGSTART_COMMAND,
+        (event) => {
+          return onDragStart(event);
+        },
+        COMMAND_PRIORITY_HIGH,
+      ),
+      editor.registerCommand<DragEvent>(
+        DRAGOVER_COMMAND,
+        () => {
+          return onDragover();
+        },
+        COMMAND_PRIORITY_LOW,
+      ),
+      editor.registerCommand<DragEvent>(
+        DROP_COMMAND,
+        (event) => {
+          return onDrop(event, editor);
+        },
+        COMMAND_PRIORITY_HIGH,
+      ),
+    );
+  }, [editor]);
+  return null;
 }
