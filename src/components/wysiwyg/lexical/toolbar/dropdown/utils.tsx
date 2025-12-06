@@ -37,10 +37,18 @@ export function useDropdown() {
       )
       setIsOpen(false);
     }
+    function handleScrollOrResize() {
+      if (isOpen) setIsOpen(false);
+    }
 
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside); // click -> mousedown 권장
+    window.addEventListener("scroll", handleScrollOrResize, { capture: true }); // capture: true로 내부 스크롤도 감지
+    window.addEventListener("resize", handleScrollOrResize);
     return () => {
       document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScrollOrResize, { capture: true });
+      window.removeEventListener("resize", handleScrollOrResize);
     };
   }, [isOpen]); // 의존성 배열 유지
 
