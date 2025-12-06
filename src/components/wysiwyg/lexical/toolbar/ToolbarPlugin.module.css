@@ -37,6 +37,10 @@
     background-color: var(--color-gray-500);
 }
 
+.hiddenInput{
+    display: none;
+}
+
 .toolbarItemIcon{
     background-size: contain;
     height: 18px;
@@ -63,4 +67,3 @@
     margin-left: 4px;
     display: flex;
 }
-
