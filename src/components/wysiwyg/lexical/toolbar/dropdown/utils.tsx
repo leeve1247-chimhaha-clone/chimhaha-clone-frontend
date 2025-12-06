@@ -32,8 +32,8 @@ export function useDropdown() {
         isOpen &&
         dropDownRef.current && triggerRef.current &&
         isNode(event.target) &&
-        dropDownRef.current.contains(event.target) &&
-        triggerRef.current.contains(event.target)
+        !dropDownRef.current.contains(event.target) &&
+        !triggerRef.current.contains(event.target)
       )
       setIsOpen(false);
     }
