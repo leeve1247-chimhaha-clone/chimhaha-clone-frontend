@@ -19,24 +19,37 @@ import {
   UNDO_COMMAND
 } from "lexical";
 import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  ArrowClockwise,
-  ArrowCounterclockwise, CameraVideo, CardImage, Fonts, Image,
-  Justify, Link, Palette,
-  TextCenter,
-  TextLeft,
-  TextRight,
-  TypeBold,
-  TypeItalic,
-  TypeStrikethrough,
-  TypeUnderline
-} from "react-bootstrap-icons";
 import style from "./ToolbarPlugin.module.css";
 import { DropDownTrigger } from "./dropdown/DropDownTrigger.tsx";
 import { DropDownMenu } from "./dropdown/DropDownMenu.tsx";
 import { DropDown } from "./dropdown/DropDown.tsx";
 import { DropDownItems } from "./dropdown/DropDownItems.tsx";
-import { TextAlignStart } from "lucide-react";
+import {
+  ALargeSmall,
+  AlignCenter,
+  AlignJustify,
+  AlignLeft,
+  AlignRight,
+  Baseline,
+  Bold,
+  Highlighter,
+  Image,
+  Italic,
+  Link,
+  List,
+  ListIndentDecrease,
+  ListIndentIncrease,
+  ListOrdered,
+  Minus,
+  Quote,
+  Redo2,
+  RemoveFormatting,
+  Strikethrough,
+  Type,
+  Underline,
+  Undo2,
+  Video
+} from "lucide-react";
 
 const LowPriority = 1;
 
@@ -53,7 +66,7 @@ export default function ToolbarPlugin() {
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
-  const [elementType, setElementType] = useState('left');
+  const [elementType, setElementType] = useState("left");
 
   const $updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -104,104 +117,147 @@ export default function ToolbarPlugin() {
 
   return (
     <div className={style.toolbar} ref={toolbarRef}>
-      <button><TextAlignStart /></button>
-      <button><Fonts/></button>
-      <button>FontSize</button>
-      <Divider/>
-      <button><Image/></button>
-      <button><CameraVideo/></button>
-      <button><Link/></button>
-      <Divider/>
-      <button><Palette/></button>
-      <button>Bg Color</button>
-      <button>Init Font</button>
-      <Divider/>
+      <button
+        className={`${style.toolbarItemButton}`}
+      >
+        <Type className={style.toolbarItemIcon} />
+      </button>
+      <button
+        className={`${style.toolbarItemButton}`}
+      >
+        <ALargeSmall className={style.toolbarItemIcon} />
+      </button>
+      <Divider />
+      <button
+        className={`${style.toolbarItemButton}`}
+      >
+        <Image className={style.toolbarItemIcon} />
+      </button>
+      <button
+        className={`${style.toolbarItemButton}`}
+      >
+        <Video className={style.toolbarItemIcon} />
+      </button>
+      <button
+        className={`${style.toolbarItemButton}`}
+      >
+        <Link className={style.toolbarItemIcon} />
+      </button>
+      <Divider />
       <button
         onClick={() => {
           editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
         }}
-        className={`${style.toolbarItemButton} ${style.spaced} ${isBold ? style.active : ""}`}
+        className={`${style.toolbarItemButton} ${isBold ? style.active : ""}`}
       >
-        <TypeBold className={style.toolbarItemIcon} />
+        <Bold className={style.toolbarItemIcon} />
       </button>
       <button
         onClick={() => {
           editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
         }}
-        className={`${style.toolbarItemButton} ${style.spaced} ${isItalic ? style.active : ""}`}
+        className={`${style.toolbarItemButton} ${isItalic ? style.active : ""}`}
       >
-        <TypeItalic className={style.toolbarItemIcon} />
+        <Italic className={style.toolbarItemIcon} />
       </button>
       <button
         onClick={() => {
           editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
         }}
-        className={`${style.toolbarItemButton} ${style.spaced} ${isUnderline ? style.active : ""}`}>
-        <TypeUnderline className={style.toolbarItemIcon} />
+        className={`${style.toolbarItemButton} ${isUnderline ? style.active : ""}`}>
+        <Underline className={style.toolbarItemIcon} />
       </button>
       <button
         onClick={() => {
           editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
         }}
-        className={`${style.toolbarItemButton} ${style.spaced} ${isStrikethrough ? style.active : ""}`}
+        className={`${style.toolbarItemButton} ${isStrikethrough ? style.active : ""}`}
       >
-        <TypeStrikethrough className={style.toolbarItemIcon} />
+        <Strikethrough className={style.toolbarItemIcon} />
+      </button>
+      <Divider />
+      <button
+        className={`${style.toolbarItemButton}`}
+      >
+        <Baseline className={style.toolbarItemIcon} />
+      </button>
+      <button
+        className={`${style.toolbarItemButton}`}
+      >
+        <Highlighter className={style.toolbarItemIcon} />
+      </button>
+      <button
+        className={`${style.toolbarItemButton}`}
+      >
+        <RemoveFormatting className={style.toolbarItemIcon} />
       </button>
       <Divider />
       <DropDown>
         <DropDownTrigger>
-          {['left', ''].includes(elementType) && <TextLeft className={style.toolbarItemIcon} />}
-          {elementType == 'center' && <TextCenter className={style.toolbarItemIcon} />}
-          {elementType == 'right' && <TextRight className={style.toolbarItemIcon} />}
-          {elementType == 'justify' && <Justify className={style.toolbarItemIcon} />}
+          {["left", ""].includes(elementType) && <AlignLeft className={style.toolbarItemIcon} />}
+          {elementType == "center" && <AlignCenter className={style.toolbarItemIcon} />}
+          {elementType == "right" && <AlignRight className={style.toolbarItemIcon} />}
+          {elementType == "justify" && <AlignJustify className={style.toolbarItemIcon} />}
         </DropDownTrigger>
         <DropDownMenu>
           <DropDownItems
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
             }}
-            className={`${style.toolbarItemButton} ${style.Spaced}`}
+            className={`${style.toolbarItemButton}`}
           >
-            <TextLeft className={style.toolbarItemIcon} />
+            <AlignLeft className={style.toolbarItemIcon} />
           </DropDownItems>
           <DropDownItems
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
             }}
-            className={`${style.toolbarItemButton} ${style.Spaced}`}
+            className={`${style.toolbarItemButton}`}
           >
-            <TextCenter className={style.toolbarItemIcon} />
+            <AlignCenter className={style.toolbarItemIcon} />
           </DropDownItems>
           <DropDownItems
             onClick={() => {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
             }}
-            className={`${style.toolbarItemButton} ${style.Spaced}`}
+            className={`${style.toolbarItemButton}`}
           >
-            <TextRight className={style.toolbarItemIcon} />
+            <AlignRight className={style.toolbarItemIcon} />
           </DropDownItems>
           <DropDownItems onClick={() => {
             editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
           }} className={style.toolbarItemButton}>
-            <Justify className={style.toolbarItemIcon} />
+            <AlignJustify className={style.toolbarItemIcon} />
           </DropDownItems>
         </DropDownMenu>
       </DropDown>
-      <button>numberTagging</button>
-      <button>dotTagging</button>
-      <button>Tab</button>
-      <button>R.Tab</button>
+      <button
+        className={`${style.toolbarItemButton}`}
+      ><ListOrdered className={style.toolbarItemIcon} /></button>
+      <button
+        className={`${style.toolbarItemButton}`}
+      ><List className={style.toolbarItemIcon} /></button>
+      <button
+        className={`${style.toolbarItemButton}`}
+      ><ListIndentIncrease className={style.toolbarItemIcon} /></button>
+      <button
+        className={`${style.toolbarItemButton}`}
+      ><ListIndentDecrease className={style.toolbarItemIcon} /></button>
       <Divider />
-      <button>Quote</button>
-      <button>HorizontalRule</button>
+      <button
+        className={`${style.toolbarItemButton}`}
+      ><Quote className={style.toolbarItemIcon} /></button>
+      <button
+        className={`${style.toolbarItemButton}`}
+      ><Minus className={style.toolbarItemIcon} /></button>
       <button
         disabled={!canUndo}
         onClick={() => {
           editor.dispatchCommand(UNDO_COMMAND, undefined);
         }}
-        className={`${style.toolbarItemButton} ${style.Spaced}`}
+        className={`${style.toolbarItemButton}`}
       >
-        <ArrowCounterclockwise className={style.toolbarItemIcon} />
+        <Undo2 className={style.toolbarItemIcon} />
       </button>
       <button
         disabled={!canRedo}
@@ -210,7 +266,7 @@ export default function ToolbarPlugin() {
         }}
         className={style.toolbarItemButton}
       >
-        <ArrowClockwise className={style.toolbarItemIcon} />
+        <Redo2 className={style.toolbarItemIcon} />
       </button>
     </div>
   );
