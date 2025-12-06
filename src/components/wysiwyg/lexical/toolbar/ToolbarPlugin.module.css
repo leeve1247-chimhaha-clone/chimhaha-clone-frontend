@@ -25,6 +25,10 @@
     vertical-align: middle;
 }
 
+.toolbarItemButton:hover{
+    background-color: var(--color-gray-600);
+}
+
 /*toolbarItemButton*/
 .active{
     background-color: var(--color-gray-500);
@@ -35,10 +39,6 @@
     margin-right: 2px;
 }
 
-.toolbarItemButton:hover{
-    background-color: var(--color-gray-600);
-}
-
 .toolbarItemIcon{
     background-size: contain;
     height: 18px;
@@ -47,4 +47,19 @@
     vertical-align: -0.25em;
     display: flex;
     opacity: 0.6;
+}
+
+.toolbarDropDown {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-gray-800);
+    z-index: 1000;
+    min-width: 150px;
+    border: 1px solid var(--color-gray-650);
+    border-radius: 10px;
+}
+
+.toolbarDropDownItem {
+    margin: 5px;
 }
