@@ -9,12 +9,12 @@ export function DropDownTrigger({children}:{children:ReactNode}) {
     <button
       ref={controller.triggerRef}
       onClick={controller.toggle}
-      className={`${style.toolbarItemButton} ${style.Spaced}`}
+      className={`${style.toolbarItemButton}`}
       aria-expanded={controller.isOpen} // 접근성 추가
     >
       {children}
-      {controller.isOpen && <ChevronUp className={`${style.toolbarItemButton} ${style.toolbarDropDownChevron}`}/>}
-      {!controller.isOpen && <ChevronDown className={`${style.toolbarItemButton} ${style.toolbarDropDownChevron}`}/>}
+      {controller.isOpen && <ChevronUp className={`${style.toolbarItemIcon} ${style.toolbarDropDownChevron}`}/>}
+      {!controller.isOpen && <ChevronDown className={`${style.toolbarItemIcon}  ${style.toolbarDropDownChevron}`}/>}
     </button>
   );
 }
