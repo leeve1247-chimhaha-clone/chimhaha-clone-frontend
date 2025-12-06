@@ -1,7 +1,7 @@
 import style from "../ToolbarPlugin.module.css";
 import type { ReactNode } from "react";
 import { useMyDropDownContext } from "./DropDownContext.tsx";
-import { ChevronDown, ChevronUp } from "react-bootstrap-icons";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 export function DropDownTrigger({children}:{children:ReactNode}) {
   const controller = useMyDropDownContext();

@@ -117,11 +117,14 @@ export default function ToolbarPlugin() {
 
   return (
     <div className={style.toolbar} ref={toolbarRef}>
-      <button
-        className={`${style.toolbarItemButton}`}
-      >
-        <Type className={style.toolbarItemIcon} />
-      </button>
+      <DropDown>
+        <DropDownTrigger><Type className={style.toolbarItemIcon} /></DropDownTrigger>
+        <DropDownMenu>
+          <DropDownItems onClick={() => {
+            console.log(123);
+          }} className={`${style.toolbarItemButton}`}>b</DropDownItems>
+        </DropDownMenu>
+      </DropDown>
       <button
         className={`${style.toolbarItemButton}`}
       >
