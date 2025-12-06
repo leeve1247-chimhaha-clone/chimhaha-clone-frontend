@@ -35,6 +35,7 @@ import style from "./ToolbarPlugin.module.css";
 import { DropDownTrigger } from "./dropdown/DropDownTrigger.tsx";
 import { DropDownMenu } from "./dropdown/DropDownMenu.tsx";
 import { DropDown } from "./dropdown/DropDown.tsx";
+import { DropDownItems } from "./dropdown/DropDownItems.tsx";
 
 const LowPriority = 1;
 
@@ -51,6 +52,7 @@ export default function ToolbarPlugin() {
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
+  const [elementType, setElementType] = useState('left');
 
   const $updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -60,6 +62,7 @@ export default function ToolbarPlugin() {
       setIsItalic(selection.hasFormat("italic"));
       setIsUnderline(selection.hasFormat("underline"));
       setIsStrikethrough(selection.hasFormat("strikethrough"));
+      setElementType(selection.anchor.getNode().getTopLevelElementOrThrow().getFormatType());
     }
   }, []);
 
@@ -133,49 +136,45 @@ export default function ToolbarPlugin() {
       </button>
       <Divider />
       <DropDown>
-        <DropDownTrigger>메뉴 열기</DropDownTrigger>
+        <DropDownTrigger>
+          {['left', ''].includes(elementType) && <TextLeft className={style.toolbarItemIcon} />}
+          {elementType == 'center' && <TextCenter className={style.toolbarItemIcon} />}
+          {elementType == 'right' && <TextRight className={style.toolbarItemIcon} />}
+          {elementType == 'justify' && <Justify className={style.toolbarItemIcon} />}
+        </DropDownTrigger>
         <DropDownMenu>
-          <button
-            className={`${style.toolbarItemButton} ${style.toolbarDropDownItem}`}
-          >1</button>
-          <button
-            className={`${style.toolbarItemButton} ${style.toolbarDropDownItem}`}
-          >2</button>
-          <button
-            className={`${style.toolbarItemButton} ${style.toolbarDropDownItem}`}
-          >3</button>
+          <DropDownItems
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
+            }}
+            className={`${style.toolbarItemButton} ${style.Spaced}`}
+          >
+            <TextLeft className={style.toolbarItemIcon} />
+          </DropDownItems>
+          <DropDownItems
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
+            }}
+            className={`${style.toolbarItemButton} ${style.Spaced}`}
+          >
+            <TextCenter className={style.toolbarItemIcon} />
+          </DropDownItems>
+          <DropDownItems
+            onClick={() => {
+              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
+            }}
+            className={`${style.toolbarItemButton} ${style.Spaced}`}
+          >
+            <TextRight className={style.toolbarItemIcon} />
+          </DropDownItems>
+          <DropDownItems onClick={() => {
+            editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
+          }} className={style.toolbarItemButton}>
+            <Justify className={style.toolbarItemIcon} />
+          </DropDownItems>
         </DropDownMenu>
       </DropDown>
 
-      <button
-        onClick={() => {
-          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
-        }}
-        className={`${style.toolbarItemButton} ${style.Spaced}`}
-      >
-        <TextLeft className={style.toolbarItemIcon} />
-      </button>
-      <button
-        onClick={() => {
-          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
-        }}
-        className={`${style.toolbarItemButton} ${style.Spaced}`}
-      >
-        <TextCenter className={style.toolbarItemIcon} />
-      </button>
-      <button
-        onClick={() => {
-          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
-        }}
-        className={`${style.toolbarItemButton} ${style.Spaced}`}
-      >
-        <TextRight className={style.toolbarItemIcon} />
-      </button>
-      <button onClick={() => {
-        editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
-      }} className={style.toolbarItemButton}>
-        <Justify className={style.toolbarItemIcon} />
-      </button>
       <Divider />
       <button
         disabled={!canUndo}
