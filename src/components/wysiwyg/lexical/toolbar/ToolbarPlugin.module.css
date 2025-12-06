@@ -12,6 +12,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     vertical-align: middle;
+    gap: 2px;
 }
 
 .toolbarItemButton{
@@ -34,17 +35,11 @@
     background-color: var(--color-gray-500);
 }
 
-/*toolbarItemButton*/
-.spaced{
-    margin-right: 2px;
-}
-
 .toolbarItemIcon{
     background-size: contain;
     height: 18px;
     width: 18px;
     margin-top: 2px;
-    vertical-align: -0.25em;
     display: flex;
     opacity: 0.6;
 }
@@ -57,8 +52,14 @@
     z-index: 1000;
     border: 1px solid var(--color-gray-650);
     border-radius: 10px;
+    padding: 4px;
 }
 
 .toolbarDropDownChevron{
-    font-size: 75%;
+    background-size: contain;
+    height: 9px;
+    width: 9px;
+    margin-left: 4px;
+    display: flex;
+    opacity: 0.6;
 }
