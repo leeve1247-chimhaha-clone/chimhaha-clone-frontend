@@ -1,19 +1,12 @@
-import { DropDownItems } from "./DropDownItems.tsx";
-import { DropDownTrigger } from "./DropDownTrigger.tsx";
+import { type ReactNode } from "react";
+import { DropDownContext } from "./DropDownContext.tsx";
 import { useDropdown } from "./utils.tsx";
 
-
-export function DropDown() {
+export function DropDown({ children }: { children: ReactNode }) {
   const dropdown = useDropdown();
-  return (
-    <>
-      <DropDownTrigger controller={dropdown} />
-      {dropdown.isOpen && (
-        <DropDownItems
-          dropDownRef = {dropdown.dropDownRef}
-          coords={dropdown.coords}
-        />
-      )}
-    </>
-  );
+  return(
+  <DropDownContext.Provider value = {dropdown}>
+    {children}
+  </DropDownContext.Provider>
+  )
 }

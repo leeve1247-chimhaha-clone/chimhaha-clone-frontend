@@ -1,11 +1,9 @@
 import style from "../ToolbarPlugin.module.css";
-import type { useDropdown } from "./utils.tsx";
+import type { ReactNode } from "react";
+import { useMyDropDownContext } from "./DropDownContext.tsx";
 
-interface TriggerProps {
-  controller: ReturnType<typeof useDropdown>;
-}
-
-export function DropDownTrigger({ controller }: TriggerProps) {
+export function DropDownTrigger({children}:{children:ReactNode}) {
+  const controller = useMyDropDownContext();
   return (
     <button
       ref={controller.triggerRef}
@@ -13,7 +11,7 @@ export function DropDownTrigger({ controller }: TriggerProps) {
       className={`${style.toolbarItemButton} ${style.Spaced}`}
       aria-expanded={controller.isOpen} // 접근성 추가
     >
-      메뉴 열기
+      {children}
     </button>
   );
 }
