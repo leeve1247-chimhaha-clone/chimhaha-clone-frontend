@@ -1,3 +1,3 @@
-export function BrokenImage(){
-    return (<div>Broken :( </div>)
+export function BrokenImage() {
+  return (<div>Broken :( </div>)
 }
