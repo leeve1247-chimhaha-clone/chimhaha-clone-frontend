@@ -64,7 +64,7 @@ export function PostDetailHeader({ data }: { data: PostDetailProps }) {
         <div className={styles.postTitle}>{data.title}</div>
       </div>
       <div className={styles.postHeader3}>
-        <div className={styles.postHeader3left}>
+        <div className={styles.postHeaderleft}>
           <div>{data.username}</div>
           <Dot className={styles.dot} />
           <CreatedDate date={data.createdDate} />

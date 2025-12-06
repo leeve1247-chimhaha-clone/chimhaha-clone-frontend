@@ -56,7 +56,7 @@
   color: var(--color-gray-600);
 }
 
-.postHeader3left {
+.postHeaderleft {
   display: flex;
   align-items: center;
   justify-content: left;
