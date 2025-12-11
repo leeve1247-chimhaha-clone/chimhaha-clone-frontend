@@ -19,7 +19,7 @@ export function ToolBarInput({ children }: { children: ReactNode }) {
     if (files !== null) {
       reader.readAsDataURL(files[0]);
     }
-    event.target.value = '';
+    event.target.value = ''; //init event for upload same file
   }
 
   return (

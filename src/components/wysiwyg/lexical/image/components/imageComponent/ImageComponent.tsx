@@ -1,14 +1,15 @@
-import {$getNodeByKey, CLICK_COMMAND, COMMAND_PRIORITY_LOW, DRAGSTART_COMMAND, type NodeKey} from "lexical";
+import { $getNodeByKey, CLICK_COMMAND, COMMAND_PRIORITY_LOW, DRAGSTART_COMMAND, type NodeKey } from "lexical";
 
-import {type JSX, Suspense, useCallback, useEffect, useRef, useState} from "react";
-import {useLexicalNodeSelection} from "@lexical/react/useLexicalNodeSelection";
-import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
-import {mergeRegister} from "@lexical/utils";
-import {ImageResizer} from "../resizer/ImageResizer.tsx";
-import {LazyImage} from "../lazyImage/LazyImage.tsx";
-import {useLexicalEditable} from "@lexical/react/useLexicalEditable";
+import { type JSX, Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useLexicalNodeSelection } from "@lexical/react/useLexicalNodeSelection";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { mergeRegister } from "@lexical/utils";
+import { ImageResizer } from "../resizer/ImageResizer.tsx";
+import { LazyImage } from "../lazyImage/LazyImage.tsx";
+import { useLexicalEditable } from "@lexical/react/useLexicalEditable";
 import style from "./ImageComponent.module.css";
-import {isImageNode} from "../../nodes/utils.tsx";
+import { isImageNode } from "../../nodes/utils.tsx";
+import { ImageUploadIndicator } from "./ImageUploadIndicator.tsx";
 
 export default function ImageComponent(
   {
@@ -28,10 +29,12 @@ export default function ImageComponent(
     width: "inherit" | number;
   }): JSX.Element {
   const imageRef = useRef<null | HTMLImageElement>(null);
+  const uploadRef = useRef<null | HTMLDivElement>(null);
   const [isSelected, setSelected, clearSelection] = useLexicalNodeSelection(nodeKey);
   const [editor] = useLexicalComposerContext();
   const [isResizing, setIsResizing] = useState<boolean>(false);
   const isEditable = useLexicalEditable();
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const onResizeStart = () => {
     setIsResizing(true);
@@ -60,7 +63,7 @@ export default function ImageComponent(
       if (isResizing) {
         return true;
       }
-      if (event.target === imageRef.current) {
+      if (event.target === imageRef.current || event.target === uploadRef.current) {
         if (event.shiftKey) {
           setSelected(!isSelected);
         } else {
@@ -123,10 +126,16 @@ export default function ImageComponent(
             imageRef={imageRef}
             width={width}
             height={height}
-            maxWidth={maxWidth} onError={function (): void {
+            maxWidth={maxWidth}
+            onError={function (): void {
             throw new Error("Function not implemented.");
           }}/>
         </div>
+        {!isUploading && (
+          <ImageUploadIndicator
+            uploadRef = {uploadRef}
+          />
+        )}
         {isFocused && (
           <ImageResizer
             imageRef={imageRef}

@@ -14,6 +14,7 @@ import ExampleTheme from "./ExampleTheme.tsx";
 import { RefEditorPlugin } from "./plugins/RefEditorPlugin.tsx";
 import type { RefObject } from "react";
 import { UpdateEditorStatePlugin } from "./plugins/UpdateEditorStatePlugin.tsx";
+import { ImagesUploadPlugin } from "./image/plugins/ImageUploadPlugin.tsx";
 
 interface LexicalProps {
   readOnly?: boolean;
@@ -52,6 +53,7 @@ export function Lexical({ readOnly = false, postId = undefined, ref }: LexicalPr
           <HistoryPlugin />
           <AutoFocusPlugin />
           <ImagesPlugin />
+          <ImagesUploadPlugin/>
           <DragAndDropPlugin />
           {postId !== undefined && <UpdateEditorStatePlugin postId={postId} />}
           {/*<UpdateEditorStatePlugin />*/}

@@ -1,11 +1,12 @@
-import type {DOMConversionMap, DOMExportOutput} from "lexical";
-import {DecoratorNode} from "lexical";
-import {type JSX, Suspense} from "react";
+import type { DOMConversionMap, DOMExportOutput } from "lexical";
+import { DecoratorNode } from "lexical";
+import { type JSX, Suspense } from "react";
 import style from "./ImageNode.module.css";
-import type {ImagePayload} from "./ImagePayload.tsx";
-import {convertImageElement} from "./utils.tsx";
-import {LazyImageComponent} from "../components/imageComponent/LazyImageComponent.tsx";
-import type {SerializedImageNode} from "./SerializedImageNode.tsx";
+import type { ImagePayload } from "./ImagePayload.tsx";
+import { convertImageElement, getStatusBy } from "./utils.tsx";
+import { LazyImageComponent } from "../components/imageComponent/LazyImageComponent.tsx";
+import type { SerializedImageNode } from "./SerializedImageNode.tsx";
+import { ImageStatus } from "./ImageStatus.tsx";
 
 export class ImageNode extends DecoratorNode<JSX.Element> {
   __src: string;
@@ -13,14 +14,16 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
   __width: "inherit" | number;
   __height: "inherit" | number;
   __maxWidth: number;
+  __status: ImageStatus;
 
-  constructor({src, altText, maxWidth, width, height, key}: ImagePayload) {
+  constructor({ src, altText, maxWidth, width, height, key }: ImagePayload) {
     super(key);
     this.__src = src;
     this.__altText = altText;
     this.__maxWidth = maxWidth == undefined ? 500 : maxWidth;
     this.__width = width || "inherit";
     this.__height = height || "inherit";
+    this.__status = getStatusBy(src);
   }
 
   override decorate(): JSX.Element {
@@ -52,8 +55,14 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
   }
 
   static override importJSON(serializedNode: SerializedImageNode): ImageNode {
-    const {altText, height, width, maxWidth, src} = serializedNode;
-    return new ImageNode({altText, height, width, maxWidth, src}).updateFromJSON(serializedNode);
+    const { altText, height, width, maxWidth, src } = serializedNode;
+    return new ImageNode({
+      altText,
+      height,
+      width,
+      maxWidth,
+      src
+    }).updateFromJSON(serializedNode);
   }
 
   override createDOM(): HTMLElement {
@@ -94,7 +103,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     const element = document.createElement("img");
     element.setAttribute("src", this.__src);
     element.setAttribute("alt", this.__altText);
-    return {element};
+    return { element };
   }
 
   static override getType(): string {
@@ -116,6 +125,19 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
 
   getAltText(): string {
     return this.__altText;
+  }
+
+  setSrc(src: string): void {
+    const writable = this.getWritable(); // 쓰기 가능한 노드를 가져옵니다.
+    writable.__src = src;
+  }
+
+  getStatus(): ImageStatus {
+    return this.__status;
+  }
+  setStatus(imageStatus: ImageStatus): void {
+    const writable = this.getWritable();
+    writable.__status = imageStatus;
   }
 }
 
