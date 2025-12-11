@@ -14,7 +14,7 @@ import { clearImageSrcInEditorState } from "./functions/clearImageSrcInEditorSta
 import { isEmpty } from "./functions/isEmpty.ts";
 import type { RootState } from "../../../redux/store.tsx";
 
-interface PresignedPostProps {
+export interface PresignedPostProps {
   url: string;
   fields: {
     key: string;
@@ -137,8 +137,6 @@ export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | u
     if (!selectedFile) return;
     formData.append('Content-Type', selectedFile.type)
     formData.append('file', selectedFile)
-
-
     axios.post(presignedData?.url, formData).then(r => console.log(r.status)).catch(a=>console.log(a));
   }
 
