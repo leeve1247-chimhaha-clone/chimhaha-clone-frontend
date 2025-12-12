@@ -1,7 +1,6 @@
 import { useAuth } from "react-oidc-context";
 import type { RefObject } from "react";
 import type { LexicalEditor } from "lexical";
-import { clearImageSrcInEditorState } from "../../post/submit/functions/clearImageSrcInEditorState.ts";
 import { isEmpty } from "../../post/submit/functions/isEmpty.ts";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
@@ -27,8 +26,6 @@ export function SubmitUpdateButton({ postId, commentId, ref }: SubmitUpdateButto
     const editor = ref.current;
     const editorState = editor.getEditorState();
     const content = editorState.toJSON();
-
-    clearImageSrcInEditorState(content);
     if (isEmpty(content)) return;
     const commentData = {
       postId: postId,
