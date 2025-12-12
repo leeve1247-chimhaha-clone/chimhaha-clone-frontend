@@ -16,13 +16,12 @@ export interface UpdateImagePayload {
   src: string;
 }
 
-async function changeSrcToServerUrl({ src, auth }: { src: string, auth: AuthContextProps }): Promise<string | null> {
-  if (src.startsWith(CData.local_image_uri)) return src;
+async function changeSrcToServerUrl({ src, auth }: { src: string, auth: AuthContextProps }): Promise<string> {
+  if (src.startsWith(CData.object_storage_image_uri)) return src;
   const file = await getFileFrom(src);
   if (file === null) return src;
   const presignedPostProps = await getPresignedPostProps(file, auth);
-  return postImage({ presignedData: presignedPostProps, file: file })
-
+  return postImage({ presignedData: presignedPostProps, file: file });
 }
 
 async function getFileFrom(src: string) {
@@ -49,12 +48,12 @@ async function getPresignedPostProps(file: File, auth: AuthContextProps) {
     }
   });
   return r.data;
-  
+
 }
 
-function postImage({ presignedData, file }: { presignedData: PresignedPostProps, file: File }) {
+async function postImage({ presignedData, file }: { presignedData: PresignedPostProps, file: File }) {
   const formData = new FormData();
-  if (presignedData?.fields == undefined) return null;
+  if (presignedData?.fields == undefined) throw new Error("Failed to post Image");
   const fields = presignedData?.fields;
 
   const { key, ...rest } = fields;
@@ -63,14 +62,14 @@ function postImage({ presignedData, file }: { presignedData: PresignedPostProps,
     formData.append(key, value);
   });
 
-  if (!file) return null;
+  if (!file) throw new Error("Failed to post Image");
   formData.append("Content-Type", file.type);
   formData.append("file", file);
-  try{
-  return axios.post<string>(presignedData?.url, formData).then(() => {
-    return CData.local_image_uri + "/" + "minio-bucket" + "/" + file.name;
-  })} catch {
-    return null;
+  try {
+    await axios.post<string>(presignedData?.url, formData);
+    return presignedData?.url + key;
+  } catch {
+    throw new Error("Failed to post Image");
   }
 }
 
@@ -83,29 +82,25 @@ export function ImagesUploadPlugin(): JSX.Element | null {
       editor.registerCommand<UpdateImagePayload>(
         UPLOAD_IMAGE_COMMAND,
         ({ nodeKey, src }) => {
-          let shouldStartUpload = false;
-          editor.update(() => {
-            const node = $getNodeByKey(nodeKey);
-            if (isImageNode(node) && node.getStatus() === ImageStatus.Local) {
-                shouldStartUpload = true;
-                node.setStatus(ImageStatus.Uploading);
-            }
-          });
-          if (!shouldStartUpload) {
-            return true;
-          }
           (async () => {
             try {
+              if (src.startsWith(CData.object_storage_image_uri)) return;
+              editor.update(() => {
+                const node = $getNodeByKey(nodeKey);
+                if (isImageNode(node)) {
+                  node.setStatus(ImageStatus.Uploading);
+                }
+              });
               const serverSrc = await changeSrcToServerUrl({ src, auth });
-              if (serverSrc === null) return;
               editor.update(() => {
                 const node = $getNodeByKey(nodeKey);
                 if (isImageNode(node)) {
                   node.setSrc(serverSrc);
+                  node.setStatus(ImageStatus.Uploaded);
                 }
               });
-            } catch (error) {
-              console.error("Image upload failed", error);
+            } catch (e) {
+              console.error(e);
               editor.update(() => {
                 const node = $getNodeByKey(nodeKey);
                 if (isImageNode(node)) node.setStatus(ImageStatus.Error);
@@ -117,9 +112,8 @@ export function ImagesUploadPlugin(): JSX.Element | null {
         COMMAND_PRIORITY_EDITOR
       ),
       editor.registerNodeTransform(ImageNode, (node) => {
-        console.log(node.getStatus())
         if (node.getStatus() === ImageStatus.Local) {
-          editor.dispatchCommand(UPLOAD_IMAGE_COMMAND, {nodeKey: node.getKey(), src: node.getSrc()});
+          editor.dispatchCommand(UPLOAD_IMAGE_COMMAND, { nodeKey: node.getKey(), src: node.getSrc() });
         }
       })
     );

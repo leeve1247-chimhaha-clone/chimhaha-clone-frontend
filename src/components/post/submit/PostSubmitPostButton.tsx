@@ -133,10 +133,9 @@ export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | u
     Object.entries(rest).forEach(([key, value])=>{
       formData.append(key, value)
     })
-
     if (!selectedFile) return;
-    formData.append('Content-Type', selectedFile.type)
     formData.append('file', selectedFile)
+    console.log(formData)
     axios.post(presignedData?.url, formData).then(r => console.log(r.status)).catch(a=>console.log(a));
   }
 
