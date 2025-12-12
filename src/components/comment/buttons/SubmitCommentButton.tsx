@@ -4,7 +4,6 @@ import { useAuth } from "react-oidc-context";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
 import styles from "../CommentComponent.module.css";
-import { clearImageSrcInEditorState } from "../../post/submit/functions/clearImageSrcInEditorState.ts";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import { isEmpty } from "../../post/submit/functions/isEmpty.ts";
@@ -29,7 +28,6 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
     const editor = ref.current;
     const editorState = editor.getEditorState();
     const content = editorState.toJSON();
-    clearImageSrcInEditorState(content);
     if (isEmpty(content)) return;
     const commentData = {
       postId: postId,

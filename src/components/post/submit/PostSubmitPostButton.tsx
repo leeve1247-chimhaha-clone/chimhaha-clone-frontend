@@ -1,5 +1,5 @@
 import type { LexicalEditor } from "lexical";
-import { type BaseSyntheticEvent, type RefObject, useState } from "react";
+import { type RefObject } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { CData } from "../../../../credential/data.ts";
@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import styles from "./PostSubmit.module.css";
-import { clearImageSrcInEditorState } from "./functions/clearImageSrcInEditorState.ts";
 import { isEmpty } from "./functions/isEmpty.ts";
 import type { RootState } from "../../../redux/store.tsx";
 
@@ -33,8 +32,6 @@ export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | u
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const postId = queryParams.get("postId");
-  const [selectedFile, setSelectedFile] = useState<File|null>(null);
-  const [presignedData, setPresignedData] = useState<PresignedPostProps|null>(null);
 
   if (selector.category === undefined) {
     const category = matches[1].pathname.substring(1, matches[1].pathname.length);
@@ -49,8 +46,6 @@ export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | u
       const content = editorState.toJSON();
       if (isEmpty(content)) return;
       if (matches.length < 2) return;
-      clearImageSrcInEditorState(content);
-
       const postData = {
         title: selector.title,
         category: selector.category,
@@ -81,7 +76,7 @@ export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | u
       const content = editorState.toJSON();
       if (isEmpty(content)) return;
       if (matches.length < 2) return;
-      clearImageSrcInEditorState(content);
+      console.log(content)
       const postData = {
         title: selector.title,
         category: selector.category,
@@ -102,57 +97,8 @@ export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | u
     });
   }
 
-  function getPresignedPost() {
-    axios.get<PresignedPostProps>(CData.local_backend + "/get/presigned-post", {
-      headers: {
-        "Content-Type": "application/json",
-        "X-File-MimeType": selectedFile?.type,
-        Authorization: `Bearer ${auth.user?.access_token}`
-      }
-    }).then((r) => {
-      setPresignedData(r.data);
-    });
-  }
-
-  function getOnChange() {
-    return (event:BaseSyntheticEvent) => {
-      console.log(event)
-      console.log(event.target.files);
-      console.log("Hello");
-      setSelectedFile(event.target.files[0])
-    };
-  }
-
-  function postImage() {
-    const formData = new FormData();
-    if (presignedData?.fields == undefined) return;
-    const fields = presignedData?.fields;
-
-    const {key, ...rest} = fields;
-    formData.append('key', key);
-    Object.entries(rest).forEach(([key, value])=>{
-      formData.append(key, value)
-    })
-    if (!selectedFile) return;
-    formData.append('file', selectedFile)
-    console.log(formData)
-    axios.post(presignedData?.url, formData).then(r => console.log(r.status)).catch(a=>console.log(a));
-  }
-
   return (
     <>
-      <button className={styles.buttonApply}
-              onClick={getPresignedPost}
-      >Get Presigned Post
-      </button>
-      <input
-        type={"file"}
-        onChange={getOnChange()}
-      ></input>
-      <button className={styles.buttonApply}
-      onClick={()=>{postImage()}}>Post To Bucket Yeah
-      </button>
-
       {(postId === undefined || postId === null) && (
         <button className={styles.buttonApply} onClick={submitPost}>
           등록
