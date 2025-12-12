@@ -10,6 +10,7 @@ import { useLexicalEditable } from "@lexical/react/useLexicalEditable";
 import style from "./ImageComponent.module.css";
 import { isImageNode } from "../../nodes/utils.tsx";
 import { ImageUploadIndicator } from "./ImageUploadIndicator.tsx";
+import { ImageStatus } from "../../nodes/ImageStatus.tsx";
 
 export default function ImageComponent(
   {
@@ -78,7 +79,23 @@ export default function ImageComponent(
   );
 
   useEffect(() => {
+    editor.getEditorState().read(() => {
+      const node = $getNodeByKey(nodeKey);
+      if (isImageNode(node)) {
+        setIsUploading(node.getStatus() === ImageStatus.Uploading);
+      }
+    });
+
     const unregister = mergeRegister(
+      editor.registerUpdateListener(({ editorState }) => {
+        editorState.read(() => {
+          const node = $getNodeByKey(nodeKey);
+          if (isImageNode(node)) {
+            const isNodeUploading = node.getStatus() === ImageStatus.Uploading; // 'loading' 확인 필요
+            setIsUploading((prev) => (prev !== isNodeUploading ? isNodeUploading : prev));
+          }
+        });
+      }),
       editor.registerCommand<MouseEvent>(
         CLICK_COMMAND,
         onClick,
@@ -131,7 +148,7 @@ export default function ImageComponent(
             throw new Error("Function not implemented.");
           }}/>
         </div>
-        {!isUploading && (
+        {isUploading && (
           <ImageUploadIndicator
             uploadRef = {uploadRef}
           />

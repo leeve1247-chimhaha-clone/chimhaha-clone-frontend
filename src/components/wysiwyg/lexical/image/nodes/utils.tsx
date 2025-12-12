@@ -20,6 +20,6 @@ export function isImageNode(
 }
 
 export function getStatusBy(src: string) {
-  if (src.startsWith(CData.local_image_uri)) return ImageStatus.Uploaded;
+  if (src.startsWith(CData.object_storage_image_uri)) return ImageStatus.Uploaded;
   return ImageStatus.Local;
 }
