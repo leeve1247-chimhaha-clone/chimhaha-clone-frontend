@@ -1,26 +1,13 @@
 import styles from "./Login.module.css";
 import { BoxArrowLeft } from "react-bootstrap-icons";
 import { useAuth } from "react-oidc-context";
-import { CData } from "../../../credential/data.ts";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../../react-query/queryKeys.tsx";
+import { accountApi } from "../../api/accountApi.ts";
 
 export function LoginComponent() {
   const auth = useAuth();
-  const {data, error} = useQuery({queryKey:queryKeys.NickName, queryFn:fetchMeals});
-  async function fetchMeals() {
-    const axiosResponse = await axios.get(CData.local_backend + "/getMyNickName", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth.user?.access_token}`
-      }
-    });
-    if (axiosResponse.data !== "") {
-      return axiosResponse.data;
-    }
-    return "전문시청팀";
-  }
+  const { data, error } = useQuery({ queryKey: queryKeys.NickName, queryFn: () => accountApi.fetchNickName(auth.user?.access_token) });
 
   if (error) return <div>Error: {error.message}</div>;
   if (data === undefined) return <div>No data</div>;

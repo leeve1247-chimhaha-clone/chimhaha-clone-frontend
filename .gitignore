@@ -25,3 +25,7 @@ dist-ssr
 
 # Ignore package-lock.json
 package-lock.json
+
+#
+.claude
+CLAUDE.md

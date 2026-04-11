@@ -1,37 +1,23 @@
 import styles from "./PostListComponent.module.css";
 import { PostCard } from "./PostCard/PostCard.tsx";
-import axios from "axios";
-import { CData } from "../../../../credential/data.ts";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import { useMatches } from "react-router";
 import type { RawRouteConfig } from "../../../router/convertToRouteObjects.tsx";
-import type { PostProps } from "./PostProps.tsx";
 import { PostListYoutubeCards } from "./YoutubeCard/PostListYoutubeCards.tsx";
 import { NoticeListComponent } from "./NoticeListComponent.tsx";
 import { useAuth } from "react-oidc-context";
 import { PopularComponent } from "./PopularComponent.tsx";
 import { PostButton } from "./PostButton.tsx";
+import { postApi } from "../../../api/postApi.ts";
 
 export function PostListComponents() {
   const matches = useMatches();
   const category = matches[1].pathname.substring(1, matches[1].pathname.length);
-  const { data, error } = useQuery({ queryKey: [...queryKeys.PostList, category], queryFn: fetchPostList });
+  const { data, error } = useQuery({ queryKey: [...queryKeys.PostList, category], queryFn: () => postApi.fetchPostList(category) });
   const queryClient = useQueryClient();
   const queryData = queryClient.getQueryData<RawRouteConfig[]>(queryKeys.RouterDataFlat);
   const auth = useAuth();
-
-  async function fetchPostList() {
-    return axios
-      .get<PostProps[]>(CData.local_backend + "/posts?category=" + category)
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-        return undefined;
-      });
-  }
 
   if (error) return <div>Error: {error.message}</div>;
   if (data === undefined) return <div>No data</div>;

@@ -1,8 +1,6 @@
 import type { LexicalEditor } from "lexical";
 import { type RefObject } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { CData } from "../../../../credential/data.ts";
 import { useAuth } from "react-oidc-context";
 import { useLocation, useMatches } from "react-router";
 import { setCategory } from "../../../redux/post/submit/submitPostSlice.tsx";
@@ -12,15 +10,7 @@ import { queryKeys } from "../../../react-query/queryKeys.tsx";
 import styles from "./PostSubmit.module.css";
 import { isEmpty } from "./functions/isEmpty.ts";
 import type { RootState } from "../../../redux/store.tsx";
-
-export interface PresignedPostProps {
-  url: string;
-  fields: {
-    key: string;
-    policy: string;
-    [key:string]: string
-  };
-}
+import { postApi } from "../../../api/postApi.ts";
 
 export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | undefined> }) {
   const selector = useSelector((state: RootState) => state.submitPostStatus);
@@ -46,24 +36,13 @@ export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | u
       const content = editorState.toJSON();
       if (isEmpty(content)) return;
       if (matches.length < 2) return;
-      const postData = {
-        title: selector.title,
-        category: selector.category,
-        content: content,
-        postId: postId
-      };
-
       const access_token = auth?.user?.access_token;
-      axios
-        .post(CData.local_backend + "/update", postData, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${access_token}`
-          }
-        })
-        .then(async (r) => {
+      if (!access_token) return;
+      postApi
+        .updatePost({ title: selector.title, category: selector.category, content, postId }, access_token)
+        .then(async (postNum) => {
           await queryClient.invalidateQueries({ queryKey: [...queryKeys.PostDetail, postId] });
-          navigate("/" + selector.category + "/" + r.data);
+          navigate("/" + selector.category + "/" + postNum);
         });
     });
   }
@@ -76,23 +55,13 @@ export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | u
       const content = editorState.toJSON();
       if (isEmpty(content)) return;
       if (matches.length < 2) return;
-      console.log(content)
-      const postData = {
-        title: selector.title,
-        category: selector.category,
-        content: content
-      };
-
+      console.log(content);
       const access_token = auth?.user?.access_token;
-      axios
-        .post(CData.local_backend + "/save", postData, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${access_token}`
-          }
-        })
-        .then((r) => {
-          navigate("/" + selector.category + "/" + r.data);
+      if (!access_token) return;
+      postApi
+        .savePost({ title: selector.title, category: selector.category, content }, access_token)
+        .then((postNum) => {
+          navigate("/" + selector.category + "/" + postNum);
         });
     });
   }

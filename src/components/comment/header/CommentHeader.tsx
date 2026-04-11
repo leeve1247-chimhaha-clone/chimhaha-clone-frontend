@@ -5,20 +5,23 @@ import type { CommentProps } from "../CommentProps.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { setCommentLike } from "../../../redux/comment/commentRootComponentSlice.tsx";
 import type { RootState } from "../../../redux/store.tsx";
+import { useEffect } from "react";
 
 export function CommentHeader(props: { comment: CommentProps; onClick: () => void; modalOpen: boolean; onClose: () => void }) {
   const dispatch = useDispatch();
   const likesData = useSelector((state: RootState) => state.commentRootComponentStatus.commentLikes[String(props.comment.id)]);
-  if (likesData === undefined) {
 
-    dispatch(
-      setCommentLike({
-        commentId: String(props.comment.id),
-        likes: props.comment.likes? Number(props.comment.likes) : 0,
-        selfLiked: props.comment.selfLiked? props.comment.selfLiked : false,
-      }),
-    );
-  }
+  useEffect(() => {
+    if (likesData === undefined) {
+      dispatch(
+        setCommentLike({
+          commentId: String(props.comment.id),
+          likes: props.comment.likes ? Number(props.comment.likes) : 0,
+          selfLiked: props.comment.selfLiked ? props.comment.selfLiked : false,
+        }),
+      );
+    }
+  }, [props.comment.id]);
   return (
     <div className={cssClass.commentHeaderContainer}>
       <CommentHeaderLeft username={props.comment.username} date={props.comment.lastEditedDate} likes={likesData?.likes === undefined ? 0 : likesData.likes} />
