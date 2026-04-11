@@ -7,7 +7,7 @@ import { isImageNode } from "../nodes/utils.tsx";
 import { CData } from "../../../../../../credential/data.ts";
 import axios from "axios";
 import { type AuthContextProps, useAuth } from "react-oidc-context";
-import type { PresignedPostProps } from "../../../../post/submit/PostSubmitPostButton.tsx";
+import { imageApi, type PresignedPostProps } from "../../../../../api/imageApi.ts";
 import { ImageStatus } from "../nodes/ImageStatus.tsx";
 import { ImageNode } from "../nodes/ImageNode.tsx";
 
@@ -20,7 +20,8 @@ async function changeSrcToServerUrl({ src, auth }: { src: string, auth: AuthCont
   if (src.startsWith(CData.object_storage_image_uri)) return src;
   const file = await getFileFrom(src);
   if (file === null) return src;
-  const presignedPostProps = await getPresignedPostProps(file, auth);
+  if (!auth.user?.access_token) return src;
+  const presignedPostProps = await imageApi.getPresignedPost(file, auth.user.access_token);
   return postImage({ presignedData: presignedPostProps, file: file });
 }
 
@@ -37,18 +38,6 @@ async function getFileFrom(src: string) {
     console.error(e);
     return null;
   }
-}
-
-async function getPresignedPostProps(file: File, auth: AuthContextProps) {
-  const r = await axios.get<PresignedPostProps>(CData.local_backend + "/get/presigned-post", {
-    headers: {
-      "Content-Type": "application/json",
-      "X-File-MimeType": file?.type,
-      Authorization: `Bearer ${auth.user?.access_token}`
-    }
-  });
-  return r.data;
-
 }
 
 async function postImage({ presignedData, file }: { presignedData: PresignedPostProps, file: File }) {

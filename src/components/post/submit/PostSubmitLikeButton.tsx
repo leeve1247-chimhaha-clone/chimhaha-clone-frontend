@@ -1,10 +1,9 @@
-import axios from "axios";
-import { CData } from "../../../../credential/data.ts";
 import { useAuth } from "react-oidc-context";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setLikes } from "../../../redux/post/detail/defaultPostDetailSlice.tsx";
 import type { RootState } from "../../../redux/store.tsx";
+import { postApi } from "../../../api/postApi.ts";
 
 interface SubmitLikeButtonProps {
   className?: string;
@@ -17,19 +16,8 @@ export function PostSubmitLikeButton({ className }: SubmitLikeButtonProps) {
   const dispatch = useDispatch();
 
   async function likePost() {
-    const deltaJson = JSON.stringify({
-      postId: postId,
-    });
-    const newLikes = await axios
-      .post<number>(CData.local_backend + "/posts/like", deltaJson, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${auth?.user?.access_token}`,
-        },
-      })
-      .then((res) => res.data)
-      .catch(() => undefined);
-
+    if (!postId || !auth?.user?.access_token) return;
+    const newLikes = await postApi.likePost(postId, auth.user.access_token);
     dispatch(
       setLikes({
         likes: newLikes ? newLikes : 0,
