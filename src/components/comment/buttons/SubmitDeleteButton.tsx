@@ -1,10 +1,9 @@
 import { useAuth } from "react-oidc-context";
-import axios from "axios";
-import { CData } from "../../../../credential/data.ts";
 import { useDispatch } from "react-redux";
 import { setCommentPage } from "../../../redux/comment/commentRootComponentSlice.tsx";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
+import { commentApi } from "../../../api/commentApi.ts";
 
 interface SubmitUpdateButton {
   postId: string;
@@ -16,26 +15,15 @@ export function SubmitDeleteButton({ postId, commentId }: SubmitUpdateButton) {
   const auth = useAuth();
   const queryClient = useQueryClient();
 
-  async function submitComment() {
-    const commentData = {
-      postId: postId,
-      commentId: commentId,
-    };
+  async function deleteComment() {
     const access_token = auth?.user?.access_token;
-    const pageNum = await axios
-      .post<number>(CData.local_backend + "/delete/comment", commentData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
-      .then((res) => res.data)
-      .catch(() => undefined);
+    if (!access_token) return;
+    const pageNum = await commentApi.deleteComment({ postId, commentId }, access_token);
     if (pageNum === undefined) return;
-    await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentPageSize, postId] })
+    await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentPageSize, postId] });
     await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentList, postId, String(pageNum)] });
     dispatch(setCommentPage(pageNum));
   }
 
-  return <button onClick={submitComment}>삭제</button>;
+  return <button onClick={deleteComment}>삭제</button>;
 }

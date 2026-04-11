@@ -1,8 +1,6 @@
 import type { RefObject } from "react";
 import { type LexicalEditor } from "lexical";
 import { useAuth } from "react-oidc-context";
-import axios from "axios";
-import { CData } from "../../../../credential/data.ts";
 import styles from "../CommentComponent.module.css";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "../../../react-query/queryKeys.tsx";
@@ -10,6 +8,7 @@ import { isEmpty } from "../../post/submit/functions/isEmpty.ts";
 import { useDispatch } from "react-redux";
 import { setCommentPage } from "../../../redux/comment/commentRootComponentSlice.tsx";
 import emptyEditor from "../../../../public/empty_editor_state.json";
+import { commentApi } from "../../../api/commentApi.ts";
 
 interface SubmitCommentButtonProps {
   postId: string;
@@ -29,23 +28,9 @@ export function SubmitCommentButton({ postId, commentId, ref }: SubmitCommentBut
     const editorState = editor.getEditorState();
     const content = editorState.toJSON();
     if (isEmpty(content)) return;
-    const commentData = {
-      postId: postId,
-      commentId: commentId,
-      content: content,
-    };
     const access_token = auth?.user?.access_token;
-    const commentPage = await axios
-      .post<number>(CData.local_backend + "/save/comment", commentData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
-      .then((res) => {
-        return res.data;
-      })
-      .catch(() => undefined);
+    if (!access_token) return;
+    const commentPage = await commentApi.saveComment({ postId, commentId, content }, access_token);
     if (!commentPage) return;
     await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentPageSize, postId] });
     await queryClient.invalidateQueries({ queryKey: [...queryKeys.CommentList, postId, String(commentPage)] });

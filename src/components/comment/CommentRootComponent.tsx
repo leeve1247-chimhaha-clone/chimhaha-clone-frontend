@@ -8,9 +8,8 @@ import { useParams } from "react-router";
 import { CommentListComponent } from "./CommentListComponent.tsx";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "../../react-query/queryKeys.tsx";
-import axios from "axios";
-import { CData } from "../../../credential/data.ts";
 import { useAuth } from "react-oidc-context";
+import { commentApi } from "../../api/commentApi.ts";
 
 export function CommentRootComponent() {
   const ref = useRef<LexicalEditor | undefined>(undefined);
@@ -20,21 +19,8 @@ export function CommentRootComponent() {
 
   const { data, error, isLoading } = useQuery({
     queryKey: [...queryKeys.CommentPageSize, postId],
-    queryFn: fetchCommentPageSize,
+    queryFn: () => commentApi.fetchCommentPageSize(postId),
   });
-
-  async function fetchCommentPageSize() {
-    return axios
-      .get<number>(CData.local_backend + "/get/comment/page-size", {
-        params: {
-          postId: postId,
-        },
-      })
-      .then((res) => {
-        return res.data;
-      })
-      .catch(console.error);
-  }
 
   if (postId === undefined) return <></>;
   if (isLoading) return <></>;
