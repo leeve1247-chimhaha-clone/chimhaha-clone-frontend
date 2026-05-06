@@ -19,7 +19,7 @@ export function PostDetail() {
     queryFn: () => postApi.fetchPostDetail(postId),
   });
   if (error) return <div>Error: {error.message}</div>;
-  if (data === undefined) return <div>No data</div>;
+  if (data === undefined || data === "") return <div>No data</div>;
   return (
     <>
       <div className={styles.postContainer}>

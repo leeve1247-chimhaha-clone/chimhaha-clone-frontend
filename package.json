@@ -27,6 +27,7 @@
     "react-router-dom": "^7.9.4"
   },
   "devDependencies": {
+    "@types/node": "^22",
     "@eslint/js": "^9.36.0",
     "@tanstack/eslint-plugin-query": "^5.91.2",
     "@types/react": "^19.1.16",
