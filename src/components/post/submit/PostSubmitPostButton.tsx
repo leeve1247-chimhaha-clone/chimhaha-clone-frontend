@@ -30,6 +30,8 @@ export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | u
 
   function editPost() {
     if (ref.current === undefined) return;
+    const { title, category } = selector;
+    if (!title || !category) return;
     const editor = ref.current;
     editor.read(() => {
       const editorState = editor.getEditorState();
@@ -39,16 +41,18 @@ export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | u
       const access_token = auth?.user?.access_token;
       if (!access_token) return;
       postApi
-        .updatePost({ title: selector.title, category: selector.category, content, postId }, access_token)
+        .updatePost({ title, category, content, postId }, access_token)
         .then(async (postNum) => {
           await queryClient.invalidateQueries({ queryKey: [...queryKeys.PostDetail, postId] });
-          navigate("/" + selector.category + "/" + postNum);
+          navigate("/" + category + "/" + postNum);
         });
     });
   }
 
   function submitPost() {
     if (ref.current === undefined) return;
+    const { title, category } = selector;
+    if (!title || !category) return;
     const editor = ref.current;
     editor.read(() => {
       const editorState = editor.getEditorState();
@@ -59,9 +63,9 @@ export function PostSubmitPostButton({ ref }: { ref: RefObject<LexicalEditor | u
       const access_token = auth?.user?.access_token;
       if (!access_token) return;
       postApi
-        .savePost({ title: selector.title, category: selector.category, content }, access_token)
+        .savePost({ title, category, content }, access_token)
         .then((postNum) => {
-          navigate("/" + selector.category + "/" + postNum);
+          navigate("/" + category + "/" + postNum);
         });
     });
   }

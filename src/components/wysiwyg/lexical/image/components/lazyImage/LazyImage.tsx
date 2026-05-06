@@ -15,7 +15,7 @@ export function LazyImage(
     width,
     height,
     maxWidth,
-    onError
+    onError: _onError
   }: {
     altText: string;
     className: string | null;
