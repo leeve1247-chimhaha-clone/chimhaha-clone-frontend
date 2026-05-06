@@ -2,6 +2,21 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+const { lexicalState } = vi.hoisted(() => ({
+  lexicalState: {
+    json: {
+      root: {
+        type: "root",
+        children: [
+          { type: "paragraph", children: [{ type: "text", text: "hi" }] },
+        ],
+      },
+    } as unknown,
+  },
+}));
+
+const NON_EMPTY_JSON_DEFAULT = lexicalState.json;
+
 vi.mock("react-oidc-context");
 vi.mock("../../wysiwyg/lexical/Lexical.tsx", () => ({
   Lexical: ({
@@ -11,19 +26,7 @@ vi.mock("../../wysiwyg/lexical/Lexical.tsx", () => ({
   }) => {
     const fakeEditor = {
       read: (fn: () => void) => fn(),
-      getEditorState: () => ({
-        toJSON: () => ({
-          root: {
-            type: "root",
-            children: [
-              {
-                type: "paragraph",
-                children: [{ type: "text", text: "hello" }],
-              },
-            ],
-          },
-        }),
-      }),
+      getEditorState: () => ({ toJSON: () => lexicalState.json }),
     };
     if (typeof ref === "function") {
       ref(fakeEditor);
@@ -46,6 +49,8 @@ import {
 import { mswServer, http, HttpResponse } from "../../../test/mswServer.ts";
 import { CData } from "../../../../credential/data.ts";
 import { setTitle } from "../../../redux/post/submit/submitPostSlice.tsx";
+import { postApi } from "../../../api/postApi.ts";
+import EMPTY_EDITOR_STATE_JSON from "../../../../public/empty_editor_state.json";
 
 const BACKEND = CData.local_backend;
 
@@ -82,6 +87,7 @@ function renderSubmit({ authenticated = false, postId }: RenderOpts = {}) {
 describe("PostSubmit", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    lexicalState.json = NON_EMPTY_JSON_DEFAULT;
   });
 
   it("renders the 등록 button + header/editor mocks in create mode", async () => {
@@ -162,5 +168,41 @@ describe("PostSubmit", () => {
       expect(capturedBody?.title).toBe("내 제목");
       expect(capturedBody?.category).toBe("free");
     });
+  });
+
+  it("does not call /save when the user is not authenticated", async () => {
+    const saveSpy = vi.spyOn(postApi, "savePost");
+
+    const { store } = renderSubmit({ authenticated: false });
+    store.dispatch(setTitle("내 제목"));
+
+    const button = await screen.findByRole("button", { name: "등록" });
+    await userEvent.click(button);
+
+    expect(saveSpy).not.toHaveBeenCalled();
+  });
+
+  it("does not call /save when the title is empty", async () => {
+    const saveSpy = vi.spyOn(postApi, "savePost");
+
+    renderSubmit({ authenticated: true });
+
+    const button = await screen.findByRole("button", { name: "등록" });
+    await userEvent.click(button);
+
+    expect(saveSpy).not.toHaveBeenCalled();
+  });
+
+  it("does not call /save when the editor content is empty", async () => {
+    const saveSpy = vi.spyOn(postApi, "savePost");
+    lexicalState.json = EMPTY_EDITOR_STATE_JSON;
+
+    const { store } = renderSubmit({ authenticated: true });
+    store.dispatch(setTitle("내 제목"));
+
+    const button = await screen.findByRole("button", { name: "등록" });
+    await userEvent.click(button);
+
+    expect(saveSpy).not.toHaveBeenCalled();
   });
 });
