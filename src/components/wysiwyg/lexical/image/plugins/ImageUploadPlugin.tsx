@@ -16,7 +16,7 @@ export interface UpdateImagePayload {
   src: string;
 }
 
-async function changeSrcToServerUrl({ src, auth }: { src: string, auth: AuthContextProps }): Promise<string> {
+export async function changeSrcToServerUrl({ src, auth }: { src: string, auth: AuthContextProps }): Promise<string> {
   if (src.startsWith(CData.object_storage_image_uri)) return src;
   const file = await getFileFrom(src);
   if (file === null) return src;
@@ -25,7 +25,7 @@ async function changeSrcToServerUrl({ src, auth }: { src: string, auth: AuthCont
   return postImage({ presignedData: presignedPostProps, file: file });
 }
 
-async function getFileFrom(src: string) {
+export async function getFileFrom(src: string) {
   try {
     const response = await axios.get<Blob>(src, {
       responseType: "blob"
@@ -40,7 +40,7 @@ async function getFileFrom(src: string) {
   }
 }
 
-async function postImage({ presignedData, file }: { presignedData: PresignedPostProps, file: File }) {
+export async function postImage({ presignedData, file }: { presignedData: PresignedPostProps, file: File }) {
   const formData = new FormData();
   if (presignedData?.fields == undefined) throw new Error("Failed to post Image");
   const fields = presignedData?.fields;
