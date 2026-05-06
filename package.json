@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@ionic/react": "^8.7.7",
@@ -27,9 +29,10 @@
     "react-router-dom": "^7.9.4"
   },
   "devDependencies": {
-    "@types/node": "^22",
     "@eslint/js": "^9.36.0",
+    "@playwright/test": "^1.59.1",
     "@tanstack/eslint-plugin-query": "^5.91.2",
+    "@types/node": "^22",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",

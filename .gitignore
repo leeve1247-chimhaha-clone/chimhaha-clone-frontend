@@ -29,3 +29,8 @@ package-lock.json
 #
 .claude
 CLAUDE.md
+
+# Playwright
+tests/e2e/.auth/
+test-results/
+playwright-report/
