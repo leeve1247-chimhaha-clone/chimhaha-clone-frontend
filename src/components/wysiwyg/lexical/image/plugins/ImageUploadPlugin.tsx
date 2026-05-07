@@ -22,6 +22,9 @@ export async function changeSrcToServerUrl({ src, auth }: { src: string, auth: A
   if (file === null) return src;
   if (!auth.user?.access_token) return src;
   const presignedPostProps = await imageApi.getPresignedPost(file, auth.user.access_token);
+  if (presignedPostProps.alreadyExists) {
+    return CData.object_storage_image_uri + presignedPostProps.fields.key;
+  }
   return postImage({ presignedData: presignedPostProps, file: file });
 }
 

@@ -69,6 +69,7 @@ describe("changeSrcToServerUrl", () => {
         return HttpResponse.json({
           url: uploadUrl,
           fields: { key, policy: "policy", "x-amz-signature": "sig" },
+          alreadyExists: false,
         });
       }),
       http.post(uploadUrl, ({ request }) => {
@@ -84,5 +85,33 @@ describe("changeSrcToServerUrl", () => {
 
     expect(postedUrl).toBe(uploadUrl);
     expect(result).toBe(uploadUrl + key);
+  });
+
+  it("skips the S3 upload and reuses the existing fileName when the backend says alreadyExists", async () => {
+    vi.spyOn(axios, "get").mockResolvedValueOnce({ data: makePngBlob() });
+    const src = "https://images.example.com/img.png";
+    let s3Posted = false;
+
+    mswServer.use(
+      http.get(`${BACKEND}/get/presigned-post`, () =>
+        HttpResponse.json({
+          url: "",
+          fields: { key: "/existing.png" },
+          alreadyExists: true,
+        }),
+      ),
+      http.post(/.*/, () => {
+        s3Posted = true;
+        return HttpResponse.text("");
+      }),
+    );
+
+    const result = await changeSrcToServerUrl({
+      src,
+      auth: makeAuth("tok"),
+    });
+
+    expect(s3Posted).toBe(false);
+    expect(result).toBe(OSS + "/existing.png");
   });
 });

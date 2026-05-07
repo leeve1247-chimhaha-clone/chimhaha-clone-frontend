@@ -80,6 +80,7 @@ describe("ImagesUploadPlugin integration", () => {
         HttpResponse.json({
           url: uploadUrl,
           fields: { key, policy: "p", "x-amz-signature": "s" },
+          alreadyExists: false,
         }),
       ),
       http.post(uploadUrl, () => HttpResponse.text("")),
