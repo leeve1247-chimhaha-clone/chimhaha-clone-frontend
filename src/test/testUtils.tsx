@@ -101,11 +101,12 @@ export function renderWithRouter(
   }: RenderWithRouterOptions & Omit<RenderOptions, "wrapper">,
 ) {
   const router = createMemoryRouter(fillOutletDefaults(routes), { initialEntries });
-  return renderWithProviders(<RouterProvider router={router} />, {
+  const result = renderWithProviders(<RouterProvider router={router} />, {
     store,
     queryClient,
     ...renderOptions,
   });
+  return { ...result, router };
 }
 
 export function mockUseAuth(value: Partial<AuthContextProps> = {}): AuthContextProps {

@@ -28,7 +28,7 @@ export function PostDetail() {
           {isLoading && <div>Loading...</div>}
           {!isLoading && <Lexical readOnly={true} postId={postId} />}
         </>
-        {access_token && <PostDetailAuthRequired />}
+        {access_token && <PostDetailAuthRequired category={data.category} postId={String(data.postId)} />}
         <CommentRootComponent />
       </div>
     </>
