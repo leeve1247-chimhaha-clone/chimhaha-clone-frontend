@@ -28,7 +28,7 @@ package-lock.json
 
 #
 .claude
-CLAUDE.md
+CLAUDE.local.md
 
 # Playwright
 tests/e2e/.auth/
