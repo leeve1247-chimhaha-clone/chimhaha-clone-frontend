@@ -9,5 +9,6 @@ export const queryKeys = {
   ThumbNails: ["ThumbNails"],
   CommentPageSize: ["CommentPageSize"],
   Comment: ["Comment"],
-  NickName: ["NickName"]
+  NickName: ["NickName"],
+  Notifications: ["Notifications"]
 };

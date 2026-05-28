@@ -4,6 +4,7 @@ import { PostListComponents } from "../components/post/list/PostListComponents.t
 import { PostSubmit } from "../components/post/submit/PostSubmit.tsx";
 import { PostDetail } from "../components/post/detail/PostDetail.tsx";
 import { PostPopularListComponents } from "../components/post/list/PostPopularListComponents.tsx";
+import { NotificationsPage } from "../components/notification/NotificationsPage.tsx";
 
 export interface RawRouteConfig {
   id: number;
@@ -45,6 +46,10 @@ export function convertToRouteObjects(routes: RawRouteConfig[]): RouteObject[] {
     .concat({
       path:"/mypage",
       element: <div></div>
+    })
+    .concat({
+      path: "/notifications",
+      element: <NotificationsPage />
     })
   ;
 
