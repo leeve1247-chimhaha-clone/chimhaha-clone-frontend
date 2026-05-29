@@ -59,7 +59,7 @@ describe("PostCard", () => {
   it("renders the thumbnail image when titleImageFileName is set", async () => {
     const fileName = "abc.png";
     mswServer.use(
-      http.get(`${CData.local_backend}/get/thumbnail-src-url`, ({ request }) => {
+      http.get(`${CData.image_backend}/get/thumbnail-src-url`, ({ request }) => {
         const url = new URL(request.url);
         expect(url.searchParams.get("filename")).toBe(fileName);
         return HttpResponse.text("https://cdn.example/abc.png");

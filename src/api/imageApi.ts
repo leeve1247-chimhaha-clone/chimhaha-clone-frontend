@@ -15,7 +15,7 @@ export const imageApi = {
   async fetchThumbNailUrl(fileName: string): Promise<string | undefined> {
     try {
       const res = await axios
-        .get<string>(CData.local_backend + "/get/thumbnail-src-url?filename=" + fileName);
+        .get<string>(CData.image_backend + "/get/thumbnail-src-url?filename=" + fileName);
       return res.data;
     } catch (err) {
       console.error(err);
@@ -26,7 +26,7 @@ export const imageApi = {
   async getPresignedPost(file: File, accessToken: string): Promise<PresignedPostProps> {
     const sha256 = await computeSha256Hex(file);
     const res = await axios
-      .get<PresignedPostProps>(CData.local_backend + "/get/presigned-post", {
+      .get<PresignedPostProps>(CData.image_backend + "/get/presigned-post", {
         headers: {
           "Content-Type": "application/json",
           "X-File-MimeType": file.type,

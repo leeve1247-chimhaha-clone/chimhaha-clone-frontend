@@ -23,7 +23,7 @@ import { isImageNode } from "../nodes/utils.tsx";
 
 vi.mock("react-oidc-context");
 
-const BACKEND = CData.local_backend;
+const BACKEND = CData.image_backend;
 const OSS = CData.object_storage_image_uri;
 
 function CaptureEditor({

@@ -3,7 +3,7 @@ import { imageApi } from "./imageApi.ts";
 import { CData } from "../../credential/data.ts";
 import { mswServer, http, HttpResponse } from "../test/mswServer.ts";
 
-const BACKEND = CData.local_backend;
+const BACKEND = CData.image_backend;
 
 describe("imageApi", () => {
   describe("fetchThumbNailUrl", () => {

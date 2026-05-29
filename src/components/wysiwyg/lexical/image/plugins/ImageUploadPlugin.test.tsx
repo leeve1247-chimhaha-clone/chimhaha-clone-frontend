@@ -7,7 +7,7 @@ import { CData } from "../../../../../../credential/data.ts";
 import { imageApi } from "../../../../../api/imageApi.ts";
 import { changeSrcToServerUrl } from "./ImageUploadPlugin.tsx";
 
-const BACKEND = CData.local_backend;
+const BACKEND = CData.image_backend;
 const OSS = CData.object_storage_image_uri;
 
 function makeAuth(token?: string): AuthContextProps {
